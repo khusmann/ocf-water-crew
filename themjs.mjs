@@ -16,13 +16,15 @@ const peopleSorted = people
   .map((i) => ({
     ...i,
     name: `${i.first} ${i.last} ${i.nickname}`,
-    shiftsPlaced: "0",
+    shiftsPlaced: 0,
   }))
   .sort(
-    priorityComparison(["SpecialQualificationIds", "timeId", "shiftsPlaced"])
+    priorityComparison(["specialQualificationsIds", "timeId", "shiftsPlaced"])
   );
 
 console.log(assignmentsSorted);
+
+console.log(peopleSorted);
 
 // console.log(peopleSorted);
 

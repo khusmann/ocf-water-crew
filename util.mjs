@@ -1,4 +1,7 @@
 export const genericCompare = (a, b) => {
+  if (a === undefined || b === undefined) {
+    throw new Error("value is undefined");
+  }
   if (Array.isArray(a)) {
     return genericCompare(Math.min(...a), Math.min(...b));
   } else {
