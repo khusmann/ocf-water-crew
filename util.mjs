@@ -2,22 +2,22 @@ export const genericCompare = (a, b) => {
   if (a === undefined || b === undefined) {
     throw new Error("value is undefined");
   }
-  if (Array.isArray(a)) {
-    return genericCompare(Math.min(...a), Math.min(...b));
-  } else {
-    if (a === b) {
-      return 0;
-    } else {
-      return a > b ? 1 : -1;
-    }
+
+  const valueA = Array.isArray(a) ? Math.min(...a) : a;
+  const valueB = Array.isArray(b) ? Math.min(...b) : b;
+
+  if (valueA === valueB) {
+    return 0;
   }
+
+  return valueA > valueB ? 1 : -1;
 };
 
 export const priorityComparison = (keyOrder) => (a, b) => {
-  for (let i = 0; i < keyOrder.length; i++) {
-    const out = genericCompare(a[keyOrder[i]], b[keyOrder[i]]);
-    if (out !== 0) {
-      return out;
+  for (const key of keyOrder) {
+    const result = genericCompare(a[key], b[key]);
+    if (result !== 0) {
+      return result;
     }
   }
   return 0;
