@@ -51,7 +51,7 @@ function sortAssignments(){
 
 const peopleSorted = sortPeople();
 const assignmentsSorted = sortAssignments();
-const shiftsPlacedChart = peopleSorted.map(
+const shiftsPlacedChart = peopleSorted.sort(priorityComparison([ "specialQualificationsIds", "timeId", "name"])).map(
   (i) => ({name: i.name, shiftsPlaced: 0})
 );
 const shiftsSorted = expandObjects(peopleSorted, "specialQualificationsIds").sort(priorityComparison([ "specialQualificationsIds", "timeId", "name"]));
@@ -103,109 +103,261 @@ function assign(){
       return volunteerAssignment;
   }), "jobPriority");
 
-  // console.log(shiftsPlacedChart.find(p => p.name = "Graham Shields "))
-  // console.log(JSON.stringify(unstagedAssignments, null, 2));
-  // console.log(JSON.stringify(peopleToAssign, null, 2));
-
-
-  // console.log(peopleToAssign.at(0))
-  // shiftsPlacedChart.find(p => p.name === "Helena Ament Leni").shiftsPlaced = 7; // test
-  for(let assignmentIndex = 0, peopleIndex = 0; assignmentIndex < unstagedAssignments.length; assignmentIndex++ ){ //using shift and splice
-    let skip = true;
-    for(let p = 0, a = 0, i=1; peopleToAssign[peopleIndex].length > 0 && a < unstagedAssignments[assignmentIndex].length && p < unstagedAssignments[assignmentIndex].length  && p < peopleToAssign[peopleIndex].length && skip; p++){ // peopleIndex < peopleToAssign.length && peopleToAssign.length != 0 && a < peopleToAssign[peopleIndex].length
-      let shiftCount = shiftsPlacedChart.find(shift => shift.name === peopleToAssign[peopleIndex][p].name);
-        if(shiftCount.shiftsPlaced >= 2){
-          console.log("removed", shiftCount);
-          // console.log(p,peopleIndex, shiftCount.name);
-          peopleToAssign[peopleIndex].splice(p,1);
-          p--; //?
-        }
-        else{
-          // if(unstagedAssignments[assignmentIndex][a].timePriority == peopleToAssign[peopleIndex][p].timeId){
-          if(unstagedAssignments[assignmentIndex][a].timePriority != peopleToAssign[peopleIndex][p].timeId && peopleToAssign[peopleIndex][p].timeId != 2){
-            peopleToAssign[peopleIndex].push(peopleToAssign[peopleIndex].splice(p,1)[0]);
-            shiftCount = shiftsPlacedChart.find(shift => shift.name === peopleToAssign[peopleIndex][p].name);
-            //add in time id and 
-          } 
-          
-          {
-            unstagedAssignments[assignmentIndex][a].assignedVolunteer = peopleToAssign[peopleIndex][p].name;
-            // peopleToAssign[peopleIndex].push(peopleToAssign[peopleIndex].splice(p,1)[0]);//might break
-
-            if(unstagedAssignments[assignmentIndex][a].timePriority != peopleToAssign[peopleIndex][p].timeId ){
-              unstagedAssignments[assignmentIndex][a].nonIdealShiftTaken = true;
-              peopleToAssign[peopleIndex][p].nonIdealShiftTaken = true;
+  for(let i = 0; i<2; i++){
+    for(let assignmentIndex = 0, peopleIndex = 0; assignmentIndex < unstagedAssignments.length; assignmentIndex++, peopleIndex >= 10 ? 1 : peopleIndex++){
+      for(let p = 0, a = 0, shiftCount = shiftsPlacedChart.find(shift => shift.name === peopleToAssign[peopleIndex][p].name) ;  p < peopleToAssign[peopleIndex].length && a < unstagedAssignments[assignmentIndex].length;){ 
+        console.log(p, a); //
+        //shiftCount = peopleIndex == 0 ? shiftsPlacedChart[0] :shiftsPlacedChart[peopleToAssign[peopleIndex-1].length]
+          for(let idealGrace = 0; idealGrace < 3 && a < unstagedAssignments[assignmentIndex].length; p % peopleToAssign[peopleIndex].length == 0 ? idealGrace++ : 1){ //idealGrace >= 3 ? p : p = 0
+            console.log(shiftCount.name);
+            if(shiftCount.name == 'Ryan Ashton ' && assignmentIndex >1){
+              console.log("here");
             }
-            shiftCount.shiftsPlaced++;
-            // console.log(shiftCount.shiftsPlaced, " boop ", peopleToAssign[peopleIndex][p]);
+            if(shiftCount.shiftsPlaced >= 2){
+              p++;
+              shiftCount = shiftsPlacedChart.find(shift => shift.name === peopleToAssign[peopleIndex][p % peopleToAssign[peopleIndex].length].name);
+              // shiftCount = peopleIndex == 0 ? shiftsPlacedChart[(p % peopleToAssign[peopleIndex].length)] : shiftsPlacedChart[(p % peopleToAssign[peopleIndex].length)+peopleToAssign[peopleIndex-1].length-1];  
+            } 
+            else{
+              if(unstagedAssignments[assignmentIndex][a].timePriority != peopleToAssign[peopleIndex][p % peopleToAssign[peopleIndex].length].timeId && peopleToAssign[peopleIndex][p % peopleToAssign[peopleIndex].length].timeId != 2 && unstagedAssignments[assignmentIndex][a].timePriority != 2){
+                if(idealGrace < 2){
+                p++;
+                // a++;
+                // shiftCount = peopleIndex == 0 ? shiftsPlacedChart[(p % peopleToAssign[peopleIndex].length)] : shiftsPlacedChart[(p % peopleToAssign[peopleIndex].length)+peopleToAssign[peopleIndex-1].length];  
+                shiftCount = shiftsPlacedChart.find(shift => shift.name === peopleToAssign[peopleIndex][p % peopleToAssign[peopleIndex].length].name); 
+                }
+                idealGrace++;         
+              } 
+              else{
+                if(idealGrace == 2){
+                  a=0;
+                  // p=0;
+                  idealGrace++;
+                }  
+                // a=0;
+                // if(!unstagedAssignments[assignmentIndex][a].assignedVolunteer){
+                if(!unstagedAssignments[assignmentIndex][a].assignedVolunteer){
+                  unstagedAssignments[assignmentIndex][a].assignedVolunteer = peopleToAssign[peopleIndex][p % peopleToAssign[peopleIndex].length].name;
+                  if(unstagedAssignments[assignmentIndex][a].timePriority != peopleToAssign[peopleIndex][p % peopleToAssign[peopleIndex].length].timeId && peopleToAssign[peopleIndex][p % peopleToAssign[peopleIndex].length].timeId != 2){
+                    unstagedAssignments[assignmentIndex][a].nonIdealShiftTaken = true;
+                    peopleToAssign[peopleIndex][p % peopleToAssign[peopleIndex].length].nonIdealShiftTaken = true;
+                  }
+                  shiftCount.shiftsPlaced++;
+                }
+                  p++;
+                  shiftCount = peopleIndex == 0 ? shiftsPlacedChart[(p % peopleToAssign[peopleIndex].length)] : shiftsPlacedChart[(p % peopleToAssign[peopleIndex].length)+peopleToAssign[peopleIndex-1].length];  
+                  // shiftCount = shiftsPlacedChart.find(shift => shift.name === peopleToAssign[peopleIndex][p % peopleToAssign[peopleIndex].length].name);
+                  a++;
+                // }
+              }
+            }
+            // if(idealGrace >= 3){
+            //   p=0;
+            // }
           }
-          a++;
-          (unstagedAssignments[assignmentIndex][a]);
-        }
-        if(i == 1 && p >= peopleToAssign[peopleIndex].length - 1){
-          p=-1;
-          i++;
-        }
-        if(p*i >= p >= peopleToAssign[peopleIndex].length - 1){
-          p=-1;
-          a=0;
-          peopleIndex < 10 ? peopleIndex++: 1;
-          skip=false;
-        }
+        a++;
+        // p++;
+        // console.log(p,a);
+
+        //PERSON GETS INSERT a++ p++;
+        //person gets no job agreement break;
+        //person gets skipped because non-preference; p++; 
+        //person gets skipped 
+
+        // if(p == peopleToAssign[peopleIndex].length && a < unstagedAssignments[assignmentIndex].length){
+        //   p++;//on skip
+        // }
+        // if(p < peopleToAssign[peopleIndex].length && a < unstagedAssignments[assignmentIndex].length){
+        //   if
+        //   p++;
+        //   a++;
+        // }
+        // else{
+        //   p++;
+        //   a++;
+      }
     }
-    // if(peopleIndex > 0 && peopleIndex < 10 && peopleToAssign[peopleIndex].length > 0){
-    //   for(let p = 0; p<peopleToAssign[peopleIndex].length; p++){
-    //     if(peopleToAssign[peopleIndex][p]){
-    //       peopleToAssign[10].push(peopleToAssign[peopleIndex][p])
-    //     }
-    //   }
-    // }
-    if(peopleIndex >= 10){
-      peopleIndex = 9;
-    }
-    peopleIndex++;
   }
-  console.log(unstagedAssignments[0].slice(0,9));
+  // console.log((unstagedAssignments[0].slice(0,9)));
   console.log(shiftsPlacedChart)
-  // console.log(peopleToAssign.slice(0,1));
+
+  // for(let i = 0; i<2; i++){
+  //   for(let assignmentIndex = 0, peopleIndex = 0; assignmentIndex < unstagedAssignments.length; assignmentIndex++, peopleIndex >= 10 ? 1 : peopleIndex++){
+  //     for(let p = 0, a = 0, shiftCount =shiftsPlacedChart[0];  p < peopleToAssign[peopleIndex].length && a < unstagedAssignments[assignmentIndex].length;){ 
+  //       console.log(p, a);
+  //         for(let idealGrace = 0; idealGrace < 3; idealGrace++){ //idealGrace >= 3 ? p : p = 0
+  //           console.log(shiftCount.name);
+  //           if(shiftCount.shiftsPlaced >= 2){
+  //             p++;
+  //             shiftCount = shiftsPlacedChart.find(shift => shift.name === peopleToAssign[peopleIndex][p].name);
+  //           } 
+  //           else{
+  //             if(idealGrace < 2 && unstagedAssignments[assignmentIndex][a].timePriority != peopleToAssign[peopleIndex][p % peopleToAssign[peopleIndex].length].timeId){
+  //               p++;
+  //               shiftCount = shiftsPlacedChart.find(shift => shift.name === peopleToAssign[peopleIndex][p % peopleToAssign[peopleIndex].length].name);                } 
+  //             else{
+  //               unstagedAssignments[assignmentIndex][a].assignedVolunteer = peopleToAssign[peopleIndex][p % peopleToAssign[peopleIndex].length].name;
+  //               if(unstagedAssignments[assignmentIndex][a].timePriority != peopleToAssign[peopleIndex][p % peopleToAssign[peopleIndex].length].timeId ){
+  //                 unstagedAssignments[assignmentIndex][a].nonIdealShiftTaken = true;
+  //                 peopleToAssign[peopleIndex][p].nonIdealShiftTaken = true;
+  //               }
+  //               shiftCount.shiftsPlaced++;
+  //               p++;
+  //               shiftCount = shiftsPlacedChart.find(shift => shift.name === peopleToAssign[peopleIndex][p % peopleToAssign[peopleIndex].length].name);
+  //               a++;
+  //             }
+  //           }
+  //           if(idealGrace >= 3){
+  //             p=0;
+  //           }
+  //         }
+  //       a++;
+  //       // p++;
+  //       // console.log(p,a);
+
+  //       //PERSON GETS INSERT a++ p++;
+  //       //person gets no job agreement break;
+  //       //person gets skipped because non-preference; p++; 
+  //       //person gets skipped 
+
+  //       // if(p == peopleToAssign[peopleIndex].length && a < unstagedAssignments[assignmentIndex].length){
+  //       //   p++;//on skip
+  //       // }
+  //       // if(p < peopleToAssign[peopleIndex].length && a < unstagedAssignments[assignmentIndex].length){
+  //       //   if
+  //       //   p++;
+  //       //   a++;
+  //       // }
+  //       // else{
+  //       //   p++;
+  //       //   a++;
+  //     }
+  //   }
+  // }
+  // // console.log((unstagedAssignments[0].slice(0,9)));
+  // console.log(shiftsPlacedChart)
+
+  // }
+  // // console.log(shiftsPlacedChart.find(p => p.name = "Graham Shields "))
+  // // console.log(JSON.stringify(unstagedAssignments, null, 2));
+  // // console.log(JSON.stringify(peopleToAssign, null, 2));
 
 
-    // // peopleToAssign[peopleIndex].forEach(
-    //   // (person, index) => {
-    //     let shiftCount = shiftsPlacedChart.find(p => p.name === person.name);
-    //     // console.log(shiftCount)
-    //     if(shiftCount.shiftsPlaced >= 2){
-    //       // console.log("removed", shiftCount);
-    //       peopleToAssign[peopleIndex].splice(index,1);
-    //       // console.log("the person:", person);
-    //       // console.log("rest" ,peopleToAssign[peopleIndex])
-    //     } else{
-    //       for(i = 0; {
-    //         unstagedAssignments[assignmentIndex][i].stagedVolunteer = person;
-    //       }
+  // // console.log(peopleToAssign.at(0))
+  // // shiftsPlacedChart.find(p => p.name === "Helena Ament Leni").shiftsPlaced = 7; // test
+  // for(let assignmentIndex = 0, peopleIndex = 0, specialCount = 0; assignmentIndex < unstagedAssignments.length; assignmentIndex++ ){ //using shift and splice
+  //   let skip = true;
+  //   for(let p = 0, a = 0, i=1, totalCount=0; peopleToAssign[peopleIndex].length > 0 && a < unstagedAssignments[assignmentIndex].length && p < unstagedAssignments[assignmentIndex].length  && p < peopleToAssign[peopleIndex].length && skip; p++){ // peopleIndex < peopleToAssign.length && peopleToAssign.length != 0 && a < peopleToAssign[peopleIndex].length
+  //     let shiftCount = shiftsPlacedChart.find(shift => shift.name === peopleToAssign[peopleIndex][p].name);
+  //       if(shiftCount.shiftsPlaced >= 2){
+  //         console.log("removed", shiftCount);
+  //         // console.log(p,peopleIndex, shiftCount.name);
+  //         peopleToAssign[peopleIndex].splice(p,1);
+  //         p--; //?
+  //       }
+  //       else{
+  //         // if(unstagedAssignments[assignmentIndex][a].timePriority == peopleToAssign[peopleIndex][p].timeId){
+  //         if(unstagedAssignments[assignmentIndex][a].timePriority != peopleToAssign[peopleIndex][p].timeId && peopleToAssign[peopleIndex][p].timeId != 2){
+  //           peopleToAssign[peopleIndex].push(peopleToAssign[peopleIndex].splice(p,1)[0]);
+  //           shiftCount = shiftsPlacedChart.find(shift => shift.name === peopleToAssign[peopleIndex][p].name);
+  //           //add in time id and 
+  //         } 
+          
+  //         {
+  //           unstagedAssignments[assignmentIndex][a].assignedVolunteer = peopleToAssign[peopleIndex][p].name;
+  //           totalCount++;
+  //           // peopleToAssign[peopleIndex].push(peopleToAssign[peopleIndex].splice(p,1)[0]);//might break
 
-    //     // }
+  //           if(unstagedAssignments[assignmentIndex][a].timePriority != peopleToAssign[peopleIndex][p].timeId ){
+  //             unstagedAssignments[assignmentIndex][a].nonIdealShiftTaken = true;
+  //             peopleToAssign[peopleIndex][p].nonIdealShiftTaken = true;
+  //           }
+  //           shiftCount.shiftsPlaced++;
+  //           // console.log(shiftCount.shiftsPlaced, " boop ", peopleToAssign[peopleIndex][p]);
+  //         }
+  //         a++;
+  //       }
+  //       if(i == 1 && p >= peopleToAssign[peopleIndex].length - 1){
+  //         p=-1;
+  //         i++;
+  //       }
+  //       if(i ==2 && p >= peopleToAssign[peopleIndex].length-1){
+  //         p=-1;
+  //         a=0;
+  //         // peopleIndex < 10 ? peopleIndex++: 1;
+  //         skip=false;
+  //       }
+  //       if(totalCount >= unstagedAssignments[assignmentIndex].length){
+  //         skip=false;
+  //         for(p=0;  peopleToAssign[peopleIndex].length != 0; p++){
+  //           let uselessQ = peopleToAssign[peopleIndex].pop();
+  //           if(shiftsPlacedChart.find((person) => person.name === uselessQ.name).shiftCount >= 2){
+  //             ;
+  //           }
+  //           else{
+  //             peopleToAssign[10].push();
+  //           }
+  //         }
+  //         p=0;
+  //         peopleIndex < 10 ? peopleIndex++: 1;
+  //         assignmentIndex++;
+  //         totalCount = 0;
+  //       }
+  //   }
+  //   // if(peopleIndex > 0 && peopleIndex < 10 && peopleToAssign[peopleIndex].length > 0){
+  //   //   for(let p = 0; p<peopleToAssign[peopleIndex].length; p++){
+  //   //     if(peopleToAssign[peopleIndex][p]){
+  //   //       peopleToAssign[10].push(peopleToAssign[peopleIndex][p])
+  //   //     }
+  //   //   }
+  //   // }
+  //   if(peopleIndex >= 10 && specialCount < 4){
+  //     peopleIndex = 9;
+  //     specialCount++;
+  //   }
+  //   peopleIndex++;
+  // }
+  // console.log(unstagedAssignments[0].slice(0,9));
+  // console.log(shiftsPlacedChart);
+  // // console.log(peopleToAssign.slice(0,1));
 
-    //   // }
-    //     }
 
-    // console.log(peopleToAssign.slice(0,1), unstagedAssignments.slice(0,1))
+  //   // // peopleToAssign[peopleIndex].forEach(
+  //   //   // (person, index) => {
+  //   //     let shiftCount = shiftsPlacedChart.find(p => p.name === person.name);
+  //   //     // console.log(shiftCount)
+  //   //     if(shiftCount.shiftsPlaced >= 2){
+  //   //       // console.log("removed", shiftCount);
+  //   //       peopleToAssign[peopleIndex].splice(index,1);
+  //   //       // console.log("the person:", person);
+  //   //       // console.log("rest" ,peopleToAssign[peopleIndex])
+  //   //     } else{
+  //   //       for(i = 0; {
+  //   //         unstagedAssignments[assignmentIndex][i].stagedVolunteer = person;
+  //   //       }
+
+  //   //     // }
+
+  //   //   // }
+  //   //     }
+
+  //   // console.log(peopleToAssign.slice(0,1), unstagedAssignments.slice(0,1))
 
 
     
-  // console.log((autoassignedPeople.slice(autoassignedPeople.length -1,autoassignedPeople.length).at(0)))
+  // // console.log((autoassignedPeople.slice(autoassignedPeople.length -1,autoassignedPeople.length).at(0)))
 
-  //do a queue copy of unstaged, duplicate every listing there splitting apart each special qualifications. before inserting each go to shifts place lookuptable, look for name, if its shifts lpaced is at 2 remove it.
-  //while iterating through the assignments by job name,
-  //when a person gets shiftsPlace to two remove them. otherwise if you assign them remove them but then add them back in the queue.
-  // iterate through the person queue until (it is empty or we reach the end of it) and weve reached the end of assignments.
-  //if an assignment gets fully filled skip to the next one 
+  // //do a queue copy of unstaged, duplicate every listing there splitting apart each special qualifications. before inserting each go to shifts place lookuptable, look for name, if its shifts lpaced is at 2 remove it.
+  // //while iterating through the assignments by job name,
+  // //when a person gets shiftsPlace to two remove them. otherwise if you assign them remove them but then add them back in the queue.
+  // // iterate through the person queue until (it is empty or we reach the end of it) and weve reached the end of assignments.
+  // //if an assignment gets fully filled skip to the next one 
 
   // console.log(unstagedAssignments[1].find(a => a.assignedVolunteer == "Alicia Hayden "));
-  // console.log(shiftsPlacedChart.find(p => p.name == "Alicia Hayden "));
-  // console.log(peopleToAssign.find(p => p.name == "Christopher Hammer "))
+  // // console.log(shiftsPlacedChart.find(p => p.name == "Alicia Hayden "));
+  // // console.log(peopleToAssign.find(p => p.name == "Christopher Hammer "))
 
-  // clear();
+  // // clear();
   return unstagedAssignments;
 }
 
