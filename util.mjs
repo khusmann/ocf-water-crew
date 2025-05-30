@@ -55,17 +55,19 @@ export function expandObjects(arr, key) {
         Array.isArray(obj[key])
             ? obj[key].length > 0
                 ? obj[key].map(value => ({
-                    name: obj.name,
-                    specialQualifications: obj.specialQualifications,
+                    ...obj,
+                    // name: obj.name,
+                    // specialQualifications: obj.specialQualifications,
                     // special: obj.special,
                     [key]: value,
-                    timeId: obj.timeId
+                    // timeId: obj.timeId
                 }))
                 : [{ 
-                    name: obj.name,
-                    specialQualifications: obj.specialQualifications,
+                    ...obj,
+                    // name: obj.name,
+                    // specialQualifications: obj.specialQualifications,
                     [key]: undefined, // should rly inserts `undefined` but w/e
-                    timeId: obj.timeId
+                    // timeId: obj.timeId
                 }]
             : [obj]
     );

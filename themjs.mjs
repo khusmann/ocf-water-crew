@@ -2,8 +2,6 @@ import fs from "fs";
 import { priorityComparison } from "./util.mjs";
 import { splitByProperty } from "./util.mjs";
 import { expandObjects } from "./util.mjs";
-import { forEach } from "lodash-es";
-
 
 // 1) read in your JSON data
 const data = JSON.parse(fs.readFileSync("./thejson.json", "utf8"));
@@ -17,6 +15,7 @@ function sortPeople(){
   return people
     .map((i) => ({
       ...i,
+      nonIdealShiftTaken: false,
       name: `${i.first} ${i.last} ${i.nickname}`,//this is a spacing bug maybe later? but maybe not if constructed from here. add a space iff nickname exists
     }))
     .sort(
@@ -29,6 +28,7 @@ function sortAssignments(){
     priorityComparison(["jobPriority", "timePriority", "day", "person"])
   ).map((i, index) => ({
     index: index+1,
+    nonIdealShiftTaken: false,
     ...i
   }));
 
@@ -56,7 +56,9 @@ const shiftsPlacedChart = peopleSorted.map(
 );
 const shiftsSorted = expandObjects(peopleSorted, "specialQualificationsIds").sort(priorityComparison([ "specialQualificationsIds", "timeId", "name"]));
 
-// console.log(peopleSorted.slice(69))
+// console.log(assignmentsSorted);
+// console.log(peopleSorted.slice(69));
+// console.log(shiftsPlacedChart);
 
 //------- clear staged ---------
 
@@ -77,6 +79,11 @@ function clear(){
 
 //------- assign  ---------
 
+
+//problem with assign rightnow is that names are sorted alphabetically and not randomly, so same people that fill a job qualification will always get it and people with lower lexical order will not.
+//good fix idea is just in the order we found it on the sheet which is presumably the the date they got on there.
+//another good idea is to make a date-time submittedInquiryTime and we make it first come first serve and sort by that instead of name
+//also bug removing at 3?
 function assign(){
   
   //contains effects -- i.e. adds one to the shiftsPlaced field of the shiftsSorted entity whose name or id (edit this) matches assigned volunteer
@@ -97,34 +104,57 @@ function assign(){
 
   // console.log(shiftsPlacedChart.find(p => p.name = "Graham Shields "))
   // console.log(JSON.stringify(unstagedAssignments, null, 2));
-  // console.log(JSON.stringify(autoassignedPeople, null, 2));
+  // console.log(JSON.stringify(peopleToAssign, null, 2));
 
 
-  let stop = true;
   // console.log(peopleToAssign.at(0))
   // shiftsPlacedChart.find(p => p.name === "Helena Ament Leni").shiftsPlaced = 7; // test
-  for(let assignmentIndex = 0, peopleIndex = 0; peopleToAssign.length != 0 && peopleIndex < peopleToAssign.length && assignmentIndex < unstagedAssignments.length && stop; assignmentIndex++, peopleIndex++){ //using shift and splice
-    for(let p = 0, a = 0; peopleToAssign[peopleIndex].length > 0 && a<unstagedAssignments[assignmentIndex].length && a<peopleToAssign[peopleIndex].length && p < unstagedAssignments[assignmentIndex].length; p++){
-      // console.log("hi");
+  for(let assignmentIndex = 0, peopleIndex = 0; assignmentIndex < unstagedAssignments.length; assignmentIndex++, peopleIndex++){ //using shift and splice
+    for(let p = 0, a = 0; peopleToAssign[peopleIndex].length > 0 && a < unstagedAssignments[assignmentIndex].length && p < unstagedAssignments[assignmentIndex].length  && p < peopleToAssign[peopleIndex].length ; p++){ // peopleIndex < peopleToAssign.length && peopleToAssign.length != 0 && a < peopleToAssign[peopleIndex].length
       let shiftCount = shiftsPlacedChart.find(shift => shift.name === peopleToAssign[peopleIndex][p].name);
         if(shiftCount.shiftsPlaced >= 2){
-          // console.log("removed", shiftCount);
+          console.log("removed", shiftCount);
           peopleToAssign[peopleIndex].splice(p,1);
         }
         else{
-          unstagedAssignments[assignmentIndex][a].stagedVolunteer = peopleToAssign[peopleIndex][p].name;
-          shiftCount.shiftsPlaced++;
-          a++;//add in time id and 
+          // if(unstagedAssignments[assignmentIndex][a].timePriority == peopleToAssign[peopleIndex][p].timeId){
+          if(unstagedAssignments[assignmentIndex][a].timePriority != peopleToAssign[peopleIndex][p].timeId && peopleToAssign[peopleIndex][p].timeId != 2){
+            peopleToAssign[peopleIndex].push(peopleToAssign[peopleIndex].splice(p,1)[0]);
+            shiftCount = shiftsPlacedChart.find(shift => shift.name === peopleToAssign[peopleIndex][p].name);
+            //add in time id and 
+          } 
           
-        }
-        if(p >= peopleToAssign[peopleIndex].length){
-          p=0;
-        }
+          {
+            unstagedAssignments[assignmentIndex][a].assignedVolunteer = peopleToAssign[peopleIndex][p].name;
+            // peopleToAssign[peopleIndex].push(peopleToAssign[peopleIndex].splice(p,1)[0]);//might break
 
+            if(unstagedAssignments[assignmentIndex][a].timePriority != peopleToAssign[peopleIndex][p].timeId ){
+              unstagedAssignments[assignmentIndex][a].nonIdealShiftTaken = true;
+              peopleToAssign[peopleIndex][p].nonIdealShiftTaken = true;
+            }
+            shiftCount.shiftsPlaced++;
+            // console.log(shiftCount.shiftsPlaced, " boop ", peopleToAssign[peopleIndex][p]);
+          }
+          a++;
+          (unstagedAssignments[assignmentIndex][a]);
+        }
+        if(p >= peopleToAssign[peopleIndex].length - 1){
+          p=-1;
+        }
+    }
+    // if(peopleIndex > 0 && peopleIndex < 10 && peopleToAssign[peopleIndex].length > 0){
+    //   for(let p = 0; p<peopleToAssign[peopleIndex].length; p++){
+    //     if(peopleToAssign[peopleIndex][p]){
+    //       peopleToAssign[10].push(peopleToAssign[peopleIndex][p])
+    //     }
+    //   }
+    // }
+    if(peopleIndex => 10){
+      peopleIndex = 9;
     }
   }
-  // console.log(unstagedAssignments[0], "reeee");
-
+  // console.log(unstagedAssignments[2].slice(0,8));
+  // console.log(peopleToAssign.slice(0,1));
 
 
     // // peopleToAssign[peopleIndex].forEach(
@@ -158,9 +188,12 @@ function assign(){
   // iterate through the person queue until (it is empty or we reach the end of it) and weve reached the end of assignments.
   //if an assignment gets fully filled skip to the next one 
 
+  console.log(unstagedAssignments[1].find(a => a.assignedVolunteer == "Alicia Hayden "));
+  console.log(shiftsPlacedChart.find(p => p.name == "Alicia Hayden "));
+  console.log(peopleToAssign.find(p => p.name == "Christopher Hammer "))
 
-
-  return peopleToAssign;
+  // clear();
+  return unstagedAssignments;
 }
 
 assign();
