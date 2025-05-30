@@ -60,6 +60,7 @@ const shiftsSorted = expandObjects(peopleSorted, "specialQualificationsIds").sor
 // console.log(peopleSorted.slice(69));
 // console.log(shiftsPlacedChart);
 
+
 //------- clear staged ---------
 
 function clear(){
@@ -109,12 +110,15 @@ function assign(){
 
   // console.log(peopleToAssign.at(0))
   // shiftsPlacedChart.find(p => p.name === "Helena Ament Leni").shiftsPlaced = 7; // test
-  for(let assignmentIndex = 0, peopleIndex = 0; assignmentIndex < unstagedAssignments.length; assignmentIndex++, peopleIndex++){ //using shift and splice
-    for(let p = 0, a = 0; peopleToAssign[peopleIndex].length > 0 && a < unstagedAssignments[assignmentIndex].length && p < unstagedAssignments[assignmentIndex].length  && p < peopleToAssign[peopleIndex].length ; p++){ // peopleIndex < peopleToAssign.length && peopleToAssign.length != 0 && a < peopleToAssign[peopleIndex].length
+  for(let assignmentIndex = 0, peopleIndex = 0; assignmentIndex < unstagedAssignments.length; assignmentIndex++ ){ //using shift and splice
+    let skip = true;
+    for(let p = 0, a = 0, i=1; peopleToAssign[peopleIndex].length > 0 && a < unstagedAssignments[assignmentIndex].length && p < unstagedAssignments[assignmentIndex].length  && p < peopleToAssign[peopleIndex].length && skip; p++){ // peopleIndex < peopleToAssign.length && peopleToAssign.length != 0 && a < peopleToAssign[peopleIndex].length
       let shiftCount = shiftsPlacedChart.find(shift => shift.name === peopleToAssign[peopleIndex][p].name);
         if(shiftCount.shiftsPlaced >= 2){
           console.log("removed", shiftCount);
+          // console.log(p,peopleIndex, shiftCount.name);
           peopleToAssign[peopleIndex].splice(p,1);
+          p--; //?
         }
         else{
           // if(unstagedAssignments[assignmentIndex][a].timePriority == peopleToAssign[peopleIndex][p].timeId){
@@ -138,8 +142,15 @@ function assign(){
           a++;
           (unstagedAssignments[assignmentIndex][a]);
         }
-        if(p >= peopleToAssign[peopleIndex].length - 1){
+        if(i == 1 && p >= peopleToAssign[peopleIndex].length - 1){
           p=-1;
+          i++;
+        }
+        if(p*i >= p >= peopleToAssign[peopleIndex].length - 1){
+          p=-1;
+          a=0;
+          peopleIndex < 10 ? peopleIndex++: 1;
+          skip=false;
         }
     }
     // if(peopleIndex > 0 && peopleIndex < 10 && peopleToAssign[peopleIndex].length > 0){
@@ -149,11 +160,13 @@ function assign(){
     //     }
     //   }
     // }
-    if(peopleIndex => 10){
+    if(peopleIndex >= 10){
       peopleIndex = 9;
     }
+    peopleIndex++;
   }
-  // console.log(unstagedAssignments[2].slice(0,8));
+  console.log(unstagedAssignments[0].slice(0,9));
+  console.log(shiftsPlacedChart)
   // console.log(peopleToAssign.slice(0,1));
 
 
@@ -188,14 +201,15 @@ function assign(){
   // iterate through the person queue until (it is empty or we reach the end of it) and weve reached the end of assignments.
   //if an assignment gets fully filled skip to the next one 
 
-  console.log(unstagedAssignments[1].find(a => a.assignedVolunteer == "Alicia Hayden "));
-  console.log(shiftsPlacedChart.find(p => p.name == "Alicia Hayden "));
-  console.log(peopleToAssign.find(p => p.name == "Christopher Hammer "))
+  // console.log(unstagedAssignments[1].find(a => a.assignedVolunteer == "Alicia Hayden "));
+  // console.log(shiftsPlacedChart.find(p => p.name == "Alicia Hayden "));
+  // console.log(peopleToAssign.find(p => p.name == "Christopher Hammer "))
 
   // clear();
   return unstagedAssignments;
 }
 
 assign();
+// console.log(shiftsSorted);
 // console.log(assignmentsSorted)
 //special to be instead specialqualificationId be 0-9 instead of true or , which is there position in the jobs, 0 indexed hk thats job priority
