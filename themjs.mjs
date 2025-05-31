@@ -118,11 +118,11 @@ function sortAssignments(assignments) {
 
 //------- clear staged ---------
 
-function clear(assignmentsSorted) {
+function clear(assignmentsSorted, shiftsPlacedChart) {
   let cleared = assignmentsSorted.map(function (assignment) {
     let volunteerAssignment = {
       ...assignment,
-      stagedVolunteerVolunteer: "",
+      stagedVolunteer: "",
     };
     shiftsPlacedChart.forEach((i) => (i.shiftsPlaced = 0) /*effect */);
     return volunteerAssignment;
@@ -366,8 +366,7 @@ function assign(assignments, people) {
   // )
   //); // debugging mystery? // console.log(shiftsPlacedChart.slice(26));
 
-  //clear();
-  return flatAssignments;
+  return clear(flatAssignments, shiftsPlacedChart);
 }
 
 export default assign;
