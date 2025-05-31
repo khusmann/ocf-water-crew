@@ -369,7 +369,7 @@ function assign(assignments, people) {
   //); // debugging mystery? // console.log(shiftsPlacedChart.slice(26));
 
   //clear();
-  return flatAssignments, flatPeople;
+  return flatAssignments;
 }
 
 const runAssign = () => {
