@@ -336,7 +336,6 @@ function assign(assignments, people) {
         let shiftCount = shiftsPlacedChart.find(
           (shift) => shift.name === flatPeople[p].name
         );
-        // if(!flatAssignments[a].assignedVolunteer){ original
         if (
           (flatPeople[p].specialQualificationsIds ==
             flatAssignments[a].jobPriority ||
@@ -353,6 +352,7 @@ function assign(assignments, people) {
             flatAssignments[a].nonIdealShiftTaken = true;
             flatPeople[p].nonIdealShiftTaken = true;
           }
+          break;
         }
       }
     }
