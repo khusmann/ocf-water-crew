@@ -10,11 +10,11 @@ export const genericCompare = (a, b) => {
     return 0;
   }
 
-  if(valueA === undefined || Number.isNaN(valueA) || valueA === Infinity){
+  if (valueA === undefined || Number.isNaN(valueA) || valueA === Infinity) {
     return 2;
   }
 
-  if(valueB === undefined || Number.isNaN(valueB) || valueB === Infinity){
+  if (valueB === undefined || Number.isNaN(valueB) || valueB === Infinity) {
     return -2;
   }
 
@@ -32,48 +32,47 @@ export const priorityComparison = (keyOrder) => (a, b) => {
 };
 
 export function splitByProperty(arr, property) {
-    return Object.values(arr.reduce((acc, obj) => {
-        let key = obj[property];
-        if (!acc[key]) {
-            acc[key] = [];
-        }
-        acc[key].push(obj);
-        return acc;
-    }, {}));
+  return Object.values(
+    arr.reduce((acc, obj) => {
+      let key = obj[property];
+      if (!acc[key]) {
+        acc[key] = [];
+      }
+      acc[key].push(obj);
+      return acc;
+    }, {})
+  );
 }
 
 // export function expandObjects(arr, key) {
 //     return arr.flatMap(obj =>
 //         Array.isArray(obj[key])
 //             ? obj[key].map(value => ({name: obj.name, specialQualifications: obj.specialQualifications, [key]: [value], timeId: obj.timeId, [key]: value }))
-//             : [obj] // 
+//             : [obj] //
 //     );
 // }
 
 export function expandObjects(arr, key) {
-    return arr.flatMap(obj =>
-        Array.isArray(obj[key])
-            ? obj[key].length > 0
-                ? obj[key].map(value => ({
-                    ...obj,
-                    // name: obj.name,
-                    // specialQualifications: obj.specialQualifications,
-                    // special: obj.special,
-                    [key]: value,
-                    // timeId: obj.timeId
-                }))
-                : [{ 
-                    ...obj,
-                    // name: obj.name,
-                    // specialQualifications: obj.specialQualifications,
-                    [key]: undefined, // should rly inserts `undefined` but w/e
-                    // timeId: obj.timeId
-                }]
-            : [obj]
-    );
+  return arr.flatMap((obj) =>
+    Array.isArray(obj[key])
+      ? obj[key].length > 0
+        ? obj[key].map((value) => ({
+            ...obj,
+            // name: obj.name,
+            // specialQualifications: obj.specialQualifications,
+            // special: obj.special,
+            [key]: value,
+            // timeId: obj.timeId
+          }))
+        : [
+            {
+              ...obj,
+              // name: obj.name,
+              // specialQualifications: obj.specialQualifications,
+              [key]: undefined, // should rly inserts `undefined` but w/e
+              // timeId: obj.timeId
+            },
+          ]
+      : [obj]
+  );
 }
-
-
-
-
-
