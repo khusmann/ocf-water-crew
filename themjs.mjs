@@ -367,16 +367,18 @@ function assign(){
       if(!flatAssignments[a].assignedVolunteer){
         if((flatPeople[p].specialQualificationsIds == flatAssignments[a].jobPriority || flatAssignments[a].jobPriority >= 10) && shiftCount.shiftsPlaced < 2){
           flatAssignments[a].assignedVolunteer = flatPeople[p].name;
+          shiftCount.shiftsPlaced++;
           if(flatAssignments[a].timePriority != flatPeople[p].timeId != 2 && flatAssignments[a].jobPriority != 2 ){
             flatAssignments[a].nonIdealShiftTaken = true;
             flatPeople[p].nonIdealShiftTaken = true;
           }
-          shiftCount.shiftsPlaced++;
         }
       }
     }
   }
-  console.log(shiftsPlacedChart);
+  // console.log(shiftsPlacedChart.slice(26));
+  console.log(flatAssignments.slice(0))
+  // console.log(flatAssignments.reduce((count, item) => count + (item.assignedVolunteer == 'Schuyler Ashton ' ? 1 : 0), 0));
   clear();
   return flatAssignments;
 }
