@@ -83,7 +83,6 @@ function sortPeople(people) {
     .map((i) => ({
       ...i,
       nonIdealShiftTaken: false,
-      name: `${i.first} ${i.last} ${i.nickname}`, //make prettier?
     }))
     .sort(priorityComparison(["specialQualificationsIds", "timeId"]));
 }
@@ -366,7 +365,7 @@ function assign(assignments, people) {
   // )
   //); // debugging mystery? // console.log(shiftsPlacedChart.slice(26));
 
-  return clear(flatAssignments, shiftsPlacedChart);
+  return flatAssignments;
 }
 
 export default assign;
