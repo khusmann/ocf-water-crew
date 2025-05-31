@@ -68,7 +68,7 @@ function clear(){
     function(assignment) {
       let volunteerAssignment = ({
       ...assignment,
-      assignedVolunteer: '',
+      stagedVolunteerVolunteer: '',
       });
       shiftsPlacedChart.forEach(
         (i) => i.shiftsPlaced = 0 /*effect */
@@ -106,13 +106,13 @@ function assign(){
   for(let i = 0; i<2; i++){
     for(let assignmentIndex = 0, peopleIndex = 0; assignmentIndex < unstagedAssignments.length; assignmentIndex++, peopleIndex >= 10 ? 1 : peopleIndex++){
       for(let p = 0, a = 0, shiftCount = shiftsPlacedChart.find(shift => shift.name === peopleToAssign[peopleIndex][p].name) ;  p < peopleToAssign[peopleIndex].length && a < unstagedAssignments[assignmentIndex].length;){ 
-        console.log(p, a); //
+        // console.log(p, a); //
         //shiftCount = peopleIndex == 0 ? shiftsPlacedChart[0] :shiftsPlacedChart[peopleToAssign[peopleIndex-1].length]
           for(let idealGrace = 0; idealGrace < 3 && a < unstagedAssignments[assignmentIndex].length; p % peopleToAssign[peopleIndex].length == 0 ? idealGrace++ : 1){ //idealGrace >= 3 ? p : p = 0
-            console.log(shiftCount.name);
-            if(shiftCount.name == 'Ryan Ashton ' && assignmentIndex >1){
-              console.log("here");
-            }
+            // console.log(shiftCount.name);
+            // if(shiftCount.name == 'Ryan Ashton ' && assignmentIndex >1){
+            //   // console.log("here");
+            // }
             if(shiftCount.shiftsPlaced >= 2){
               p++;
               shiftCount = shiftsPlacedChart.find(shift => shift.name === peopleToAssign[peopleIndex][p % peopleToAssign[peopleIndex].length].name);
@@ -138,7 +138,7 @@ function assign(){
                 // if(!unstagedAssignments[assignmentIndex][a].assignedVolunteer){
                 if(!unstagedAssignments[assignmentIndex][a].assignedVolunteer){
                   unstagedAssignments[assignmentIndex][a].assignedVolunteer = peopleToAssign[peopleIndex][p % peopleToAssign[peopleIndex].length].name;
-                  if(unstagedAssignments[assignmentIndex][a].timePriority != peopleToAssign[peopleIndex][p % peopleToAssign[peopleIndex].length].timeId && peopleToAssign[peopleIndex][p % peopleToAssign[peopleIndex].length].timeId != 2){
+                  if(unstagedAssignments[assignmentIndex][a].timePriority != peopleToAssign[peopleIndex][p % peopleToAssign[peopleIndex].length].timeId && (peopleToAssign[peopleIndex][p % peopleToAssign[peopleIndex].length].timeId != 2 || unstagedAssignments[assignmentIndex][a].timePriority != 2)){//modify to or if assignment isnt 2
                     unstagedAssignments[assignmentIndex][a].nonIdealShiftTaken = true;
                     peopleToAssign[peopleIndex][p % peopleToAssign[peopleIndex].length].nonIdealShiftTaken = true;
                   }
@@ -179,7 +179,7 @@ function assign(){
     }
   }
   // console.log((unstagedAssignments[0].slice(0,9)));
-  console.log(shiftsPlacedChart)
+  // console.log(shiftsPlacedChart)
 
   // for(let i = 0; i<2; i++){
   //   for(let assignmentIndex = 0, peopleIndex = 0; assignmentIndex < unstagedAssignments.length; assignmentIndex++, peopleIndex >= 10 ? 1 : peopleIndex++){
@@ -341,7 +341,6 @@ function assign(){
   //   //   // }
   //   //     }
 
-  //   // console.log(peopleToAssign.slice(0,1), unstagedAssignments.slice(0,1))
 
 
     
@@ -357,8 +356,29 @@ function assign(){
   // // console.log(shiftsPlacedChart.find(p => p.name == "Alicia Hayden "));
   // // console.log(peopleToAssign.find(p => p.name == "Christopher Hammer "))
 
-  // // clear();
-  return unstagedAssignments;
+  // console.log(peopleToAssign.slice(0,1), unstagedAssignments.slice(0,1))
+
+  // console.log( peopleToAssign.slice(10).slice(0,9), unstagedAssignments.slice(10,11).slice(0,9), shiftsPlacedChart.length*2, unstagedAssignments.reduce((sum, item) => sum + item.length, 0));
+  let flatPeople = peopleToAssign.flat();
+  let flatAssignments = unstagedAssignments.flat();
+  for(let a = 0; a < flatAssignments.length; a++){
+    for(let p = 0; p < flatPeople.length; p++){
+      let shiftCount = shiftsPlacedChart.find(shift => shift.name === flatPeople[p].name);
+      if(!flatAssignments[a].assignedVolunteer){
+        if((flatPeople[p].specialQualificationsIds == flatAssignments[a].jobPriority || flatAssignments[a].jobPriority >= 10) && shiftCount.shiftsPlaced < 2){
+          flatAssignments[a].assignedVolunteer = flatPeople[p].name;
+          if(flatAssignments[a].timePriority != flatPeople[p].timeId != 2 && flatAssignments[a].jobPriority != 2 ){
+            flatAssignments[a].nonIdealShiftTaken = true;
+            flatPeople[p].nonIdealShiftTaken = true;
+          }
+          shiftCount.shiftsPlaced++;
+        }
+      }
+    }
+  }
+  console.log(shiftsPlacedChart);
+  clear();
+  return flatAssignments;
 }
 
 assign();
