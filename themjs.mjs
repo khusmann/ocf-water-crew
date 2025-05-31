@@ -379,7 +379,10 @@ const runAssign = () => {
 
   const newAssignments = assign(assignments, people);
 
-  console.log(newAssignments);
+  fs.writeFileSync(
+    "theresultjson.json",
+    JSON.stringify(newAssignments, null, 2)
+  );
 };
 
 runAssign();
