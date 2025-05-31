@@ -1,10 +1,5 @@
 import fs from "fs";
 
-// 1) read in your JSON data
-const data = JSON.parse(fs.readFileSync("./thejson.json", "utf8"));
-const assignments = data.assignments;
-const people = data.people;
-
 const genericCompare = (a, b) => {
   // if (a === undefined || b === undefined) {
   //   throw new Error("value is undefined"+" " + a + b);
@@ -85,7 +80,7 @@ function expandObjects(arr, key) {
 }
 
 //add full name or id
-function sortPeople() {
+function sortPeople(people) {
   return people
     .map((i) => ({
       ...i,
@@ -95,7 +90,7 @@ function sortPeople() {
     .sort(priorityComparison(["specialQualificationsIds", "timeId"]));
 }
 
-function sortAssignments() {
+function sortAssignments(assignments) {
   let unsorted = assignments
     .sort(priorityComparison(["jobPriority", "timePriority", "day", "person"]))
     .map((i, index) => ({
@@ -123,24 +118,9 @@ function sortAssignments() {
   return unsorted;
 }
 
-const peopleSorted = sortPeople();
-
-const assignmentsSorted = sortAssignments();
-const shiftsPlacedChart = peopleSorted
-  .sort(priorityComparison(["specialQualificationsIds", "timeId", "name"]))
-  .map((i) => ({ name: i.name, shiftsPlaced: 0 }));
-const shiftsSorted = expandObjects(
-  peopleSorted,
-  "specialQualificationsIds"
-).sort(priorityComparison(["specialQualificationsIds", "timeId", "name"]));
-
-// console.log(assignmentsSorted);
-// console.log(peopleSorted.slice(69));
-// console.log(shiftsPlacedChart);
-
 //------- clear staged ---------
 
-function clear() {
+function clear(assignmentsSorted) {
   let cleared = assignmentsSorted.map(function (assignment) {
     let volunteerAssignment = {
       ...assignment,
@@ -157,9 +137,21 @@ function clear() {
 //problem with assign rightnow is that names are sorted alphabetically and not randomly, so same people that fill a job qualification will always get it and people with lower lexical order will not.
 //good fix idea is just in the order we found it on the sheet which is presumably the the date they got on there.
 //another good idea is to make a date-time submittedInquiryTime and we make it first come first serve and sort by that instead of name
-// ALSO WE MUST CHANGE AMPM PRIOIRITY TO 1 AND PM TO 2
-function assign() {
-  //swap day and am pm
+function assign(assignments, people) {
+  const peopleSorted = sortPeople(people);
+
+  const assignmentsSorted = sortAssignments(assignments);
+  const shiftsPlacedChart = peopleSorted
+    .sort(priorityComparison(["specialQualificationsIds", "timeId", "name"]))
+    .map((i) => ({ name: i.name, shiftsPlaced: 0 }));
+  const shiftsSorted = expandObjects(
+    peopleSorted,
+    "specialQualificationsIds"
+  ).sort(priorityComparison(["specialQualificationsIds", "timeId", "name"]));
+
+  // console.log(assignmentsSorted);
+  // console.log(peopleSorted.slice(69));
+  // console.log(shiftsPlacedChart);
 
   //contains effects -- i.e. adds one to the shiftsPlaced field of the shiftsSorted entity whose name or id (edit this) matches assigned volunteer
   let peopleToAssign = splitByProperty(
@@ -368,16 +360,26 @@ function assign() {
       }
     }
   }
-  console.log(
-    flatAssignments.reduce(
-      (count, item) =>
-        count + (item.assignedVolunteer == "Schuyler Ashton " ? 1 : 0),
-      0
-    )
-  ); // debugging mystery? // console.log(shiftsPlacedChart.slice(26));
+  //console.log(
+  //  flatAssignments.reduce(
+  //    (count, item) =>
+  //     count + (item.assignedVolunteer == "Schuyler Ashton " ? 1 : 0),
+  //   0
+  // )
+  //); // debugging mystery? // console.log(shiftsPlacedChart.slice(26));
 
-  clear();
+  //clear();
   return flatAssignments, flatPeople;
 }
 
-assign();
+const runAssign = () => {
+  const data = JSON.parse(fs.readFileSync("./thejson.json", "utf8"));
+  const assignments = data.assignments;
+  const people = data.people;
+
+  const newAssignments = assign(assignments, people);
+
+  console.log(newAssignments);
+};
+
+runAssign();
