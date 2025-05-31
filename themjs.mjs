@@ -1,5 +1,3 @@
-import fs from "fs";
-
 const genericCompare = (a, b) => {
   // if (a === undefined || b === undefined) {
   //   throw new Error("value is undefined"+" " + a + b);
@@ -372,17 +370,4 @@ function assign(assignments, people) {
   return flatAssignments;
 }
 
-const runAssign = () => {
-  const data = JSON.parse(fs.readFileSync("./thejson.json", "utf8"));
-  const assignments = data.assignments;
-  const people = data.people;
-
-  const newAssignments = assign(assignments, people);
-
-  fs.writeFileSync(
-    "theresultjson.json",
-    JSON.stringify(newAssignments, null, 2)
-  );
-};
-
-runAssign();
+export default assign;
