@@ -83,7 +83,6 @@ function sortPeople(people) {
     .map((i) => ({
       ...i,
       nonIdealShiftTaken: false,
-      name: `${i.first} ${i.last} ${i.nickname}`, //make prettier?
     }))
     .sort(priorityComparison(["specialQualificationsIds", "timeId"]));
 }
@@ -346,7 +345,6 @@ function assign(assignments, people) {
         let shiftCount = shiftsPlacedChart.find(
           (shift) => shift.name === flatPeople[p].name
         );
-        // if(!flatAssignments[a].assignedVolunteer){ original
         if (
           (flatPeople[p].specialQualificationsIds ==
             flatAssignments[a].jobPriority ||
@@ -363,6 +361,7 @@ function assign(assignments, people) {
             flatAssignments[a].nonIdealShiftTaken = true;
             flatPeople[p].nonIdealShiftTaken = true;
           }
+          break;
         }
       }
     }
@@ -375,7 +374,7 @@ function assign(assignments, people) {
   // )
   // ); // debugging mystery? // console.log(shiftsPlacedChart.slice(26));
 
-  return clear(flatAssignments, shiftsPlacedChart);
+  return flatAssignments;
 }
 
 export default assign;
