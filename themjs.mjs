@@ -1,3 +1,5 @@
+// import fs from "fs";
+
 const genericCompare = (a, b) => {
   // if (a === undefined || b === undefined) {
   //   throw new Error("value is undefined"+" " + a + b);
@@ -83,6 +85,7 @@ function sortPeople(people) {
     .map((i) => ({
       ...i,
       nonIdealShiftTaken: false,
+      name: `${i.first} ${i.last} ${i.nickname}`.trim(), // some people dont have last last needs to be '' i think.
     }))
     .sort(priorityComparison(["specialQualificationsIds", "timeId"]));
 }
@@ -134,7 +137,7 @@ function clear(assignmentsSorted, shiftsPlacedChart) {
 //problem with assign rightnow is that names are sorted alphabetically and not randomly, so same people that fill a job qualification will always get it and people with lower lexical order will not.
 //good fix idea is just in the order we found it on the sheet which is presumably the the date they got on there.
 //another good idea is to make a date-time submittedInquiryTime and we make it first come first serve and sort by that instead of name
-function assign(assignments, people) {
+export default function assign(assignments, people) {
   const peopleSorted = sortPeople(people);
 
   const assignmentsSorted = sortAssignments(assignments);
@@ -146,14 +149,9 @@ function assign(assignments, people) {
     "specialQualificationsIds"
   ).sort(priorityComparison(["specialQualificationsIds", "timeId", "name"]));
 
-  //import jobs; then
-  //const number of special jobs =  
-  // console.log(
-  //  jobsSorted.reduce(
-  //    (count, item) =>
-  //     count + (item.special == true ? 1 : 0),
-  //   0
-  // )); then replace that with 10
+  let uniqueValues = new Set(assignments.map(item => item.special == false ? -1 : item.jobPriority));
+  uniqueValues.delete(-1);
+  const specialJobNumber = uniqueValues.size;
 
   // console.log(assignmentsSorted);
   // console.log(peopleSorted.slice(69));
@@ -187,7 +185,7 @@ function assign(assignments, people) {
       let assignmentIndex = 0, peopleIndex = 0;
       peopleIndex < peopleToAssign.length &&
       assignmentIndex < unstagedAssignments.length;
-      assignmentIndex++, peopleIndex >= 10 ? 1 : peopleIndex++
+      assignmentIndex++, peopleIndex >= specialJobNumber ? 1 : peopleIndex++
     ) {
       p = 0;
       a = 0;
@@ -241,7 +239,7 @@ function assign(assignments, people) {
                       peopleToAssign[peopleIndex][
                         p % peopleToAssign[peopleIndex].length
                       ].specialQualificationsIds ||
-                    unstagedAssignments[assignmentIndex][a].jobPriority >= 10
+                    unstagedAssignments[assignmentIndex][a].jobPriority >= specialJobNumber
                   ) {
                     unstagedAssignments[assignmentIndex][a].assignedVolunteer =
                       peopleToAssign[peopleIndex][
@@ -292,7 +290,7 @@ function assign(assignments, people) {
                   (unstagedAssignments[assignmentIndex][a].jobPriority ==
                     peopleToAssign[peopleIndex][p].specialQualificationsIds ||
                     peopleToAssign[peopleIndex][p].specialQualificationsIds >=
-                      10)
+                      specialJobNumber)
                 ) {
                   unstagedAssignments[assignmentIndex][a].assignedVolunteer =
                     peopleToAssign[peopleIndex][
@@ -348,7 +346,7 @@ function assign(assignments, people) {
         if (
           (flatPeople[p].specialQualificationsIds ==
             flatAssignments[a].jobPriority ||
-            flatAssignments[a].jobPriority >= 10) &&
+            flatAssignments[a].jobPriority >= specialJobNumber) &&
           shiftCount.shiftsPlaced < 4
         ) {
           flatAssignments[a].assignedVolunteer = flatPeople[p].name;
@@ -377,4 +375,10 @@ function assign(assignments, people) {
   return flatAssignments;
 }
 
-export default assign;
+  // const data = JSON.parse(fs.readFileSync("./thejson.json", "utf8"));
+  // const assignments = data.assignments;
+  // const people = data.people;
+
+  // const newAssignments = assign(assignments, people);
+
+  // console.log(newAssignments.slice(332));
