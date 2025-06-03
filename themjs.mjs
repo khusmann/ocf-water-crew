@@ -21,7 +21,7 @@ const genericCompare = (a, b) => {
   return valueA > valueB ? 1 : -1;
 };
 
-const priorityComparison = (keyOrder) => (a, b) => {
+export const priorityComparison = (keyOrder) => (a, b) => {
   for (const key of keyOrder) {
     const result = genericCompare(a[key], b[key]);
     if (result !== 0) {
@@ -147,6 +147,15 @@ function assign(assignments, people) {
     "specialQualificationsIds"
   ).sort(priorityComparison(["specialQualificationsIds", "timeId", "name"]));
 
+  //import jobs; then
+  //const number of special jobs =  
+  // console.log(
+  //  jobsSorted.reduce(
+  //    (count, item) =>
+  //     count + (item.special == true ? 1 : 0),
+  //   0
+  // )); then replace that with 10
+
   // console.log(assignmentsSorted);
   // console.log(peopleSorted.slice(69));
   // console.log(shiftsPlacedChart);
@@ -191,13 +200,13 @@ function assign(assignments, people) {
           let idealGrace = 0;
           idealGrace < 1 &&
           a < unstagedAssignments[assignmentIndex].length &&
-          p < peopleToAssign[peopleIndex].length * 2;
+          p < peopleToAssign[peopleIndex].length * 4;
           p >= peopleToAssign[peopleIndex].length &&
           a >= unstagedAssignments[assignmentIndex].length
             ? idealGrace++
             : 1
         ) {
-          if (shiftCount.shiftsPlaced >= 2) {
+          if (shiftCount.shiftsPlaced >= 4) {
             p++;
             shiftCount = shiftsPlacedChart.find(
               (shift) =>
@@ -297,8 +306,8 @@ function assign(assignments, people) {
                       ].timeId &&
                     (peopleToAssign[peopleIndex][
                       p % peopleToAssign[peopleIndex].length
-                    ].timeId != 2 ||
-                      unstagedAssignments[assignmentIndex][a].timePriority != 2)
+                    ].timeId != 1 ||
+                      unstagedAssignments[assignmentIndex][a].timePriority != 1)
                   ) {
                     //modify to or if assignment isnt 2
                     unstagedAssignments[assignmentIndex][
@@ -342,7 +351,7 @@ function assign(assignments, people) {
           (flatPeople[p].specialQualificationsIds ==
             flatAssignments[a].jobPriority ||
             flatAssignments[a].jobPriority >= 10) &&
-          shiftCount.shiftsPlaced < 2
+          shiftCount.shiftsPlaced < 4
         ) {
           flatAssignments[a].assignedVolunteer = flatPeople[p].name;
           shiftCount.shiftsPlaced++;
@@ -358,13 +367,13 @@ function assign(assignments, people) {
       }
     }
   }
-  //console.log(
+  // console.log(
   //  flatAssignments.reduce(
   //    (count, item) =>
   //     count + (item.assignedVolunteer == "Schuyler Ashton " ? 1 : 0),
   //   0
   // )
-  //); // debugging mystery? // console.log(shiftsPlacedChart.slice(26));
+  // ); // debugging mystery? // console.log(shiftsPlacedChart.slice(26));
 
   return clear(flatAssignments, shiftsPlacedChart);
 }

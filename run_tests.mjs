@@ -1,4 +1,4 @@
-import { priorityComparison } from "./util.mjs";
+import { priorityComparison } from "./themjs.mjs";
 import assert from "assert";
 
 {
