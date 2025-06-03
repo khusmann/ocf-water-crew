@@ -1,4 +1,4 @@
-// import fs from "fs";
+import fs from "fs";
 
 const genericCompare = (a, b) => {
   // if (a === undefined || b === undefined) {
@@ -32,6 +32,28 @@ export const priorityComparison = (keyOrder) => (a, b) => {
   }
   return 0;
 };
+
+function distributeSort(arr, key) {
+    const grouped = arr.reduce((acc, obj) => {
+        acc[obj[key]] = acc[obj[key]] || [];
+        acc[obj[key]].push(obj);
+        return acc;
+    }, {});
+
+    const sortedKeys = Object.keys(grouped).sort((a, b) => a - b);
+    const result = [];
+    
+    let i = 0;
+    while (result.length < arr.length) {
+        for (const k of sortedKeys) {
+            if (grouped[k].length > 0) {
+                result.push(grouped[k].shift()); // Take one at a time from each group
+            }
+        }
+    }
+    
+    return result;
+  }
 
 function splitByProperty(arr, property) {
   return Object.values(
@@ -85,6 +107,7 @@ function sortPeople(people) {
     .map((i) => ({
       ...i,
       nonIdealShiftTaken: false,
+      doubleShiftTaken: false,
       name: `${i.first} ${i.last} ${i.nickname}`.trim(), // some people dont have last last needs to be '' i think.
     }))
     .sort(priorityComparison(["specialQualificationsIds", "timeId"]));
@@ -96,6 +119,7 @@ function sortAssignments(assignments) {
     .map((i, index) => ({
       index: index + 1,
       nonIdealShiftTaken: false,
+      doubleShiftTaken: false,
       ...i,
     }));
 
@@ -336,7 +360,7 @@ export default function assign(assignments, people) {
     }
   }
   let flatPeople = peopleToAssign.flat();
-  let flatAssignments = unstagedAssignments.flat();
+  let flatAssignments = distributeSort(unstagedAssignments.flat(),"day")
   for (let a = 0; a < flatAssignments.length; a++) {
     if (flatAssignments[a].assignedVolunteer == "") {
       for (let p = 0; p < flatPeople.length; p++) {
@@ -364,6 +388,41 @@ export default function assign(assignments, people) {
       }
     }
   }
+  flatAssignments.sort(priorityComparison(["jobPriority", "timePriority", "day", "person", "ShiftStart"]));
+
+  // working on double shift
+  // const countMap = new Map();
+
+  // // // First pass: count occurrences of (name, day) pairs
+  // // for (const { name, day } of flatAssignments) {
+  // //     const key = `${name}-${day}`;
+  // //     countMap.set(key, (countMap.get(key) || 0) + 1);
+  // // }
+
+  // // // Second pass: mark doubleShiftTaken if count > 1
+  // // for (const assignment of flatAssignments) {
+  // //     const key = `${assignment.name}-${assignment.day}`;
+  // //     if (countMap.get(key) > 1) {
+  // //         assignment.doubleShiftTaken = true;
+  // //         flatPeople.find(a => a.assignedVolunteer == flatPeople.name).doubleShiftTaken = true;
+  // //     }
+  // // }
+  // const seen =  new Map();
+  // for (const assignment of flatAssignments) {
+  //   const key = `${assignment.name}-${assignment.day}`;
+    
+  //   if (seen.has(key)) {
+  //       assignment.doubleShiftTaken = true;
+  //       seen.get(key).doubleShiftTaken = true; // Mark the original instance
+  //   } else {
+  //       seen.set(key, assignment);
+  //   }
+  // }
+
+
+  // console.log(flatAssignments);
+
+
   // console.log(
   //  flatAssignments.reduce(
   //    (count, item) =>
@@ -375,10 +434,10 @@ export default function assign(assignments, people) {
   return flatAssignments;
 }
 
-  // const data = JSON.parse(fs.readFileSync("./thejson.json", "utf8"));
-  // const assignments = data.assignments;
-  // const people = data.people;
+  const data = JSON.parse(fs.readFileSync("./thejson.json", "utf8"));
+  const assignments = data.assignments;
+  const people = data.people;
 
-  // const newAssignments = assign(assignments, people);
+  const newAssignments = assign(assignments, people);
 
-  // console.log(newAssignments.slice(332));
+  console.log(newAssignments.slice(300));
