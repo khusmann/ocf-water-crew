@@ -1,4 +1,4 @@
-import fs from "fs";
+// import fs from "fs";
 
 const genericCompare = (a, b) => {
   // if (a === undefined || b === undefined) {
@@ -436,10 +436,10 @@ export default function assign(assignments, people) {
   return flatAssignments;
 }
 
-  const data = JSON.parse(fs.readFileSync("./thejson.json", "utf8"));
-  const assignments = data.assignments;
-  const people = data.people;
+  // const data = JSON.parse(fs.readFileSync("./thejson.json", "utf8"));
+  // const assignments = data.assignments;
+  // const people = data.people;
 
-  const newAssignments = assign(assignments, people);
+  // const newAssignments = assign(assignments, people);
 
 //randomly pool through everyone in 10+ by index not by name
