@@ -360,6 +360,8 @@ export default function assign(assignments, people) {
     }
   }
   let flatPeople = peopleToAssign.flat();
+  console.log(flatPeople);
+
   let flatAssignments = distributeSort(unstagedAssignments.flat(),"day")
   for (let a = 0; a < flatAssignments.length; a++) {
     if (flatAssignments[a].assignedVolunteer == "") {
@@ -440,4 +442,4 @@ export default function assign(assignments, people) {
 
   const newAssignments = assign(assignments, people);
 
-  console.log(newAssignments.slice(300));
+//randomly pool through everyone in 10+ by index not by name
