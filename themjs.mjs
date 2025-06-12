@@ -23,7 +23,7 @@ const genericCompare = (a, b) => {
   return valueA > valueB ? 1 : -1;
 };
 
-export const priorityComparison = (keyOrder) => (a, b) => {
+const priorityComparison = (keyOrder) => (a, b) => {
   for (const key of keyOrder) {
     const result = genericCompare(a[key], b[key]);
     if (result !== 0) {
@@ -161,7 +161,7 @@ function clear(assignmentsSorted, shiftsPlacedChart) {
 //problem with assign rightnow is that names are sorted alphabetically and not randomly, so same people that fill a job qualification will always get it and people with lower lexical order will not.
 //good fix idea is just in the order we found it on the sheet which is presumably the the date they got on there.
 //another good idea is to make a date-time submittedInquiryTime and we make it first come first serve and sort by that instead of name
-export default function assign(assignments, people) {
+function assign(assignments, people) {
   const peopleSorted = sortPeople(people);
 
   const assignmentsSorted = sortAssignments(assignments);
@@ -452,3 +452,6 @@ export default function assign(assignments, people) {
 // const newAssignments = assign(assignments, people);
 
 //randomly pool through everyone in 10+ by index not by name
+export { priorityComparison };
+
+export default assign;
