@@ -34,26 +34,26 @@ export const priorityComparison = (keyOrder) => (a, b) => {
 };
 
 function distributeSort(arr, key) {
-    const grouped = arr.reduce((acc, obj) => {
-        acc[obj[key]] = acc[obj[key]] || [];
-        acc[obj[key]].push(obj);
-        return acc;
-    }, {});
+  const grouped = arr.reduce((acc, obj) => {
+    acc[obj[key]] = acc[obj[key]] || [];
+    acc[obj[key]].push(obj);
+    return acc;
+  }, {});
 
-    const sortedKeys = Object.keys(grouped).sort((a, b) => a - b);
-    const result = [];
-    
-    let i = 0;
-    while (result.length < arr.length) {
-        for (const k of sortedKeys) {
-            if (grouped[k].length > 0) {
-                result.push(grouped[k].shift()); // Take one at a time from each group
-            }
-        }
+  const sortedKeys = Object.keys(grouped).sort((a, b) => a - b);
+  const result = [];
+
+  let i = 0;
+  while (result.length < arr.length) {
+    for (const k of sortedKeys) {
+      if (grouped[k].length > 0) {
+        result.push(grouped[k].shift()); // Take one at a time from each group
+      }
     }
-    
-    return result;
   }
+
+  return result;
+}
 
 function splitByProperty(arr, property) {
   return Object.values(
@@ -173,7 +173,9 @@ export default function assign(assignments, people) {
     "specialQualificationsIds"
   ).sort(priorityComparison(["specialQualificationsIds", "timeId", "name"]));
 
-  let uniqueValues = new Set(assignments.map(item => item.special == false ? -1 : item.jobPriority));
+  let uniqueValues = new Set(
+    assignments.map((item) => (item.special == false ? -1 : item.jobPriority))
+  );
   uniqueValues.delete(-1);
   const specialJobNumber = uniqueValues.size;
 
@@ -263,7 +265,8 @@ export default function assign(assignments, people) {
                       peopleToAssign[peopleIndex][
                         p % peopleToAssign[peopleIndex].length
                       ].specialQualificationsIds ||
-                    unstagedAssignments[assignmentIndex][a].jobPriority >= specialJobNumber
+                    unstagedAssignments[assignmentIndex][a].jobPriority >=
+                      specialJobNumber
                   ) {
                     unstagedAssignments[assignmentIndex][a].assignedVolunteer =
                       peopleToAssign[peopleIndex][
@@ -362,7 +365,7 @@ export default function assign(assignments, people) {
   let flatPeople = peopleToAssign.flat();
   console.log(flatPeople);
 
-  let flatAssignments = distributeSort(unstagedAssignments.flat(),"day")
+  let flatAssignments = distributeSort(unstagedAssignments.flat(), "day");
   for (let a = 0; a < flatAssignments.length; a++) {
     if (flatAssignments[a].assignedVolunteer == "") {
       for (let p = 0; p < flatPeople.length; p++) {
@@ -390,7 +393,15 @@ export default function assign(assignments, people) {
       }
     }
   }
-  flatAssignments.sort(priorityComparison(["jobPriority", "timePriority", "day", "person", "ShiftStart"]));
+  flatAssignments.sort(
+    priorityComparison([
+      "jobPriority",
+      "timePriority",
+      "day",
+      "person",
+      "ShiftStart",
+    ])
+  );
 
   // working on double shift
   // const countMap = new Map();
@@ -412,7 +423,7 @@ export default function assign(assignments, people) {
   // const seen =  new Map();
   // for (const assignment of flatAssignments) {
   //   const key = `${assignment.name}-${assignment.day}`;
-    
+
   //   if (seen.has(key)) {
   //       assignment.doubleShiftTaken = true;
   //       seen.get(key).doubleShiftTaken = true; // Mark the original instance
@@ -421,9 +432,7 @@ export default function assign(assignments, people) {
   //   }
   // }
 
-
   // console.log(flatAssignments);
-
 
   // console.log(
   //  flatAssignments.reduce(
@@ -436,10 +445,10 @@ export default function assign(assignments, people) {
   return flatAssignments;
 }
 
-  // const data = JSON.parse(fs.readFileSync("./thejson.json", "utf8"));
-  // const assignments = data.assignments;
-  // const people = data.people;
+// const data = JSON.parse(fs.readFileSync("./thejson.json", "utf8"));
+// const assignments = data.assignments;
+// const people = data.people;
 
-  // const newAssignments = assign(assignments, people);
+// const newAssignments = assign(assignments, people);
 
 //randomly pool through everyone in 10+ by index not by name
