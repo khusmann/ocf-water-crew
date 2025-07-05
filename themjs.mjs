@@ -1,4 +1,11 @@
 // import fs from "fs";
+// const { Heap, MinHeap, MaxHeap } = require('@datastructures-js/heap');
+
+import {
+  Heap,
+  MinHeap,
+} from '@datastructures-js/heap';
+
 
 const genericCompare = (a, b) => {
   // if (a === undefined || b === undefined) {
@@ -28,6 +35,25 @@ export const priorityComparison = (keyOrder) => (a, b) => {
     const result = genericCompare(a[key], b[key]);
     if (result !== 0) {
       return result;
+    }
+  }
+  return 0;
+};
+
+const personComparison = () => (a,b) => {
+  const priorityObject = ["shiftsPlaced", "daysWorked", "timePriority"];
+  for (const key of priorityObject) {
+    if(key == "timePriority"){
+      const result = genericCompare(a[key] * -1, b[key]* -1);
+      if (result !== 0) {
+        return result;
+      }
+    }
+    else {
+      const result = genericCompare(a[key], b[key]);
+      if (result !== 0) {
+        return result;
+      }
     }
   }
   return 0;
@@ -118,9 +144,9 @@ function sortAssignments(assignments) {
     .sort(priorityComparison(["jobPriority", "timePriority", "day", "person"]))
     .map((i, index) => ({
       index: index + 1,
+      ...i,
       nonIdealShiftTaken: false,
       doubleShiftTaken: false,
-      ...i,
     }));
 
   let groupShiftIds = 1;
@@ -144,17 +170,17 @@ function sortAssignments(assignments) {
 
 //------- clear staged ---------
 
-function clear(assignmentsSorted, shiftsPlacedChart) {
-  let cleared = assignmentsSorted.map(function (assignment) {
-    let volunteerAssignment = {
-      ...assignment,
-      stagedVolunteer: "",
-    };
-    shiftsPlacedChart.forEach((i) => (i.shiftsPlaced = 0) /*effect */);
-    return volunteerAssignment;
-  });
-  return cleared;
-}
+// function clear(assignmentsSorted, shiftsPlacedChart) {
+//   let cleared = assignmentsSorted.map(function (assignment) {
+//     let volunteerAssignment = {
+//       ...assignment,
+//       stagedVolunteer: "",
+//     };
+//     shiftsPlacedChart.forEach((i) => (i.shiftsPlaced = 0) /*effect */);
+//     return volunteerAssignment;
+//   });
+//   return cleared;
+// }
 
 //------- assign  ---------
 
@@ -162,12 +188,14 @@ function clear(assignmentsSorted, shiftsPlacedChart) {
 //good fix idea is just in the order we found it on the sheet which is presumably the the date they got on there.
 //another good idea is to make a date-time submittedInquiryTime and we make it first come first serve and sort by that instead of name
 export default function assign(assignments, people) {
+
+  //start parameter set up
   const peopleSorted = sortPeople(people);
 
   const assignmentsSorted = sortAssignments(assignments);
   const shiftsPlacedChart = peopleSorted
     .sort(priorityComparison(["specialQualificationsIds", "timeId", "name"]))
-    .map((i) => ({ name: i.name, shiftsPlaced: 0 }));
+    .map((i) => ({ name: i.name, shiftsPlaced: 0, daysWorked: 1 }));
   const shiftsSorted = expandObjects(
     peopleSorted,
     "specialQualificationsIds"
@@ -175,7 +203,7 @@ export default function assign(assignments, people) {
 
   let uniqueValues = new Set(assignments.map(item => item.special == false ? -1 : item.jobPriority));
   uniqueValues.delete(-1);
-  const specialJobNumber = uniqueValues.size;
+  const specialJobsAmount = uniqueValues.size;
 
   // console.log(assignmentsSorted);
   // console.log(peopleSorted.slice(69));
@@ -185,7 +213,10 @@ export default function assign(assignments, people) {
   let peopleToAssign = splitByProperty(
     shiftsSorted,
     "specialQualificationsIds"
-  );
+  ).map(peopleByjobCategory => Heap.heapify(peopleByjobCategory, personComparison()));
+  //end setup
+
+  // start copy staged area to assigned
   let unstagedAssignments = splitByProperty(
     assignmentsSorted.map(function (assignment) {
       let volunteerAssignment = {
@@ -195,11 +226,15 @@ export default function assign(assignments, people) {
       let assignedPerson = shiftsPlacedChart.find(
         (person) => person.name === volunteerAssignment.assignedVolunteer
       );
-      if (assignedPerson) /*effect */ assignedPerson.shiftsPlaced++;
+      if (assignedPerson){
+      /*effect */ assignedPerson.shiftsPlaced++;
+      /*effect */ assignedPerson.daysWorked = assignedPerson.daysWorked * volunteerAssignment.day;
+      }
       return volunteerAssignment;
     }),
     "jobPriority"
   );
+  // end
 
   for (let i = 0; i < 1; i++) {
     let p = 0;
@@ -209,7 +244,7 @@ export default function assign(assignments, people) {
       let assignmentIndex = 0, peopleIndex = 0;
       peopleIndex < peopleToAssign.length &&
       assignmentIndex < unstagedAssignments.length;
-      assignmentIndex++, peopleIndex >= specialJobNumber ? 1 : peopleIndex++
+      assignmentIndex++, peopleIndex >= specialJobsAmount ? 1 : peopleIndex++
     ) {
       p = 0;
       a = 0;
@@ -263,13 +298,14 @@ export default function assign(assignments, people) {
                       peopleToAssign[peopleIndex][
                         p % peopleToAssign[peopleIndex].length
                       ].specialQualificationsIds ||
-                    unstagedAssignments[assignmentIndex][a].jobPriority >= specialJobNumber
+                    unstagedAssignments[assignmentIndex][a].jobPriority >= specialJobsAmount
                   ) {
                     unstagedAssignments[assignmentIndex][a].assignedVolunteer =
                       peopleToAssign[peopleIndex][
                         p % peopleToAssign[peopleIndex].length
                       ].name;
                     shiftCount.shiftsPlaced++;
+                    shiftCount.daysWorked = shiftCount.daysWorked * unstagedAssignments[assignmentIndex][a].day;
                     if (
                       unstagedAssignments[assignmentIndex][a].timePriority !=
                         peopleToAssign[peopleIndex][
@@ -314,7 +350,7 @@ export default function assign(assignments, people) {
                   (unstagedAssignments[assignmentIndex][a].jobPriority ==
                     peopleToAssign[peopleIndex][p].specialQualificationsIds ||
                     peopleToAssign[peopleIndex][p].specialQualificationsIds >=
-                      specialJobNumber)
+                      specialJobsAmount)
                 ) {
                   unstagedAssignments[assignmentIndex][a].assignedVolunteer =
                     peopleToAssign[peopleIndex][
@@ -339,6 +375,7 @@ export default function assign(assignments, people) {
                     ].nonIdealShiftTaken = true;
                   }
                   shiftCount.shiftsPlaced++;
+                  shiftCount.daysWorked = shiftCount.daysWorked * unstagedAssignments[assignmentIndex][a].day;
                 }
                 p++;
                 a++;
@@ -360,7 +397,7 @@ export default function assign(assignments, people) {
     }
   }
   let flatPeople = peopleToAssign.flat();
-  console.log(flatPeople);
+  // console.log(flatPeople);
 
   let flatAssignments = distributeSort(unstagedAssignments.flat(),"day")
   for (let a = 0; a < flatAssignments.length; a++) {
@@ -372,11 +409,12 @@ export default function assign(assignments, people) {
         if (
           (flatPeople[p].specialQualificationsIds ==
             flatAssignments[a].jobPriority ||
-            flatAssignments[a].jobPriority >= specialJobNumber) &&
+            flatAssignments[a].jobPriority >= specialJobsAmount) &&
           shiftCount.shiftsPlaced < 4
         ) {
           flatAssignments[a].assignedVolunteer = flatPeople[p].name;
           shiftCount.shiftsPlaced++;
+          shiftCount.daysWorked = shiftCount.daysWorked * unstagedAssignments[assignmentIndex][a].day;
           if (
             flatAssignments[a].timePriority != flatPeople[p].timeId &&
             flatPeople[p].timeId != 1 &&
@@ -441,5 +479,62 @@ export default function assign(assignments, people) {
   // const people = data.people;
 
   // const newAssignments = assign(assignments, people);
+import fs from "fs";
+
+const data = JSON.parse(fs.readFileSync("./thejson.json", "utf8"));
+const assignments = data.assignments;
+const people = data.people;
+
+const newAssignments = assign(assignments, people);
+
+// console.log(newAssignments);
+
+fs.writeFileSync(
+  "theresult2json.json",
+  JSON.stringify(newAssignments, null, 2)
+);
 
 //randomly pool through everyone in 10+ by index not by name
+
+//split am,pm into am and pm peopletoassign
+//
+//put people of peopletoassign in a minheap. sort it similarly, then iterate. instead of p+. remove and insert.
+
+
+// heapify shifts to assign
+
+//then when you get to flat peop just assign.
+//case around (a) and make rules for each jobPriority who can be assigned to what. if special (a > 10) is false then everyone just assign.
+
+
+//find the person in shiftsto assign in people to assign
+
+//add field into people to assign shifts covered.
+//heapify each peopleIndex of people to assign min on top using shifts placed, followed by am, pm, am+pm.
+// after every people index sync people to assign of that index with shifts to assign
+//fill by jobname and then spread days so that the days are spread.
+
+// add to priority comparison if all ties a coinflip
+//add a skipped parameter to remove from heap. remove if person is at 4.
+
+// dont sort people by timepriority just filter by it.
+// sort assignments by jobpriority and then by time priority then spread by day.
+
+// in shiftsassigned catalogue not just shifts placed, but which days are placed. 
+
+// hash combinations of days to then if day is divisible you will know
+// days should not be 1 (for none) 2,3,5,7, and when you assign someone a shift multiply the int daysAssigned by the day corresponding to that number. if they have worked that day you can check just by dividing. 
+
+//  filter by jobPriority. min-heapify on each assignment based on shiftsplaced, daysplace % day == 0 (return small or neg), then by timeprioity*-1. then place each assignment by preference (popping the min)
+
+//  after youve done all thatcase on special if special true then case on heirarchy and shifts placed. dont check for anything but if shifts placed is 4, then if it isnt fill from flat people assigned.
+
+
+
+
+// skipDisrecommended=false
+// p heapified p 0, p 1, p 2, etc, a 0
+// a 1
+// a 2
+// skipDisrecommended=true
+// // doLoopover
