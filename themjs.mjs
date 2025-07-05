@@ -40,24 +40,12 @@ export const priorityComparison = (keyOrder) => (a, b) => {
   return 0;
 };
 
-const personComparison = () => (a,b) => {
-  const priorityObject = ["shiftsPlaced", "daysWorked", "timePriority"];
-  for (const key of priorityObject) {
-    if(key == "timePriority"){
-      const result = genericCompare(a[key] * -1, b[key]* -1);
-      if (result !== 0) {
-        return result;
-      }
-    }
-    else {
-      const result = genericCompare(a[key], b[key]);
-      if (result !== 0) {
-        return result;
-      }
-    }
-  }
-  return 0;
-};
+const personComparison = (shiftsChart) => (a,b) => {
+  // const priorityObject = ["shiftsPlaced", "daysWorked", "timePriority"];
+  const aShift = shiftsChart.find((person) => person.name == a.name)
+  const bShift = shiftsChart.find((person) => person.name == b.name)
+  return genericCompare(aShift.shiftsPlaced, bShift.shiftsPlaced) !== 0 ? genericCompare(aShift.shiftsPlaced, bShift.shiftsPlaced) : genericCompare(aShift.daysWorked, bShift.daysWorked) !== 0 ? genericCompare(aShift.daysWorked, bShift.daysWorked) : genericCompare(a.timePriority, b.timePriority) !== 0 ? genericCompare(a.timePriority, b.timePriority) : 0;
+}
 
 function distributeSort(arr, key) {
     const grouped = arr.reduce((acc, obj) => {
@@ -214,7 +202,7 @@ export default function assign(assignments, people) {
   let peopleToAssign = splitByProperty(
     shiftsSorted,
     "specialQualificationsIds"
-  ).map(peopleByJobCategory => peopleByJobCategory.sort(personComparison()));
+  ).map(peopleByJobCategory => peopleByJobCategory.sort(personComparison(shiftsPlacedChart)));
   //.map(peopleByjobCategory => Heap.heapify(peopleByjobCategory, personComparison()).toArray());
   //end setup
 
@@ -249,7 +237,7 @@ export default function assign(assignments, people) {
       for (
         let a = 0, p = 0;
         a < unstagedAssignments[assignmentIndex].length;
-        a++, p=0, peopleToAssign[peopleIndex].sort(personComparison())
+        a++, p=0, peopleToAssign[peopleIndex].sort(personComparison(shiftsPlacedChart))
       ){
         for(
           let shiftCount = shiftsPlacedChart.find((shift) => shift.name === peopleToAssign[peopleIndex][p].name);
@@ -259,13 +247,13 @@ export default function assign(assignments, people) {
             (
               constraintRestrictionLevel == 0 && 
               (shiftCount.shiftsPlaced < numberShiftsNeeded) && 
-              (unstagedAssignments[assignmentIndex][a].timePriority != peopleToAssign[peopleIndex][p].timeId && peopleToAssign[peopleIndex][p].timeId != 1 && unstagedAssignments[assignmentIndex][a].timePriority != 1) &&
-              (!shiftCount.daysWorked % unstagedAssignments[assignmentIndex][a].dayId == 0) // day*24+shiftStartNum shiftStartNum need to put each assignment in shiftsplaced chart and check absolute difference in each start time is more than 9 hours
+              (unstagedAssignments[assignmentIndex][a].timePriority == peopleToAssign[peopleIndex][p].timeId || peopleToAssign[peopleIndex][p].timeId == 1 || unstagedAssignments[assignmentIndex][a].timePriority == 1) && 
+              (shiftCount.daysWorked % unstagedAssignments[assignmentIndex][a].dayId == 0 || shiftCount.daysWorked == 1) // day*24+shiftStartNum shiftStartNum need to put each assignment in shiftsplaced chart and check absolute difference in each start time is more than 9 hours
             ) ||
             (
               constraintRestrictionLevel == 1 && 
               (shiftCount.shiftsPlaced < numberShiftsNeeded) &&
-              (shiftCount.daysWorked % unstagedAssignments[assignmentIndex][a].dayId == 0) // day*24+shiftStartNum shiftStartNum need to put each assignment in shiftsplaced chart and check absolute difference in each start time is more than 9 hours
+              (shiftCount.daysWorked % unstagedAssignments[assignmentIndex][a].dayId == 0 || shiftCount.daysWorked == 1) // day*24+shiftStartNum shiftStartNum need to put each assignment in shiftsplaced chart and check absolute difference in each start time is more than 9 hours
             ) ||
             (
               constraintRestrictionLevel == 2 &&
