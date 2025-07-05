@@ -190,6 +190,7 @@ function sortAssignments(assignments) {
 export default function assign(assignments, people) {
 
   //start parameter set up
+  const numberShiftsNeeded = 4;
   const peopleSorted = sortPeople(people);
 
   const assignmentsSorted = sortAssignments(assignments);
@@ -213,7 +214,8 @@ export default function assign(assignments, people) {
   let peopleToAssign = splitByProperty(
     shiftsSorted,
     "specialQualificationsIds"
-  ).map(peopleByjobCategory => Heap.heapify(peopleByjobCategory, personComparison()));
+  ).map(peopleByJobCategory => peopleByJobCategory.sort(personComparison()));
+  //.map(peopleByjobCategory => Heap.heapify(peopleByjobCategory, personComparison()).toArray());
   //end setup
 
   // start copy staged area to assigned
@@ -236,166 +238,75 @@ export default function assign(assignments, people) {
   );
   // end
 
-  for (let i = 0; i < 1; i++) {
-    let p = 0;
-    let a = 0;
-    let shiftCount;
+  //start placing assignments
+  for(let constraintRestrictionLevel = 0; constraintRestrictionLevel < 4; constraintRestrictionLevel++){//edge case of night before morning after double thing; should just check if start time is within X hours. or define a shift sequence for each sequence and check if they are sequential. make sure to make sequence not sequential for each job if there is a rest period between them.//constraintRestrictionLevel = 0 -> only recommended positions allowed; 1 -> differing timePriority allowed; 2 -> differing timePriotity allowed AND Same day shifts allowed; 3->differing timePriority and same day shift AND more than 4 shifts allowed.
     for (
       let assignmentIndex = 0, peopleIndex = 0;
       peopleIndex < peopleToAssign.length &&
       assignmentIndex < unstagedAssignments.length;
-      assignmentIndex++, peopleIndex >= specialJobsAmount ? 1 : peopleIndex++
-    ) {
-      p = 0;
-      a = 0;
-      shiftCount = shiftsPlacedChart.find(
-        (shift) => shift.name === peopleToAssign[peopleIndex][p].name
-      );
-      {
-        for (
-          let idealGrace = 0;
-          idealGrace < 1 &&
-          a < unstagedAssignments[assignmentIndex].length &&
-          p < peopleToAssign[peopleIndex].length * 4;
-          p >= peopleToAssign[peopleIndex].length &&
-          a >= unstagedAssignments[assignmentIndex].length
-            ? idealGrace++
-            : 1
-        ) {
-          if (shiftCount.shiftsPlaced >= 4) {
-            p++;
-            shiftCount = shiftsPlacedChart.find(
-              (shift) =>
-                shift.name ===
-                peopleToAssign[peopleIndex][
-                  p % peopleToAssign[peopleIndex].length
-                ].name
-            );
-          } else {
-            if (!unstagedAssignments[assignmentIndex][a].assignedVolunteer) {
-              if (idealGrace < 1) {
-                if (
-                  unstagedAssignments[assignmentIndex][a].timePriority !=
-                    peopleToAssign[peopleIndex][
-                      p % peopleToAssign[peopleIndex].length
-                    ].timeId &&
-                  peopleToAssign[peopleIndex][
-                    p % peopleToAssign[peopleIndex].length
-                  ].timeId != 1 &&
-                  unstagedAssignments[assignmentIndex][a].timePriority != 1
-                ) {
-                  p++;
-                  shiftCount = shiftsPlacedChart.find(
-                    (shift) =>
-                      shift.name ===
-                      peopleToAssign[peopleIndex][
-                        p % peopleToAssign[peopleIndex].length
-                      ].name
-                  );
-                } else {
-                  if (
-                    unstagedAssignments[assignmentIndex][a].jobPriority ==
-                      peopleToAssign[peopleIndex][
-                        p % peopleToAssign[peopleIndex].length
-                      ].specialQualificationsIds ||
-                    unstagedAssignments[assignmentIndex][a].jobPriority >= specialJobsAmount
-                  ) {
-                    unstagedAssignments[assignmentIndex][a].assignedVolunteer =
-                      peopleToAssign[peopleIndex][
-                        p % peopleToAssign[peopleIndex].length
-                      ].name;
-                    shiftCount.shiftsPlaced++;
-                    shiftCount.daysWorked = shiftCount.daysWorked * unstagedAssignments[assignmentIndex][a].day;
-                    if (
-                      unstagedAssignments[assignmentIndex][a].timePriority !=
-                        peopleToAssign[peopleIndex][
-                          p % peopleToAssign[peopleIndex].length
-                        ].timeId &&
-                      !(
-                        peopleToAssign[peopleIndex][
-                          p % peopleToAssign[peopleIndex].length
-                        ].timeId != 1 ||
-                        unstagedAssignments[assignmentIndex][a].timePriority !=
-                          1
-                      )
-                    ) {
-                      unstagedAssignments[assignmentIndex][
-                        a
-                      ].nonIdealShiftTaken = true;
-                      peopleToAssign[peopleIndex][
-                        p % peopleToAssign[peopleIndex].length
-                      ].nonIdealShiftTaken = true;
-                    }
-                    p++;
-                    shiftCount = shiftsPlacedChart.find(
-                      (shift) =>
-                        shift.name ===
-                        peopleToAssign[peopleIndex][
-                          p % peopleToAssign[peopleIndex].length
-                        ].name
-                    );
-                  }
-                }
-                a++;
-              } else {
-                // if(idealGrace == 2){
-                //   a=0;
-                //   // p=0;
-                //   idealGrace++;
-                // }
-                // a=0;
-                // if(!unstagedAssignments[assignmentIndex][a].assignedVolunteer){
-                if (
-                  !unstagedAssignments[assignmentIndex][a].assignedVolunteer &&
-                  (unstagedAssignments[assignmentIndex][a].jobPriority ==
-                    peopleToAssign[peopleIndex][p].specialQualificationsIds ||
-                    peopleToAssign[peopleIndex][p].specialQualificationsIds >=
-                      specialJobsAmount)
-                ) {
-                  unstagedAssignments[assignmentIndex][a].assignedVolunteer =
-                    peopleToAssign[peopleIndex][
-                      p % peopleToAssign[peopleIndex].length
-                    ].name;
-                  if (
-                    unstagedAssignments[assignmentIndex][a].timePriority !=
-                      peopleToAssign[peopleIndex][
-                        p % peopleToAssign[peopleIndex].length
-                      ].timeId &&
-                    (peopleToAssign[peopleIndex][
-                      p % peopleToAssign[peopleIndex].length
-                    ].timeId != 1 ||
-                      unstagedAssignments[assignmentIndex][a].timePriority != 1)
-                  ) {
-                    //modify to or if assignment isnt 2
-                    unstagedAssignments[assignmentIndex][
-                      a
-                    ].nonIdealShiftTaken = true;
-                    peopleToAssign[peopleIndex][
-                      p % peopleToAssign[peopleIndex].length
-                    ].nonIdealShiftTaken = true;
-                  }
-                  shiftCount.shiftsPlaced++;
-                  shiftCount.daysWorked = shiftCount.daysWorked * unstagedAssignments[assignmentIndex][a].day;
-                }
-                p++;
-                a++;
-                shiftCount = shiftsPlacedChart.find(
-                  (shift) =>
-                    shift.name ===
-                    peopleToAssign[peopleIndex][
-                      p % peopleToAssign[peopleIndex].length
-                    ]
-                );
-              }
-            } else {
-              a++;
+      assignmentIndex++, peopleIndex >= specialJobsAmount ? specialJobsAmount : peopleIndex++
+    ){
+      for (
+        let a = 0, p = 0;
+        a < unstagedAssignments[assignmentIndex].length;
+        a++, p=0, peopleToAssign[peopleIndex].sort(personComparison())
+      ){
+        for(
+          let shiftCount = shiftsPlacedChart.find((shift) => shift.name === peopleToAssign[peopleIndex][p].name);
+          !unstagedAssignments[assignmentIndex][a].assignedVolunteer &&
+          p < peopleToAssign[peopleIndex].length &&
+          (
+            (
+              constraintRestrictionLevel == 0 && 
+              (shiftCount.shiftsPlaced < numberShiftsNeeded) && 
+              (unstagedAssignments[assignmentIndex][a].timePriority != peopleToAssign[peopleIndex][p].timeId && peopleToAssign[peopleIndex][p].timeId != 1 && unstagedAssignments[assignmentIndex][a].timePriority != 1) &&
+              (!shiftCount.daysWorked % unstagedAssignments[assignmentIndex][a].dayId == 0) // day*24+shiftStartNum shiftStartNum need to put each assignment in shiftsplaced chart and check absolute difference in each start time is more than 9 hours
+            ) ||
+            (
+              constraintRestrictionLevel == 1 && 
+              (shiftCount.shiftsPlaced < numberShiftsNeeded) &&
+              (shiftCount.daysWorked % unstagedAssignments[assignmentIndex][a].dayId == 0) // day*24+shiftStartNum shiftStartNum need to put each assignment in shiftsplaced chart and check absolute difference in each start time is more than 9 hours
+            ) ||
+            (
+              constraintRestrictionLevel == 2 &&
+              (shiftCount.shiftsPlaced < numberShiftsNeeded) 
+            ) ||
+            (
+              constraintRestrictionLevel == 3
+            ) 
+          );
+          p++, shiftCount = shiftsPlacedChart.find((shift) => shift.name === peopleToAssign[peopleIndex][p].name)
+        ){
+          if (
+            unstagedAssignments[assignmentIndex][a].jobPriority == peopleToAssign[peopleIndex][p].specialQualificationsIds
+            || unstagedAssignments[assignmentIndex][a].jobPriority >= specialJobsAmount
+          ){
+            unstagedAssignments[assignmentIndex][a].assignedVolunteer = peopleToAssign[peopleIndex][p].name;
+            shiftCount.shiftsPlaced++;
+            shiftCount.daysWorked = shiftCount.daysWorked * unstagedAssignments[assignmentIndex][a].day;
+
+            if(
+              (shiftCount.daysWorked % unstagedAssignments[assignmentIndex][a].dayId == 0) ||
+              (
+                unstagedAssignments[assignmentIndex][a].timePriority != peopleToAssign[peopleIndex][p].timeId &&
+                !(peopleToAssign[peopleIndex][p].timeId != 1 
+                || unstagedAssignments[assignmentIndex][a].timePriority != 1)
+              )
+            ) {
+              unstagedAssignments[assignmentIndex][a].nonIdealShiftTaken = true;
+              peopleToAssign[peopleIndex][p].nonIdealShiftTaken = true;
             }
           }
-        }
-        a++;
+        } 
       }
     }
   }
+
+  1;
+  
+  //end placing assignments
+
+  //start bruteForce missingGaps
   let flatPeople = peopleToAssign.flat();
   // console.log(flatPeople);
 
