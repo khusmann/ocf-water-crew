@@ -277,23 +277,25 @@ function assign(assignments, people) {
               specialJobsAmount) &&
             (
               (constraintRestrictionLevel == 0 &&
-              shiftCount.shiftsPlaced < numberShiftsNeeded &&
-              (unstagedAssignments[assignmentIndex][a].timePriority ==
-              peopleToAssign[peopleIndex][p].timeId ||
-              peopleToAssign[peopleIndex][p].timeId == 1 ||
-              unstagedAssignments[assignmentIndex][a].timePriority == 1) &&
-              ((shiftCount.daysWorked %
-                  unstagedAssignments[assignmentIndex][a].dayId !=
-                  0 || 
-                  shiftCount.daysWorked == 1) && shiftCount.assignedHours.some(number => Math.abs((24 * unstagedAssignments[assignmentIndex][a].day + unstagedAssignments[assignmentIndex][a].shiftStartNum) - (number)) < 9)
-              )
+                shiftCount.shiftsPlaced < numberShiftsNeeded &&
+                (unstagedAssignments[assignmentIndex][a].timePriority ==
+                peopleToAssign[peopleIndex][p].timeId ||
+                peopleToAssign[peopleIndex][p].timeId == 1 ||
+                unstagedAssignments[assignmentIndex][a].timePriority == 1) &&
+                ((shiftCount.daysWorked %
+                    unstagedAssignments[assignmentIndex][a].dayId !=
+                    0 || 
+                    shiftCount.daysWorked == 1) && shiftCount.assignedHours.some(number => Math.abs((24 * unstagedAssignments[assignmentIndex][a].day + unstagedAssignments[assignmentIndex][a].shiftStartNum) - (number)) > 9)
+                )
               ) || // day*24+shiftStartNum shiftStartNum need to put each assignment in shiftsplaced chart and check absolute difference in each start time is more than 9 hours
               (constraintRestrictionLevel == 1 &&
                 shiftCount.shiftsPlaced < numberShiftsNeeded &&
-                (shiftCount.daysWorked %
-                  unstagedAssignments[assignmentIndex][a].dayId !=
-                  0 ||
-                  shiftCount.daysWorked == 1)) || // day*24+shiftStartNum shiftStartNum need to put each assignment in shiftsplaced chart and check absolute difference in each start time is more than 9 hours
+                ((shiftCount.daysWorked %
+                    unstagedAssignments[assignmentIndex][a].dayId !=
+                    0 || 
+                    shiftCount.daysWorked == 1) && shiftCount.assignedHours.some(number => Math.abs((24 * unstagedAssignments[assignmentIndex][a].day + unstagedAssignments[assignmentIndex][a].shiftStartNum) - (number)) > 9)
+                )
+              ) || // day*24+shiftStartNum shiftStartNum need to put each assignment in shiftsplaced chart and check absolute difference in each start time is more than 9 hours
               (constraintRestrictionLevel == 2 &&
                 shiftCount.shiftsPlaced < numberShiftsNeeded) //||
               //constraintRestrictionLevel == 3
