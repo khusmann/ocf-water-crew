@@ -232,12 +232,13 @@ function assign(assignments, people) {
       );
       if (assignedPerson) {
         /*effect */ assignedPerson.shiftsPlaced++;
+        if(assignedPerson.daysWorked % assignment.dayId == 0){
+          // assignedPerson.sameDayAssigned = true;
+        volunteerAssignment.sameDayAssigned = true;
+        }
         /*effect */ assignedPerson.daysWorked =
           assignedPerson.daysWorked * volunteerAssignment.dayId;
-          if(assignedPerson.daysWorked % assignment.dayId == 0){
-            // assignedPerson.sameDayAssigned = true;
-            volunteerAssignment.sameDayAssigned = true;
-          }
+
       }
       return volunteerAssignment;
     }),
