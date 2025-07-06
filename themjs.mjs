@@ -31,11 +31,25 @@ const priorityComparison = (keyOrder) => (a, b) => {
   return 0;
 };
 
-const personComparison = (shiftsChart) => (a, b) => {
+const personComparison = (shiftsChart, dayWanted) => (a, b) => {
   // const priorityObject = ["shiftsPlaced", "daysWorked", "timePriority"];
   const aShift = shiftsChart.find((person) => person.name == a.name)
   const bShift = shiftsChart.find((person) => person.name == b.name)
-  return genericCompare(a.timePriority * -1, b.timePriority * -1) !== 0 ? genericCompare(a.timePriority, b.timePriority) : genericCompare(aShift.daysWorked, bShift.daysWorked) !== 0 ? genericCompare(aShift.daysWorked, bShift.daysWorked) : genericCompare(aShift.shiftsPlaced, bShift.shiftsPlaced) !== 0 ? genericCompare(aShift.shiftsPlaced, bShift.shiftsPlaced) : 0;
+  let result = aShift.shiftsPlaced - bShift.shiftsPlaced;
+  if(result == 0){
+    if(aShift.daysWorked != bShift.daysWorked){
+      if(aShift.daysWorked == 1 || aShift.daysWorked % dayWanted != 0 ){
+        result = 1;
+      }
+      if(bShift.daysWorked == 1 || bShift.daysWorked % dayWanted != 0){
+        result = -1
+      }
+    }
+    result = genericCompare(a.timePriority, b.timePriority);
+  }
+  return result;
+  // return result;
+  // return genericCompare(a.timePriority, b.timePriority) !== 0 ? genericCompare(a.timePriority, b.timePriority) : genericCompare(aShift.daysWorked, bShift.daysWorked) !== 0 ? genericCompare(aShift.daysWorked, bShift.daysWorked)*-1 : genericCompare(aShift.shiftsPlaced, bShift.shiftsPlaced) !== 0 ? genericCompare(aShift.shiftsPlaced, bShift.shiftsPlaced)*-1 : 0;
 }
 
 function distributeSort(arr, key) {
@@ -113,6 +127,7 @@ function sortPeople(people) {
       ...i,
       nonIdealShiftTaken: false,
       doubleShiftTaken: false,
+      sameDayAssigned: false,
       name: `${i.first} ${i.last} ${i.nickname}`.trim(), // some people dont have last last needs to be '' i think.
     }))
     .sort(priorityComparison(["specialQualificationsIds", "timeId"]));
@@ -126,6 +141,7 @@ function sortAssignments(assignments) {
       ...i,
       nonIdealShiftTaken: false,
       doubleShiftTaken: false,
+      sameDayAssigned: false,
     }));
 
   let groupShiftIds = 1;
@@ -194,8 +210,6 @@ function assign(assignments, people) {
   let peopleToAssign = splitByProperty(
     shiftsSorted,
     "specialQualificationsIds"
-  ).map((peopleByJobCategory) =>
-    peopleByJobCategory.sort(personComparison(shiftsPlacedChart))
   );
   //.map(peopleByjobCategory => Heap.heapify(peopleByjobCategory, personComparison()).toArray());
   //end setup
@@ -238,55 +252,56 @@ function assign(assignments, people) {
       for (
         let a = 0, p = 0;
         a < unstagedAssignments[assignmentIndex].length;
-        a++,
-          p = 0,
-          peopleToAssign[peopleIndex].sort(personComparison(shiftsPlacedChart))
+        a++
       ) {
         for (
           let shiftCount = shiftsPlacedChart.find(
             (shift) => shift.name === peopleToAssign[peopleIndex][p].name
           );
           !unstagedAssignments[assignmentIndex][a].assignedVolunteer &&
-          p < peopleToAssign[peopleIndex].length &&
-          ((constraintRestrictionLevel == 0 &&
-            shiftCount.shiftsPlaced < numberShiftsNeeded &&
-            (unstagedAssignments[assignmentIndex][a].timePriority ==
-              peopleToAssign[peopleIndex][p].timeId ||
-              peopleToAssign[peopleIndex][p].timeId == 1 ||
-              unstagedAssignments[assignmentIndex][a].timePriority == 1) &&
-            (shiftCount.daysWorked %
-              unstagedAssignments[assignmentIndex][a].dayId ==
-              0 ||
-              shiftCount.daysWorked == 1)) || // day*24+shiftStartNum shiftStartNum need to put each assignment in shiftsplaced chart and check absolute difference in each start time is more than 9 hours
-            (constraintRestrictionLevel == 1 &&
-              shiftCount.shiftsPlaced < numberShiftsNeeded &&
-              (shiftCount.daysWorked %
-                unstagedAssignments[assignmentIndex][a].dayId ==
-                0 ||
-                shiftCount.daysWorked == 1)) || // day*24+shiftStartNum shiftStartNum need to put each assignment in shiftsplaced chart and check absolute difference in each start time is more than 9 hours
-            (constraintRestrictionLevel == 2 &&
-              shiftCount.shiftsPlaced < numberShiftsNeeded) ||
-            constraintRestrictionLevel == 3);
+          p < peopleToAssign[peopleIndex].length;
           p++,
-            shiftCount = shiftsPlacedChart.find(
-              (shift) => shift.name === peopleToAssign[peopleIndex][p].name
-            )
+          p == peopleToAssign[peopleIndex].length ? 1 : shiftCount = shiftsPlacedChart.find(
+            (shift) => shift.name === peopleToAssign[peopleIndex][p].name)
         ) {
           if (
-            unstagedAssignments[assignmentIndex][a].jobPriority ==
+            (unstagedAssignments[assignmentIndex][a].jobPriority ==
               peopleToAssign[peopleIndex][p].specialQualificationsIds ||
             unstagedAssignments[assignmentIndex][a].jobPriority >=
-              specialJobsAmount
+              specialJobsAmount) &&
+            (
+              (constraintRestrictionLevel == 0 &&
+              shiftCount.shiftsPlaced < numberShiftsNeeded &&
+              (unstagedAssignments[assignmentIndex][a].timePriority ==
+                peopleToAssign[peopleIndex][p].timeId ||
+                peopleToAssign[peopleIndex][p].timeId == 1 ||
+                unstagedAssignments[assignmentIndex][a].timePriority == 1) &&
+              (shiftCount.daysWorked %
+                unstagedAssignments[assignmentIndex][a].dayId !=
+                0 || 
+                shiftCount.daysWorked == 1)) || // day*24+shiftStartNum shiftStartNum need to put each assignment in shiftsplaced chart and check absolute difference in each start time is more than 9 hours
+              (constraintRestrictionLevel == 1 &&
+                shiftCount.shiftsPlaced < numberShiftsNeeded &&
+                (shiftCount.daysWorked %
+                  unstagedAssignments[assignmentIndex][a].dayId !=
+                  0 ||
+                  shiftCount.daysWorked == 1)) || // day*24+shiftStartNum shiftStartNum need to put each assignment in shiftsplaced chart and check absolute difference in each start time is more than 9 hours
+              (constraintRestrictionLevel == 2 &&
+                shiftCount.shiftsPlaced < numberShiftsNeeded) ||
+              constraintRestrictionLevel == 3
+            )
+
           ) {
             unstagedAssignments[assignmentIndex][a].assignedVolunteer =
               peopleToAssign[peopleIndex][p].name;
+      
+            if(shiftCount.daysWorked % unstagedAssignments[assignmentIndex][a].dayId == 0){
+              peopleToAssign[peopleIndex][p].sameDayAssigned = true;
+              unstagedAssignments[assignmentIndex][a].sameDayAssigned = true
+            }
             shiftCount.shiftsPlaced++;
             shiftCount.daysWorked = shiftCount.daysWorked * unstagedAssignments[assignmentIndex][a].dayId;
-
             if (
-              shiftCount.daysWorked %
-                unstagedAssignments[assignmentIndex][a].dayId ==
-                0 ||
               (unstagedAssignments[assignmentIndex][a].timePriority !=
                 peopleToAssign[peopleIndex][p].timeId &&
                 !(
@@ -299,6 +314,8 @@ function assign(assignments, people) {
             }
           }
         }
+        p = 0
+        peopleToAssign[peopleIndex].sort(personComparison(shiftsPlacedChart, unstagedAssignments[assignmentIndex][a].dayId))
       }
     }
   }
@@ -391,9 +408,6 @@ function assign(assignments, people) {
 
   return flatAssignments;
 }
-
-export default assign;
-
 // const data = JSON.parse(fs.readFileSync("./thejson.json", "utf8"));
 // const assignments = data.assignments;
 // const people = data.people;
