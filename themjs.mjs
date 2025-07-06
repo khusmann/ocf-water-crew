@@ -210,7 +210,9 @@ function assign(assignments, people) {
   let peopleToAssign = splitByProperty(
     shiftsSorted,
     "specialQualificationsIds"
-  );
+  )
+  peopleToAssign.forEach(arr => arr.forEach((person, index) => index < specialJobsAmount ? peopleToAssign[specialJobsAmount].push(person) : person));
+
   //.map(peopleByjobCategory => Heap.heapify(peopleByjobCategory, personComparison()).toArray());
   //end setup
 
@@ -287,8 +289,8 @@ function assign(assignments, people) {
                   0 ||
                   shiftCount.daysWorked == 1)) || // day*24+shiftStartNum shiftStartNum need to put each assignment in shiftsplaced chart and check absolute difference in each start time is more than 9 hours
               (constraintRestrictionLevel == 2 &&
-                shiftCount.shiftsPlaced < numberShiftsNeeded) ||
-              constraintRestrictionLevel == 3
+                shiftCount.shiftsPlaced < numberShiftsNeeded) //||
+              //constraintRestrictionLevel == 3
             )
 
           ) {
@@ -343,7 +345,7 @@ function assign(assignments, people) {
         ) {
           flatAssignments[a].assignedVolunteer = flatPeople[p].name;
           shiftCount.shiftsPlaced++;
-          shiftCount.daysWorked = shiftCount.daysWorked * unstagedAssignments[assignmentIndex][a].dayId;
+          shiftCount.daysWorked = shiftCount.daysWorked * flatAssignments[a].dayId;
           if (
             flatAssignments[a].timePriority != flatPeople[p].timeId &&
             flatPeople[p].timeId != 1 &&
