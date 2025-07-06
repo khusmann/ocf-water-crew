@@ -233,7 +233,7 @@ function assign(assignments, people) {
       if (assignedPerson) {
         /*effect */ assignedPerson.shiftsPlaced++;
         /*effect */ assignedPerson.daysWorked =
-          assignedPerson.daysWorked * volunteerAssignment.day;
+          assignedPerson.daysWorked * volunteerAssignment.dayId;
       }
       return volunteerAssignment;
     }),
@@ -297,7 +297,9 @@ function assign(assignments, people) {
                 )
               ) || // day*24+shiftStartNum shiftStartNum need to put each assignment in shiftsplaced chart and check absolute difference in each start time is more than 9 hours
               (constraintRestrictionLevel == 2 &&
-                shiftCount.shiftsPlaced < numberShiftsNeeded) //||
+                shiftCount.shiftsPlaced < numberShiftsNeeded
+                // do bug here
+              ) //||
               //constraintRestrictionLevel == 3
             )
 
@@ -326,8 +328,8 @@ function assign(assignments, people) {
             }
           }
         }
-        p = 0
-        peopleToAssign[peopleIndex].sort(personComparison(shiftsPlacedChart, unstagedAssignments[assignmentIndex][a].dayId))
+        p = 0;
+        peopleToAssign[peopleIndex].sort(personComparison(shiftsPlacedChart, unstagedAssignments[assignmentIndex][a].dayId));
       }
     }
   }
