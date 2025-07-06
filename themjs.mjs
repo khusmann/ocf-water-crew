@@ -234,6 +234,10 @@ function assign(assignments, people) {
         /*effect */ assignedPerson.shiftsPlaced++;
         /*effect */ assignedPerson.daysWorked =
           assignedPerson.daysWorked * volunteerAssignment.dayId;
+          if(assignedPerson.daysWorked % assignment.dayId == 0){
+            // assignedPerson.sameDayAssigned = true;
+            assignment.sameDayAssigned = true;
+          }
       }
       return volunteerAssignment;
     }),
