@@ -175,7 +175,7 @@ function sortAssignments(assignments) {
 //problem with assign rightnow is that names are sorted alphabetically and not randomly, so same people that fill a job qualification will always get it and people with lower lexical order will not.
 //good fix idea is just in the order we found it on the sheet which is presumably the the date they got on there.
 //another good idea is to make a date-time submittedInquiryTime and we make it first come first serve and sort by that instead of name
-export default function assign(assignments, people) {
+function assign(assignments, people) {
   //start parameter set up
   const numberShiftsNeeded = 4;
   const peopleSorted = sortPeople(people);
@@ -403,6 +403,8 @@ export default function assign(assignments, people) {
 
   return flatAssignments;
 }
+
+export default assign;
 
 // const data = JSON.parse(fs.readFileSync("./thejson.json", "utf8"));
 // const assignments = data.assignments;
