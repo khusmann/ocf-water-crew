@@ -232,7 +232,7 @@ function assign(assignments, people) {
       );
       if (assignedPerson) {
         /*effect */ assignedPerson.shiftsPlaced++;
-        if(assignedPerson.daysWorked % assignment.dayId == 0 && assignedPerson.daysWorked != 1){
+        if(assignedPerson.daysWorked % assignment.dayId == 0 ){
           // assignedPerson.sameDayAssigned = true;
         volunteerAssignment.sameDayAssigned = true;
         }
@@ -300,11 +300,11 @@ function assign(assignments, people) {
                     0 || 
                     shiftCount.daysWorked == 1) && shiftCount.assignedHours.some(number => Math.abs((24 * unstagedAssignments[assignmentIndex][a].day + unstagedAssignments[assignmentIndex][a].shiftStartNum) - (number)) > 9)
                 )
-              ) || // day*24+shiftStartNum shiftStartNum need to put each assignment in shiftsplaced chart and check absolute difference in each start time is more than 9 hours
-              (constraintRestrictionLevel == 2 &&
-                shiftCount.shiftsPlaced < numberShiftsNeeded
-                // do bug here
-              ) //||
+              ) //|| // day*24+shiftStartNum shiftStartNum need to put each assignment in shiftsplaced chart and check absolute difference in each start time is more than 9 hours
+              // (constraintRestrictionLevel == 2 &&
+              //   shiftCount.shiftsPlaced < numberShiftsNeeded
+              //   // do bug here
+              // ) //||
               //constraintRestrictionLevel == 3
             )
 
@@ -312,10 +312,10 @@ function assign(assignments, people) {
             unstagedAssignments[assignmentIndex][a].assignedVolunteer =
               peopleToAssign[peopleIndex][p].name;
       
-            if(shiftCount.daysWorked % unstagedAssignments[assignmentIndex][a].dayId == 0 && shiftCount.daysWorked != 1){
+            if(shiftCount.daysWorked % unstagedAssignments[assignmentIndex][a].dayId == 0){
               peopleToAssign[peopleIndex][p].sameDayAssigned = true;
               unstagedAssignments[assignmentIndex][a].sameDayAssigned = true;
-              console.log(unstagedAssignments[assignmentIndex][a])
+              // console.log(unstagedAssignments[assignmentIndex][a])
             }
             shiftCount.shiftsPlaced++;
             shiftCount.daysWorked = shiftCount.daysWorked * unstagedAssignments[assignmentIndex][a].dayId;
