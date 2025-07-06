@@ -1,8 +1,6 @@
 // import fs from "fs";
 // const { Heap, MinHeap, MaxHeap } = require('@datastructures-js/heap');
 
-import { Heap, MinHeap } from "@datastructures-js/heap";
-
 const genericCompare = (a, b) => {
   // if (a === undefined || b === undefined) {
   //   throw new Error("value is undefined"+" " + a + b);
