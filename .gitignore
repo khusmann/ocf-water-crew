@@ -1,3 +1,2 @@
-thejson*.json
-theresultjson.json
+*.json
 bak.mjs
