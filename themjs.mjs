@@ -411,6 +411,7 @@ export default function assign(assignments, people) {
 // const people = data.people;
 
 // const newAssignments = assign(assignments, people);
+/*
 import fs from "fs";
 
 const data = JSON.parse(fs.readFileSync("./thejson.json", "utf8"));
@@ -425,7 +426,7 @@ fs.writeFileSync(
   "theresult2json.json",
   JSON.stringify(newAssignments, null, 2)
 );
-
+*/
 //randomly pool through everyone in 10+ by index not by name
 
 //split am,pm into am and pm peopletoassign
