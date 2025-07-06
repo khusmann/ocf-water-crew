@@ -46,6 +46,9 @@ const personComparison = (shiftsChart, dayWanted) => (a, b) => {
       }
     }
     result = genericCompare(a.timePriority, b.timePriority);
+    if(result == 0 && a.specialQualsNumber && b.specialQualsNumber){
+      result = genericCompare(a.specialQualsNumber, b.specialQualsNumber)*-1;
+    }
   }
   return result;
   // return result;
@@ -129,6 +132,7 @@ function sortPeople(people) {
       doubleShiftTaken: false,
       sameDayAssigned: false,
       name: `${i.first} ${i.last} ${i.nickname}`.trim(), // some people dont have last last needs to be '' i think.
+      specialQualsNumber: i.specialQualificationsIds.length,
     }))
     .sort(priorityComparison(["specialQualificationsIds", "timeId"]));
 }
