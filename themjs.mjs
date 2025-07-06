@@ -1,11 +1,7 @@
 // import fs from "fs";
 // const { Heap, MinHeap, MaxHeap } = require('@datastructures-js/heap');
 
-import {
-  Heap,
-  MinHeap,
-} from '@datastructures-js/heap';
-
+import { Heap, MinHeap } from "@datastructures-js/heap";
 
 const genericCompare = (a, b) => {
   // if (a === undefined || b === undefined) {
@@ -40,12 +36,18 @@ const priorityComparison = (keyOrder) => (a, b) => {
   return 0;
 };
 
-const personComparison = (shiftsChart) => (a,b) => {
+const personComparison = (shiftsChart) => (a, b) => {
   // const priorityObject = ["shiftsPlaced", "daysWorked", "timePriority"];
-  const aShift = shiftsChart.find((person) => person.name == a.name)
-  const bShift = shiftsChart.find((person) => person.name == b.name)
-  return genericCompare(aShift.shiftsPlaced, bShift.shiftsPlaced) !== 0 ? genericCompare(aShift.shiftsPlaced, bShift.shiftsPlaced) : genericCompare(aShift.daysWorked, bShift.daysWorked) !== 0 ? genericCompare(aShift.daysWorked, bShift.daysWorked) : genericCompare(a.timePriority, b.timePriority) !== 0 ? genericCompare(a.timePriority, b.timePriority) : 0;
-}
+  const aShift = shiftsChart.find((person) => person.name == a.name);
+  const bShift = shiftsChart.find((person) => person.name == b.name);
+  return genericCompare(aShift.shiftsPlaced, bShift.shiftsPlaced) !== 0
+    ? genericCompare(aShift.shiftsPlaced, bShift.shiftsPlaced)
+    : genericCompare(aShift.daysWorked, bShift.daysWorked) !== 0
+    ? genericCompare(aShift.daysWorked, bShift.daysWorked)
+    : genericCompare(a.timePriority, b.timePriority) !== 0
+    ? genericCompare(a.timePriority, b.timePriority)
+    : 0;
+};
 
 function distributeSort(arr, key) {
   const grouped = arr.reduce((acc, obj) => {
@@ -176,7 +178,6 @@ function sortAssignments(assignments) {
 //good fix idea is just in the order we found it on the sheet which is presumably the the date they got on there.
 //another good idea is to make a date-time submittedInquiryTime and we make it first come first serve and sort by that instead of name
 export default function assign(assignments, people) {
-
   //start parameter set up
   const numberShiftsNeeded = 4;
   const peopleSorted = sortPeople(people);
@@ -204,7 +205,9 @@ export default function assign(assignments, people) {
   let peopleToAssign = splitByProperty(
     shiftsSorted,
     "specialQualificationsIds"
-  ).map(peopleByJobCategory => peopleByJobCategory.sort(personComparison(shiftsPlacedChart)));
+  ).map((peopleByJobCategory) =>
+    peopleByJobCategory.sort(personComparison(shiftsPlacedChart))
+  );
   //.map(peopleByjobCategory => Heap.heapify(peopleByjobCategory, personComparison()).toArray());
   //end setup
 
@@ -218,9 +221,10 @@ export default function assign(assignments, people) {
       let assignedPerson = shiftsPlacedChart.find(
         (person) => person.name === volunteerAssignment.assignedVolunteer
       );
-      if (assignedPerson){
-      /*effect */ assignedPerson.shiftsPlaced++;
-      /*effect */ assignedPerson.daysWorked = assignedPerson.daysWorked * volunteerAssignment.day;
+      if (assignedPerson) {
+        /*effect */ assignedPerson.shiftsPlaced++;
+        /*effect */ assignedPerson.daysWorked =
+          assignedPerson.daysWorked * volunteerAssignment.day;
       }
       return volunteerAssignment;
     }),
@@ -229,71 +233,91 @@ export default function assign(assignments, people) {
   // end
 
   //start placing assignments
-  for(let constraintRestrictionLevel = 0; constraintRestrictionLevel < 4; constraintRestrictionLevel++){//edge case of night before morning after double thing; should just check if start time is within X hours. or define a shift sequence for each sequence and check if they are sequential. make sure to make sequence not sequential for each job if there is a rest period between them.//constraintRestrictionLevel = 0 -> only recommended positions allowed; 1 -> differing timePriority allowed; 2 -> differing timePriotity allowed AND Same day shifts allowed; 3->differing timePriority and same day shift AND more than 4 shifts allowed.
+  for (
+    let constraintRestrictionLevel = 0;
+    constraintRestrictionLevel < 4;
+    constraintRestrictionLevel++
+  ) {
+    //edge case of night before morning after double thing; should just check if start time is within X hours. or define a shift sequence for each sequence and check if they are sequential. make sure to make sequence not sequential for each job if there is a rest period between them.//constraintRestrictionLevel = 0 -> only recommended positions allowed; 1 -> differing timePriority allowed; 2 -> differing timePriotity allowed AND Same day shifts allowed; 3->differing timePriority and same day shift AND more than 4 shifts allowed.
     for (
       let assignmentIndex = 0, peopleIndex = 0;
       peopleIndex < peopleToAssign.length &&
       assignmentIndex < unstagedAssignments.length;
-      assignmentIndex++, peopleIndex >= specialJobsAmount ? specialJobsAmount : peopleIndex++
-    ){
+      assignmentIndex++,
+        peopleIndex >= specialJobsAmount ? specialJobsAmount : peopleIndex++
+    ) {
       for (
         let a = 0, p = 0;
         a < unstagedAssignments[assignmentIndex].length;
-        a++, p=0, peopleToAssign[peopleIndex].sort(personComparison(shiftsPlacedChart))
-      ){
-        for(
-          let shiftCount = shiftsPlacedChart.find((shift) => shift.name === peopleToAssign[peopleIndex][p].name);
+        a++,
+          p = 0,
+          peopleToAssign[peopleIndex].sort(personComparison(shiftsPlacedChart))
+      ) {
+        for (
+          let shiftCount = shiftsPlacedChart.find(
+            (shift) => shift.name === peopleToAssign[peopleIndex][p].name
+          );
           !unstagedAssignments[assignmentIndex][a].assignedVolunteer &&
           p < peopleToAssign[peopleIndex].length &&
-          (
-            (
-              constraintRestrictionLevel == 0 && 
-              (shiftCount.shiftsPlaced < numberShiftsNeeded) && 
-              (unstagedAssignments[assignmentIndex][a].timePriority == peopleToAssign[peopleIndex][p].timeId || peopleToAssign[peopleIndex][p].timeId == 1 || unstagedAssignments[assignmentIndex][a].timePriority == 1) && 
-              (shiftCount.daysWorked % unstagedAssignments[assignmentIndex][a].dayId == 0 || shiftCount.daysWorked == 1) // day*24+shiftStartNum shiftStartNum need to put each assignment in shiftsplaced chart and check absolute difference in each start time is more than 9 hours
-            ) ||
-            (
-              constraintRestrictionLevel == 1 && 
-              (shiftCount.shiftsPlaced < numberShiftsNeeded) &&
-              (shiftCount.daysWorked % unstagedAssignments[assignmentIndex][a].dayId == 0 || shiftCount.daysWorked == 1) // day*24+shiftStartNum shiftStartNum need to put each assignment in shiftsplaced chart and check absolute difference in each start time is more than 9 hours
-            ) ||
-            (
-              constraintRestrictionLevel == 2 &&
-              (shiftCount.shiftsPlaced < numberShiftsNeeded) 
-            ) ||
-            (
-              constraintRestrictionLevel == 3
-            ) 
-          );
-          p++, shiftCount = shiftsPlacedChart.find((shift) => shift.name === peopleToAssign[peopleIndex][p].name)
-        ){
+          ((constraintRestrictionLevel == 0 &&
+            shiftCount.shiftsPlaced < numberShiftsNeeded &&
+            (unstagedAssignments[assignmentIndex][a].timePriority ==
+              peopleToAssign[peopleIndex][p].timeId ||
+              peopleToAssign[peopleIndex][p].timeId == 1 ||
+              unstagedAssignments[assignmentIndex][a].timePriority == 1) &&
+            (shiftCount.daysWorked %
+              unstagedAssignments[assignmentIndex][a].dayId ==
+              0 ||
+              shiftCount.daysWorked == 1)) || // day*24+shiftStartNum shiftStartNum need to put each assignment in shiftsplaced chart and check absolute difference in each start time is more than 9 hours
+            (constraintRestrictionLevel == 1 &&
+              shiftCount.shiftsPlaced < numberShiftsNeeded &&
+              (shiftCount.daysWorked %
+                unstagedAssignments[assignmentIndex][a].dayId ==
+                0 ||
+                shiftCount.daysWorked == 1)) || // day*24+shiftStartNum shiftStartNum need to put each assignment in shiftsplaced chart and check absolute difference in each start time is more than 9 hours
+            (constraintRestrictionLevel == 2 &&
+              shiftCount.shiftsPlaced < numberShiftsNeeded) ||
+            constraintRestrictionLevel == 3);
+          p++,
+            shiftCount = shiftsPlacedChart.find(
+              (shift) => shift.name === peopleToAssign[peopleIndex][p].name
+            )
+        ) {
           if (
-            unstagedAssignments[assignmentIndex][a].jobPriority == peopleToAssign[peopleIndex][p].specialQualificationsIds
-            || unstagedAssignments[assignmentIndex][a].jobPriority >= specialJobsAmount
-          ){
-            unstagedAssignments[assignmentIndex][a].assignedVolunteer = peopleToAssign[peopleIndex][p].name;
+            unstagedAssignments[assignmentIndex][a].jobPriority ==
+              peopleToAssign[peopleIndex][p].specialQualificationsIds ||
+            unstagedAssignments[assignmentIndex][a].jobPriority >=
+              specialJobsAmount
+          ) {
+            unstagedAssignments[assignmentIndex][a].assignedVolunteer =
+              peopleToAssign[peopleIndex][p].name;
             shiftCount.shiftsPlaced++;
-            shiftCount.daysWorked = shiftCount.daysWorked * unstagedAssignments[assignmentIndex][a].day;
+            shiftCount.daysWorked =
+              shiftCount.daysWorked *
+              unstagedAssignments[assignmentIndex][a].day;
 
-            if(
-              (shiftCount.daysWorked % unstagedAssignments[assignmentIndex][a].dayId == 0) ||
-              (
-                unstagedAssignments[assignmentIndex][a].timePriority != peopleToAssign[peopleIndex][p].timeId &&
-                !(peopleToAssign[peopleIndex][p].timeId != 1 
-                || unstagedAssignments[assignmentIndex][a].timePriority != 1)
-              )
+            if (
+              shiftCount.daysWorked %
+                unstagedAssignments[assignmentIndex][a].dayId ==
+                0 ||
+              (unstagedAssignments[assignmentIndex][a].timePriority !=
+                peopleToAssign[peopleIndex][p].timeId &&
+                !(
+                  peopleToAssign[peopleIndex][p].timeId != 1 ||
+                  unstagedAssignments[assignmentIndex][a].timePriority != 1
+                ))
             ) {
               unstagedAssignments[assignmentIndex][a].nonIdealShiftTaken = true;
               peopleToAssign[peopleIndex][p].nonIdealShiftTaken = true;
             }
           }
-        } 
+        }
       }
     }
   }
 
   1;
-  
+
   //end placing assignments
 
   //start bruteForce missingGaps
@@ -315,7 +339,8 @@ export default function assign(assignments, people) {
         ) {
           flatAssignments[a].assignedVolunteer = flatPeople[p].name;
           shiftCount.shiftsPlaced++;
-          shiftCount.daysWorked = shiftCount.daysWorked * unstagedAssignments[assignmentIndex][a].day;
+          shiftCount.daysWorked =
+            shiftCount.daysWorked * unstagedAssignments[assignmentIndex][a].day;
           if (
             flatAssignments[a].timePriority != flatPeople[p].timeId &&
             flatPeople[p].timeId != 1 &&
@@ -385,7 +410,7 @@ export default function assign(assignments, people) {
 // const assignments = data.assignments;
 // const people = data.people;
 
-  // const newAssignments = assign(assignments, people);
+// const newAssignments = assign(assignments, people);
 import fs from "fs";
 
 const data = JSON.parse(fs.readFileSync("./thejson.json", "utf8"));
@@ -407,12 +432,10 @@ fs.writeFileSync(
 //
 //put people of peopletoassign in a minheap. sort it similarly, then iterate. instead of p+. remove and insert.
 
-
 // heapify shifts to assign
 
 //then when you get to flat peop just assign.
 //case around (a) and make rules for each jobPriority who can be assigned to what. if special (a > 10) is false then everyone just assign.
-
 
 //find the person in shiftsto assign in people to assign
 
@@ -427,17 +450,14 @@ fs.writeFileSync(
 // dont sort people by timepriority just filter by it.
 // sort assignments by jobpriority and then by time priority then spread by day.
 
-// in shiftsassigned catalogue not just shifts placed, but which days are placed. 
+// in shiftsassigned catalogue not just shifts placed, but which days are placed.
 
 // hash combinations of days to then if day is divisible you will know
-// days should not be 1 (for none) 2,3,5,7, and when you assign someone a shift multiply the int daysAssigned by the day corresponding to that number. if they have worked that day you can check just by dividing. 
+// days should not be 1 (for none) 2,3,5,7, and when you assign someone a shift multiply the int daysAssigned by the day corresponding to that number. if they have worked that day you can check just by dividing.
 
 //  filter by jobPriority. min-heapify on each assignment based on shiftsplaced, daysplace % day == 0 (return small or neg), then by timeprioity*-1. then place each assignment by preference (popping the min)
 
 //  after youve done all thatcase on special if special true then case on heirarchy and shifts placed. dont check for anything but if shifts placed is 4, then if it isnt fill from flat people assigned.
-
-
-
 
 // skipDisrecommended=false
 // p heapified p 0, p 1, p 2, etc, a 0
