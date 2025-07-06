@@ -312,7 +312,7 @@ function assign(assignments, people) {
             unstagedAssignments[assignmentIndex][a].assignedVolunteer =
               peopleToAssign[peopleIndex][p].name;
       
-            if(shiftCount.daysWorked % unstagedAssignments[assignmentIndex][a].dayId == 0 && shiftCount.daysWorked!= 1){
+            if(shiftCount.daysWorked % unstagedAssignments[assignmentIndex][a].dayId == 0 && shiftCount.daysWorked != 1){
               peopleToAssign[peopleIndex][p].sameDayAssigned = true;
               unstagedAssignments[assignmentIndex][a].sameDayAssigned = true;
               console.log(unstagedAssignments[assignmentIndex][a])
