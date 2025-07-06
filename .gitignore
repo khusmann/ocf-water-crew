@@ -1,4 +1,9 @@
+<<<<<<< HEAD
 thejson*.json
 theresultjson.json
 bak.mjs
 finaltheresultjson.json
+=======
+*.json
+bak.mjs
+>>>>>>> 9d17e6dffeac571f54d064b4dcc3c3b0a9fc7e28
