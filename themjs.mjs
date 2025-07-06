@@ -236,7 +236,7 @@ function assign(assignments, people) {
           assignedPerson.daysWorked * volunteerAssignment.dayId;
           if(assignedPerson.daysWorked % assignment.dayId == 0){
             // assignedPerson.sameDayAssigned = true;
-            assignment.sameDayAssigned = true;
+            volunteerAssignment.sameDayAssigned = true;
           }
       }
       return volunteerAssignment;
@@ -313,7 +313,8 @@ function assign(assignments, people) {
       
             if(shiftCount.daysWorked % unstagedAssignments[assignmentIndex][a].dayId == 0){
               peopleToAssign[peopleIndex][p].sameDayAssigned = true;
-              unstagedAssignments[assignmentIndex][a].sameDayAssigned = true
+              unstagedAssignments[assignmentIndex][a].sameDayAssigned = true;
+              console.log(unstagedAssignments[assignmentIndex][a])
             }
             shiftCount.shiftsPlaced++;
             shiftCount.daysWorked = shiftCount.daysWorked * unstagedAssignments[assignmentIndex][a].dayId;
