@@ -194,7 +194,7 @@ function assign(assignments, people) {
   const assignmentsSorted = sortAssignments(assignments);
   const shiftsPlacedChart = peopleSorted
     .sort(priorityComparison(["specialQualificationsIds", "timeId", "name"]))
-    .map((i) => ({ name: i.name, shiftsPlaced: 0, daysWorked: 1 }));
+    .map((i) => ({ name: i.name, shiftsPlaced: 0, daysWorked: 1, assignedHours: [0] }));
   const shiftsSorted = expandObjects(
     peopleSorted,
     "specialQualificationsIds"
@@ -279,13 +279,15 @@ function assign(assignments, people) {
               (constraintRestrictionLevel == 0 &&
               shiftCount.shiftsPlaced < numberShiftsNeeded &&
               (unstagedAssignments[assignmentIndex][a].timePriority ==
-                peopleToAssign[peopleIndex][p].timeId ||
-                peopleToAssign[peopleIndex][p].timeId == 1 ||
-                unstagedAssignments[assignmentIndex][a].timePriority == 1) &&
-              (shiftCount.daysWorked %
-                unstagedAssignments[assignmentIndex][a].dayId !=
-                0 || 
-                shiftCount.daysWorked == 1)) || // day*24+shiftStartNum shiftStartNum need to put each assignment in shiftsplaced chart and check absolute difference in each start time is more than 9 hours
+              peopleToAssign[peopleIndex][p].timeId ||
+              peopleToAssign[peopleIndex][p].timeId == 1 ||
+              unstagedAssignments[assignmentIndex][a].timePriority == 1) &&
+              ((shiftCount.daysWorked %
+                  unstagedAssignments[assignmentIndex][a].dayId !=
+                  0 || 
+                  shiftCount.daysWorked == 1) && shiftCount.assignedHours.some(number => Math.abs((24 * unstagedAssignments[assignmentIndex][a].day + unstagedAssignments[assignmentIndex][a].shiftStartNum) - (number)) < 9)
+              )
+              ) || // day*24+shiftStartNum shiftStartNum need to put each assignment in shiftsplaced chart and check absolute difference in each start time is more than 9 hours
               (constraintRestrictionLevel == 1 &&
                 shiftCount.shiftsPlaced < numberShiftsNeeded &&
                 (shiftCount.daysWorked %
@@ -307,6 +309,8 @@ function assign(assignments, people) {
             }
             shiftCount.shiftsPlaced++;
             shiftCount.daysWorked = shiftCount.daysWorked * unstagedAssignments[assignmentIndex][a].dayId;
+            shiftCount.assignedHours.push(24 * unstagedAssignments[assignmentIndex][a].day + unstagedAssignments[assignmentIndex][a].shiftStartNum);
+            //first element null?
             if (
               (unstagedAssignments[assignmentIndex][a].timePriority !=
                 peopleToAssign[peopleIndex][p].timeId &&
