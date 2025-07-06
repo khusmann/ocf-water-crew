@@ -1,12 +1,3 @@
-// import fs from "fs";
-// const { Heap, MinHeap, MaxHeap } = require('@datastructures-js/heap');
-
-import {
-  Heap,
-  MinHeap,
-} from '@datastructures-js/heap';
-
-
 const genericCompare = (a, b) => {
   // if (a === undefined || b === undefined) {
   //   throw new Error("value is undefined"+" " + a + b);
@@ -44,7 +35,7 @@ const personComparison = (shiftsChart) => (a,b) => {
   // const priorityObject = ["shiftsPlaced", "daysWorked", "timePriority"];
   const aShift = shiftsChart.find((person) => person.name == a.name)
   const bShift = shiftsChart.find((person) => person.name == b.name)
-  return genericCompare(aShift.shiftsPlaced, bShift.shiftsPlaced) !== 0 ? genericCompare(aShift.shiftsPlaced, bShift.shiftsPlaced) : genericCompare(aShift.daysWorked, bShift.daysWorked) !== 0 ? genericCompare(aShift.daysWorked, bShift.daysWorked) : genericCompare(a.timePriority, b.timePriority) !== 0 ? genericCompare(a.timePriority, b.timePriority) : 0;
+  return genericCompare(a.timePriority * -1, b.timePriority * -1) !== 0 ? genericCompare(a.timePriority, b.timePriority) : genericCompare(aShift.daysWorked, bShift.daysWorked) !== 0 ? genericCompare(aShift.daysWorked, bShift.daysWorked) : genericCompare(aShift.shiftsPlaced, bShift.shiftsPlaced) !== 0 ? genericCompare(aShift.shiftsPlaced, bShift.shiftsPlaced) : 0;
 }
 
 function distributeSort(arr, key) {
@@ -273,7 +264,7 @@ export default function assign(assignments, people) {
           ){
             unstagedAssignments[assignmentIndex][a].assignedVolunteer = peopleToAssign[peopleIndex][p].name;
             shiftCount.shiftsPlaced++;
-            shiftCount.daysWorked = shiftCount.daysWorked * unstagedAssignments[assignmentIndex][a].day;
+            shiftCount.daysWorked = shiftCount.daysWorked * unstagedAssignments[assignmentIndex][a].dayId;
 
             if(
               (shiftCount.daysWorked % unstagedAssignments[assignmentIndex][a].dayId == 0) ||
@@ -315,7 +306,7 @@ export default function assign(assignments, people) {
         ) {
           flatAssignments[a].assignedVolunteer = flatPeople[p].name;
           shiftCount.shiftsPlaced++;
-          shiftCount.daysWorked = shiftCount.daysWorked * unstagedAssignments[assignmentIndex][a].day;
+          shiftCount.daysWorked = shiftCount.daysWorked * unstagedAssignments[assignmentIndex][a].dayId;
           if (
             flatAssignments[a].timePriority != flatPeople[p].timeId &&
             flatPeople[p].timeId != 1 &&
@@ -386,20 +377,6 @@ export default function assign(assignments, people) {
 // const people = data.people;
 
   // const newAssignments = assign(assignments, people);
-import fs from "fs";
-
-const data = JSON.parse(fs.readFileSync("./thejson.json", "utf8"));
-const assignments = data.assignments;
-const people = data.people;
-
-const newAssignments = assign(assignments, people);
-
-// console.log(newAssignments);
-
-fs.writeFileSync(
-  "theresult2json.json",
-  JSON.stringify(newAssignments, null, 2)
-);
 
 //randomly pool through everyone in 10+ by index not by name
 
@@ -445,3 +422,36 @@ fs.writeFileSync(
 // a 2
 // skipDisrecommended=true
 // // doLoopover
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/////////////////////////////////////////////////////////////////
+//--------------------------------------------------IGNORE below HERE
+/////////////////////////////////////////////////////////////////
+//--------------------------------------------------
+
+
+import fs from "fs";
+
+
+const data = JSON.parse(fs.readFileSync("./thejson.json", "utf8"));
+const assignments = data.assignments;
+const people = data.people;
+
+const newAssignments = assign(assignments, people);
+
+fs.writeFileSync(
+  "theresultjson.json",
+  JSON.stringify(newAssignments, null, 2)
+);
