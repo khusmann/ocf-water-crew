@@ -303,7 +303,7 @@ function assign(assignments, people) {
               ) || // day*24+shiftStartNum shiftStartNum need to put each assignment in shiftsplaced chart and check absolute difference in each start time is more than 9 hours
               (constraintRestrictionLevel == 2 &&
                 shiftCount.shiftsPlaced < numberShiftsNeeded &&
-                shiftCount.assignedHours.some(number => Math.abs((24 * unstagedAssignments[assignmentIndex][a].day + unstagedAssignments[assignmentIndex][a].shiftStartNum) - (number)) > 1)
+                // shiftCount.assignedHours.some(number => Math.abs((24 * unstagedAssignments[assignmentIndex][a].day + unstagedAssignments[assignmentIndex][a].shiftStartNum) - (number)) > 1)
                 // do bug here same time two different jobs check if same say time 
               ) //||
               //constraintRestrictionLevel == 3
