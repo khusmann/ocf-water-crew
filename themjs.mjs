@@ -232,7 +232,7 @@ function assign(assignments, people) {
       );
       if (assignedPerson) {
         /*effect */ assignedPerson.shiftsPlaced++;
-        if(assignedPerson.daysWorked % assignment.dayId == 0 ){
+        if(assignedPerson.daysWorked % assignment.dayId == 0 && assignedPerson.name !== ''){
           // assignedPerson.sameDayAssigned = true;
         volunteerAssignment.sameDayAssigned = true;
         }
@@ -324,7 +324,7 @@ function assign(assignments, people) {
             if (
               (unstagedAssignments[assignmentIndex][a].timePriority !=
                 peopleToAssign[peopleIndex][p].timeId &&
-                !(
+                (
                   peopleToAssign[peopleIndex][p].timeId != 1 ||
                   unstagedAssignments[assignmentIndex][a].timePriority != 1
                 ))
