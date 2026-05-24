@@ -1,9 +1,8 @@
 // @ts-nocheck
-// TODO: port to proper TypeScript — add type annotations, declare or
-// import `assign` from ./scheduler.ts, replace implicit globals
-// (`jobLookup`, `jobs` in getVolunteers) with const declarations.
-// Kept as JS-in-.ts for now to preserve verbatim behavior; the rest
-// of the build pipeline treats it like any other TS source.
+// TODO: port to proper TypeScript — add type annotations and
+// `import { assign } from "./scheduler.ts"`. Kept as JS-in-.ts for
+// now; the rest of the build pipeline treats it like any other TS
+// source.
 
 function onOpen() {
   const ui = SpreadsheetApp.getUi();
@@ -103,7 +102,7 @@ function generateAssignments() {
     (i) => ({...i, timePriority: lookupTimeId(i.timeCategory)})
   );
 
-  jobLookup = Object.fromEntries(
+  const jobLookup = Object.fromEntries(
     jobs.map((j) => ([j.jobName, j]))
   )
 
@@ -136,7 +135,7 @@ function getShifts() {
  * @returns {Array.<Object>} the volunteers
  */
 function getVolunteers(){
-  jobs = getJobs();
+  const jobs = getJobs();
 
   const lookupPriority = (name) => jobs.find((i) => i.jobName === name).jobPriority;
 
