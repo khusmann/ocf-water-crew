@@ -1,0 +1,23 @@
+{
+  "name": "ocf-water-crew",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Scheduler for water crew work assignments at Oregon Country Faire.",
+  "license": "Apache-2.0",
+  "engines": {
+    "node": ">=22.6"
+  },
+  "scripts": {
+    "test": "node --test --experimental-strip-types \"test/**/*.test.ts\"",
+    "start": "node --experimental-strip-types bin/run-local.ts",
+    "local": "node --experimental-strip-types bin/run-local.ts",
+    "build": "node --experimental-strip-types bin/build-gas.ts",
+    "typecheck": "tsc --noEmit -p tsconfig.tools.json"
+  },
+  "devDependencies": {
+    "@types/google-apps-script": "^1.0.97",
+    "@types/node": "^22.0.0",
+    "typescript": "^5.5.0"
+  }
+}

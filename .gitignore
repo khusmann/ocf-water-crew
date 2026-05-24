@@ -1,2 +1,6 @@
 data/
 bak.mjs
+node_modules/
+/dist/
+/build/
+/build-tools/
