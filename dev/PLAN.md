@@ -5,41 +5,35 @@ repo with proper file names, a real test runner, a clean local/GAS dev loop,
 and a fixed-point "this is what the current algorithm does" test suite — so
 that the next step (rule-based rewrite) can be done with confidence.
 
-**Out of scope for this plan:** CI, any change to the algorithm's behavior,
-and the actual move to `clasp` (we set up *clasp-ready* but don't adopt it).
-The algorithm gets *moved to TypeScript, exported, and pinned by tests* —
-not rewritten. Rewrite is Phase 4, deferred.
+**Out of scope for this plan:** CI, any change to the algorithm's
+behavior. The algorithm gets *moved to TypeScript, exported, and
+pinned by tests* — not rewritten. Rewrite is Phase 4, deferred.
 
 ---
 
 ## Tooling decisions
 
-**Decided: npm + TypeScript, zero runtime dependencies, two dev deps (`typescript`, `@types/google-apps-script`). Structured to drop `clasp` in later without restructuring.**
+**Decided: npm + TypeScript + clasp, zero runtime dependencies, four devDeps (`typescript`, `@types/google-apps-script`, `@types/node`, `@google/clasp`).**
 
 ### Why npm
 The shipped GAS artifact has no module system and no `node_modules`, so
 *runtime* deps are off the table. But `package.json` still earns its
-keep: `npm test`/`npm run build`/`npm start` as standard entry points,
-`"engines"` to pin the Node version, a place for devDeps.
+keep: `npm test`/`npm run build`/`npm start`/`npm run push` as
+standard entry points, `"engines"` to pin the Node version, a place
+for devDeps.
 
 ### Why TypeScript
 - The data model is the complicated part of this codebase (see
   CURRENT.md §4: parallel arrays, `timeId` ↔ `timePreference` mappings,
   pre-staged vs assigned, `dayId` primes). Typing it once kills a whole
   class of "what's this field again?" bugs in the rewrite.
-- Apps Script V8 runtime accepts modern JS, and `tsc` can emit a single
-  GAS-compatible file via `module: "none"` + `outFile`. So TS adds a
-  build step but no runtime cost.
-- Two devDeps (`typescript`, `@types/google-apps-script`). No bundler,
-  no test transformer if we use Node ≥22.6's native type stripping
-  (see below).
+- Apps Script V8 runtime accepts modern JS. `tsc` emits per-file ESM
+  to `build/`, and `bin/build-gas.ts` strips `import`/`export` lines
+  and assembles `dist/` for clasp. Build step, no runtime cost.
 - `@types/google-apps-script` gives us `SpreadsheetApp`, `Sheet`,
-  `Range`, etc. The algorithm itself doesn't touch any of those, so
-  these types are dormant during Phase 1–3. They're installed now so
-  that when clasp lands and the sheet-side wrapper moves into this
-  repo, no tooling change is needed — just write the wrapper as `.ts`
-  and the types are already there. (Loaded via
-  `"types": ["google-apps-script"]` in the GAS tsconfig.)
+  `Range`, etc. — used heavily by `src/sheet.ts`, the sheet-side
+  wrapper. `@types/node` is needed for `bin/` scripts that use
+  `node:fs`/`node:path`.
 
 ### Test runner with TypeScript: three options
 1. **Node ≥22.6 `--experimental-strip-types`** (recommended). Native, zero
@@ -53,26 +47,18 @@ keep: `npm test`/`npm run build`/`npm start` as standard entry points,
 
 **Going with (1).** Bump to (2) only if we hit a real friction point.
 
-### Clasp readiness (not adoption)
-`clasp push` expects a directory containing one or more `.js`/`.gs` files
-plus an `appsscript.json` manifest, with a `.clasp.json` at the project
-root pointing to that directory via `"rootDir"`. Our `dist/` will already
-hold `Code.gs` post-build — adopting clasp later is just:
+### Clasp (adopted)
+`.clasp.json` at the repo root pins the bound script ID and points
+clasp at `./dist` as its `rootDir`. `appsscript.json` (the GAS
+manifest) lives at the repo root and is copied verbatim into `dist/`
+during build. `npm run push` runs build + `clasp push`; `npm run pull`
+brings server-side edits back into `dist/` for diffing.
 
-1. `npm i -D @google/clasp`
-2. `clasp login`
-3. Drop `appsscript.json` into `dist/`
-4. Add `.clasp.json` at the repo root with `"rootDir": "./dist"` and the
-   bound script's `scriptId`.
-5. `clasp push` instead of copy-paste.
-
-Nothing in this plan needs to change to enable that. Flagged here so we
-don't accidentally couple `dist/` to non-clasp-friendly conventions
-(e.g. don't put non-GAS files in `dist/`).
-
-Push back on any of this if you'd rather: keep things looser (no TS),
-go further (add Prettier/ESLint now), or do the clasp adoption as part
-of Phase 1 rather than later.
+The hand-maintained sheet-side wrapper (`src/sheet.ts`) was pulled
+into the repo when clasp was adopted. It uses `SpreadsheetApp` and
+friends directly, and imports `{ assign }` from `./scheduler.js` — the
+build strips the import line so both files land in GAS as siblings in
+the same global scope.
 
 ---
 
@@ -80,26 +66,29 @@ of Phase 1 rather than later.
 
 ```
 ocf-water-crew/
-  package.json              scripts + Node engine; one devDep (typescript)
-  tsconfig.json             strict; targets ES2019; module: none + outFile
-                            for the GAS build
-  tsconfig.tools.json       extends tsconfig.json; module: NodeNext, used
-                            for bin/* scripts that need fs/path/etc.
-  README.md                 short — what it is, how to run/test/build/deploy
-  .gitignore                add /dist, /build, keep /data
+  package.json              scripts + Node engine + devDeps
+  package-lock.json
+  tsconfig.json             strict; ES2019; emits ESM to ./build/
+  tsconfig.tools.json       extends tsconfig.json; NodeNext + noEmit,
+                            used for typechecking bin/test/src
+  .clasp.json               script ID + rootDir: ./dist
+  appsscript.json           GAS manifest; copied verbatim into dist/
+  README.md                 what it is, how to run/test/build/push
+  .gitignore                ignores /dist, /build, /data, node_modules
 
   src/
-    scheduler.ts            the algorithm: assign() + helpers, with exports
-    types.ts                Person, Assignment, AssignmentResult, etc. —
-                            the data shapes from CURRENT.md §4, hand-written
-                            from the live JSON. Imported by scheduler.ts
-                            and tests.
+    scheduler.ts            the algorithm: assign() + helpers, exported
+    sheet.ts                GAS sheet wrapper: onOpen, menu wiring,
+                            runAssignVolunteers, sheet I/O. Imports
+                            { assign } from ./scheduler.js.
+    types.ts                Person, Assignment, IndexedAssignment, etc.
+                            — data shapes from CURRENT.md §4, imported
+                            by scheduler.ts, sheet.ts, and tests.
 
   test/
-    helpers.test.ts         unit tests for priorityComparison,
-                            genericCompare, splitByProperty, expandObjects,
-                            distributeSort  (the existing 4 assertions
-                            roll into here)
+    helpers.test.ts         unit tests for priorityComparison and
+                            related comparators (the original assertions
+                            from run_tests.mjs)
     scheduler.test.ts       end-to-end behavior tests against synthetic
                             fixtures (Phase 2)
     fixtures/
@@ -114,17 +103,18 @@ ocf-water-crew/
   bin/
     run-local.ts            reads data/thejson.json, calls assign(),
                             writes data/theresultjson.json
-                            (replaces the IGNORE-below-HERE block)
-    build-gas.ts            emits dist/Code.gs from src/scheduler.ts —
-                            shells out to tsc with the GAS tsconfig and
-                            tacks on a "do not edit" header
+    build-gas.ts            tsc → strip imports/exports → assemble
+                            dist/ (scheduler.js + sheet.js +
+                            appsscript.json) for clasp push
     anonymize.ts            (Phase 2) reads data/thejson.json, rewrites
                             every name field with a placeholder, writes
                             test/fixtures/realistic.json
 
-  dist/                     generated, gitignored
-    Code.gs                 single-file GAS-pasteable output of tsc
-                            (clasp's rootDir target later)
+  build/                    generated, gitignored — raw tsc output
+  dist/                     generated, gitignored — clasp rootDir
+    scheduler.js            algorithm, generated from src/scheduler.ts
+    sheet.js                wrapper, generated from src/sheet.ts
+    appsscript.json         copied from ./appsscript.json
 
   data/                     gitignored (real names) — unchanged
 
@@ -133,33 +123,34 @@ ocf-water-crew/
     PLAN.md                 this file
 ```
 
-**Files to delete:**
+**Files deleted in Phase 1:** `themjs.mjs`, `runthemjs.mjs`,
+`run_tests.mjs`, `theworkingversion.mjs`. Contents migrated where
+relevant.
 
-- `themjs.mjs` — contents migrate to `src/scheduler.ts`
-- `runthemjs.mjs` — replaced by `bin/run-local.ts`
-- `run_tests.mjs` — replaced by `test/helpers.test.ts`
-- `theworkingversion.mjs` — 0-byte; gone
-
-**Files to keep:** `LICENSE`, `README.md` (rewrite), `.claude/CLAUDE.md`,
-`dev/CURRENT.md`, `dev/PLAN.md`.
-
-Naming rationale: `themjs.mjs` is unsearchable and `runthemjs` / `thejson`
-are riffs on it. `scheduler`, `run-local`, `build-gas` say what the file
-does the first time you read the name.
+Naming rationale: `themjs.mjs` is unsearchable and `runthemjs` /
+`thejson` are riffs on it. `scheduler`, `sheet`, `run-local`,
+`build-gas` say what the file does the first time you read the name.
 
 ### Why two tsconfigs
-`src/scheduler.ts` has to compile to a single file with no module syntax
-(GAS doesn't have modules), which means `module: "none"` + `outFile`. But
-that mode forbids `import`/`export` in source — fine for `src/`, broken
-for `bin/run-local.ts` which needs `import fs from "node:fs"`. So
-`tsconfig.tools.json` extends the base with `module: "NodeNext"` for
-the bin scripts. It's the standard split.
+`tsconfig.json` drives the build: `module: "ES2020"`,
+`moduleResolution: "bundler"`, `outDir: "./build"`. Each `src/*.ts`
+file compiles to a sibling `build/*.js`. `bin/build-gas.ts` then
+strips `import`/`export` lines from those outputs and writes
+`dist/scheduler.js` + `dist/sheet.js`, plus a copy of
+`appsscript.json`. clasp pushes from `dist/`.
 
-The alternative — one tsconfig that uses modules, plus a separate bundle
-step that strips `export` and concatenates — works too, but it's more
-moving parts. tsc's `outFile` is the simplest thing that produces the
-right shape for GAS, and clasp later just consumes whatever lands in
-`dist/`.
+`tsconfig.tools.json` extends the base with `module: "NodeNext"` and
+`noEmit: true`. It exists only for `npm run typecheck` and covers
+`bin/`, `test/`, and `src/` in one pass — so editor diagnostics and
+the typecheck script see the same world as Node when it runs the
+`bin/` and `test/` scripts via `--experimental-strip-types`.
+
+Why not `tsc --outFile` for a single GAS bundle? Because `outFile`
+requires `module: "none" | "amd" | "system"` — none of which allow
+`import`/`export` in source. We need exports so the test runner and
+local runner can import from `src/scheduler.ts`. The strip-and-copy
+approach is a tiny amount of post-processing for a much cleaner source
+layout.
 
 ---
 
@@ -168,98 +159,69 @@ right shape for GAS, and clasp later just consumes whatever lands in
 All commands assume Node ≥22.6 (pinned in `package.json` `engines`).
 
 ### `npm test`
-Runs `node --test --experimental-strip-types test/`. Picks up both
-`helpers.test.ts` and `scheduler.test.ts`. Tests import from
-`src/scheduler.ts` directly — Node strips the types at load time, no
-compile step needed.
+Runs `node --test --experimental-strip-types "test/**/*.test.ts"`.
+Picks up `helpers.test.ts` and (in Phase 2) `scheduler.test.ts`. Tests
+import from `src/scheduler.ts` directly — Node strips the types at
+load time, no compile step needed.
 
 ### `npm start` (or `npm run local`)
 Runs `node --experimental-strip-types bin/run-local.ts`. Reads
 `data/thejson.json`, calls `assign()`, writes `data/theresultjson.json`.
-This is what `node themjs.mjs` currently does, minus the ritual of
-commenting out the import block.
 
 ### `npm run build`
-Runs `tsc -p tsconfig.json`. Emits `dist/Code.gs` — a single file with
-no module syntax, all functions/consts at top level, ready for GAS.
-The "Generated, do not edit" header is prepended via a tiny postbuild
-step (one `fs.writeFileSync` call wrapping the tsc output, or just a
-`build-gas.ts` wrapper that shells out to tsc and prepends).
+Runs `node --experimental-strip-types bin/build-gas.ts`, which:
 
-GAS deployment today is then: `npm run build`, open `dist/Code.gs`, copy,
-paste into the bound script editor. No commenting-out, no manual edits.
-The sheet-side wrapper still calls `assign(assignments, people)` exactly
-as today.
+1. Wipes `build/` and `dist/`.
+2. Shells out to `tsc -p tsconfig.json` — emits per-file JS to
+   `build/` (scheduler.js, sheet.js).
+3. For each, strips `import` and `export` lines via regex, prepends a
+   "Generated, do not edit" header, writes to `dist/`.
+4. Copies `./appsscript.json` → `dist/appsscript.json` verbatim.
 
-GAS deployment **once clasp is adopted**: `npm run build && clasp push`.
-No source changes needed for the switch.
+### `npm run push`
+`npm run build && clasp push`. Deploys `dist/` to the bound script.
+
+### `npm run pull`
+`clasp pull`. Pulls server-side state into `dist/`. Use to diff against
+local before committing edits made in the GAS editor.
 
 ### `npm run typecheck`
-Runs `tsc --noEmit -p tsconfig.json` and `tsc --noEmit -p tsconfig.tools.json`.
-Catches type errors without producing output. Useful as a fast pre-commit
-check.
+Runs `tsc --noEmit -p tsconfig.tools.json`, covering `bin/`, `test/`,
+and `src/`. Catches type errors without producing output.
 
 ---
 
-## Phase 1 — repo scaffolding + port to TS (mechanical, no behavior change)
+## Phase 1 — repo scaffolding + port to TS — **done**
 
-1. Add `package.json` with:
-   - `"engines": { "node": ">=22.6" }`
-   - `scripts`: `test`, `start`, `build`, `typecheck`
-   - `devDependencies`: `typescript` (latest 5.x),
-     `@types/google-apps-script` (latest 1.x)
-   - No runtime deps.
-2. Add `tsconfig.json` (GAS build target): `strict: true`, `target: "ES2019"`,
-   `module: "none"`, `outFile: "./dist/Code.gs"`, `include: ["src/**/*.ts"]`,
-   `types: ["google-apps-script"]`, `removeComments: false`.
-3. Add `tsconfig.tools.json` extending the base with `module: "NodeNext"`,
-   `moduleResolution: "NodeNext"`, `include: ["bin/**/*.ts", "test/**/*.ts", "src/**/*.ts"]`,
-   `noEmit: true` (only used for typecheck).
-4. Add `src/types.ts` with hand-written `Person`, `Assignment`,
-   `AssignmentResult`, `ShiftChartEntry` (and any others needed) derived
-   from CURRENT.md §4. Use `readonly` where appropriate; mark
-   `assignedVolunteer`, `sameDayAssigned` etc. as the mutated fields.
-5. Move `themjs.mjs` → `src/scheduler.ts`. Mechanical changes only:
-   - Add types to function signatures and locals, importing from `types.ts`.
-     Resolve `any`s by reading what the live data actually contains, not
-     by guessing.
-   - Restore named exports for `assign`, `priorityComparison`,
-     `genericCompare`, `splitByProperty`, `expandObjects`,
-     `distributeSort`, `personComparison`, `sortPeople`, `sortAssignments`.
-   - Delete the IGNORE block and the commented-out `clear()`,
-     `doubleShiftTaken`, and design-note blocks at the bottom — CURRENT.md
-     preserves them.
-   - **Do not refactor logic.** Bugs documented in CURRENT.md §6 stay in.
-     Adding types may surface them (e.g. `"ShiftStart"` vs `shiftStart`) —
-     note them in a `// TODO(phase-4):` comment and leave the behavior
-     unchanged. The Phase-2 snapshots will pin them.
-6. Add `bin/run-local.ts` — `import { assign } from "../src/scheduler.ts"`,
-   read `data/thejson.json`, write `data/theresultjson.json`.
-7. Add `bin/build-gas.ts` — shell out to `tsc -p tsconfig.json`, then
-   prepend the "Generated from src/scheduler.ts — do not edit" header
-   to `dist/Code.gs`.
-8. Port `run_tests.mjs` → `test/helpers.test.ts`. Use `node:test` +
-   `node:assert/strict`.
-9. Delete the four obsolete files.
-10. Update `.gitignore`: add `/dist`, `/build`, keep `/data`,
-    `node_modules/`.
-11. Rewrite `README.md`: one paragraph on what this is, then the
-    commands (test/start/build/typecheck, deploy ritual, and a one-line
-    "clasp coming later" note).
+What landed (see git history for the detail):
 
-**Exit criteria for Phase 1:**
-- `npm install` succeeds (just typescript).
-- `npm run typecheck` passes with no errors.
-- `npm test` runs the 4 existing comparator assertions and passes.
-- `npm start` reproduces the current `data/theresultjson.json`
-  byte-for-byte.
-- `npm run build` produces a `dist/Code.gs` that, pasted into GAS,
-  behaves identically to the hand-pasted version today.
+- `package.json` with `engines.node >=22.6`, four devDeps (`typescript`,
+  `@types/google-apps-script`, `@types/node`, `@google/clasp`), no
+  runtime deps. `"type": "module"` so Node's strip-types treats `.ts`
+  as ESM.
+- `tsconfig.json` (build) + `tsconfig.tools.json` (typecheck). See
+  "Why two tsconfigs" above.
+- `src/types.ts` — `Person`, `Assignment`, `IndexedAssignment`,
+  `ShiftChartEntry`, etc., hand-derived from CURRENT.md §4.
+- `src/scheduler.ts` — port of `themjs.mjs`, types added without
+  refactor. Bugs from CURRENT.md §6 preserved and marked with
+  `// TODO(phase-4):` comments (nonIdealShiftTaken inverted condition,
+  pre-staged hours not pushed, `"ShiftStart"` no-op sort key, level-3
+  unimplemented, dense-id assumption, dead `.timePriority` access).
+- `src/sheet.ts` — sheet wrapper, pulled from the bound script via
+  clasp, then ported to TS. Imports `{ assign }` from `./scheduler.js`.
+- `bin/run-local.ts`, `bin/build-gas.ts` — Node entry points.
+- `test/helpers.test.ts` — the original `priorityComparison` assertions
+  from `run_tests.mjs`, re-homed under `node:test`.
+- Clasp wired up: `.clasp.json`, `appsscript.json` at root, `npm run push`.
+- Deleted: `themjs.mjs`, `runthemjs.mjs`, `run_tests.mjs`,
+  `theworkingversion.mjs`.
 
-The byte-for-byte check on `data/theresultjson.json` is the safety net
-for the port — TS shouldn't change runtime behavior, but a stray
-coercion (e.g. `as number` on something that was actually a string in
-practice) can. Diff before/after to confirm.
+Exit criteria met: `npm test` passes, `npm run typecheck` passes,
+`npm start` reproduces `data/theresultjson.json` byte-for-byte against
+the pre-port baseline, `npm run build` produces a `dist/` that
+`clasp push` deploys and that runs identically to the prior bound
+script.
 
 ---
 
@@ -307,7 +269,7 @@ Plus one big anonymized fixture:
 |--------------------|------------------------------------------------------------------------|
 | `realistic.json`   | Same *shape* as `data/thejson.json` (127 people, 416 slots, same       |
 |                    | jobs, same day/time distribution) but with placeholder names. Built    |
-|                    | once via a `bin/anonymize.mjs` script that reads the live file and     |
+|                    | once via a `bin/anonymize.ts` script that reads the live file and      |
 |                    | rewrites every `first`/`last`/`nickname`/`stagedVolunteer` field.      |
 |                    | Acts as the broad regression catch.                                    |
 
@@ -375,10 +337,10 @@ Phases 1–3 are in. Inputs to that conversation will be:
 
 ## Order of operations
 
-1. Phase 1 as one commit. Verify byte-identical `theresultjson.json`
-   before committing.
+1. ~~Phase 1 as one commit. Verify byte-identical `theresultjson.json`
+   before committing.~~ **done**
 2. Phase 2 as a series of commits — one per fixture, so the snapshot of
    "what the current algorithm does for case X" is reviewable in
-   isolation.
+   isolation. **next**
 3. Phase 3 only if it stays trivial.
 4. Stop. Re-plan Phase 4 with the user.
