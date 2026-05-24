@@ -15,7 +15,9 @@
     "build": "node --experimental-strip-types bin/build-gas.ts",
     "push": "npm run build && clasp push",
     "pull": "clasp pull",
-    "typecheck": "tsc --noEmit -p tsconfig.tools.json"
+    "typecheck": "tsc --noEmit -p tsconfig.tools.json",
+    "regen-fixtures": "node --experimental-strip-types bin/regen-fixtures.ts",
+    "anonymize": "node --experimental-strip-types bin/anonymize.ts"
   },
   "devDependencies": {
     "@google/clasp": "^3.3.0",

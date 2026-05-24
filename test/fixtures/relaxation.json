@@ -1,0 +1,36 @@
+{
+  "people": [
+    {
+      "first": "Person",
+      "last": "01",
+      "nickname": "",
+      "volunteerType": "Staff",
+      "specialQualifications": "",
+      "timePreference": "AM",
+      "name": "Person 01",
+      "hoursAssigned": 8,
+      "shifts": 1,
+      "timeId": 0,
+      "specialQualificationsIds": []
+    }
+  ],
+  "assignments": [
+    {
+      "stagedVolunteer": "",
+      "assignedVolunteer": "",
+      "jobPriority": 0,
+      "jobName": "Carts",
+      "special": false,
+      "day": 1,
+      "dayId": 2,
+      "shiftStart": "1899-12-30T22:00:00.000Z",
+      "shiftStartNum": 14,
+      "hrsShift": 8,
+      "person": 1,
+      "timePriority": 2,
+      "timeCategory": "PM",
+      "sameDayAssigned": false,
+      "nonIdealShiftTaken": false
+    }
+  ]
+}

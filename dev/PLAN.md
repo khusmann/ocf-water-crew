@@ -225,13 +225,38 @@ script.
 
 ---
 
-## Phase 2 — pin the current algorithm with synthetic tests
+## Phase 2 — pin the current algorithm with synthetic tests — **done**
 
-This is the load-bearing phase: we need a checked-in regression suite
+This was the load-bearing phase: we need a checked-in regression suite
 before we touch the algorithm, and we can't check in the real input
 because of the names policy (see [CLAUDE.md](../.claude/CLAUDE.md)).
 
-### Approach
+What landed (see git history for the detail):
+
+- `test/scheduler.test.ts` — one `test()` per fixture, deep-equals
+  actual `assign()` output against the committed expected snapshot.
+- `test/fixtures/{tiny,special-jobs,same-day,rest-gap,relaxation,brute-force,time-pref-permutation,realistic}.json`
+  plus `test/fixtures/expected/*.json` for each.
+- `bin/anonymize.ts` — reads `data/thejson.json` and rewrites every
+  name with a placeholder, assigning `Person NNN` slugs in
+  *alphabetical* order of the originals so the algorithm's
+  name-as-tiebreaker behavior is preserved (without this, the
+  realistic snapshot drifts away from the live run — different shift
+  counts, `sameDayAssigned` count of 0 instead of 142).
+- `bin/regen-fixtures.ts` — utility that runs `assign()` against every
+  input under `test/fixtures/` and refreshes the expected snapshots.
+  Used to seed Phase-2 snapshots and intended to be re-run in Phase 4
+  to refresh them (the diff being the proof of what changed).
+- `npm run regen-fixtures` and `npm run anonymize` script wiring.
+
+Exit criteria met: `npm test` runs 10 tests (2 helpers + 8 fixtures)
+and passes; `npm run typecheck` passes; the realistic-fixture snapshot
+matches `data/theresultjson.json`'s stats from CURRENT.md §4 exactly
+(416 filled, 142 sameDay, 0 nonIdeal, shifts {2:13, 3:54, 4:57}).
+Informal line-removal check: commenting out `shiftCount.shiftsPlaced++`
+in the main loop fails `brute-force` and `realistic`.
+
+### Approach (as built)
 Build small synthetic fixtures using placeholder names ("Person 01",
 "Person 02", …). Each fixture targets one or two specific code paths
 in `assign()` so a future change that breaks that path fails a named,
@@ -339,8 +364,8 @@ Phases 1–3 are in. Inputs to that conversation will be:
 
 1. ~~Phase 1 as one commit. Verify byte-identical `theresultjson.json`
    before committing.~~ **done**
-2. Phase 2 as a series of commits — one per fixture, so the snapshot of
+2. ~~Phase 2 as a series of commits — one per fixture, so the snapshot of
    "what the current algorithm does for case X" is reviewable in
-   isolation. **next**
-3. Phase 3 only if it stays trivial.
+   isolation.~~ **done**
+3. Phase 3 only if it stays trivial. **next**
 4. Stop. Re-plan Phase 4 with the user.

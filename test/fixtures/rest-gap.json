@@ -1,0 +1,53 @@
+{
+  "people": [
+    {
+      "first": "Person",
+      "last": "01",
+      "nickname": "",
+      "volunteerType": "Staff",
+      "specialQualifications": "",
+      "timePreference": "AM, PM",
+      "name": "Person 01",
+      "hoursAssigned": 16,
+      "shifts": 2,
+      "timeId": 1,
+      "specialQualificationsIds": []
+    }
+  ],
+  "assignments": [
+    {
+      "stagedVolunteer": "Person 01",
+      "assignedVolunteer": "",
+      "jobPriority": 0,
+      "jobName": "Carts",
+      "special": false,
+      "day": 1,
+      "dayId": 2,
+      "shiftStart": "1899-12-31T06:00:00.000Z",
+      "shiftStartNum": 22,
+      "hrsShift": 4,
+      "person": 1,
+      "timePriority": 2,
+      "timeCategory": "PM",
+      "sameDayAssigned": false,
+      "nonIdealShiftTaken": false
+    },
+    {
+      "stagedVolunteer": "",
+      "assignedVolunteer": "",
+      "jobPriority": 0,
+      "jobName": "Carts",
+      "special": false,
+      "day": 2,
+      "dayId": 3,
+      "shiftStart": "1899-12-30T14:00:00.000Z",
+      "shiftStartNum": 6,
+      "hrsShift": 8,
+      "person": 1,
+      "timePriority": 0,
+      "timeCategory": "AM",
+      "sameDayAssigned": false,
+      "nonIdealShiftTaken": false
+    }
+  ]
+}
