@@ -8,7 +8,7 @@
     "outDir": "./build-tools",
     "noEmit": true,
     "allowImportingTsExtensions": true,
-    "types": ["node"]
+    "types": ["node", "google-apps-script"]
   },
   "include": ["bin/**/*.ts", "test/**/*.ts", "src/**/*.ts"]
 }
