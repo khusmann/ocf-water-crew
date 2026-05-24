@@ -1,13 +1,5 @@
-import type { Person, Assignment, IndexedAssignment } from "./types.ts";
-
-// `assign` lives in scheduler.ts; in the GAS deployment it sits next
-// to this file in the same global scope. Declared as ambient here so
-// TypeScript sees the signature without an import (which would be
-// stripped at build time anyway). See bin/build-gas.ts.
-declare function assign(
-  assignments: Assignment[],
-  people: Person[]
-): IndexedAssignment[];
+import { assign } from "./scheduler.js";
+import type { Person, Assignment } from "./types.ts";
 
 type Sheet = GoogleAppsScript.Spreadsheet.Sheet;
 
