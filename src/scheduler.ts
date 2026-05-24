@@ -7,6 +7,17 @@ import type {
   ShiftChartEntry,
 } from "./types.ts";
 
+// Per-person ceiling on placed shifts (applies at restriction levels
+// 0/1/2 and in the brute-force gap-fill pass). Level 3 was intended
+// to lift this cap but was never implemented — see CURRENT.md §5e.
+const MAX_SHIFTS_PER_PERSON = 4;
+
+// Minimum hours between two shifts assigned to the same person.
+// Compared against `assignedHours` entries (each = 24*day + startHour).
+// Note: pre-staged shifts don't push to assignedHours, so the gap is
+// not enforced against them — see CURRENT.md §6.5.
+const MIN_REST_HOURS = 9;
+
 // Comparator that treats arrays as their minimum element, and treats
 // undefined / NaN / Infinity as "always loses". Only the sign of the
 // return is read downstream, but the original code returns +/-2 for
@@ -191,7 +202,6 @@ export function assign(
   assignments: Assignment[],
   people: Person[]
 ): IndexedAssignment[] {
-  const numberShiftsNeeded = 4;
   const peopleSorted = sortPeople(people);
 
   const assignmentsSorted = sortAssignments(assignments);
@@ -295,11 +305,11 @@ export function assign(
         ) {
           if (
             (unstagedAssignments[assignmentIndex][a].jobPriority ==
-              (peopleToAssign[peopleIndex][p].specialQualificationsIds as any) ||
+              peopleToAssign[peopleIndex][p].specialQualificationsIds ||
               unstagedAssignments[assignmentIndex][a].jobPriority >=
                 specialJobsAmount) &&
             ((constraintRestrictionLevel == 0 &&
-              shiftCount.shiftsPlaced < numberShiftsNeeded &&
+              shiftCount.shiftsPlaced < MAX_SHIFTS_PER_PERSON &&
               (unstagedAssignments[assignmentIndex][a].timePriority ==
                 peopleToAssign[peopleIndex][p].timeId ||
                 peopleToAssign[peopleIndex][p].timeId == 1 ||
@@ -314,10 +324,10 @@ export function assign(
                     24 * unstagedAssignments[assignmentIndex][a].day +
                       unstagedAssignments[assignmentIndex][a].shiftStartNum -
                       number
-                  ) > 9
+                  ) > MIN_REST_HOURS
               )) ||
               (constraintRestrictionLevel == 1 &&
-                shiftCount.shiftsPlaced < numberShiftsNeeded &&
+                shiftCount.shiftsPlaced < MAX_SHIFTS_PER_PERSON &&
                 (shiftCount.daysWorked %
                   unstagedAssignments[assignmentIndex][a].dayId !=
                   0 ||
@@ -328,10 +338,10 @@ export function assign(
                       24 * unstagedAssignments[assignmentIndex][a].day +
                         unstagedAssignments[assignmentIndex][a].shiftStartNum -
                         number
-                    ) > 9
+                    ) > MIN_REST_HOURS
                 )) ||
               (constraintRestrictionLevel == 2 &&
-                shiftCount.shiftsPlaced < numberShiftsNeeded))
+                shiftCount.shiftsPlaced < MAX_SHIFTS_PER_PERSON))
           ) {
             unstagedAssignments[assignmentIndex][a].assignedVolunteer =
               peopleToAssign[peopleIndex][p].name;
@@ -394,9 +404,9 @@ export function assign(
         )!;
         if (
           (flatPeople[p].specialQualificationsIds ==
-            (flatAssignments[a].jobPriority as any) ||
+            flatAssignments[a].jobPriority ||
             flatAssignments[a].jobPriority >= specialJobsAmount) &&
-          shiftCount.shiftsPlaced < 4
+          shiftCount.shiftsPlaced < MAX_SHIFTS_PER_PERSON
         ) {
           flatAssignments[a].assignedVolunteer = flatPeople[p].name;
           shiftCount.shiftsPlaced++;
