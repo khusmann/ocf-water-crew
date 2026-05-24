@@ -13,9 +13,12 @@
     "start": "node --experimental-strip-types bin/run-local.ts",
     "local": "node --experimental-strip-types bin/run-local.ts",
     "build": "node --experimental-strip-types bin/build-gas.ts",
+    "push": "npm run build && clasp push",
+    "pull": "clasp pull",
     "typecheck": "tsc --noEmit -p tsconfig.tools.json"
   },
   "devDependencies": {
+    "@google/clasp": "^3.3.0",
     "@types/google-apps-script": "^1.0.97",
     "@types/node": "^22.0.0",
     "typescript": "^5.5.0"
