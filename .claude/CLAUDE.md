@@ -7,6 +7,12 @@ local testing.
 Used in production for 2025; now working on the 2026 version. No backward
 compatibility required — prefer the correct approach over the compatible one.
 
+## Style
+
+Prefer pure, functional code that can be statically type-checked. Push
+mutations (I/O, sheet reads/writes, RNG, time) to the edges so the core
+logic is easy to reason about and test.
+
 ## Privacy
 
 Do not put real volunteer names or other personal information into any tracked
