@@ -32,8 +32,11 @@ export type TimeWindow = "AM" | "PM" | "EITHER";
 // Open string id — the sheet is the source of truth for which
 // qualifications exist. Engine treats them as opaque tokens: rules
 // only do equality checks (`includes`, `===`), never branch on
-// specific values. Boundary parser is responsible for whatever
-// normalization is wanted (e.g. lowercase, slugify) so that
+// specific values. The boundary parser bridges the legacy numeric
+// representation: legacy Assignment.jobPriority (when special) and
+// Person.specialQualificationsIds[i] are both numeric ids drawn from
+// the same name table on the sheet. The parser stringifies them (or
+// looks up the sheet's qualification-name column) so that
 // person.qualifications and slot.requiredQualification compare equal.
 export type QualificationId = string;
 
@@ -48,13 +51,13 @@ export type Assignment = {
   jobPriority: number;                     // 0..14, lower = filled first
   requiredQualification?: QualificationId; // present iff job needs qualification
   day: number;                             // 1..4 (Thu..Sun of the Faire)
-  startHour: number;                       // hour-of-day (was shiftStartNum)
-  durationHours: number;                   // shift duration (was hrsShift)
+  startHour: number;                       // integer hour-of-day 0..23 (was shiftStartNum)
+  durationHours: number;                   // integer shift duration (was hrsShift)
   timeWindow: TimeWindow;                  // categorical (was timePriority/timeCategory)
   stagedVolunteer: string;                 // "" if open
 };
 
-export type IndexedAssignment = Assignment & {
+export type PlacedAssignment = Assignment & {
   assignedVolunteer: string;               // "" if engine left it empty
   brokenRules: string[];                   // names of rules relaxed for this placement
 };
@@ -92,7 +95,7 @@ export type PersonState = {
   shiftsPlaced: number;
   daysWorked: Set<number>;                 // day numbers (1..4)
   assignedShifts: Array<{
-    startHour: number;                     // 24*day + assignment.startHour
+    absoluteStartHour: number;             // 24*assignment.day + assignment.startHour
     durationHours: number;
   }>;
 };
@@ -148,6 +151,15 @@ export type RuleSet = {
 };
 ```
 
+Constructed via a `defineRuleSet()` helper that validates:
+
+- `assignmentRules` contains at least one rule at priority 0 (the floor
+  the engine relaxes down to).
+- `sortingRules` priorities are pairwise distinct.
+
+Both violations throw at construction — the engine never runs against
+a malformed rule set.
+
 ### 1.6 Engine entry point
 
 ```ts
@@ -161,7 +173,7 @@ export function assign(
   assignments: Assignment[],
   people: Person[],
   opts?: AssignOptions,
-): IndexedAssignment[];
+): PlacedAssignment[];
 ```
 
 Slot iteration order is `[jobPriority, day, startHour, jobName]`. Ties
@@ -169,6 +181,16 @@ within those keys preserve input order via stable sort — the canonical
 shape doesn't carry the legacy `person` / `index` fields, so input
 order is the only available tiebreaker and the parser is responsible
 for handing slots in a meaningful order (sheet row order is fine).
+
+Staged volunteers (where `stagedVolunteer !== ""`) are copied verbatim
+into `assignedVolunteer` before the placement pass begins. The
+assignment-rule set is evaluated against each staged (person, slot)
+pair and any failures are recorded in that slot's `brokenRules` —
+staging is a manual override that the engine never rejects, but it
+*is* annotated so a downstream UI can surface "this staged shift
+breaks rule X." The placement pass updates per-person state from
+staged shifts (counters, days, hours) so subsequent placements see
+the correct picture.
 
 ---
 
@@ -223,12 +245,14 @@ const oneShiftPerDay: AssignmentRule = {
 // prior shift is >9h away", and it's why the realistic snapshot shows
 // fewer rest-gap rejections than you'd expect. The `target` set replaces
 // this with `sequential-rest-8h`, which encodes the intent properly.
+// Compared start-to-start (legacy compared `24*day + shiftStartNum`
+// against the same form for prior shifts), not end-to-start.
 const restGap9hLegacy: AssignmentRule = {
   name: "rest-gap-9h-legacy",
   priority: 1,
   test: ({ slot, state }) => {
     const slotStart = 24 * slot.day + slot.startHour;
-    const hours = [0, ...state.assignedShifts.map((s) => s.startHour)];
+    const hours = [0, ...state.assignedShifts.map((s) => s.absoluteStartHour)];
     return hours.some((h) => Math.abs(slotStart - h) > 9);
   },
 };
@@ -295,7 +319,7 @@ const alphabeticalByName: SortingRule = {
 ### 2.3 Composition
 
 ```ts
-export const currentRules: RuleSet = {
+export const currentRules: RuleSet = defineRuleSet({
   name: "current",
   assignmentRules: [
     qualification, maxShifts4,
@@ -307,24 +331,80 @@ export const currentRules: RuleSet = {
     moreSpecializedFirstAmongSpecialists,
     alphabeticalByName,
   ],
-};
+});
 ```
 
-### 2.4 Snapshot-fidelity caveat
+### 2.4 Snapshot divergences
 
-The Phase-2 snapshots were generated by an algorithm that uses *two*
-slot iteration orders — sorted `[jobPriority, timePriority, day, person]`
-for the main loop, and a day-interleaved `distributeSort` for the
-brute-force pass (CURRENT.md §5e–§5f). The new engine uses a single
-sorted slot order across all relaxation passes: `[jobPriority, day,
-startHour, jobName]` — `startHour` (legacy `shiftStartNum`) is the
-actual hour of day, finer-grained than the AM/PM `timePriority` bucket,
-and a more natural ordering.
+`currentRules` reproduces the *policy* of the current algorithm —
+ordered passes that relax time-preference, then same-day + rest-gap,
+then fall through to a qualification-only floor. The rule definitions
+encode every legacy behavior that fits cleanly into the rule body; a
+few legacy bugs would require schema additions (e.g. tracking which
+pass made a placement, or distinguishing staged from placed shifts in
+`PersonState`) to preserve and are *not* preserved. Phase-2 snapshots
+need a one-time regeneration; the expected diff is exactly the items
+below.
 
-For most fixtures the alphabetical-by-name sorting rule uniquely
-determines each placement, so slot order should not affect the result.
-If the `realistic` fixture diverges anyway during Step-2 implementation,
-the available outs are:
+#### Output-shape changes (every snapshot row)
+
+- The three boolean flags (`nonIdealShiftTaken`, `sameDayAssigned`,
+  `doubleShiftTaken`) are replaced by `brokenRules: string[]`.
+- The `index` field on the output is gone (it never drove a decision —
+  see [src/types.ts:62-65](../src/types.ts#L62-L65) and CURRENT.md §6.8).
+
+#### Bugs preserved by the rules
+
+- **`sameDayAssigned` on staged slots.** Legacy
+  [src/scheduler.ts:259-261](../src/scheduler.ts#L259-L261) sets the
+  flag during the staging copy when a person was staged twice on the
+  same day. Per META_PLAN step 3 the new engine evaluates all assignment
+  rules against staged (person, slot) pairs, so a same-day staging
+  collision lands `"one-shift-per-day"` in the second slot's
+  `brokenRules` — same fact, new shape.
+
+#### Bugs *not* preserved (expected snapshot diffs)
+
+- **Pre-staged shifts now affect gap / day checks for auto-placements.**
+  Legacy [src/scheduler.ts:248-268](../src/scheduler.ts#L248-L268) bumps
+  `shiftsPlaced` and `daysWorked` from staged shifts but doesn't push to
+  `assignedHours` — so the 9h gap check ignores staged shifts entirely
+  (CURRENT.md §6.5). Preserving this would require `PersonState` to
+  distinguish staged from placed entries; the new engine treats all
+  shifts uniformly. **Snapshot impact:** in fixtures where someone is
+  staged within 9h of an open slot they'd otherwise qualify for, the
+  staged person now fails the gap check and a different candidate wins
+  that slot. (`one-shift-per-day` is unaffected — legacy also bumped
+  `daysWorked`, so same-day staging was already gating auto-placements.)
+
+- **`time-preference` violations are now recorded uniformly.** Legacy's
+  main-loop flag-setter at
+  [src/scheduler.ts:371-381](../src/scheduler.ts#L371-L381) is logically
+  unreachable — the condition simplifies to `x != y && x == 1 && y == 1`
+  (CURRENT.md §6.6) — so `nonIdealShiftTaken` is only ever set by the
+  brute-force pass at [src/scheduler.ts:416-422](../src/scheduler.ts#L416-L422).
+  Preserving this would require rules to know which relaxation pass made
+  the placement. The new engine records `"time-preference"` in
+  `brokenRules` for any placement where it's violated, regardless of
+  pass. **Snapshot impact:** more placements carry the
+  `"time-preference"` entry than the legacy `nonIdealShiftTaken: true`
+  flag — specifically the level-1 (time-pref-relaxed, gap- and day-still-
+  enforced) placements that legacy intended to flag but didn't.
+
+#### Slot iteration order
+
+The legacy algorithm uses *two* slot orders — sorted
+`[jobPriority, timePriority, day, person]` for the main loop, and a
+day-interleaved `distributeSort` for the brute-force pass (CURRENT.md
+§5e–§5f). The new engine uses one sorted order across all relaxation
+passes: `[jobPriority, day, startHour, jobName]`. `startHour` (legacy
+`shiftStartNum`) is the actual hour of day, finer-grained than the AM/PM
+`timePriority` bucket, and a more natural ordering.
+
+For most fixtures the `alphabetical-by-name` sorting rule uniquely
+determines each placement, so slot order doesn't affect *who* gets
+*which* slot. If the `realistic` fixture diverges anyway during Step-2
+implementation, the available outs are:
 
 1. The diff is provably equivalent (same set of (person, slot) pairs,
    different presentation order) — regen the snapshot and move on.
@@ -348,31 +428,24 @@ special-case logic so it has to be explicit here).
 | Rule                          | Priority |
 |-------------------------------|----------|
 | `qualification`               | 0        |
-| `no-two-shifts-same-start`    | 0        |
 | `sequential-rest-1h`          | 0        |
 | `one-shift-per-day`           | 1        |
 | `sequential-rest-8h`          | 1        |
 | `max-shifts-4`                | 2        |
 | `time-preference`             | 3        |
 
-Floor (priority 0) = qualification + no-collision + minimum-1h-rest.
-A slot that can't satisfy all three stays empty — there is no
-brute-force escape hatch.
+Floor (priority 0) = qualification + minimum-1h-rest. The 1h-rest rule
+subsumes "no two shifts with the same start time" — if two shifts share
+a start, both gap checks return false (`slotStart - sEnd = -duration < 1`
+on both sides), so the slot fails the floor anyway. A slot that can't
+satisfy the floor stays empty — there is no brute-force escape hatch.
 
 ```ts
 // Shared with `current` — same definition.
 const qualification: AssignmentRule = { /* as in §2.1 */ };
 
-const noTwoShiftsSameStart: AssignmentRule = {
-  name: "no-two-shifts-same-start",
-  priority: 0,
-  test: ({ slot, state }) => {
-    const slotStart = 24 * slot.day + slot.startHour;
-    return !state.assignedShifts.some((s) => s.startHour === slotStart);
-  },
-};
-
-// End-to-next-start gap ≥ 1h, in either direction.
+// End-to-next-start gap ≥ 1h, in either direction. Also rejects
+// same-start collisions (gap goes negative) and overlaps.
 const sequentialRest1h: AssignmentRule = {
   name: "sequential-rest-1h",
   priority: 0,
@@ -380,8 +453,8 @@ const sequentialRest1h: AssignmentRule = {
     const slotStart = 24 * slot.day + slot.startHour;
     const slotEnd = slotStart + slot.durationHours;
     return state.assignedShifts.every((s) => {
-      const sEnd = s.startHour + s.durationHours;
-      return slotStart - sEnd >= 1 || s.startHour - slotEnd >= 1;
+      const sEnd = s.absoluteStartHour + s.durationHours;
+      return slotStart - sEnd >= 1 || s.absoluteStartHour - slotEnd >= 1;
     });
   },
 };
@@ -395,8 +468,8 @@ const sequentialRest8h: AssignmentRule = {
     const slotStart = 24 * slot.day + slot.startHour;
     const slotEnd = slotStart + slot.durationHours;
     return state.assignedShifts.every((s) => {
-      const sEnd = s.startHour + s.durationHours;
-      return slotStart - sEnd >= 8 || s.startHour - slotEnd >= 8;
+      const sEnd = s.absoluteStartHour + s.durationHours;
+      return slotStart - sEnd >= 8 || s.absoluteStartHour - slotEnd >= 8;
     });
   },
 };
@@ -417,7 +490,7 @@ const timePreference: AssignmentRule = { /* same as §2.1, but */ priority: 3 };
 | `everyone-gets-2-shifts`                      | 0        |
 | `fewer-shifts-first`                          | 1        |
 | `fewer-days-first`                            | 2        |
-| `pm-first-then-flex-then-am`                  | 3        |
+| `prefer-exact-time-match`                     | 3        |
 | `fewer-quals-first-among-specialists`         | 4        |
 
 ```ts
@@ -441,13 +514,19 @@ const fewerDaysFirst: SortingRule = {
     stateOf(a).daysWorked.size - stateOf(b).daysWorked.size,
 };
 
-// Want PM first, then EITHER, then AM.
-const pmFirstThenFlexThenAm: SortingRule = {
-  name: "pm-first-then-flex-then-am",
+// Prefer candidates whose preference matches the slot exactly; then
+// EITHER (the flexible folks); then the opposite-window people last
+// (they only show up here if `time-preference` has already been
+// relaxed at priority 3, so they'd be a hard-mismatch placement).
+// This saves EITHER candidates for slots where exact match is
+// unavailable, instead of burning them on slots an exact-match person
+// could have taken.
+const preferExactTimeMatch: SortingRule = {
+  name: "prefer-exact-time-match",
   priority: 3,
-  compare: (a, b) => {
-    const rank = (t: TimeWindow) =>
-      t === "PM" ? 0 : t === "EITHER" ? 1 : 2;
+  compare: (a, b, { slot }) => {
+    const rank = (pref: TimeWindow) =>
+      pref === slot.timeWindow ? 0 : pref === "EITHER" ? 1 : 2;
     return rank(a.timePreference) - rank(b.timePreference);
   },
 };
@@ -474,11 +553,10 @@ deterministically; production uses unseeded `Math.random`.
 ### 3.3 Composition
 
 ```ts
-export const targetRules: RuleSet = {
+export const targetRules: RuleSet = defineRuleSet({
   name: "target",
   assignmentRules: [
-    qualification,
-    noTwoShiftsSameStart, sequentialRest1h,
+    qualification, sequentialRest1h,
     oneShiftPerDay, sequentialRest8h,
     maxShifts4,
     timePreference,
@@ -487,10 +565,10 @@ export const targetRules: RuleSet = {
     everyoneGets2Shifts,
     fewerShiftsFirst,
     fewerDaysFirst,
-    pmFirstThenFlexThenAm,
+    preferExactTimeMatch,
     fewerQualsFirstAmongSpecialists,
   ],
-};
+});
 ```
 
 ---
@@ -502,13 +580,13 @@ policy change the rewrite ships:
 
 | Concern               | `current`                                         | `target`                                                          |
 |-----------------------|---------------------------------------------------|-------------------------------------------------------------------|
-| Hour-gap rule         | Single 9h gap, buggy (`.some()` + `[0]` sentinel) | Split: ≥1h end-to-start floor, ≥8h end-to-start at priority 1     |
-| Same-start collisions | Implicit in 9h rule                               | Explicit floor rule (`no-two-shifts-same-start`)                  |
+| Hour-gap rule         | Single 9h start-to-start, buggy (`.some()` + `[0]` sentinel) | Split: ≥1h end-to-start floor, ≥8h end-to-start at priority 1     |
+| Same-start collisions | Implicit in 9h rule                               | Subsumed by ≥1h floor rule (no separate rule)                     |
 | Max-shifts-4          | Floor (unbreakable)                               | Priority 2 (relax before leaving slot empty)                      |
 | Time preference       | Priority 2 (last to relax of breakables)          | Priority 3 (last to relax of breakables)                          |
 | Sort: ≥2 per person   | absent                                            | Priority 0 (highest)                                              |
 | Sort: days worked     | absent                                            | Priority 2                                                        |
-| Sort: time pref       | absent                                            | Priority 3 (PM → EITHER → AM)                                     |
+| Sort: time pref       | absent                                            | Priority 3 (prefer exact slot match, then EITHER, then opposite)  |
 | Sort: specialty count | More-specialized first (legacy)                   | **Fewer**-qualified first (anti-burnout)                          |
 | Tiebreak              | Alphabetical-by-name                              | RNG (`mulberry32(0)` in tests, `Math.random` in production)       |
 | Brute force           | Implicit final pass with reorder by day           | Drops out — floor is the only fallback, unfillable slots stay empty |

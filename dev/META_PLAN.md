@@ -30,20 +30,28 @@ file.
 2. Sort assignments by job priority — most important jobs filled first.
 3. Copy staged volunteers into their assignments; bump each person's
    running counters (shifts placed, days worked, hours assigned).
+   Run the full assignment-rule set against each staged (person, slot)
+   pair and record any failures in that slot's brokenRules. Staging
+   is a manual override — the engine doesn't *reject* a staged
+   placement, but it does annotate the violations so the UI can flag
+   "this staged shift breaks rule X."
 4. Place open assignments with all assignment rules active. For each
    still-open slot:
      a. Filter people through the currently-active assignment rules.
      b. Sort survivors by the people-sorting rules.
      c. Pick from the top-tied group (stable order, or RNG per engine
         parameter).
-     d. Record any *dropped* rules the chosen (person, slot) pair
-        would have failed in brokenRules.
+     d. Test the chosen (person, slot) pair against every assignment
+        rule that has been dropped on a prior pass; record the names
+        of the ones it fails in brokenRules. On the first pass nothing
+        has been dropped, so this list is always empty.
 5. Drop the highest-priority-number group of assignment rules. (Rules
    sharing that priority drop together — non-distinct priorities.)
 6. Repeat step 4 on still-open slots.
-7. Continue 5–6 until only the rule set's floor remains active.
+7. Continue 5–6 until only the rule set's floor (priority 0) remains
+   active. The construction-time check guarantees a non-empty floor.
 8. Done. Any slot the floor couldn't fill stays empty
-   (assignedVolunteer === "").
+   (assignedVolunteer === "", brokenRules === []).
 ```
 
 The **floor** is whatever rules are still active after all relaxable levels
@@ -63,14 +71,17 @@ break the one-shift-per-day rule", etc.
 
 ## Two kinds of rules
 
-Rules are specified via config (JSON). There are two types:
+Rules are TypeScript values composed into a rule set. There are two types:
 
 **Assignment rules** — gate whether a person *can* take a slot.
 Non-distinct priority (multiple rules may share a priority and are relaxed
-as a group). Priority `0` = unbreakable.
+as a group). Priority `0` = unbreakable. A rule set MUST contain at least
+one priority-0 assignment rule; the engine errors at construction
+otherwise.
 
 **People-sorting rules** — comparators that rank candidates inside the
-qualified pool. Distinct priority. Priority `0` = strictest tiebreaker.
+qualified pool. Distinct priority — duplicate priorities are a construction
+error. Priority `0` = strictest tiebreaker.
 
 People-sorting rules express the *order in which we are willing to
 compromise* — i.e. the priorities of an ideal assignment.
@@ -83,21 +94,26 @@ compromise* — i.e. the priorities of an ideal assignment.
 
 | Rule | Priority |
 |------|----------|
-| No two shifts with the same start time | 0 |
+| Person holds required qualification | 0 |
 | Sequential shifts must have ≥ 1 hour between end and next start | 0 |
 | At most one shift per day | 1 |
 | Sequential shifts must have ≥ 8 hours between end and next start | 1 |
 | At most 4 shifts per person | 2 |
 | Person gets their time preference | 3 |
 
+`qualification` is the implicit floor every rule set carries (the engine
+has no special-case logic for it). The ≥1-hour rule subsumes the
+same-start-time check — two shifts sharing a start time fail it on both
+sides, so no separate rule is needed.
+
 **People-sorting rules:**
 
 | Rule | Priority |
 |------|----------|
-| Every person gets ≥ 2 assignments *(not yet implemented)* | 0 |
+| Every person gets ≥ 2 assignments | 0 |
 | Fewer shifts placed first | 1 |
 | Fewer days assigned first | 2 |
-| Time preference (PM → AM/PM → AM) | 3 |
+| Prefer candidates whose time preference matches the slot (then EITHER, then opposite) | 3 |
 | Among qualified specialists, fewer qualifications first | 4 |
 
 The current hard-coded rules in `scheduler.ts` are a *subset* of these — the
