@@ -1,11 +1,13 @@
-// Regenerates test/fixtures/expected/*.json by running the current
-// assign() against every input under test/fixtures/. Use after a
-// deliberate behavior change (Phase 4) so the diff to the snapshot
-// suite is the proof of what changed. Phase 2 uses it once to seed
-// the initial snapshots.
+// Regenerates test/fixtures/expected/*.json by running the rules
+// engine against every input under test/fixtures/. After a deliberate
+// behavior change (e.g. a new rule, or a §2.4 divergence in
+// dev/NEW_SYSTEM.md), the diff between regenerated and prior expected
+// is the proof of what changed.
 import fs from "node:fs";
 import path from "node:path";
-import { assign } from "../src/scheduler.ts";
+import { assign } from "../src/engine/assign.ts";
+import { parseLegacy } from "../src/engine/parseLegacy.ts";
+import { currentRules } from "../src/rulesets/current.ts";
 import type { SchedulerInput } from "../src/types.ts";
 
 const fixturesDir = path.resolve("test/fixtures");
@@ -25,7 +27,8 @@ for (const name of inputs) {
   const data: SchedulerInput = JSON.parse(
     fs.readFileSync(path.join(fixturesDir, name), "utf8")
   );
-  const result = assign(data.assignments, data.people);
+  const canonical = parseLegacy(data.assignments, data.people);
+  const result = assign(currentRules, canonical.assignments, canonical.people);
   fs.writeFileSync(
     path.join(expectedDir, name),
     JSON.stringify(result, null, 2) + "\n"

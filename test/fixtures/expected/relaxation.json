@@ -1,21 +1,15 @@
 [
   {
-    "index": 1,
+    "jobName": "Carts",
+    "jobPriority": 0,
+    "day": 1,
+    "startHour": 14,
+    "durationHours": 8,
+    "timeWindow": "PM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 01",
-    "jobPriority": 0,
-    "jobName": "Carts",
-    "special": false,
-    "day": 1,
-    "dayId": 2,
-    "shiftStart": "1899-12-30T22:00:00.000Z",
-    "shiftStartNum": 14,
-    "hrsShift": 8,
-    "person": 1,
-    "timePriority": 2,
-    "timeCategory": "PM",
-    "sameDayAssigned": false,
-    "nonIdealShiftTaken": false,
-    "doubleShiftTaken": false
+    "brokenRules": [
+      "time-preference"
+    ]
   }
 ]

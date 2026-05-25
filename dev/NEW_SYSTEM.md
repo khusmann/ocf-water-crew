@@ -365,6 +365,40 @@ below.
 
 #### Bugs *not* preserved (expected snapshot diffs)
 
+- **Bucket-duplication trick falls away.** Legacy
+  [src/scheduler.ts:236-242](../src/scheduler.ts#L236-L242) duplicates only
+  the first `specialJobsAmount` entries of each specialty bucket into the
+  general-jobs bucket — specialists later in the sort never compete for
+  general slots (CURRENT.md §5c step 8 / §6.11). Per META_PLAN's
+  "Qualification matching" decision the new engine evaluates rules against
+  the full people pool per slot, so every qualified specialist competes
+  for general jobs they pass the qualification floor on. The
+  [brute-force fixture](../test/fixtures/brute-force.json) was engineered
+  to exercise the trick's blind spot, so its snapshot reshuffles
+  significantly under the new engine; the realistic fixture sees milder
+  reshuffling for the same reason.
+
+- **`"PM, AM"` timePreference no longer sorts worst.** Legacy people with
+  `timePreference: "PM, AM"` get no `timeId` (CURRENT.md §6.10), and
+  `genericCompare` sorts them as worst on every tiebreak. Per
+  [§1.1](#11-canonical-input-types) the boundary parser folds both
+  `"PM, AM"` and `"AM, PM"` into `EITHER`, so these candidates compete
+  on equal footing. Affects the
+  [time-pref-permutation fixture](../test/fixtures/time-pref-permutation.json)
+  and any realistic-fixture placement that depended on the legacy
+  deprioritization.
+
+- **Staged-shift rule failures surface uniformly in `brokenRules`.** Per
+  META_PLAN step 3 the engine evaluates every assignment rule against
+  each staged (person, slot) pair. Legacy only set
+  `sameDayAssigned` on staged shifts; other violations
+  (e.g. a staged person who doesn't hold the required qualification,
+  or whose time-preference doesn't match the slot) were silently
+  ignored. The new engine surfaces them all — staged Lead Plumbers /
+  Runner / Shift Super slots in the realistic fixture pick up
+  `"qualification"` and/or `"time-preference"` entries they didn't
+  carry under legacy flags.
+
 - **Pre-staged shifts now affect gap / day checks for auto-placements.**
   Legacy [src/scheduler.ts:248-268](../src/scheduler.ts#L248-L268) bumps
   `shiftsPlaced` and `daysWorked` from staged shifts but doesn't push to

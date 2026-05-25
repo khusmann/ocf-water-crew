@@ -1,17 +1,21 @@
-// Snapshot tests pinning the current behavior of assign() against
-// hand-built fixtures. Each fixture targets one or two code paths so
-// a regression fails a named test instead of an opaque whole-output
-// diff.
+// Snapshot tests pinning the current-rule-set behavior of the canonical
+// engine against hand-built fixtures. Each fixture targets one or two
+// code paths so a regression fails a named test instead of an opaque
+// whole-output diff.
 //
-// Snapshots include the documented bugs in dev/CURRENT.md §6 as-is.
-// Phase 4 will deliberately flip these and the diff against these
-// expected files is the proof of what the rewrite changed.
+// Inputs in test/fixtures/*.json are still in the legacy shape — the
+// engine's parseLegacy bridges them. Once src/sheet.ts is rewritten to
+// emit canonical types directly, the fixtures move to canonical shape
+// too and parseLegacy is deleted.
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import fs from "node:fs";
 import path from "node:path";
-import { assign } from "../src/scheduler.ts";
-import type { IndexedAssignment, SchedulerInput } from "../src/types.ts";
+import { assign } from "../src/engine/assign.ts";
+import { parseLegacy } from "../src/engine/parseLegacy.ts";
+import type { PlacedAssignment } from "../src/engine/types.ts";
+import { currentRules } from "../src/rulesets/current.ts";
+import type { SchedulerInput } from "../src/types.ts";
 
 const fixturesDir = path.resolve("test/fixtures");
 const expectedDir = path.join(fixturesDir, "expected");
@@ -22,7 +26,7 @@ function loadInput(name: string): SchedulerInput {
   );
 }
 
-function loadExpected(name: string): IndexedAssignment[] {
+function loadExpected(name: string): PlacedAssignment[] {
   return JSON.parse(
     fs.readFileSync(path.join(expectedDir, `${name}.json`), "utf8")
   );
@@ -30,78 +34,52 @@ function loadExpected(name: string): IndexedAssignment[] {
 
 function runFixture(name: string): void {
   const input = loadInput(name);
+  const canonical = parseLegacy(input.assignments, input.people);
+  const actual = assign(currentRules, canonical.assignments, canonical.people);
   const expected = loadExpected(name);
-  const actual = assign(input.assignments, input.people);
   assert.deepEqual(actual, expected);
 }
 
-// All pre-staged; main loop does nothing. Verifies the pre-stage copy
-// path writes assignedVolunteer and the final sort order.
-test("tiny: pre-stage copy of all slots", () => {
-  runFixture("tiny");
-});
+// All pre-staged; placement pass does nothing for these slots.
+test("tiny: pre-stage copy of all slots", () => runFixture("tiny"));
 
-// Exercises the line-218 bucket-duplication trick: the one specialist
-// is pushed into the general-jobs bucket so they can be considered for
-// both specialty and general slots. CURRENT.md §5c, §6.11.
-test("special-jobs: specialist + general via bucket-duplication", () => {
-  runFixture("special-jobs");
-});
+// Specialist eligible for both their specialty job and any general job —
+// no special bucket-duplication needed (META_PLAN: short-circuit on
+// qualification rule). See dev/NEW_SYSTEM.md §2.4.
+test("special-jobs: specialist also fills a general slot", () =>
+  runFixture("special-jobs"));
 
 // Pre-stages the same person to two day-1 slots and one day-2 slot.
-// Slot 2 should have sameDayAssigned=true (Person 01 already worked
-// day 1 once); the day-2 slot should not. Tests the dayId prime
-// mechanic in the pre-stage path. CURRENT.md §5b, §5d.
-test("same-day: sameDayAssigned flag set on same-day pre-stage", () => {
-  runFixture("same-day");
-});
+// Second day-1 slot picks up "one-shift-per-day" in brokenRules —
+// the new shape of the legacy `sameDayAssigned` flag (§2.4).
+test("same-day: same-day staging surfaces in brokenRules", () =>
+  runFixture("same-day"));
 
-// Pre-stages a Day-1 22:00 shift, then leaves a Day-2 06:00 open
-// slot (8 hours after — under the documented 9-hour rest gap). The
-// snapshot shows the open slot gets filled at level 0 anyway,
-// pinning two documented bugs together: pre-stages don't push to
-// assignedHours (CURRENT.md §6.5) AND the initial [0] in
-// assignedHours makes the some(>9) check trivially pass for any
-// real shift (CURRENT.md §5e). Phase 4 will fix both and the
-// snapshot will flip.
-test("rest-gap: 9-hour gap not enforced (documented bug)", () => {
-  runFixture("rest-gap");
-});
+// Pins the legacy `.some(... > 9)` + [0] sentinel quirk via
+// rest-gap-9h-legacy. Open slot still gets filled at the floor because
+// the sentinel makes the check trivially pass — same outcome as legacy,
+// new representation of "no brokenRules".
+test("rest-gap: legacy-quirk gap rule still admits the placement", () =>
+  runFixture("rest-gap"));
 
-// One AM-only person, one PM slot. Level 0 (strict time-pref) finds
-// no match; level 1 (drop time-pref) places them. Note: the
-// nonIdealShiftTaken flag stays false because of the inverted
-// detection condition (CURRENT.md §6.6 / §5e). Phase 4 will fix
-// the detection and this snapshot will flip.
-test("relaxation: level-1 placement when level-0 has no time-pref fit", () => {
-  runFixture("relaxation");
-});
+// AM-only person, PM slot. Time-preference rule (priority 2) drops on
+// pass 2; placement records "time-preference" in brokenRules.
+test("relaxation: time-preference relaxation surfaces in brokenRules", () =>
+  runFixture("relaxation"));
 
-// Engineered so the main loop fills everything it can reach but
-// leaves one general slot empty (Person 02, qualified, is only in
-// the specialty bucket and never duplicated into the general
-// bucket by the line-218 trick because they are not at index 0 of
-// their specialty bucket). The brute-force gap-fill pass (§5f)
-// iterates the full flat list and finds them.
-test("brute-force: gap-fill places a candidate the main loop missed", () => {
-  runFixture("brute-force");
-});
+// Brute-force fixture (legacy). Under the canonical engine, every
+// qualified specialist competes for general slots (META_PLAN
+// qualification decision), so the legacy bucket-duplication blind spot
+// goes away. See dev/NEW_SYSTEM.md §2.4 "Bucket-duplication trick".
+test("brute-force: candidate-pool reshuffle (§2.4)", () =>
+  runFixture("brute-force"));
 
-// Person 01 has timePreference "PM, AM" with no timeId — the
-// sheet-side mapping doesn't produce one for that permutation
-// (CURRENT.md §6.10). genericCompare sorts undefined as worst,
-// so Person 01 is deprioritized; the snapshot pins this current
-// behavior. Phase 4 will fix the upstream mapping or handle
-// undefined explicitly.
-test("time-pref-permutation: undefined timeId sorts worst", () => {
-  runFixture("time-pref-permutation");
-});
+// Person 01 had timePreference "PM, AM" with no legacy `timeId`; the
+// canonical parser folds both "PM, AM" and "AM, PM" into "EITHER",
+// removing the deprioritization. See dev/NEW_SYSTEM.md §2.4 "PM, AM".
+test("time-pref-permutation: PM,AM no longer sorts worst (§2.4)", () =>
+  runFixture("time-pref-permutation"));
 
-// Broad regression catch: same shape as the live data/thejson.json
-// (127 people, 416 slots, same job/day/time distribution) with
-// placeholder names assigned in alphabetical order of the originals
-// so the name-as-tiebreaker behavior matches production. Anchors
-// any subtle output drift the small fixtures might miss.
-test("realistic: anonymized full-size dataset", () => {
-  runFixture("realistic");
-});
+// Broad regression catch — same shape as the live data/thejson.json.
+test("realistic: anonymized full-size dataset", () =>
+  runFixture("realistic"));
