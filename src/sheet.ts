@@ -228,28 +228,55 @@ function buildPrintHtml(assignments: Assignment[]): string {
 }
 
 function renderJobPage(jobName: string, rows: Assignment[]): string {
-  const sorted = rows.slice().sort(
-    (a, b) =>
-      a.day - b.day ||
-      timeOfDayMinutes(a.shiftStart) - timeOfDayMinutes(b.shiftStart) ||
-      a.person - b.person
-  );
-  const body = sorted
-    .map(
-      (a) => `<tr>
-      <td>Day ${a.day}</td>
-      <td>${escapeHtml(formatShiftTime(a.shiftStart))}</td>
-      <td>${a.hrsShift}h</td>
-      <td class="slot">#${a.person}</td>
-      <td class="name">${escapeHtml(volunteerName(a))}</td>
-    </tr>`
-    )
+  const days = Array.from(new Set(rows.map((r) => r.day))).sort((a, b) => a - b);
+
+  // Columns: union of (start-of-day minutes, hrsShift) pairs across the job.
+  const shiftCols = new Map<string, { start: any; hrs: number; minutes: number }>();
+  for (const r of rows) {
+    const minutes = timeOfDayMinutes(r.shiftStart);
+    const key = `${minutes}|${r.hrsShift}`;
+    if (!shiftCols.has(key)) {
+      shiftCols.set(key, { start: r.shiftStart, hrs: r.hrsShift, minutes });
+    }
+  }
+  const cols = Array.from(shiftCols.values()).sort((a, b) => a.minutes - b.minutes);
+
+  const cellMap = new Map<string, Assignment[]>();
+  for (const r of rows) {
+    const key = `${r.day}|${timeOfDayMinutes(r.shiftStart)}|${r.hrsShift}`;
+    let list = cellMap.get(key);
+    if (!list) {
+      list = [];
+      cellMap.set(key, list);
+    }
+    list.push(r);
+  }
+
+  const headerCells = cols
+    .map((c) => `<th>${escapeHtml(shiftRangeLabel(c.start, c.hrs))}</th>`)
+    .join("");
+  const bodyRows = days
+    .map((d) => {
+      const tds = cols
+        .map((c) => {
+          const list = (cellMap.get(`${d}|${c.minutes}|${c.hrs}`) ?? [])
+            .slice()
+            .sort((a, b) => a.person - b.person);
+          const names = list
+            .map((a) => escapeHtml(volunteerName(a)))
+            .join("<br>");
+          return `<td>${names}</td>`;
+        })
+        .join("");
+      return `<tr><th class="day">${escapeHtml(dayLabel(d))}</th>${tds}</tr>`;
+    })
     .join("\n");
+
   return `<section class="page">
-    <h1>${escapeHtml(jobName)}</h1>
-    <table>
-      <thead><tr><th>Day</th><th>Start</th><th>Hours</th><th>Slot</th><th>Volunteer</th></tr></thead>
-      <tbody>${body}</tbody>
+    <h1 class="title">${escapeHtml(jobName)}</h1>
+    <table class="grid">
+      <thead><tr><th class="corner"></th>${headerCells}</tr></thead>
+      <tbody>${bodyRows}</tbody>
     </table>
   </section>`;
 }
@@ -271,23 +298,39 @@ function renderCartsShiftPages(rows: Assignment[]): string[] {
     .map((k) => {
       const group = shifts.get(k)!.slice().sort((a, b) => a.person - b.person);
       const head = group[0];
-      const body = group
-        .map(
-          (a) => `<tr>
-        <td class="slot">#${a.person}</td>
-        <td class="name">${escapeHtml(volunteerName(a))}</td>
-      </tr>`
-        )
+      const items = group
+        .map((a) => `<li>${escapeHtml(volunteerName(a))}</li>`)
         .join("\n");
       return `<section class="page">
-      <h1>Carts &mdash; Day ${head.day} &middot; ${escapeHtml(formatShiftTime(head.shiftStart))}</h1>
-      <p class="sub">${head.hrsShift}h shift</p>
-      <table>
-        <thead><tr><th>Slot</th><th>Volunteer</th></tr></thead>
-        <tbody>${body}</tbody>
-      </table>
+      <h1 class="title">Carts &mdash; ${escapeHtml(dayLabel(head.day))} ${escapeHtml(shiftRangeLabel(head.shiftStart, head.hrsShift))}</h1>
+      <ul class="roster">${items}</ul>
     </section>`;
     });
+}
+
+function dayLabel(day: number): string {
+  return (
+    ({ 1: "Thursday", 2: "Friday", 3: "Saturday", 4: "Sunday" } as Record<
+      number,
+      string
+    >)[day] ?? `Day ${day}`
+  );
+}
+
+function shiftRangeLabel(start: any, hrs: number): string {
+  if (!start) return "";
+  const d = new Date(start);
+  const end = new Date(d.getTime() + hrs * 60 * 60 * 1000);
+  return `${formatHourCompact(d)} - ${formatHourCompact(end)}`;
+}
+
+function formatHourCompact(d: Date): string {
+  // "7:00 AM" → "7am", "12:30 PM" → "12:30pm"
+  const raw = Utilities.formatDate(d, Session.getScriptTimeZone(), "h:mm a");
+  const [time, ampm] = raw.split(" ");
+  const [h, m] = time.split(":");
+  const suffix = ampm.toLowerCase();
+  return m === "00" ? `${h}${suffix}` : `${h}:${m}${suffix}`;
 }
 
 function volunteerName(a: Assignment): string {
@@ -306,12 +349,6 @@ function shiftTimeKey(t: any): string {
   return `${String(d.getHours()).padStart(2, "0")}:${String(d.getMinutes()).padStart(2, "0")}`;
 }
 
-function formatShiftTime(t: any): string {
-  if (!t) return "";
-  const d = new Date(t);
-  return Utilities.formatDate(d, Session.getScriptTimeZone(), "h:mm a");
-}
-
 function escapeHtml(s: string): string {
   return String(s ?? "")
     .replace(/&/g, "&amp;")
@@ -327,18 +364,21 @@ function wrapPrintDocument(body: string): string {
 <head>
 <meta charset="utf-8">
 <style>
-  body { font-family: -apple-system, system-ui, "Segoe UI", sans-serif; margin: 0; color: #111; background: #eee; }
+  body { font-family: -apple-system, system-ui, "Segoe UI", Arial, sans-serif; margin: 0; color: #000; background: #eee; }
   .toolbar { position: sticky; top: 0; z-index: 1; background: #f5f5f5; padding: 8px 12px; border-bottom: 1px solid #ccc; }
   .toolbar button { font-size: 14px; padding: 6px 16px; cursor: pointer; }
   .pages { padding: 16px; }
-  .page { background: #fff; padding: 32px; margin: 0 auto 16px; max-width: 720px; border: 1px solid #ddd; }
-  .page h1 { margin: 0 0 4px; font-size: 24px; }
-  .page .sub { margin: 0 0 14px; color: #555; }
-  table { width: 100%; border-collapse: collapse; }
-  th, td { text-align: left; padding: 6px 10px; border-bottom: 1px solid #eee; }
-  th { background: #f0f0f0; font-weight: 600; }
-  td.slot { width: 64px; color: #555; }
-  td.name { font-weight: 500; }
+  .page { background: #fff; padding: 24px; margin: 0 auto 16px; max-width: 9in; border: 1px solid #ddd; }
+  .title { margin: 0; padding: 12px; font-size: 22px; font-weight: bold; text-align: center; background: #b6cdec; border: 1px solid #888; border-bottom: none; }
+  table.grid { width: 100%; border-collapse: collapse; table-layout: fixed; }
+  table.grid th, table.grid td { border: 1px solid #888; padding: 14px 16px; vertical-align: middle; font-size: 15px; line-height: 1.6; }
+  table.grid thead th { text-align: center; font-weight: bold; background: #fff; }
+  table.grid th.corner { width: 130px; background: #fff; border-top: none; border-left: none; }
+  table.grid th.day { width: 130px; text-align: center; font-weight: bold; background: #fff; }
+  table.grid td { min-height: 70px; height: 70px; }
+  ul.roster { list-style: none; padding: 0; margin: 0; border: 1px solid #888; border-top: none; }
+  ul.roster li { padding: 14px 16px; border-bottom: 1px solid #888; font-size: 16px; }
+  ul.roster li:last-child { border-bottom: none; }
   @media print {
     body { background: #fff; }
     .toolbar { display: none; }
