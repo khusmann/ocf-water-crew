@@ -6,13 +6,12 @@
 // sheet.ts → pushObjArrayToSheet path still writes meaningful columns.
 //
 // The canonical-shape consumers (tests, regen-fixtures) call
-// runEngine() in src/engine/ directly — they don't go through this
+// runEngine() in src/engine.ts directly — they don't go through this
 // adapter. Once src/sheet.ts is rewritten to consume canonical
 // types directly (META_PLAN migration step 2), this driver collapses
 // to a one-liner and the legacy types can be deleted.
-import { parseLegacy } from "./engine/parseLegacy.ts";
-import { runEngine } from "./engine/runEngine.ts";
-import { currentRules } from "./rulesets/current.ts";
+import { parseLegacy, runEngine } from "./engine.ts";
+import { currentRules } from "./rulesets.ts";
 import type { Assignment, IndexedAssignment, Person } from "./types.ts";
 
 export function assign(

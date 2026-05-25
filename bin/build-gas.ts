@@ -70,14 +70,15 @@ function isCommentOnly(body: string): boolean {
   return withoutLines.trim() === "";
 }
 
-// GAS evaluates files in name order, and `const` has TDZ across files
-// — currentRules referencing `qualification` while the qualification
-// file hasn't run yet throws. Prefix by layer so name-order load order
-// matches dependency order: engine → rules → rulesets → scheduler → sheet.
+// GAS evaluates files in name order and `const` has TDZ across files,
+// so prefix by layer to enforce dependency order: engine → rules →
+// rulesets → scheduler → sheet. (Combinators are function declarations
+// and get hoisted across the flat global scope regardless, but the
+// ruleset compositions are top-level `const`s and need the ordering.)
 function layerPrefix(relPath: string): string {
-  if (relPath.startsWith("engine/")) return "10";
-  if (relPath.startsWith("rules/")) return "20";
-  if (relPath.startsWith("rulesets/")) return "30";
+  if (relPath === "engine.js") return "10";
+  if (relPath === "rules.js") return "20";
+  if (relPath === "rulesets.js") return "30";
   if (relPath === "scheduler.js") return "40";
   if (relPath === "sheet.js") return "50";
   return "99";

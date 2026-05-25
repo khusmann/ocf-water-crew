@@ -11,10 +11,12 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import fs from "node:fs";
 import path from "node:path";
-import { runEngine } from "../src/engine/runEngine.ts";
-import { parseLegacy } from "../src/engine/parseLegacy.ts";
-import type { PlacedAssignment } from "../src/engine/types.ts";
-import { currentRules } from "../src/rulesets/current.ts";
+import {
+  parseLegacy,
+  runEngine,
+  type PlacedAssignment,
+} from "../src/engine.ts";
+import { currentRules } from "../src/rulesets.ts";
 import type { SchedulerInput } from "../src/types.ts";
 
 const fixturesDir = path.resolve("test/fixtures");

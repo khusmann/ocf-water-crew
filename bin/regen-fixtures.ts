@@ -8,11 +8,8 @@
 // and the `target` snapshot (test/fixtures/expected/target/*.json).
 import fs from "node:fs";
 import path from "node:path";
-import { runEngine } from "../src/engine/runEngine.ts";
-import { parseLegacy } from "../src/engine/parseLegacy.ts";
-import { mulberry32 } from "../src/engine/rng.ts";
-import { currentRules } from "../src/rulesets/current.ts";
-import { targetRules } from "../src/rulesets/target.ts";
+import { mulberry32, parseLegacy, runEngine } from "../src/engine.ts";
+import { currentRules, targetRules } from "../src/rulesets.ts";
 import type { SchedulerInput } from "../src/types.ts";
 
 const fixturesDir = path.resolve("test/fixtures");

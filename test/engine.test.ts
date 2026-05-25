@@ -11,7 +11,7 @@ import {
   type AssignmentRule,
   type Person,
   type SortingRule,
-} from "../src/engine/index.ts";
+} from "../src/engine.ts";
 
 const passEverything: AssignmentRule = {
   name: "pass",
