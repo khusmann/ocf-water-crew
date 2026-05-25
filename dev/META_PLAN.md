@@ -144,6 +144,31 @@ config format must be able to express both.
 - **File layout**: `src/rules/*.ts` for individual rule implementations,
   `src/rulesets/*.ts` for named compositions (`current.ts`, `target.ts`).
   `src/scheduler.ts` becomes a thin driver over the engine + a rule set.
+- **Canonical types at the engine boundary**: the rules engine operates
+  on canonical input types — categorical `TimeWindow` ("AM" | "PM" |
+  "EITHER") and opaque-string `QualificationId` (sheet is the source
+  of truth — the engine never enumerates them) rather than numeric
+  `timeId` / `timePriority` / `dayId` / numeric qualification ids;
+  qualification needs are expressed as `requiredQualification?` on the
+  slot rather than overloading `jobPriority`; redundant / unused legacy
+  fields (`timeCategory`, `shiftStart`, `volunteerType`,
+  `hoursAssigned`, `shifts`, `first`/`last`/`nickname`,
+  `specialQualifications`, `dayId`, `person`, `index`, the per-flag
+  `nonIdealShiftTaken` / `sameDayAssigned` / `doubleShiftTaken`) are
+  dropped at the boundary. Ordering policy lives in the rules, not the
+  types. Migration:
+  1. Step 2 lands the engine + a small parser at its entry that converts
+     the legacy [src/types.ts](../src/types.ts) `Person` / `Assignment`
+     (as produced by [src/sheet.ts](../src/sheet.ts)) into canonical
+     shapes. Legacy `src/scheduler.ts` and `src/sheet.ts` are not
+     touched.
+  2. Once the new engine is in and snapshots are green, rewrite
+     `src/sheet.ts` to emit canonical types directly and delete the
+     parser.
+  3. Optional follow-on: drop the redundant numeric fields from the
+     sheet itself once nothing consumes them.
+
+  See [NEW_SYSTEM.md](NEW_SYSTEM.md) §1.1 for the canonical shapes.
 
 ### A note on Phase-2 fixture reproduction
 
