@@ -44,7 +44,7 @@ function combineSortingRules(rules: SortingRule[]) {
   };
 }
 
-export function assign(
+export function runEngine(
   ruleSet: RuleSet,
   assignments: Assignment[],
   people: Person[],

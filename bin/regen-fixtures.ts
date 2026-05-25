@@ -8,7 +8,7 @@
 // and the `target` snapshot (test/fixtures/expected/target/*.json).
 import fs from "node:fs";
 import path from "node:path";
-import { assign } from "../src/engine/assign.ts";
+import { runEngine } from "../src/engine/runEngine.ts";
 import { parseLegacy } from "../src/engine/parseLegacy.ts";
 import { mulberry32 } from "../src/engine/rng.ts";
 import { currentRules } from "../src/rulesets/current.ts";
@@ -35,13 +35,13 @@ for (const name of inputs) {
   );
   const canonical = parseLegacy(data.assignments, data.people);
 
-  const current = assign(currentRules, canonical.assignments, canonical.people);
+  const current = runEngine(currentRules, canonical.assignments, canonical.people);
   fs.writeFileSync(
     path.join(expectedDir, name),
     JSON.stringify(current, null, 2) + "\n"
   );
 
-  const target = assign(
+  const target = runEngine(
     targetRules,
     canonical.assignments,
     canonical.people,

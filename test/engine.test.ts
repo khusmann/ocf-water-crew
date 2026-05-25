@@ -4,7 +4,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import {
-  assign,
+  runEngine,
   defineRuleSet,
   mulberry32,
   type Assignment,
@@ -68,19 +68,19 @@ test("defineRuleSet rejects sorting rules with duplicate priorities", () => {
   );
 });
 
-test("assign places single slot using only a floor rule", () => {
+test("runEngine places single slot using only a floor rule", () => {
   const rs = defineRuleSet({
     name: "minimal",
     assignmentRules: [passEverything],
     sortingRules: [noTies],
   });
-  const out = assign(rs, [slot()], [alice(), bob()]);
+  const out = runEngine(rs, [slot()], [alice(), bob()]);
   assert.equal(out.length, 1);
   assert.equal(out[0].assignedVolunteer, "Alice");
   assert.deepEqual(out[0].brokenRules, []);
 });
 
-test("assign sorts slots by [jobPriority, day, startHour, jobName]", () => {
+test("runEngine sorts slots by [jobPriority, day, startHour, jobName]", () => {
   const rs = defineRuleSet({
     name: "minimal",
     assignmentRules: [passEverything],
@@ -93,7 +93,7 @@ test("assign sorts slots by [jobPriority, day, startHour, jobName]", () => {
     slot({ jobName: "Z", day: 1, startHour: 14 }),
     slot({ jobName: "Z", day: 1, startHour: 6 }),
   ];
-  const out = assign(rs, slots, [alice(), bob()]);
+  const out = runEngine(rs, slots, [alice(), bob()]);
   assert.deepEqual(
     out.map((s) => [s.jobName, s.day, s.startHour]),
     [
@@ -105,13 +105,13 @@ test("assign sorts slots by [jobPriority, day, startHour, jobName]", () => {
   );
 });
 
-test("assign copies staged volunteers verbatim and bumps their counters", () => {
+test("runEngine copies staged volunteers verbatim and bumps their counters", () => {
   const rs = defineRuleSet({
     name: "minimal",
     assignmentRules: [passEverything],
     sortingRules: [noTies],
   });
-  const out = assign(
+  const out = runEngine(
     rs,
     [
       slot({ jobName: "Carts", stagedVolunteer: "Bob" }),
@@ -134,7 +134,7 @@ test("assign copies staged volunteers verbatim and bumps their counters", () => 
       { ...noTies, priority: 1 },
     ],
   });
-  const out2 = assign(
+  const out2 = runEngine(
     rs2,
     [
       slot({ jobName: "Carts", stagedVolunteer: "Bob" }),
@@ -145,7 +145,7 @@ test("assign copies staged volunteers verbatim and bumps their counters", () => 
   assert.equal(out2[1].assignedVolunteer, "Alice");
 });
 
-test("assign records dropped-rule failures in brokenRules", () => {
+test("runEngine records dropped-rule failures in brokenRules", () => {
   const onlyOnDay2: AssignmentRule = {
     name: "only-day-2",
     priority: 1,
@@ -156,12 +156,12 @@ test("assign records dropped-rule failures in brokenRules", () => {
     assignmentRules: [passEverything, onlyOnDay2],
     sortingRules: [noTies],
   });
-  const out = assign(rs, [slot({ day: 1 })], [alice()]);
+  const out = runEngine(rs, [slot({ day: 1 })], [alice()]);
   assert.equal(out[0].assignedVolunteer, "Alice");
   assert.deepEqual(out[0].brokenRules, ["only-day-2"]);
 });
 
-test("assign annotates staged-slot rule failures into brokenRules", () => {
+test("runEngine annotates staged-slot rule failures into brokenRules", () => {
   const oneShiftPerDay: AssignmentRule = {
     name: "one-shift-per-day",
     priority: 1,
@@ -172,7 +172,7 @@ test("assign annotates staged-slot rule failures into brokenRules", () => {
     assignmentRules: [passEverything, oneShiftPerDay],
     sortingRules: [noTies],
   });
-  const out = assign(
+  const out = runEngine(
     rs,
     [
       slot({ day: 1, startHour: 6, stagedVolunteer: "Alice" }),
@@ -184,7 +184,7 @@ test("assign annotates staged-slot rule failures into brokenRules", () => {
   assert.deepEqual(out[1].brokenRules, ["one-shift-per-day"]);
 });
 
-test("assign without rng picks the first survivor (stable order)", () => {
+test("runEngine without rng picks the first survivor (stable order)", () => {
   const rs = defineRuleSet({
     name: "stable",
     assignmentRules: [passEverything],
@@ -196,12 +196,12 @@ test("assign without rng picks the first survivor (stable order)", () => {
       },
     ],
   });
-  const out = assign(rs, [slot()], [alice(), bob()]);
+  const out = runEngine(rs, [slot()], [alice(), bob()]);
   // First survivor wins because everything ties
   assert.equal(out[0].assignedVolunteer, "Alice");
 });
 
-test("assign with rng picks uniformly from the top tied group", () => {
+test("runEngine with rng picks uniformly from the top tied group", () => {
   const rs = defineRuleSet({
     name: "tied",
     assignmentRules: [passEverything],
@@ -216,7 +216,7 @@ test("assign with rng picks uniformly from the top tied group", () => {
   // mulberry32(1)() ≈ 0.627, so Math.floor(0.627 * 2) = 1 → Bob wins.
   // (no-rng would have picked Alice — see the prior test.)
   const rng = mulberry32(1);
-  const out = assign(rs, [slot()], [alice(), bob()], { rng });
+  const out = runEngine(rs, [slot()], [alice(), bob()], { rng });
   assert.equal(out[0].assignedVolunteer, "Bob");
 });
 
@@ -242,7 +242,7 @@ test("priority-0 floor rule that fails leaves the slot empty", () => {
     ],
     sortingRules: [noTies],
   });
-  const out = assign(rs, [slot()], [alice(), bob()]);
+  const out = runEngine(rs, [slot()], [alice(), bob()]);
   assert.equal(out[0].assignedVolunteer, "");
   assert.deepEqual(out[0].brokenRules, []);
 });

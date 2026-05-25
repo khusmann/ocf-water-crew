@@ -11,7 +11,7 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import fs from "node:fs";
 import path from "node:path";
-import { assign } from "../src/engine/assign.ts";
+import { runEngine } from "../src/engine/runEngine.ts";
 import { parseLegacy } from "../src/engine/parseLegacy.ts";
 import type { PlacedAssignment } from "../src/engine/types.ts";
 import { currentRules } from "../src/rulesets/current.ts";
@@ -35,7 +35,7 @@ function loadExpected(name: string): PlacedAssignment[] {
 function runFixture(name: string): void {
   const input = loadInput(name);
   const canonical = parseLegacy(input.assignments, input.people);
-  const actual = assign(currentRules, canonical.assignments, canonical.people);
+  const actual = runEngine(currentRules, canonical.assignments, canonical.people);
   const expected = loadExpected(name);
   assert.deepEqual(actual, expected);
 }

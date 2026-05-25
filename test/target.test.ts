@@ -8,7 +8,7 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import fs from "node:fs";
 import path from "node:path";
-import { assign } from "../src/engine/assign.ts";
+import { runEngine } from "../src/engine/runEngine.ts";
 import { parseLegacy } from "../src/engine/parseLegacy.ts";
 import { mulberry32 } from "../src/engine/rng.ts";
 import type { PlacedAssignment } from "../src/engine/types.ts";
@@ -23,7 +23,7 @@ function runFixture(name: string): void {
     fs.readFileSync(path.join(fixturesDir, `${name}.json`), "utf8")
   );
   const canonical = parseLegacy(input.assignments, input.people);
-  const actual = assign(
+  const actual = runEngine(
     targetRules,
     canonical.assignments,
     canonical.people,
