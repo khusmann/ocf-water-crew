@@ -11,7 +11,8 @@ function onOpen(): void {
   const ui = SpreadsheetApp.getUi();
   ui.createMenu("Volunteer Tools")
     .addItem("Assign volunteers", "runAssignVolunteers")
-    .addItem("Print assignments", "runPrintAssignments")
+    .addItem("Print assignments by job", "runPrintAssignmentsByJob")
+    .addItem("Print assignments by volunteer", "runPrintAssignmentsByVolunteer")
     .addToUi();
   ui.createMenu("Danger")
     .addItem("Clear / Re-generate assignments", "runGenerateAssignments")
@@ -190,12 +191,121 @@ function sizeIgnoringEmptyEnd(arr: any[]): number {
   return size;
 }
 
-function runPrintAssignments(): void {
+function runPrintAssignmentsByJob(): void {
   const html = buildPrintHtml(getAssignments());
   const output = HtmlService.createHtmlOutput(html)
     .setWidth(1000)
     .setHeight(720);
   SpreadsheetApp.getUi().showModalDialog(output, "Print assignments");
+}
+
+function runPrintAssignmentsByVolunteer(): void {
+  const html = buildVolunteerScheduleHtml(getVolunteers(), getAssignments());
+  const output = HtmlService.createHtmlOutput(html)
+    .setWidth(1200)
+    .setHeight(800);
+  SpreadsheetApp.getUi().showModalDialog(output, "Print assignments by volunteer");
+}
+
+function buildVolunteerScheduleHtml(
+  volunteers: Person[],
+  assignments: Assignment[]
+): string {
+  // Index assignments by volunteer name → "day|AM"/"day|PM" → [jobName].
+  const buckets = new Map<string, Map<string, string[]>>();
+  for (const a of assignments) {
+    const name = (a.assignedVolunteer || "").trim();
+    if (!name) continue;
+    const slots = amPmBuckets(a.timeCategory);
+    if (slots.length === 0) continue;
+    let cells = buckets.get(name);
+    if (!cells) {
+      cells = new Map();
+      buckets.set(name, cells);
+    }
+    for (const slot of slots) {
+      const key = `${a.day}|${slot}`;
+      let list = cells.get(key);
+      if (!list) {
+        list = [];
+        cells.set(key, list);
+      }
+      if (!list.includes(a.jobName)) list.push(a.jobName);
+    }
+  }
+
+  const sorted = volunteers
+    .slice()
+    .sort(
+      (a, b) =>
+        (a.last || "").localeCompare(b.last || "") ||
+        (a.first || "").localeCompare(b.first || "")
+    );
+
+  const days = [1, 2, 3, 4];
+  const slots: ("AM" | "PM")[] = ["AM", "PM"];
+
+  const colHeaders = days
+    .flatMap((d) => slots.map((s) => `${dayShort(d)} ${s}`))
+    .map((h) => `<th>${escapeHtml(h)}</th>`)
+    .join("");
+
+  const bodyRows = sorted
+    .map((v) => {
+      const cells = buckets.get(v.name) ?? new Map<string, string[]>();
+      const slotCells = days
+        .flatMap((d) =>
+          slots.map((s) => {
+            const list = cells.get(`${d}|${s}`) ?? [];
+            return `<td>${list.map(escapeHtml).join("<br>")}</td>`;
+          })
+        )
+        .join("");
+      return `<tr>
+        <td class="id">${escapeHtml(v.first)}</td>
+        <td class="id">${escapeHtml(v.last)}</td>
+        <td class="id">${escapeHtml(v.nickname)}</td>
+        <td class="center">${escapeHtml(prefLabel(v.timePreference))}</td>
+        ${slotCells}
+      </tr>`;
+    })
+    .join("\n");
+
+  const body = `<section class="page wide">
+    <table class="schedule">
+      <thead>
+        <tr>
+          <th>First</th><th>Last</th><th>Nickname</th><th>AM/PM Pref</th>
+          ${colHeaders}
+        </tr>
+      </thead>
+      <tbody>${bodyRows}</tbody>
+    </table>
+  </section>`;
+
+  return wrapPrintDocument(body, { landscape: true });
+}
+
+function amPmBuckets(t: string): ("AM" | "PM")[] {
+  // Final assignments are binary AM or PM. Be defensive: if a legacy
+  // "AM,PM"/"AM, PM" midday value sneaks through, span both columns.
+  if (t === "AM") return ["AM"];
+  if (t === "PM") return ["PM"];
+  if (t === "AM,PM" || t === "AM, PM") return ["AM", "PM"];
+  return [];
+}
+
+function dayShort(day: number): string {
+  return (
+    ({ 1: "Thurs", 2: "Fri", 3: "Sat", 4: "Sun" } as Record<number, string>)[
+      day
+    ] ?? `Day ${day}`
+  );
+}
+
+function prefLabel(p: string): string {
+  if (p === "AM, PM" || p === "PM, AM" || p === "AM,PM") return "AM/PM";
+  return p ?? "";
 }
 
 function buildPrintHtml(assignments: Assignment[]): string {
@@ -373,7 +483,14 @@ function escapeHtml(s: string): string {
     .replace(/'/g, "&#39;");
 }
 
-function wrapPrintDocument(body: string): string {
+function wrapPrintDocument(
+  body: string,
+  opts: { landscape?: boolean } = {}
+): string {
+  const pageRule = opts.landscape
+    ? "@page { size: letter landscape; margin: 0.4in; }"
+    : "@page { size: letter; margin: 0; }";
+  const printPagePadding = opts.landscape ? "0" : "0.5in";
   return `<!DOCTYPE html>
 <html>
 <head>
@@ -384,6 +501,7 @@ function wrapPrintDocument(body: string): string {
   .toolbar button { font-size: 14px; padding: 6px 16px; cursor: pointer; }
   .pages { padding: 16px; }
   .page { background: #fff; padding: 24px; margin: 0 auto 16px; max-width: 9in; border: 1px solid #ddd; }
+  .page.wide { max-width: 10.5in; }
   .title { margin: 0; padding: 12px; font-size: 22px; font-weight: bold; text-align: center; background: #b6cdec; border: 1px solid #888; border-bottom: none; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
   table.grid { width: 100%; border-collapse: collapse; table-layout: fixed; }
   table.grid th, table.grid td { border: 1px solid #888; padding: 14px 16px; vertical-align: middle; font-size: 15px; line-height: 1.6; }
@@ -394,13 +512,18 @@ function wrapPrintDocument(body: string): string {
   ul.roster { list-style: none; padding: 0; margin: 0; border: 1px solid #888; border-top: none; }
   ul.roster li { padding: 14px 16px; border-bottom: 1px solid #888; font-size: 16px; }
   ul.roster li:last-child { border-bottom: none; }
+  table.schedule { width: 100%; border-collapse: collapse; font-size: 11px; }
+  table.schedule th, table.schedule td { border: 1px solid #888; padding: 4px 6px; vertical-align: middle; }
+  table.schedule thead th { background: #d6e4f7; font-weight: bold; text-align: center; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  table.schedule td.id { font-weight: 500; white-space: nowrap; }
+  table.schedule td.center { text-align: center; }
   @media print {
     body { background: #fff; }
     .toolbar { display: none; }
     .pages { padding: 0; }
-    .page { border: none; padding: 0.5in; max-width: none; margin: 0; page-break-after: always; }
+    .page { border: none; padding: ${printPagePadding}; max-width: none; margin: 0; page-break-after: always; }
     .page:last-child { page-break-after: auto; }
-    @page { size: letter; margin: 0; }
+    ${pageRule}
   }
 </style>
 </head>
