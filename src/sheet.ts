@@ -273,7 +273,7 @@ function renderJobPage(jobName: string, rows: Assignment[]): string {
     .join("\n");
 
   return `<section class="page">
-    <h1 class="title">${escapeHtml(jobName)}</h1>
+    <h1 class="title" style="background:${titleColor(jobName)}">${escapeHtml(jobName)}</h1>
     <table class="grid">
       <thead><tr><th class="corner"></th>${headerCells}</tr></thead>
       <tbody>${bodyRows}</tbody>
@@ -282,6 +282,7 @@ function renderJobPage(jobName: string, rows: Assignment[]): string {
 }
 
 function renderCartsShiftPages(rows: Assignment[]): string[] {
+  const color = titleColor("Carts");
   // One page per (day, shiftStart) combination.
   const shifts = new Map<string, Assignment[]>();
   for (const a of rows) {
@@ -302,10 +303,24 @@ function renderCartsShiftPages(rows: Assignment[]): string[] {
         .map((a) => `<li>${escapeHtml(volunteerName(a))}</li>`)
         .join("\n");
       return `<section class="page">
-      <h1 class="title">Carts &mdash; ${escapeHtml(dayLabel(head.day))} ${escapeHtml(shiftRangeLabel(head.shiftStart, head.hrsShift))}</h1>
+      <h1 class="title" style="background:${color}">Carts &mdash; ${escapeHtml(dayLabel(head.day))} ${escapeHtml(shiftRangeLabel(head.shiftStart, head.hrsShift))}</h1>
       <ul class="roster">${items}</ul>
     </section>`;
     });
+}
+
+function titleColor(name: string): string {
+  // Stable hash → pastel palette. Light enough for black text to read.
+  const palette = [
+    "#b6cdec", "#c4e3b6", "#f5e6a3", "#f5c6d8",
+    "#d4c5e8", "#f7d4b6", "#b6e3d4", "#f5b6b6",
+    "#b6e3e8", "#e8d4b6", "#e0b6e8", "#d0e8b6",
+  ];
+  let h = 0;
+  for (let i = 0; i < name.length; i++) {
+    h = ((h << 5) - h + name.charCodeAt(i)) | 0;
+  }
+  return palette[Math.abs(h) % palette.length];
 }
 
 function dayLabel(day: number): string {
@@ -369,7 +384,7 @@ function wrapPrintDocument(body: string): string {
   .toolbar button { font-size: 14px; padding: 6px 16px; cursor: pointer; }
   .pages { padding: 16px; }
   .page { background: #fff; padding: 24px; margin: 0 auto 16px; max-width: 9in; border: 1px solid #ddd; }
-  .title { margin: 0; padding: 12px; font-size: 22px; font-weight: bold; text-align: center; background: #b6cdec; border: 1px solid #888; border-bottom: none; }
+  .title { margin: 0; padding: 12px; font-size: 22px; font-weight: bold; text-align: center; background: #b6cdec; border: 1px solid #888; border-bottom: none; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
   table.grid { width: 100%; border-collapse: collapse; table-layout: fixed; }
   table.grid th, table.grid td { border: 1px solid #888; padding: 14px 16px; vertical-align: middle; font-size: 15px; line-height: 1.6; }
   table.grid thead th { text-align: center; font-weight: bold; background: #fff; }
