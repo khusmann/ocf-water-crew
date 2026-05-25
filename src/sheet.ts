@@ -11,6 +11,7 @@ function onOpen(): void {
   const ui = SpreadsheetApp.getUi();
   ui.createMenu("Volunteer Tools")
     .addItem("Assign volunteers", "runAssignVolunteers")
+    .addItem("Print assignments", "runPrintAssignments")
     .addToUi();
   ui.createMenu("Danger")
     .addItem("Clear / Re-generate assignments", "runGenerateAssignments")
@@ -187,4 +188,170 @@ function sizeIgnoringEmptyEnd(arr: any[]): number {
     size--;
   }
   return size;
+}
+
+function runPrintAssignments(): void {
+  const html = buildPrintHtml(getAssignments());
+  const output = HtmlService.createHtmlOutput(html)
+    .setWidth(1000)
+    .setHeight(720);
+  SpreadsheetApp.getUi().showModalDialog(output, "Print assignments");
+}
+
+function buildPrintHtml(assignments: Assignment[]): string {
+  const byJob = new Map<string, Assignment[]>();
+  for (const a of assignments) {
+    let list = byJob.get(a.jobName);
+    if (!list) {
+      list = [];
+      byJob.set(a.jobName, list);
+    }
+    list.push(a);
+  }
+
+  // Jobs print in jobPriority order; rows within a group share the same priority.
+  const jobNames = Array.from(byJob.keys()).sort(
+    (a, b) => byJob.get(a)![0].jobPriority - byJob.get(b)![0].jobPriority
+  );
+
+  const pages: string[] = [];
+  for (const name of jobNames) {
+    const rows = byJob.get(name)!;
+    if (name === "Carts") {
+      pages.push(...renderCartsShiftPages(rows));
+    } else {
+      pages.push(renderJobPage(name, rows));
+    }
+  }
+
+  return wrapPrintDocument(pages.join("\n"));
+}
+
+function renderJobPage(jobName: string, rows: Assignment[]): string {
+  const sorted = rows.slice().sort(
+    (a, b) =>
+      a.day - b.day ||
+      timeOfDayMinutes(a.shiftStart) - timeOfDayMinutes(b.shiftStart) ||
+      a.person - b.person
+  );
+  const body = sorted
+    .map(
+      (a) => `<tr>
+      <td>Day ${a.day}</td>
+      <td>${escapeHtml(formatShiftTime(a.shiftStart))}</td>
+      <td>${a.hrsShift}h</td>
+      <td class="slot">#${a.person}</td>
+      <td class="name">${escapeHtml(volunteerName(a))}</td>
+    </tr>`
+    )
+    .join("\n");
+  return `<section class="page">
+    <h1>${escapeHtml(jobName)}</h1>
+    <table>
+      <thead><tr><th>Day</th><th>Start</th><th>Hours</th><th>Slot</th><th>Volunteer</th></tr></thead>
+      <tbody>${body}</tbody>
+    </table>
+  </section>`;
+}
+
+function renderCartsShiftPages(rows: Assignment[]): string[] {
+  // One page per (day, shiftStart) combination.
+  const shifts = new Map<string, Assignment[]>();
+  for (const a of rows) {
+    const key = `${String(a.day).padStart(2, "0")}|${shiftTimeKey(a.shiftStart)}`;
+    let list = shifts.get(key);
+    if (!list) {
+      list = [];
+      shifts.set(key, list);
+    }
+    list.push(a);
+  }
+  return Array.from(shifts.keys())
+    .sort()
+    .map((k) => {
+      const group = shifts.get(k)!.slice().sort((a, b) => a.person - b.person);
+      const head = group[0];
+      const body = group
+        .map(
+          (a) => `<tr>
+        <td class="slot">#${a.person}</td>
+        <td class="name">${escapeHtml(volunteerName(a))}</td>
+      </tr>`
+        )
+        .join("\n");
+      return `<section class="page">
+      <h1>Carts &mdash; Day ${head.day} &middot; ${escapeHtml(formatShiftTime(head.shiftStart))}</h1>
+      <p class="sub">${head.hrsShift}h shift</p>
+      <table>
+        <thead><tr><th>Slot</th><th>Volunteer</th></tr></thead>
+        <tbody>${body}</tbody>
+      </table>
+    </section>`;
+    });
+}
+
+function volunteerName(a: Assignment): string {
+  return a.assignedVolunteer || a.stagedVolunteer || "—";
+}
+
+function timeOfDayMinutes(t: any): number {
+  if (!t) return 0;
+  const d = new Date(t);
+  return d.getHours() * 60 + d.getMinutes();
+}
+
+function shiftTimeKey(t: any): string {
+  if (!t) return "00:00";
+  const d = new Date(t);
+  return `${String(d.getHours()).padStart(2, "0")}:${String(d.getMinutes()).padStart(2, "0")}`;
+}
+
+function formatShiftTime(t: any): string {
+  if (!t) return "";
+  const d = new Date(t);
+  return Utilities.formatDate(d, Session.getScriptTimeZone(), "h:mm a");
+}
+
+function escapeHtml(s: string): string {
+  return String(s ?? "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
+function wrapPrintDocument(body: string): string {
+  return `<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  body { font-family: -apple-system, system-ui, "Segoe UI", sans-serif; margin: 0; color: #111; background: #eee; }
+  .toolbar { position: sticky; top: 0; z-index: 1; background: #f5f5f5; padding: 8px 12px; border-bottom: 1px solid #ccc; }
+  .toolbar button { font-size: 14px; padding: 6px 16px; cursor: pointer; }
+  .pages { padding: 16px; }
+  .page { background: #fff; padding: 32px; margin: 0 auto 16px; max-width: 720px; border: 1px solid #ddd; }
+  .page h1 { margin: 0 0 4px; font-size: 24px; }
+  .page .sub { margin: 0 0 14px; color: #555; }
+  table { width: 100%; border-collapse: collapse; }
+  th, td { text-align: left; padding: 6px 10px; border-bottom: 1px solid #eee; }
+  th { background: #f0f0f0; font-weight: 600; }
+  td.slot { width: 64px; color: #555; }
+  td.name { font-weight: 500; }
+  @media print {
+    body { background: #fff; }
+    .toolbar { display: none; }
+    .pages { padding: 0; }
+    .page { border: none; padding: 0.5in; max-width: none; margin: 0; page-break-after: always; }
+    .page:last-child { page-break-after: auto; }
+    @page { size: letter; margin: 0; }
+  }
+</style>
+</head>
+<body>
+<div class="toolbar"><button onclick="window.print()">Print</button></div>
+<div class="pages">${body}</div>
+</body>
+</html>`;
 }
