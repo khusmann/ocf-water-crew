@@ -1,0 +1,15 @@
+[
+  {
+    "jobName": "Carts",
+    "jobPriority": 0,
+    "day": 1,
+    "startHour": 14,
+    "durationHours": 8,
+    "timeWindow": "PM",
+    "stagedVolunteer": "",
+    "assignedVolunteer": "Person 01",
+    "brokenRules": [
+      "time-preference"
+    ]
+  }
+]

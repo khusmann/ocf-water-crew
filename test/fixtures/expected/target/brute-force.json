@@ -1,0 +1,102 @@
+[
+  {
+    "jobName": "Coordinator",
+    "jobPriority": 0,
+    "requiredQualification": "0",
+    "day": 1,
+    "startHour": 6,
+    "durationHours": 8,
+    "timeWindow": "EITHER",
+    "stagedVolunteer": "",
+    "assignedVolunteer": "Person 01",
+    "brokenRules": []
+  },
+  {
+    "jobName": "Carts",
+    "jobPriority": 1,
+    "day": 1,
+    "startHour": 6,
+    "durationHours": 8,
+    "timeWindow": "EITHER",
+    "stagedVolunteer": "",
+    "assignedVolunteer": "Person 02",
+    "brokenRules": []
+  },
+  {
+    "jobName": "Carts",
+    "jobPriority": 1,
+    "day": 1,
+    "startHour": 14,
+    "durationHours": 8,
+    "timeWindow": "EITHER",
+    "stagedVolunteer": "",
+    "assignedVolunteer": "Person 03",
+    "brokenRules": []
+  },
+  {
+    "jobName": "Carts",
+    "jobPriority": 1,
+    "day": 2,
+    "startHour": 6,
+    "durationHours": 8,
+    "timeWindow": "EITHER",
+    "stagedVolunteer": "",
+    "assignedVolunteer": "Person 01",
+    "brokenRules": []
+  },
+  {
+    "jobName": "Carts",
+    "jobPriority": 1,
+    "day": 2,
+    "startHour": 14,
+    "durationHours": 8,
+    "timeWindow": "EITHER",
+    "stagedVolunteer": "",
+    "assignedVolunteer": "Person 02",
+    "brokenRules": []
+  },
+  {
+    "jobName": "Carts",
+    "jobPriority": 1,
+    "day": 3,
+    "startHour": 6,
+    "durationHours": 8,
+    "timeWindow": "EITHER",
+    "stagedVolunteer": "",
+    "assignedVolunteer": "Person 03",
+    "brokenRules": []
+  },
+  {
+    "jobName": "Carts",
+    "jobPriority": 1,
+    "day": 3,
+    "startHour": 14,
+    "durationHours": 8,
+    "timeWindow": "EITHER",
+    "stagedVolunteer": "",
+    "assignedVolunteer": "Person 02",
+    "brokenRules": []
+  },
+  {
+    "jobName": "Carts",
+    "jobPriority": 1,
+    "day": 4,
+    "startHour": 6,
+    "durationHours": 8,
+    "timeWindow": "EITHER",
+    "stagedVolunteer": "",
+    "assignedVolunteer": "Person 03",
+    "brokenRules": []
+  },
+  {
+    "jobName": "Carts",
+    "jobPriority": 1,
+    "day": 4,
+    "startHour": 14,
+    "durationHours": 8,
+    "timeWindow": "EITHER",
+    "stagedVolunteer": "",
+    "assignedVolunteer": "Person 01",
+    "brokenRules": []
+  }
+]

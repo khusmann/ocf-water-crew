@@ -1,0 +1,25 @@
+[
+  {
+    "jobName": "Coordinator",
+    "jobPriority": 0,
+    "requiredQualification": "0",
+    "day": 1,
+    "startHour": 6,
+    "durationHours": 8,
+    "timeWindow": "AM",
+    "stagedVolunteer": "",
+    "assignedVolunteer": "Person 01",
+    "brokenRules": []
+  },
+  {
+    "jobName": "Carts",
+    "jobPriority": 1,
+    "day": 2,
+    "startHour": 6,
+    "durationHours": 8,
+    "timeWindow": "AM",
+    "stagedVolunteer": "",
+    "assignedVolunteer": "Person 02",
+    "brokenRules": []
+  }
+]
