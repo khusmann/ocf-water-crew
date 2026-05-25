@@ -409,12 +409,18 @@ function renderCartsShiftPages(rows: Assignment[]): string[] {
     .map((k) => {
       const group = shifts.get(k)!.slice().sort((a, b) => a.person - b.person);
       const head = group[0];
-      const items = group
-        .map((a) => `<li>${escapeHtml(volunteerName(a))}</li>`)
-        .join("\n");
+      const half = Math.ceil(group.length / 2);
+      const trs: string[] = [];
+      for (let i = 0; i < half; i++) {
+        const l = group[i];
+        const r = group[i + half];
+        const lCell = `<td>${l ? escapeHtml(volunteerName(l)) : ""}</td>`;
+        const rCell = `<td>${r ? escapeHtml(volunteerName(r)) : ""}</td>`;
+        trs.push(`<tr>${lCell}${rCell}</tr>`);
+      }
       return `<section class="page">
       <h1 class="title" style="background:${color}">Carts &mdash; ${escapeHtml(dayLabel(head.day))} ${escapeHtml(shiftRangeLabel(head.shiftStart, head.hrsShift))}</h1>
-      <ul class="roster">${items}</ul>
+      <table class="roster"><tbody>${trs.join("\n")}</tbody></table>
     </section>`;
     });
 }
@@ -509,9 +515,8 @@ function wrapPrintDocument(
   table.grid th.corner { width: 130px; background: #fff; border-top: none; border-left: none; }
   table.grid th.day { width: 130px; text-align: center; font-weight: bold; background: #fff; }
   table.grid td { min-height: 70px; height: 70px; }
-  ul.roster { list-style: none; padding: 0; margin: 0; border: 1px solid #888; border-top: none; }
-  ul.roster li { padding: 14px 16px; border-bottom: 1px solid #888; font-size: 16px; }
-  ul.roster li:last-child { border-bottom: none; }
+  table.roster { width: 100%; border-collapse: collapse; border: 1px solid #888; border-top: none; table-layout: fixed; }
+  table.roster td { padding: 14px 16px; border: 1px solid #888; font-size: 16px; width: 50%; }
   table.schedule { width: 100%; border-collapse: collapse; font-size: 11px; }
   table.schedule th, table.schedule td { border: 1px solid #888; padding: 4px 6px; vertical-align: middle; }
   table.schedule thead th { background: #d6e4f7; font-weight: bold; text-align: center; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
