@@ -257,7 +257,7 @@ function buildVolunteerScheduleHtml(
         .flatMap((d) =>
           slots.map((s) => {
             const list = cells.get(`${d}|${s}`) ?? [];
-            return `<td>${list.map(escapeHtml).join("<br>")}</td>`;
+            return `<td>${list.map(escapeHtml).join(", ")}</td>`;
           })
         )
         .join("");
@@ -518,6 +518,7 @@ function wrapPrintDocument(
   table.roster { width: 100%; border-collapse: collapse; border: 1px solid #888; border-top: none; table-layout: fixed; }
   table.roster td { padding: 14px 16px; border: 1px solid #888; font-size: 16px; width: 50%; }
   table.schedule { width: 100%; border-collapse: collapse; font-size: 11px; }
+  table.schedule tr { page-break-inside: avoid; break-inside: avoid; }
   table.schedule th, table.schedule td { border: 1px solid #888; padding: 4px 6px; vertical-align: middle; }
   table.schedule thead th { background: #d6e4f7; font-weight: bold; text-align: center; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
   table.schedule td.id { font-weight: 500; white-space: nowrap; }
