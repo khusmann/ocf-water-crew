@@ -266,7 +266,7 @@ function buildVolunteerScheduleHtml(
         <td class="id">${escapeHtml(v.last)}</td>
         <td class="id">${escapeHtml(v.nickname)}</td>
         <td class="center">${escapeHtml(prefLabel(v.timePreference))}</td>
-        <td class="center">${total}</td>
+        <td class="center swatch" style="background:${shiftCountColor(total)}">${total}</td>
         ${slotCells}
       </tr>`;
     })
@@ -285,6 +285,15 @@ function buildVolunteerScheduleHtml(
   </section>`;
 
   return wrapPrintDocument(body, { landscape: true });
+}
+
+function shiftCountColor(n: number): string {
+  // Flag under-/fully-loaded volunteers at a glance: ≤1 red, 2 orange,
+  // 3 yellow, 4 (the max-shifts cap) green.
+  if (n <= 1) return "#f4a6a6";
+  if (n === 2) return "#f6c592";
+  if (n === 3) return "#f5e6a3";
+  return "#bfe3a6";
 }
 
 function amPmBucket(a: Assignment): "AM" | "PM" | null {
@@ -527,6 +536,7 @@ function wrapPrintDocument(
   table.schedule thead th { background: #d6e4f7; font-weight: bold; text-align: center; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
   table.schedule td.id { font-weight: 500; white-space: nowrap; }
   table.schedule td.center { text-align: center; }
+  table.schedule td.swatch { font-weight: bold; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
   @media print {
     body { background: #fff; }
     .toolbar { display: none; }
