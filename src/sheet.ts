@@ -251,10 +251,12 @@ function buildVolunteerScheduleHtml(
   const bodyRows = sorted
     .map((v) => {
       const cells = buckets.get(v.name) ?? new Map<string, string[]>();
+      let total = 0;
       const slotCells = days
         .flatMap((d) =>
           slots.map((s) => {
             const list = cells.get(`${d}|${s}`) ?? [];
+            total += list.length;
             return `<td>${list.map(escapeHtml).join(", ")}</td>`;
           })
         )
@@ -264,6 +266,7 @@ function buildVolunteerScheduleHtml(
         <td class="id">${escapeHtml(v.last)}</td>
         <td class="id">${escapeHtml(v.nickname)}</td>
         <td class="center">${escapeHtml(prefLabel(v.timePreference))}</td>
+        <td class="center">${total}</td>
         ${slotCells}
       </tr>`;
     })
@@ -273,7 +276,7 @@ function buildVolunteerScheduleHtml(
     <table class="schedule">
       <thead>
         <tr>
-          <th>First</th><th>Last</th><th>Nickname</th><th>AM/PM Pref</th>
+          <th>First</th><th>Last</th><th>Nickname</th><th>AM/PM Pref</th><th>Shifts</th>
           ${colHeaders}
         </tr>
       </thead>
