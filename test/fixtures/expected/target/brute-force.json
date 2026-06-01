@@ -9,7 +9,8 @@
     "timeWindow": "EITHER",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 01",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -20,7 +21,8 @@
     "timeWindow": "EITHER",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 02",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -31,7 +33,8 @@
     "timeWindow": "EITHER",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 03",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -42,7 +45,8 @@
     "timeWindow": "EITHER",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 01",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -53,7 +57,8 @@
     "timeWindow": "EITHER",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 02",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -64,7 +69,8 @@
     "timeWindow": "EITHER",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 03",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -75,7 +81,8 @@
     "timeWindow": "EITHER",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 02",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -86,7 +93,8 @@
     "timeWindow": "EITHER",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 03",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -97,6 +105,7 @@
     "timeWindow": "EITHER",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 01",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   }
 ]

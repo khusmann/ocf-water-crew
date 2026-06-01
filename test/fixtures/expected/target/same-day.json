@@ -8,7 +8,8 @@
     "timeWindow": "EITHER",
     "stagedVolunteer": "Person 01",
     "assignedVolunteer": "Person 01",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -23,6 +24,11 @@
       "sequential-rest-1h",
       "one-shift-per-day",
       "sequential-rest-8h"
+    ],
+    "brokenCodes": [
+      "H1",
+      "D",
+      "H8"
     ]
   },
   {
@@ -34,6 +40,7 @@
     "timeWindow": "EITHER",
     "stagedVolunteer": "Person 01",
     "assignedVolunteer": "Person 01",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   }
 ]

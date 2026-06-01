@@ -8,7 +8,8 @@
     "timeWindow": "EITHER",
     "stagedVolunteer": "Person 01",
     "assignedVolunteer": "Person 01",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -21,6 +22,9 @@
     "assignedVolunteer": "Person 01",
     "brokenRules": [
       "one-shift-per-day"
+    ],
+    "brokenCodes": [
+      "D"
     ]
   },
   {
@@ -32,6 +36,7 @@
     "timeWindow": "EITHER",
     "stagedVolunteer": "Person 01",
     "assignedVolunteer": "Person 01",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   }
 ]

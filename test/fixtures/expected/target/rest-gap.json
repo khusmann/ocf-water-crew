@@ -8,7 +8,8 @@
     "timeWindow": "PM",
     "stagedVolunteer": "Person 01",
     "assignedVolunteer": "Person 01",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -21,6 +22,9 @@
     "assignedVolunteer": "Person 01",
     "brokenRules": [
       "sequential-rest-8h"
+    ],
+    "brokenCodes": [
+      "H8"
     ]
   }
 ]

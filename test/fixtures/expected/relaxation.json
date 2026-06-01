@@ -10,6 +10,9 @@
     "assignedVolunteer": "Person 01",
     "brokenRules": [
       "time-preference"
+    ],
+    "brokenCodes": [
+      "T"
     ]
   }
 ]

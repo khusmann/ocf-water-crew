@@ -14,6 +14,7 @@ import type { AssignmentRule, SortingRule, TimeWindow } from "./engine.ts";
 export function qualification(priority: number): AssignmentRule {
   return {
     name: "qualification",
+    code: "Q",
     priority,
     test: ({ slot, person }) =>
       !slot.requiredQualification ||
@@ -24,6 +25,7 @@ export function qualification(priority: number): AssignmentRule {
 export function maxShifts(maxN: number, priority: number): AssignmentRule {
   return {
     name: `max-shifts-${maxN}`,
+    code: `S${maxN}`,
     priority,
     test: ({ state }) => state.shiftsPlaced < maxN,
   };
@@ -32,6 +34,7 @@ export function maxShifts(maxN: number, priority: number): AssignmentRule {
 export function oneShiftPerDay(priority: number): AssignmentRule {
   return {
     name: "one-shift-per-day",
+    code: "D",
     priority,
     test: ({ slot, state }) => !state.daysWorked.has(slot.day),
   };
@@ -48,6 +51,7 @@ export function restGapLegacy(
 ): AssignmentRule {
   return {
     name: `rest-gap-${minGapHours}h-legacy`,
+    code: `H${minGapHours}`,
     priority,
     test: ({ slot, state }) => {
       const slotStart = 24 * slot.day + slot.startHour;
@@ -65,6 +69,7 @@ export function sequentialRest(
 ): AssignmentRule {
   return {
     name: `sequential-rest-${minGapHours}h`,
+    code: `H${minGapHours}`,
     priority,
     test: ({ slot, state }) => {
       const slotStart = 24 * slot.day + slot.startHour;
@@ -83,6 +88,7 @@ export function sequentialRest(
 export function timePreference(priority: number): AssignmentRule {
   return {
     name: "time-preference",
+    code: "T",
     priority,
     test: ({ slot, person }) =>
       slot.timeWindow === person.timePreference ||

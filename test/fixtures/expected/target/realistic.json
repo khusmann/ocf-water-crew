@@ -9,7 +9,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "Person 098",
     "assignedVolunteer": "Person 098",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Coordinator",
@@ -21,7 +22,8 @@
     "timeWindow": "EITHER",
     "stagedVolunteer": "Person 080",
     "assignedVolunteer": "Person 080",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Coordinator",
@@ -33,7 +35,8 @@
     "timeWindow": "PM",
     "stagedVolunteer": "Person 003",
     "assignedVolunteer": "Person 003",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Coordinator",
@@ -45,7 +48,8 @@
     "timeWindow": "PM",
     "stagedVolunteer": "Person 085",
     "assignedVolunteer": "Person 085",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Coordinator",
@@ -57,7 +61,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "Person 098",
     "assignedVolunteer": "Person 098",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Coordinator",
@@ -69,7 +74,8 @@
     "timeWindow": "EITHER",
     "stagedVolunteer": "Person 080",
     "assignedVolunteer": "Person 080",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Coordinator",
@@ -81,7 +87,8 @@
     "timeWindow": "PM",
     "stagedVolunteer": "Person 003",
     "assignedVolunteer": "Person 003",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Coordinator",
@@ -93,7 +100,8 @@
     "timeWindow": "PM",
     "stagedVolunteer": "Person 085",
     "assignedVolunteer": "Person 085",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Coordinator",
@@ -105,7 +113,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "Person 080",
     "assignedVolunteer": "Person 080",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Coordinator",
@@ -117,7 +126,8 @@
     "timeWindow": "EITHER",
     "stagedVolunteer": "Person 098",
     "assignedVolunteer": "Person 098",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Coordinator",
@@ -129,7 +139,8 @@
     "timeWindow": "PM",
     "stagedVolunteer": "Person 003",
     "assignedVolunteer": "Person 003",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Coordinator",
@@ -141,7 +152,8 @@
     "timeWindow": "PM",
     "stagedVolunteer": "Person 085",
     "assignedVolunteer": "Person 085",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Coordinator",
@@ -153,7 +165,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "Person 098",
     "assignedVolunteer": "Person 098",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Coordinator",
@@ -165,7 +178,8 @@
     "timeWindow": "EITHER",
     "stagedVolunteer": "Person 080",
     "assignedVolunteer": "Person 080",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Coordinator",
@@ -177,7 +191,8 @@
     "timeWindow": "PM",
     "stagedVolunteer": "Person 003",
     "assignedVolunteer": "Person 003",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Coordinator",
@@ -189,7 +204,8 @@
     "timeWindow": "PM",
     "stagedVolunteer": "Person 085",
     "assignedVolunteer": "Person 085",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Biggie Swampers",
@@ -201,7 +217,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "Person 099",
     "assignedVolunteer": "Person 099",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Biggie Swampers",
@@ -213,7 +230,8 @@
     "timeWindow": "EITHER",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 039",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Biggie Swampers",
@@ -225,7 +243,8 @@
     "timeWindow": "PM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 050",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Biggie Swampers",
@@ -237,7 +256,8 @@
     "timeWindow": "PM",
     "stagedVolunteer": "Person 028",
     "assignedVolunteer": "Person 028",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Biggie Swampers",
@@ -249,7 +269,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "Person 099",
     "assignedVolunteer": "Person 099",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Biggie Swampers",
@@ -261,7 +282,8 @@
     "timeWindow": "EITHER",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 120",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Biggie Swampers",
@@ -273,7 +295,8 @@
     "timeWindow": "PM",
     "stagedVolunteer": "Person 115",
     "assignedVolunteer": "Person 115",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Biggie Swampers",
@@ -285,7 +308,8 @@
     "timeWindow": "PM",
     "stagedVolunteer": "Person 030",
     "assignedVolunteer": "Person 030",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Biggie Swampers",
@@ -297,7 +321,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "Person 099",
     "assignedVolunteer": "Person 099",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Biggie Swampers",
@@ -309,7 +334,8 @@
     "timeWindow": "EITHER",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 065",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Biggie Swampers",
@@ -321,7 +347,8 @@
     "timeWindow": "PM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 091",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Biggie Swampers",
@@ -333,7 +360,8 @@
     "timeWindow": "PM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 015",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Biggie Swampers",
@@ -345,7 +373,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 086",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Biggie Swampers",
@@ -357,7 +386,8 @@
     "timeWindow": "EITHER",
     "stagedVolunteer": "Person 099",
     "assignedVolunteer": "Person 099",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Biggie Swampers",
@@ -371,6 +401,9 @@
     "assignedVolunteer": "Person 073",
     "brokenRules": [
       "time-preference"
+    ],
+    "brokenCodes": [
+      "T"
     ]
   },
   {
@@ -383,7 +416,8 @@
     "timeWindow": "PM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 065",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Phil-up Drivers",
@@ -395,7 +429,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "Person 061",
     "assignedVolunteer": "Person 061",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Phil-up Drivers",
@@ -407,7 +442,8 @@
     "timeWindow": "EITHER",
     "stagedVolunteer": "Person 077",
     "assignedVolunteer": "Person 077",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Phil-up Drivers",
@@ -419,7 +455,8 @@
     "timeWindow": "PM",
     "stagedVolunteer": "Person 100",
     "assignedVolunteer": "Person 100",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Phil-up Drivers",
@@ -431,7 +468,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "Person 053",
     "assignedVolunteer": "Person 053",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Phil-up Drivers",
@@ -443,7 +481,8 @@
     "timeWindow": "EITHER",
     "stagedVolunteer": "Person 061",
     "assignedVolunteer": "Person 061",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Phil-up Drivers",
@@ -455,7 +494,8 @@
     "timeWindow": "PM",
     "stagedVolunteer": "Person 100",
     "assignedVolunteer": "Person 100",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Phil-up Drivers",
@@ -467,7 +507,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "Person 053",
     "assignedVolunteer": "Person 053",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Phil-up Drivers",
@@ -479,7 +520,8 @@
     "timeWindow": "EITHER",
     "stagedVolunteer": "Person 061",
     "assignedVolunteer": "Person 061",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Phil-up Drivers",
@@ -491,7 +533,8 @@
     "timeWindow": "PM",
     "stagedVolunteer": "Person 100",
     "assignedVolunteer": "Person 100",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Phil-up Drivers",
@@ -503,7 +546,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "Person 053",
     "assignedVolunteer": "Person 053",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Phil-up Drivers",
@@ -515,7 +559,8 @@
     "timeWindow": "EITHER",
     "stagedVolunteer": "Person 061",
     "assignedVolunteer": "Person 061",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Phil-up Drivers",
@@ -527,7 +572,8 @@
     "timeWindow": "PM",
     "stagedVolunteer": "Person 100",
     "assignedVolunteer": "Person 100",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Phil-up Swampers",
@@ -539,7 +585,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 070",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Phil-up Swampers",
@@ -551,7 +598,8 @@
     "timeWindow": "EITHER",
     "stagedVolunteer": "Person 021",
     "assignedVolunteer": "Person 021",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Phil-up Swampers",
@@ -565,6 +613,9 @@
     "assignedVolunteer": "Person 074",
     "brokenRules": [
       "time-preference"
+    ],
+    "brokenCodes": [
+      "T"
     ]
   },
   {
@@ -577,7 +628,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "Person 048",
     "assignedVolunteer": "Person 048",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Phil-up Swampers",
@@ -589,7 +641,8 @@
     "timeWindow": "EITHER",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 019",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Phil-up Swampers",
@@ -601,7 +654,8 @@
     "timeWindow": "PM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 091",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Phil-up Swampers",
@@ -613,7 +667,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "Person 048",
     "assignedVolunteer": "Person 048",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Phil-up Swampers",
@@ -625,7 +680,8 @@
     "timeWindow": "EITHER",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 074",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Phil-up Swampers",
@@ -637,7 +693,8 @@
     "timeWindow": "PM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 124",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Phil-up Swampers",
@@ -649,7 +706,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "Person 048",
     "assignedVolunteer": "Person 048",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Phil-up Swampers",
@@ -661,7 +719,8 @@
     "timeWindow": "EITHER",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 007",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Phil-up Swampers",
@@ -673,7 +732,8 @@
     "timeWindow": "PM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 015",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Pump House Desk",
@@ -685,7 +745,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "Person 069",
     "assignedVolunteer": "Person 069",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Pump House Desk",
@@ -697,7 +758,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "Person 045",
     "assignedVolunteer": "Person 045",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Pump House Desk",
@@ -709,7 +771,8 @@
     "timeWindow": "EITHER",
     "stagedVolunteer": "Person 107",
     "assignedVolunteer": "Person 107",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Pump House Desk",
@@ -721,7 +784,8 @@
     "timeWindow": "EITHER",
     "stagedVolunteer": "Person 014",
     "assignedVolunteer": "Person 014",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Pump House Desk",
@@ -733,7 +797,8 @@
     "timeWindow": "PM",
     "stagedVolunteer": "Person 054",
     "assignedVolunteer": "Person 054",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Pump House Desk",
@@ -745,7 +810,8 @@
     "timeWindow": "PM",
     "stagedVolunteer": "Person 044",
     "assignedVolunteer": "Person 044",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Pump House Desk",
@@ -757,7 +823,8 @@
     "timeWindow": "PM",
     "stagedVolunteer": "Person 040",
     "assignedVolunteer": "Person 040",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Pump House Desk",
@@ -769,7 +836,8 @@
     "timeWindow": "PM",
     "stagedVolunteer": "Person 038",
     "assignedVolunteer": "Person 038",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Pump House Desk",
@@ -781,7 +849,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "Person 069",
     "assignedVolunteer": "Person 069",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Pump House Desk",
@@ -793,7 +862,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "Person 046",
     "assignedVolunteer": "Person 046",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Pump House Desk",
@@ -805,7 +875,8 @@
     "timeWindow": "EITHER",
     "stagedVolunteer": "Person 071",
     "assignedVolunteer": "Person 071",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Pump House Desk",
@@ -817,7 +888,8 @@
     "timeWindow": "EITHER",
     "stagedVolunteer": "Person 107",
     "assignedVolunteer": "Person 107",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Pump House Desk",
@@ -831,6 +903,9 @@
     "assignedVolunteer": "Person 075",
     "brokenRules": [
       "time-preference"
+    ],
+    "brokenCodes": [
+      "T"
     ]
   },
   {
@@ -843,7 +918,8 @@
     "timeWindow": "PM",
     "stagedVolunteer": "Person 040",
     "assignedVolunteer": "Person 040",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Pump House Desk",
@@ -855,7 +931,8 @@
     "timeWindow": "PM",
     "stagedVolunteer": "Person 054",
     "assignedVolunteer": "Person 054",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Pump House Desk",
@@ -867,7 +944,8 @@
     "timeWindow": "PM",
     "stagedVolunteer": "Person 117",
     "assignedVolunteer": "Person 117",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Pump House Desk",
@@ -879,7 +957,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "Person 069",
     "assignedVolunteer": "Person 069",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Pump House Desk",
@@ -891,7 +970,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "Person 047",
     "assignedVolunteer": "Person 047",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Pump House Desk",
@@ -903,7 +983,8 @@
     "timeWindow": "EITHER",
     "stagedVolunteer": "Person 107",
     "assignedVolunteer": "Person 107",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Pump House Desk",
@@ -915,7 +996,8 @@
     "timeWindow": "EITHER",
     "stagedVolunteer": "Person 108",
     "assignedVolunteer": "Person 108",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Pump House Desk",
@@ -929,6 +1011,9 @@
     "assignedVolunteer": "Person 066",
     "brokenRules": [
       "time-preference"
+    ],
+    "brokenCodes": [
+      "T"
     ]
   },
   {
@@ -941,7 +1026,8 @@
     "timeWindow": "PM",
     "stagedVolunteer": "Person 054",
     "assignedVolunteer": "Person 054",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Pump House Desk",
@@ -953,7 +1039,8 @@
     "timeWindow": "PM",
     "stagedVolunteer": "Person 125",
     "assignedVolunteer": "Person 125",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Pump House Desk",
@@ -965,7 +1052,8 @@
     "timeWindow": "PM",
     "stagedVolunteer": "Person 038",
     "assignedVolunteer": "Person 038",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Pump House Desk",
@@ -977,7 +1065,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "Person 069",
     "assignedVolunteer": "Person 069",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Pump House Desk",
@@ -989,7 +1078,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "Person 108",
     "assignedVolunteer": "Person 108",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Pump House Desk",
@@ -1001,7 +1091,8 @@
     "timeWindow": "EITHER",
     "stagedVolunteer": "Person 071",
     "assignedVolunteer": "Person 071",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Pump House Desk",
@@ -1013,7 +1104,8 @@
     "timeWindow": "EITHER",
     "stagedVolunteer": "Person 075",
     "assignedVolunteer": "Person 075",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Pump House Desk",
@@ -1025,7 +1117,8 @@
     "timeWindow": "PM",
     "stagedVolunteer": "Person 040",
     "assignedVolunteer": "Person 040",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Pump House Desk",
@@ -1039,6 +1132,9 @@
     "assignedVolunteer": "Person 066",
     "brokenRules": [
       "time-preference"
+    ],
+    "brokenCodes": [
+      "T"
     ]
   },
   {
@@ -1051,7 +1147,8 @@
     "timeWindow": "PM",
     "stagedVolunteer": "Person 125",
     "assignedVolunteer": "Person 125",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Pump House Desk",
@@ -1063,7 +1160,8 @@
     "timeWindow": "PM",
     "stagedVolunteer": "Person 054",
     "assignedVolunteer": "Person 054",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Pump House Night Train",
@@ -1075,7 +1173,8 @@
     "timeWindow": "PM",
     "stagedVolunteer": "Person 125",
     "assignedVolunteer": "Person 125",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Pump House Night Train",
@@ -1090,6 +1189,10 @@
     "brokenRules": [
       "sequential-rest-1h",
       "sequential-rest-8h"
+    ],
+    "brokenCodes": [
+      "H1",
+      "H8"
     ]
   },
   {
@@ -1105,6 +1208,10 @@
     "brokenRules": [
       "sequential-rest-1h",
       "sequential-rest-8h"
+    ],
+    "brokenCodes": [
+      "H1",
+      "H8"
     ]
   },
   {
@@ -1117,7 +1224,8 @@
     "timeWindow": "PM",
     "stagedVolunteer": "Person 123",
     "assignedVolunteer": "Person 123",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Shift Super",
@@ -1129,7 +1237,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "Person 059",
     "assignedVolunteer": "Person 059",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Shift Super",
@@ -1141,7 +1250,8 @@
     "timeWindow": "EITHER",
     "stagedVolunteer": "Person 123",
     "assignedVolunteer": "Person 123",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Shift Super",
@@ -1155,6 +1265,9 @@
     "assignedVolunteer": "Person 063",
     "brokenRules": [
       "time-preference"
+    ],
+    "brokenCodes": [
+      "T"
     ]
   },
   {
@@ -1169,6 +1282,9 @@
     "assignedVolunteer": "Person 118",
     "brokenRules": [
       "time-preference"
+    ],
+    "brokenCodes": [
+      "T"
     ]
   },
   {
@@ -1181,7 +1297,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "Person 009",
     "assignedVolunteer": "Person 009",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Shift Super",
@@ -1193,7 +1310,8 @@
     "timeWindow": "EITHER",
     "stagedVolunteer": "Person 063",
     "assignedVolunteer": "Person 063",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Shift Super",
@@ -1207,6 +1325,9 @@
     "assignedVolunteer": "Person 024",
     "brokenRules": [
       "time-preference"
+    ],
+    "brokenCodes": [
+      "T"
     ]
   },
   {
@@ -1219,7 +1340,8 @@
     "timeWindow": "PM",
     "stagedVolunteer": "Person 076",
     "assignedVolunteer": "Person 076",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Shift Super",
@@ -1231,7 +1353,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "Person 118",
     "assignedVolunteer": "Person 118",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Shift Super",
@@ -1243,7 +1366,8 @@
     "timeWindow": "EITHER",
     "stagedVolunteer": "Person 009",
     "assignedVolunteer": "Person 009",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Shift Super",
@@ -1255,7 +1379,8 @@
     "timeWindow": "PM",
     "stagedVolunteer": "Person 076",
     "assignedVolunteer": "Person 076",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Shift Super",
@@ -1269,6 +1394,9 @@
     "assignedVolunteer": "Person 063",
     "brokenRules": [
       "time-preference"
+    ],
+    "brokenCodes": [
+      "T"
     ]
   },
   {
@@ -1281,7 +1409,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "Person 059",
     "assignedVolunteer": "Person 059",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Shift Super",
@@ -1293,7 +1422,8 @@
     "timeWindow": "EITHER",
     "stagedVolunteer": "Person 009",
     "assignedVolunteer": "Person 009",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Shift Super",
@@ -1307,6 +1437,9 @@
     "assignedVolunteer": "Person 118",
     "brokenRules": [
       "time-preference"
+    ],
+    "brokenCodes": [
+      "T"
     ]
   },
   {
@@ -1319,7 +1452,8 @@
     "timeWindow": "PM",
     "stagedVolunteer": "Person 076",
     "assignedVolunteer": "Person 076",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Lead Plumbers",
@@ -1331,7 +1465,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "Person 089",
     "assignedVolunteer": "Person 089",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Lead Plumbers",
@@ -1343,7 +1478,8 @@
     "timeWindow": "PM",
     "stagedVolunteer": "Person 111",
     "assignedVolunteer": "Person 111",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Lead Plumbers",
@@ -1358,6 +1494,10 @@
     "brokenRules": [
       "qualification",
       "time-preference"
+    ],
+    "brokenCodes": [
+      "Q",
+      "T"
     ]
   },
   {
@@ -1370,7 +1510,8 @@
     "timeWindow": "PM",
     "stagedVolunteer": "Person 089",
     "assignedVolunteer": "Person 089",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Lead Plumbers",
@@ -1382,7 +1523,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "Person 089",
     "assignedVolunteer": "Person 089",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Lead Plumbers",
@@ -1394,7 +1536,8 @@
     "timeWindow": "PM",
     "stagedVolunteer": "Person 111",
     "assignedVolunteer": "Person 111",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Lead Plumbers",
@@ -1408,6 +1551,9 @@
     "assignedVolunteer": "Person 058",
     "brokenRules": [
       "qualification"
+    ],
+    "brokenCodes": [
+      "Q"
     ]
   },
   {
@@ -1420,7 +1566,8 @@
     "timeWindow": "PM",
     "stagedVolunteer": "Person 111",
     "assignedVolunteer": "Person 111",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Plumbers",
@@ -1432,7 +1579,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "Person 078",
     "assignedVolunteer": "Person 078",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Plumbers",
@@ -1444,7 +1592,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "Person 004",
     "assignedVolunteer": "Person 004",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Plumbers",
@@ -1456,7 +1605,8 @@
     "timeWindow": "EITHER",
     "stagedVolunteer": "Person 112",
     "assignedVolunteer": "Person 112",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Plumbers",
@@ -1468,7 +1618,8 @@
     "timeWindow": "EITHER",
     "stagedVolunteer": "Person 087",
     "assignedVolunteer": "Person 087",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Plumbers",
@@ -1482,6 +1633,9 @@
     "assignedVolunteer": "Person 023",
     "brokenRules": [
       "time-preference"
+    ],
+    "brokenCodes": [
+      "T"
     ]
   },
   {
@@ -1494,7 +1648,8 @@
     "timeWindow": "PM",
     "stagedVolunteer": "Person 036",
     "assignedVolunteer": "Person 036",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Plumbers",
@@ -1506,7 +1661,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "Person 087",
     "assignedVolunteer": "Person 087",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Plumbers",
@@ -1518,7 +1674,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "Person 058",
     "assignedVolunteer": "Person 058",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Plumbers",
@@ -1530,7 +1687,8 @@
     "timeWindow": "EITHER",
     "stagedVolunteer": "Person 078",
     "assignedVolunteer": "Person 078",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Plumbers",
@@ -1542,7 +1700,8 @@
     "timeWindow": "EITHER",
     "stagedVolunteer": "Person 023",
     "assignedVolunteer": "Person 023",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Plumbers",
@@ -1554,7 +1713,8 @@
     "timeWindow": "PM",
     "stagedVolunteer": "Person 111",
     "assignedVolunteer": "Person 111",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Plumbers",
@@ -1566,7 +1726,8 @@
     "timeWindow": "PM",
     "stagedVolunteer": "Person 112",
     "assignedVolunteer": "Person 112",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Plumbers",
@@ -1578,7 +1739,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "Person 087",
     "assignedVolunteer": "Person 087",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Plumbers",
@@ -1590,7 +1752,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "Person 058",
     "assignedVolunteer": "Person 058",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Plumbers",
@@ -1602,7 +1765,8 @@
     "timeWindow": "EITHER",
     "stagedVolunteer": "Person 112",
     "assignedVolunteer": "Person 112",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Plumbers",
@@ -1614,7 +1778,8 @@
     "timeWindow": "EITHER",
     "stagedVolunteer": "Person 023",
     "assignedVolunteer": "Person 023",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Plumbers",
@@ -1626,7 +1791,8 @@
     "timeWindow": "PM",
     "stagedVolunteer": "Person 078",
     "assignedVolunteer": "Person 078",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Plumbers",
@@ -1638,7 +1804,8 @@
     "timeWindow": "PM",
     "stagedVolunteer": "Person 036",
     "assignedVolunteer": "Person 036",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Plumbers",
@@ -1650,7 +1817,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "Person 004",
     "assignedVolunteer": "Person 004",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Plumbers",
@@ -1662,7 +1830,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "Person 023",
     "assignedVolunteer": "Person 023",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Plumbers",
@@ -1674,7 +1843,8 @@
     "timeWindow": "EITHER",
     "stagedVolunteer": "Person 087",
     "assignedVolunteer": "Person 087",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Plumbers",
@@ -1686,7 +1856,8 @@
     "timeWindow": "EITHER",
     "stagedVolunteer": "Person 078",
     "assignedVolunteer": "Person 078",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Plumbers",
@@ -1698,7 +1869,8 @@
     "timeWindow": "PM",
     "stagedVolunteer": "Person 112",
     "assignedVolunteer": "Person 112",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Plumbers",
@@ -1710,7 +1882,8 @@
     "timeWindow": "PM",
     "stagedVolunteer": "Person 124",
     "assignedVolunteer": "Person 124",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Cart Leads",
@@ -1722,7 +1895,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 103",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Cart Leads",
@@ -1734,7 +1908,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 094",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Cart Leads",
@@ -1746,7 +1921,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 033",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Cart Leads",
@@ -1758,7 +1934,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 016",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Cart Leads",
@@ -1770,7 +1947,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 102",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Cart Leads",
@@ -1782,7 +1960,8 @@
     "timeWindow": "PM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 030",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Cart Leads",
@@ -1794,7 +1973,8 @@
     "timeWindow": "PM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 065",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Cart Leads",
@@ -1806,7 +1986,8 @@
     "timeWindow": "PM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 015",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Cart Leads",
@@ -1818,7 +1999,8 @@
     "timeWindow": "PM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 076",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Cart Leads",
@@ -1832,6 +2014,9 @@
     "assignedVolunteer": "Person 017",
     "brokenRules": [
       "time-preference"
+    ],
+    "brokenCodes": [
+      "T"
     ]
   },
   {
@@ -1844,7 +2029,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 079",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Cart Leads",
@@ -1856,7 +2042,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 025",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Cart Leads",
@@ -1868,7 +2055,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 022",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Cart Leads",
@@ -1880,7 +2068,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 033",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Cart Leads",
@@ -1892,7 +2081,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 016",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Cart Leads",
@@ -1904,7 +2094,8 @@
     "timeWindow": "PM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 050",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Cart Leads",
@@ -1916,7 +2107,8 @@
     "timeWindow": "PM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 028",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Cart Leads",
@@ -1928,7 +2120,8 @@
     "timeWindow": "PM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 044",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Cart Leads",
@@ -1940,7 +2133,8 @@
     "timeWindow": "PM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 065",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Cart Leads",
@@ -1952,7 +2146,8 @@
     "timeWindow": "PM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 015",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Cart Leads",
@@ -1964,7 +2159,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 094",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Cart Leads",
@@ -1976,7 +2172,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 102",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Cart Leads",
@@ -1988,7 +2185,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 103",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Cart Leads",
@@ -2000,7 +2198,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 014",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Cart Leads",
@@ -2012,7 +2211,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 025",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Cart Leads",
@@ -2024,7 +2224,8 @@
     "timeWindow": "PM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 050",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Cart Leads",
@@ -2036,7 +2237,8 @@
     "timeWindow": "PM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 028",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Cart Leads",
@@ -2048,7 +2250,8 @@
     "timeWindow": "PM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 030",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Cart Leads",
@@ -2060,7 +2263,8 @@
     "timeWindow": "PM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 044",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Cart Leads",
@@ -2074,6 +2278,9 @@
     "assignedVolunteer": "Person 079",
     "brokenRules": [
       "time-preference"
+    ],
+    "brokenCodes": [
+      "T"
     ]
   },
   {
@@ -2086,7 +2293,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 079",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Cart Leads",
@@ -2098,7 +2306,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 017",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Cart Leads",
@@ -2110,7 +2319,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 046",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Cart Leads",
@@ -2122,7 +2332,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 047",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Cart Leads",
@@ -2134,7 +2345,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 022",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Cart Leads",
@@ -2146,7 +2358,8 @@
     "timeWindow": "PM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 050",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Cart Leads",
@@ -2158,7 +2371,8 @@
     "timeWindow": "PM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 028",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Cart Leads",
@@ -2170,7 +2384,8 @@
     "timeWindow": "PM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 030",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Cart Leads",
@@ -2182,7 +2397,8 @@
     "timeWindow": "PM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 044",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Cart Leads",
@@ -2196,6 +2412,9 @@
     "assignedVolunteer": "Person 103",
     "brokenRules": [
       "time-preference"
+    ],
+    "brokenCodes": [
+      "T"
     ]
   },
   {
@@ -2208,7 +2427,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "Person 012",
     "assignedVolunteer": "Person 012",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Runner",
@@ -2220,7 +2440,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "Person 026",
     "assignedVolunteer": "Person 026",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Runner",
@@ -2234,6 +2455,9 @@
     "assignedVolunteer": "Person 088",
     "brokenRules": [
       "time-preference"
+    ],
+    "brokenCodes": [
+      "T"
     ]
   },
   {
@@ -2246,7 +2470,8 @@
     "timeWindow": "PM",
     "stagedVolunteer": "Person 018",
     "assignedVolunteer": "Person 018",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Runner",
@@ -2258,7 +2483,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "Person 090",
     "assignedVolunteer": "Person 090",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Runner",
@@ -2270,7 +2496,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "Person 026",
     "assignedVolunteer": "Person 026",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Runner",
@@ -2284,6 +2511,9 @@
     "assignedVolunteer": "Person 088",
     "brokenRules": [
       "time-preference"
+    ],
+    "brokenCodes": [
+      "T"
     ]
   },
   {
@@ -2296,7 +2526,8 @@
     "timeWindow": "PM",
     "stagedVolunteer": "Person 018",
     "assignedVolunteer": "Person 018",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Runner",
@@ -2308,7 +2539,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "Person 090",
     "assignedVolunteer": "Person 090",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Runner",
@@ -2320,7 +2552,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "Person 012",
     "assignedVolunteer": "Person 012",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Runner",
@@ -2335,6 +2568,10 @@
     "brokenRules": [
       "qualification",
       "time-preference"
+    ],
+    "brokenCodes": [
+      "Q",
+      "T"
     ]
   },
   {
@@ -2349,6 +2586,9 @@
     "assignedVolunteer": "Person 088",
     "brokenRules": [
       "time-preference"
+    ],
+    "brokenCodes": [
+      "T"
     ]
   },
   {
@@ -2361,7 +2601,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "Person 026",
     "assignedVolunteer": "Person 026",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Runner",
@@ -2373,7 +2614,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "Person 012",
     "assignedVolunteer": "Person 012",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Runner",
@@ -2385,7 +2627,8 @@
     "timeWindow": "PM",
     "stagedVolunteer": "Person 018",
     "assignedVolunteer": "Person 018",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Runner",
@@ -2399,6 +2642,9 @@
     "assignedVolunteer": "Person 088",
     "brokenRules": [
       "time-preference"
+    ],
+    "brokenCodes": [
+      "T"
     ]
   },
   {
@@ -2410,7 +2656,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 049",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Fountain Sanitizer",
@@ -2421,7 +2668,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 121",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Fountain Sanitizer",
@@ -2432,7 +2680,8 @@
     "timeWindow": "EITHER",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 020",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Fountain Sanitizer",
@@ -2443,7 +2692,8 @@
     "timeWindow": "EITHER",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 062",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Fountain Sanitizer",
@@ -2454,7 +2704,8 @@
     "timeWindow": "PM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 032",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Fountain Sanitizer",
@@ -2465,7 +2716,8 @@
     "timeWindow": "PM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 037",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Fountain Sanitizer",
@@ -2476,7 +2728,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 027",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Fountain Sanitizer",
@@ -2487,7 +2740,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 002",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Fountain Sanitizer",
@@ -2498,7 +2752,8 @@
     "timeWindow": "EITHER",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 113",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Fountain Sanitizer",
@@ -2509,7 +2764,8 @@
     "timeWindow": "EITHER",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 068",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Fountain Sanitizer",
@@ -2520,7 +2776,8 @@
     "timeWindow": "PM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 055",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Fountain Sanitizer",
@@ -2531,7 +2788,8 @@
     "timeWindow": "PM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 097",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Fountain Sanitizer",
@@ -2542,7 +2800,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 110",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Fountain Sanitizer",
@@ -2553,7 +2812,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 060",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Fountain Sanitizer",
@@ -2564,7 +2824,8 @@
     "timeWindow": "EITHER",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 116",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Fountain Sanitizer",
@@ -2575,7 +2836,8 @@
     "timeWindow": "EITHER",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 006",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Fountain Sanitizer",
@@ -2586,7 +2848,8 @@
     "timeWindow": "PM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 057",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Fountain Sanitizer",
@@ -2597,7 +2860,8 @@
     "timeWindow": "PM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 083",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Fountain Sanitizer",
@@ -2608,7 +2872,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 096",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Fountain Sanitizer",
@@ -2619,7 +2884,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 093",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Fountain Sanitizer",
@@ -2630,7 +2896,8 @@
     "timeWindow": "EITHER",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 011",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Fountain Sanitizer",
@@ -2641,7 +2908,8 @@
     "timeWindow": "EITHER",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 106",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Fountain Sanitizer",
@@ -2652,7 +2920,8 @@
     "timeWindow": "PM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 067",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Fountain Sanitizer",
@@ -2663,7 +2932,8 @@
     "timeWindow": "PM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 051",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Hot Spot Duster",
@@ -2674,7 +2944,8 @@
     "timeWindow": "EITHER",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 043",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Hot Spot Duster",
@@ -2685,7 +2956,8 @@
     "timeWindow": "EITHER",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 001",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Hot Spot Duster",
@@ -2696,7 +2968,8 @@
     "timeWindow": "EITHER",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 109",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Hot Spot Duster",
@@ -2707,7 +2980,8 @@
     "timeWindow": "EITHER",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 005",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Hot Spot Duster",
@@ -2718,7 +2992,8 @@
     "timeWindow": "EITHER",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 101",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Hot Spot Duster",
@@ -2729,7 +3004,8 @@
     "timeWindow": "EITHER",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 122",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Hot Spot Duster",
@@ -2740,7 +3016,8 @@
     "timeWindow": "EITHER",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 072",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Hot Spot Duster",
@@ -2751,7 +3028,8 @@
     "timeWindow": "EITHER",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 092",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Hot Spot Duster",
@@ -2762,7 +3040,8 @@
     "timeWindow": "EITHER",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 031",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Hot Spot Duster",
@@ -2773,7 +3052,8 @@
     "timeWindow": "EITHER",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 035",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Hot Spot Duster",
@@ -2784,7 +3064,8 @@
     "timeWindow": "EITHER",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 082",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Hot Spot Duster",
@@ -2795,7 +3076,8 @@
     "timeWindow": "EITHER",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 052",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Hot Spot Duster",
@@ -2806,7 +3088,8 @@
     "timeWindow": "EITHER",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 008",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Hot Spot Duster",
@@ -2817,7 +3100,8 @@
     "timeWindow": "EITHER",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 029",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Hot Spot Duster",
@@ -2828,7 +3112,8 @@
     "timeWindow": "EITHER",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 084",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Hot Spot Duster",
@@ -2839,7 +3124,8 @@
     "timeWindow": "EITHER",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 095",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Hot Spot Duster",
@@ -2850,7 +3136,8 @@
     "timeWindow": "EITHER",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 034",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Hot Spot Duster",
@@ -2861,7 +3148,8 @@
     "timeWindow": "EITHER",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 041",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Hot Spot Duster",
@@ -2872,7 +3160,8 @@
     "timeWindow": "EITHER",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 119",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Hot Spot Duster",
@@ -2883,7 +3172,8 @@
     "timeWindow": "EITHER",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 081",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Hot Spot Duster",
@@ -2894,7 +3184,8 @@
     "timeWindow": "EITHER",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 013",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Hot Spot Duster",
@@ -2905,7 +3196,8 @@
     "timeWindow": "EITHER",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 105",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Hot Spot Duster",
@@ -2916,7 +3208,8 @@
     "timeWindow": "EITHER",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 064",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Hot Spot Duster",
@@ -2927,7 +3220,8 @@
     "timeWindow": "EITHER",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 056",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Morning Foliage Duster",
@@ -2938,7 +3232,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 042",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Morning Foliage Duster",
@@ -2949,7 +3244,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 104",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Morning Foliage Duster",
@@ -2960,7 +3256,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 010",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Morning Foliage Duster",
@@ -2971,7 +3268,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 114",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Morning Foliage Duster",
@@ -2982,7 +3280,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 049",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Morning Foliage Duster",
@@ -2993,7 +3292,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 029",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Morning Foliage Duster",
@@ -3004,7 +3304,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 077",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Morning Foliage Duster",
@@ -3015,7 +3316,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 104",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Morning Foliage Duster",
@@ -3026,7 +3328,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 072",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Morning Foliage Duster",
@@ -3037,7 +3340,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 002",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Morning Foliage Duster",
@@ -3048,7 +3352,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 082",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Morning Foliage Duster",
@@ -3059,7 +3364,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 074",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -3070,7 +3376,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 007",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -3081,7 +3388,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 110",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -3092,7 +3400,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 027",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -3103,7 +3412,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 105",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -3114,7 +3424,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 013",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -3125,7 +3436,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 086",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -3136,7 +3448,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 024",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -3147,7 +3460,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 093",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -3158,7 +3472,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 119",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -3169,7 +3484,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 092",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -3180,7 +3496,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 084",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -3191,7 +3508,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 096",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -3202,7 +3520,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 031",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -3213,7 +3532,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 120",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -3224,7 +3544,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 060",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -3235,7 +3556,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 035",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -3246,7 +3568,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 073",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -3257,7 +3580,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 056",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -3268,7 +3592,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 081",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -3279,7 +3604,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 064",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -3290,7 +3616,8 @@
     "timeWindow": "PM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 055",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -3301,7 +3628,8 @@
     "timeWindow": "PM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 057",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -3312,7 +3640,8 @@
     "timeWindow": "PM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 051",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -3323,7 +3652,8 @@
     "timeWindow": "PM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 097",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -3334,7 +3664,8 @@
     "timeWindow": "PM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 095",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -3345,7 +3676,8 @@
     "timeWindow": "PM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 083",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -3356,7 +3688,8 @@
     "timeWindow": "PM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 067",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -3367,7 +3700,8 @@
     "timeWindow": "PM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 115",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -3378,7 +3712,8 @@
     "timeWindow": "PM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 011",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -3389,7 +3724,8 @@
     "timeWindow": "PM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 006",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -3400,7 +3736,8 @@
     "timeWindow": "PM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 116",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -3411,7 +3748,8 @@
     "timeWindow": "PM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 113",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -3422,7 +3760,8 @@
     "timeWindow": "PM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 106",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -3433,7 +3772,8 @@
     "timeWindow": "PM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 068",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -3444,7 +3784,8 @@
     "timeWindow": "PM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 019",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -3455,7 +3796,8 @@
     "timeWindow": "PM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 091",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -3466,7 +3808,8 @@
     "timeWindow": "PM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 124",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -3477,7 +3820,8 @@
     "timeWindow": "PM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 117",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -3490,6 +3834,9 @@
     "assignedVolunteer": "Person 075",
     "brokenRules": [
       "time-preference"
+    ],
+    "brokenCodes": [
+      "T"
     ]
   },
   {
@@ -3503,6 +3850,9 @@
     "assignedVolunteer": "Person 108",
     "brokenRules": [
       "time-preference"
+    ],
+    "brokenCodes": [
+      "T"
     ]
   },
   {
@@ -3514,7 +3864,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 010",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -3525,7 +3876,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 034",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -3536,7 +3888,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 047",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -3547,7 +3900,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 041",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -3558,7 +3912,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 008",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -3569,7 +3924,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 045",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -3580,7 +3936,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 042",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -3591,7 +3948,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 121",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -3602,7 +3960,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 070",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -3613,7 +3972,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 062",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -3624,7 +3984,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 109",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -3635,7 +3996,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 101",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -3646,7 +4008,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 005",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -3657,7 +4020,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 001",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -3668,7 +4032,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 043",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -3679,7 +4044,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 122",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -3690,7 +4056,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 020",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -3701,7 +4068,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 039",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -3712,7 +4080,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 013",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -3723,7 +4092,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 007",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -3734,7 +4104,8 @@
     "timeWindow": "PM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 032",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -3745,7 +4116,8 @@
     "timeWindow": "PM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 037",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -3756,7 +4128,8 @@
     "timeWindow": "PM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 123",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -3767,7 +4140,8 @@
     "timeWindow": "PM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 051",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -3778,7 +4152,8 @@
     "timeWindow": "PM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 067",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -3789,7 +4164,8 @@
     "timeWindow": "PM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 083",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -3800,7 +4176,8 @@
     "timeWindow": "PM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 057",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -3811,7 +4188,8 @@
     "timeWindow": "PM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 095",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -3822,7 +4200,8 @@
     "timeWindow": "PM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 004",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -3833,7 +4212,8 @@
     "timeWindow": "PM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 006",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -3844,7 +4224,8 @@
     "timeWindow": "PM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 116",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -3855,7 +4236,8 @@
     "timeWindow": "PM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 011",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -3866,7 +4248,8 @@
     "timeWindow": "PM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 036",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -3877,7 +4260,8 @@
     "timeWindow": "PM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 106",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -3888,7 +4272,8 @@
     "timeWindow": "PM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 124",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -3899,7 +4284,8 @@
     "timeWindow": "PM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 125",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -3912,6 +4298,9 @@
     "assignedVolunteer": "Person 073",
     "brokenRules": [
       "time-preference"
+    ],
+    "brokenCodes": [
+      "T"
     ]
   },
   {
@@ -3925,6 +4314,9 @@
     "assignedVolunteer": "Person 086",
     "brokenRules": [
       "time-preference"
+    ],
+    "brokenCodes": [
+      "T"
     ]
   },
   {
@@ -3938,6 +4330,9 @@
     "assignedVolunteer": "Person 093",
     "brokenRules": [
       "time-preference"
+    ],
+    "brokenCodes": [
+      "T"
     ]
   },
   {
@@ -3951,6 +4346,9 @@
     "assignedVolunteer": "Person 066",
     "brokenRules": [
       "time-preference"
+    ],
+    "brokenCodes": [
+      "T"
     ]
   },
   {
@@ -3962,7 +4360,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 052",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -3973,7 +4372,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 114",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -3984,7 +4384,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 082",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -3995,7 +4396,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 022",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -4006,7 +4408,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 081",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -4017,7 +4420,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 064",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -4028,7 +4432,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 046",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -4039,7 +4444,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 042",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -4050,7 +4456,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 049",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -4061,7 +4468,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 035",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -4072,7 +4480,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 033",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -4083,7 +4492,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 002",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -4094,7 +4504,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 045",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -4105,7 +4516,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 059",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -4116,7 +4528,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 119",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -4127,7 +4540,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 071",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -4138,7 +4552,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 031",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -4149,7 +4564,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 105",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -4160,7 +4576,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 027",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -4171,7 +4588,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 121",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -4182,7 +4600,8 @@
     "timeWindow": "PM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 055",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -4193,7 +4612,8 @@
     "timeWindow": "PM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 032",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -4204,7 +4624,8 @@
     "timeWindow": "PM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 037",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -4215,7 +4636,8 @@
     "timeWindow": "PM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 021",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -4226,7 +4648,8 @@
     "timeWindow": "PM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 097",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -4237,7 +4660,8 @@
     "timeWindow": "PM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 019",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -4248,7 +4672,8 @@
     "timeWindow": "PM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 043",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -4259,7 +4684,8 @@
     "timeWindow": "PM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 122",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -4270,7 +4696,8 @@
     "timeWindow": "PM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 062",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -4281,7 +4708,8 @@
     "timeWindow": "PM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 101",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -4292,7 +4720,8 @@
     "timeWindow": "PM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 068",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -4303,7 +4732,8 @@
     "timeWindow": "PM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 020",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -4314,7 +4744,8 @@
     "timeWindow": "PM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 039",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -4325,7 +4756,8 @@
     "timeWindow": "PM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 109",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -4336,7 +4768,8 @@
     "timeWindow": "PM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 115",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -4347,7 +4780,8 @@
     "timeWindow": "PM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 005",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -4358,7 +4792,8 @@
     "timeWindow": "PM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 113",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -4369,7 +4804,8 @@
     "timeWindow": "PM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 001",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -4380,7 +4816,8 @@
     "timeWindow": "PM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 040",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -4391,7 +4828,8 @@
     "timeWindow": "PM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 051",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -4402,7 +4840,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 016",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -4413,7 +4852,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 060",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -4424,7 +4864,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 104",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -4435,7 +4876,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 052",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -4446,7 +4888,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 034",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -4457,7 +4900,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 025",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -4468,7 +4912,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 084",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -4479,7 +4924,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 014",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -4490,7 +4936,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 102",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -4501,7 +4948,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 072",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -4512,7 +4960,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 070",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -4523,7 +4972,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 024",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -4534,7 +4984,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 029",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -4545,7 +4996,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 094",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -4556,7 +5008,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 114",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -4567,7 +5020,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 077",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -4578,7 +5032,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 041",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -4589,7 +5044,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 008",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -4600,7 +5056,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 092",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -4611,7 +5068,8 @@
     "timeWindow": "AM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 010",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -4622,7 +5080,8 @@
     "timeWindow": "PM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 090",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -4633,7 +5092,8 @@
     "timeWindow": "PM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 037",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -4644,7 +5104,8 @@
     "timeWindow": "PM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 032",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -4655,7 +5116,8 @@
     "timeWindow": "PM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 038",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -4666,7 +5128,8 @@
     "timeWindow": "PM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 021",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -4677,7 +5140,8 @@
     "timeWindow": "PM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 083",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -4688,7 +5152,8 @@
     "timeWindow": "PM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 091",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -4699,7 +5164,8 @@
     "timeWindow": "PM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 057",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -4710,7 +5176,8 @@
     "timeWindow": "PM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 095",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -4721,7 +5188,8 @@
     "timeWindow": "PM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 097",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -4732,7 +5200,8 @@
     "timeWindow": "PM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 055",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -4743,7 +5212,8 @@
     "timeWindow": "PM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 115",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -4754,7 +5224,8 @@
     "timeWindow": "PM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 020",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -4765,7 +5236,8 @@
     "timeWindow": "PM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 001",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -4776,7 +5248,8 @@
     "timeWindow": "PM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 122",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -4787,7 +5260,8 @@
     "timeWindow": "PM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 117",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -4800,6 +5274,9 @@
     "assignedVolunteer": "Person 110",
     "brokenRules": [
       "time-preference"
+    ],
+    "brokenCodes": [
+      "T"
     ]
   },
   {
@@ -4811,7 +5288,8 @@
     "timeWindow": "PM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 036",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -4822,7 +5300,8 @@
     "timeWindow": "PM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 043",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Carts",
@@ -4833,6 +5312,7 @@
     "timeWindow": "PM",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 101",
-    "brokenRules": []
+    "brokenRules": [],
+    "brokenCodes": []
   }
 ]

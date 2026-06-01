@@ -1,4 +1,5 @@
 import { assign } from "./scheduler.js";
+import { orderCodes } from "./engine.ts";
 import type { Person, Assignment } from "./types.ts";
 
 type Sheet = GoogleAppsScript.Spreadsheet.Sheet;
@@ -29,7 +30,7 @@ function runGenerateAssignments(): void {
 }
 
 function debugPrint(name: string, x: string, col: number): void {
-  const debugSheet = getSheet("Debug");
+  const debugSheet = getOrCreateSheet("Debug");
 
   const chunks: string[] = [];
   const chunkSize = 50000;
@@ -67,6 +68,14 @@ function getSheet(sheet_name: string): Sheet {
     throw new Error(`Sheet named '${sheet_name}' not found!`);
   }
   return sheet;
+}
+
+// Like getSheet, but creates the tab if it's missing. Used for the
+// Debug dump so a fresh spreadsheet without a Debug tab doesn't abort
+// the assignment run.
+function getOrCreateSheet(sheet_name: string): Sheet {
+  const ss = SpreadsheetApp.getActiveSpreadsheet();
+  return ss.getSheetByName(sheet_name) ?? ss.insertSheet(sheet_name);
 }
 
 function lookupTimeId(t: string): number | undefined {
@@ -211,8 +220,10 @@ function buildVolunteerScheduleHtml(
   volunteers: Person[],
   assignments: Assignment[]
 ): string {
-  // Index assignments by volunteer name → "day|AM"/"day|PM" → [jobName].
+  // Index assignments by volunteer name → "day|AM"/"day|PM" → [jobName],
+  // and collect the union of broken-rule codes across their shifts.
   const buckets = new Map<string, Map<string, string[]>>();
+  const codesByName = new Map<string, Set<string>>();
   for (const a of assignments) {
     const name = (a.assignedVolunteer || "").trim();
     if (!name) continue;
@@ -230,6 +241,17 @@ function buildVolunteerScheduleHtml(
       cells.set(key, list);
     }
     if (!list.includes(a.jobName)) list.push(a.jobName);
+
+    let codes = codesByName.get(name);
+    if (!codes) {
+      codes = new Set();
+      codesByName.set(name, codes);
+    }
+    // Persisted as a concatenated string ("H8S4T"); split back into
+    // individual codes (letter + optional digits) to union per person.
+    for (const c of String(a.codes ?? "").match(/[A-Z]\d*/g) ?? []) {
+      codes.add(c);
+    }
   }
 
   const sorted = volunteers
@@ -261,12 +283,14 @@ function buildVolunteerScheduleHtml(
           })
         )
         .join("");
+      const codes = orderCodes(codesByName.get(v.name) ?? []).join("");
       return `<tr>
         <td class="id">${escapeHtml(v.first)}</td>
         <td class="id">${escapeHtml(v.last)}</td>
         <td class="id">${escapeHtml(v.nickname)}</td>
         <td class="center">${escapeHtml(prefLabel(v.timePreference))}</td>
         <td class="center swatch" style="background:${shiftCountColor(total)}">${total}</td>
+        <td class="center">${escapeHtml(codes)}</td>
         ${slotCells}
       </tr>`;
     })
@@ -276,7 +300,7 @@ function buildVolunteerScheduleHtml(
     <table class="schedule">
       <thead>
         <tr>
-          <th>First</th><th>Last</th><th>Nickname</th><th>AM/PM Pref</th><th>Shifts</th>
+          <th>First</th><th>Last</th><th>Nickname</th><th>AM/PM Pref</th><th>Shifts</th><th>Codes</th>
           ${colHeaders}
         </tr>
       </thead>

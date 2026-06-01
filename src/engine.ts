@@ -43,6 +43,7 @@ export interface Assignment {
 export interface PlacedAssignment extends Assignment {
   assignedVolunteer: string;
   brokenRules: string[];
+  brokenCodes: string[];
 }
 
 export interface PersonState {
@@ -62,6 +63,10 @@ export interface PlacementContext {
 
 export interface AssignmentRule {
   name: string;
+  // Short code surfaced in output when this rule is broken (e.g. "H8",
+  // "S4", "T"). Letter identifies the rule; trailing number, where
+  // present, echoes the rule's parameter.
+  code: string;
   priority: number;
   test: (ctx: PlacementContext) => boolean;
 }
@@ -117,6 +122,27 @@ export function defineRuleSet(spec: RuleSet): RuleSet {
 // ---------------------------------------------------------------------------
 // mulberry32 — small seedable RNG for deterministic tests.
 // ---------------------------------------------------------------------------
+
+// ---------------------------------------------------------------------------
+// orderCodes — stable display order for broken-rule codes.
+// ---------------------------------------------------------------------------
+
+// Sort by leading letter (rest H, same-day D, max-shifts S, time T,
+// qualification Q; anything else last), then by trailing number so e.g.
+// "H8" precedes "H10". Dedups via the Set the caller passes in.
+export function orderCodes(codes: Iterable<string>): string[] {
+  const rank = (code: string): number => {
+    const i = "HDSTQ".indexOf(code[0]);
+    return i === -1 ? Number.MAX_SAFE_INTEGER : i;
+  };
+  const num = (code: string): number => {
+    const n = parseInt(code.slice(1), 10);
+    return Number.isNaN(n) ? 0 : n;
+  };
+  return Array.from(new Set(codes)).sort(
+    (a, b) => rank(a) - rank(b) || num(a) - num(b) || a.localeCompare(b)
+  );
+}
 
 export function mulberry32(seed: number): () => number {
   let state = seed >>> 0;
@@ -186,7 +212,12 @@ export function runEngine(
   const personByName = new Map(people.map((p) => [p.name, p]));
 
   const placed: PlacedAssignment[] = assignments
-    .map((a) => ({ ...a, assignedVolunteer: "", brokenRules: [] as string[] }))
+    .map((a) => ({
+      ...a,
+      assignedVolunteer: "",
+      brokenRules: [] as string[],
+      brokenCodes: [] as string[],
+    }))
     .sort((a, b) => compareSlots(a, b));
 
   // Step 3 — copy staged volunteers into their assignments. Evaluate the
@@ -202,6 +233,7 @@ export function runEngine(
     for (const rule of rulesByPriorityAsc) {
       if (!rule.test({ slot, person, state })) {
         slot.brokenRules.push(rule.name);
+        slot.brokenCodes.push(rule.code);
       }
     }
     bumpState(state, slot);
@@ -254,6 +286,7 @@ export function runEngine(
       for (const rule of droppedRules) {
         if (!rule.test({ slot, person: chosen, state: chosenState })) {
           slot.brokenRules.push(rule.name);
+          slot.brokenCodes.push(rule.code);
         }
       }
 

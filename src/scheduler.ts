@@ -10,7 +10,7 @@
 // adapter. Once src/sheet.ts is rewritten to consume canonical
 // types directly (META_PLAN migration step 2), this driver collapses
 // to a one-liner and the legacy types can be deleted.
-import { parseLegacy, runEngine } from "./engine.ts";
+import { orderCodes, parseLegacy, runEngine } from "./engine.ts";
 import { currentRules } from "./rulesets.ts";
 import type { Assignment, IndexedAssignment, Person } from "./types.ts";
 
@@ -48,6 +48,7 @@ export function assign(
       sameDayAssigned: p.brokenRules.includes("one-shift-per-day"),
       nonIdealShiftTaken: p.brokenRules.includes("time-preference"),
       doubleShiftTaken: false,
+      codes: orderCodes(new Set(p.brokenCodes)).join(""),
     });
   }
   return out;

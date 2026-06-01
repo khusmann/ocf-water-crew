@@ -56,12 +56,16 @@ export interface Assignment {
   timeCategory: TimeCategory | string;
   sameDayAssigned: boolean;
   nonIdealShiftTaken: boolean;
+  // Concatenated broken-rule codes for this placement (e.g. "H8S4T").
+  // Empty when the placement broke no relaxable rule.
+  codes?: string;
 }
 
 // Assignment after sortAssignments(): adds index and doubleShiftTaken.
 export interface IndexedAssignment extends Assignment {
   index: number;
   doubleShiftTaken: boolean;
+  codes: string;
 }
 
 // Per-person running totals built in the setup phase.

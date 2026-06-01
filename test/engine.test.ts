@@ -15,6 +15,7 @@ import {
 
 const passEverything: AssignmentRule = {
   name: "pass",
+  code: "P",
   priority: 0,
   test: () => true,
 };
@@ -148,6 +149,7 @@ test("runEngine copies staged volunteers verbatim and bumps their counters", () 
 test("runEngine records dropped-rule failures in brokenRules", () => {
   const onlyOnDay2: AssignmentRule = {
     name: "only-day-2",
+    code: "X",
     priority: 1,
     test: ({ slot }) => slot.day === 2,
   };
@@ -164,6 +166,7 @@ test("runEngine records dropped-rule failures in brokenRules", () => {
 test("runEngine annotates staged-slot rule failures into brokenRules", () => {
   const oneShiftPerDay: AssignmentRule = {
     name: "one-shift-per-day",
+    code: "D",
     priority: 1,
     test: ({ slot, state }) => !state.daysWorked.has(slot.day),
   };
@@ -236,6 +239,7 @@ test("priority-0 floor rule that fails leaves the slot empty", () => {
     assignmentRules: [
       {
         name: "no-one-qualifies",
+        code: "N",
         priority: 0,
         test: () => false,
       },
