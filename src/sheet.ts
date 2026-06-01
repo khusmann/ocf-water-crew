@@ -216,22 +216,20 @@ function buildVolunteerScheduleHtml(
   for (const a of assignments) {
     const name = (a.assignedVolunteer || "").trim();
     if (!name) continue;
-    const slots = amPmBuckets(a.timeCategory);
-    if (slots.length === 0) continue;
+    const slot = amPmBucket(a);
+    if (!slot) continue;
     let cells = buckets.get(name);
     if (!cells) {
       cells = new Map();
       buckets.set(name, cells);
     }
-    for (const slot of slots) {
-      const key = `${a.day}|${slot}`;
-      let list = cells.get(key);
-      if (!list) {
-        list = [];
-        cells.set(key, list);
-      }
-      if (!list.includes(a.jobName)) list.push(a.jobName);
+    const key = `${a.day}|${slot}`;
+    let list = cells.get(key);
+    if (!list) {
+      list = [];
+      cells.set(key, list);
     }
+    if (!list.includes(a.jobName)) list.push(a.jobName);
   }
 
   const sorted = volunteers
@@ -286,13 +284,16 @@ function buildVolunteerScheduleHtml(
   return wrapPrintDocument(body, { landscape: true });
 }
 
-function amPmBuckets(t: string): ("AM" | "PM")[] {
-  // Final assignments are binary AM or PM. Be defensive: if a legacy
-  // "AM,PM"/"AM, PM" midday value sneaks through, span both columns.
-  if (t === "AM") return ["AM"];
-  if (t === "PM") return ["PM"];
-  if (t === "AM,PM" || t === "AM, PM") return ["AM", "PM"];
-  return [];
+function amPmBucket(a: Assignment): "AM" | "PM" | null {
+  // Each finished assignment occupies a single AM-or-PM column. AM and
+  // PM pass straight through; a midday "AM, PM" shift is one shift that
+  // straddles noon, so resolve it to a single window by start hour
+  // (before noon → AM, noon or later → PM) rather than spanning both.
+  const t = a.timeCategory;
+  if (t === "AM") return "AM";
+  if (t === "PM") return "PM";
+  if (t === "AM,PM" || t === "AM, PM") return a.shiftStartNum < 12 ? "AM" : "PM";
+  return null;
 }
 
 function dayShort(day: number): string {
