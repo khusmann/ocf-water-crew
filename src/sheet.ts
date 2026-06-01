@@ -158,7 +158,11 @@ function objArrayFromSheet(sheet: Sheet, sizeCol: number = 0): SheetRow[] {
   const values = dataRange.getValues();
 
   const nJobs = sizeIgnoringEmptyEnd(values.map((i) => i[sizeCol]));
-  const nProps = sizeIgnoringEmptyEnd(values[nJobs - 1]);
+  // Column count comes from the header row, which is always fully
+  // populated. Deriving it from a data row drops trailing columns whose
+  // last-row cell is empty (e.g. a Codes column the last assignment
+  // leaves blank).
+  const nProps = sizeIgnoringEmptyEnd(values[0]);
 
   const props = values[0].slice(0, nProps).map(toCamelCase);
 
@@ -297,6 +301,7 @@ function buildVolunteerScheduleHtml(
     .join("\n");
 
   const body = `<section class="page wide">
+    ${codesLegend()}
     <table class="schedule">
       <thead>
         <tr>
@@ -309,6 +314,25 @@ function buildVolunteerScheduleHtml(
   </section>`;
 
   return wrapPrintDocument(body, { landscape: true });
+}
+
+// Key for the Codes column. "#" stands for the rule's threshold, which
+// rides along in the actual code (e.g. "H9" = under 9h rest).
+function codesLegend(): string {
+  const items: [string, string][] = [
+    ["H#", "under #h rest between shifts"],
+    ["D", "second shift same day"],
+    ["S#", "over # shifts (max)"],
+    ["T", "non-preferred AM/PM"],
+    ["Q", "missing required qualification"],
+  ];
+  const entries = items
+    .map(
+      ([code, desc]) =>
+        `<span class="legend-item"><b>${escapeHtml(code)}</b> ${escapeHtml(desc)}</span>`
+    )
+    .join("");
+  return `<div class="legend"><span class="legend-title">Codes:</span> ${entries}</div>`;
 }
 
 function shiftCountColor(n: number): string {
@@ -561,6 +585,9 @@ function wrapPrintDocument(
   table.schedule td.id { font-weight: 500; white-space: nowrap; }
   table.schedule td.center { text-align: center; }
   table.schedule td.swatch { font-weight: bold; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .legend { font-size: 11px; margin: 0 0 8px; line-height: 1.6; }
+  .legend-title { font-weight: bold; }
+  .legend-item { margin-right: 14px; white-space: nowrap; }
   @media print {
     body { background: #fff; }
     .toolbar { display: none; }
