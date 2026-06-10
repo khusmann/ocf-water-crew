@@ -2,18 +2,6 @@
   {
     "jobName": "Carts",
     "jobPriority": 0,
-    "day": 1,
-    "startHour": 22,
-    "durationHours": 4,
-    "timeWindow": "PM",
-    "stagedVolunteer": "Person 01",
-    "assignedVolunteer": "Person 01",
-    "brokenRules": [],
-    "brokenCodes": []
-  },
-  {
-    "jobName": "Carts",
-    "jobPriority": 0,
     "day": 2,
     "startHour": 6,
     "durationHours": 8,
@@ -26,5 +14,17 @@
     "brokenCodes": [
       "H8"
     ]
+  },
+  {
+    "jobName": "Carts",
+    "jobPriority": 0,
+    "day": 1,
+    "startHour": 22,
+    "durationHours": 4,
+    "timeWindow": "PM",
+    "stagedVolunteer": "Person 01",
+    "assignedVolunteer": "Person 01",
+    "brokenRules": [],
+    "brokenCodes": []
   }
 ]

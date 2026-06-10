@@ -8,54 +8,6 @@
     "durationHours": 8,
     "timeWindow": "EITHER",
     "stagedVolunteer": "",
-    "assignedVolunteer": "Person 01",
-    "brokenRules": [],
-    "brokenCodes": []
-  },
-  {
-    "jobName": "Carts",
-    "jobPriority": 1,
-    "day": 1,
-    "startHour": 6,
-    "durationHours": 8,
-    "timeWindow": "EITHER",
-    "stagedVolunteer": "",
-    "assignedVolunteer": "Person 02",
-    "brokenRules": [],
-    "brokenCodes": []
-  },
-  {
-    "jobName": "Carts",
-    "jobPriority": 1,
-    "day": 1,
-    "startHour": 14,
-    "durationHours": 8,
-    "timeWindow": "EITHER",
-    "stagedVolunteer": "",
-    "assignedVolunteer": "Person 03",
-    "brokenRules": [],
-    "brokenCodes": []
-  },
-  {
-    "jobName": "Carts",
-    "jobPriority": 1,
-    "day": 2,
-    "startHour": 6,
-    "durationHours": 8,
-    "timeWindow": "EITHER",
-    "stagedVolunteer": "",
-    "assignedVolunteer": "Person 01",
-    "brokenRules": [],
-    "brokenCodes": []
-  },
-  {
-    "jobName": "Carts",
-    "jobPriority": 1,
-    "day": 2,
-    "startHour": 14,
-    "durationHours": 8,
-    "timeWindow": "EITHER",
-    "stagedVolunteer": "",
     "assignedVolunteer": "Person 02",
     "brokenRules": [],
     "brokenCodes": []
@@ -68,7 +20,31 @@
     "durationHours": 8,
     "timeWindow": "EITHER",
     "stagedVolunteer": "",
+    "assignedVolunteer": "Person 01",
+    "brokenRules": [],
+    "brokenCodes": []
+  },
+  {
+    "jobName": "Carts",
+    "jobPriority": 1,
+    "day": 4,
+    "startHour": 14,
+    "durationHours": 8,
+    "timeWindow": "EITHER",
+    "stagedVolunteer": "",
     "assignedVolunteer": "Person 03",
+    "brokenRules": [],
+    "brokenCodes": []
+  },
+  {
+    "jobName": "Carts",
+    "jobPriority": 1,
+    "day": 2,
+    "startHour": 14,
+    "durationHours": 8,
+    "timeWindow": "EITHER",
+    "stagedVolunteer": "",
+    "assignedVolunteer": "Person 01",
     "brokenRules": [],
     "brokenCodes": []
   },
@@ -92,6 +68,18 @@
     "durationHours": 8,
     "timeWindow": "EITHER",
     "stagedVolunteer": "",
+    "assignedVolunteer": "Person 02",
+    "brokenRules": [],
+    "brokenCodes": []
+  },
+  {
+    "jobName": "Carts",
+    "jobPriority": 1,
+    "day": 1,
+    "startHour": 14,
+    "durationHours": 8,
+    "timeWindow": "EITHER",
+    "stagedVolunteer": "",
     "assignedVolunteer": "Person 03",
     "brokenRules": [],
     "brokenCodes": []
@@ -99,12 +87,24 @@
   {
     "jobName": "Carts",
     "jobPriority": 1,
-    "day": 4,
-    "startHour": 14,
+    "day": 1,
+    "startHour": 6,
     "durationHours": 8,
     "timeWindow": "EITHER",
     "stagedVolunteer": "",
     "assignedVolunteer": "Person 01",
+    "brokenRules": [],
+    "brokenCodes": []
+  },
+  {
+    "jobName": "Carts",
+    "jobPriority": 1,
+    "day": 2,
+    "startHour": 6,
+    "durationHours": 8,
+    "timeWindow": "EITHER",
+    "stagedVolunteer": "",
+    "assignedVolunteer": "Person 03",
     "brokenRules": [],
     "brokenCodes": []
   }

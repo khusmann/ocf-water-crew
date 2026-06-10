@@ -163,6 +163,44 @@ export function compareSlots(a: Assignment, b: Assignment): number {
   return 0;
 }
 
+// Fisher–Yates shuffle of arr[lo, hi) in place, driven by rng.
+function shuffleRange<T>(
+  arr: T[],
+  lo: number,
+  hi: number,
+  rng: () => number
+): void {
+  for (let i = hi - 1; i > lo; i--) {
+    const j = lo + Math.floor(rng() * (i - lo + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+}
+
+// The order the engine fills slots in. Without rng: the deterministic
+// canonical order (compareSlots). With rng: stable by jobPriority, then
+// each equal-priority group is shuffled together (full interleave) — so
+// among equal-priority slots no job systematically gets first pick of the
+// candidate pool. dev/UNIFY_SHEET.md §4.6.
+function orderSlotsForFill(
+  placed: PlacedAssignment[],
+  rng?: () => number
+): void {
+  if (!rng) {
+    placed.sort((a, b) => compareSlots(a, b));
+    return;
+  }
+  placed.sort((a, b) => a.jobPriority - b.jobPriority); // stable in V8
+  let i = 0;
+  while (i < placed.length) {
+    let j = i;
+    while (j < placed.length && placed[j].jobPriority === placed[i].jobPriority) {
+      j++;
+    }
+    shuffleRange(placed, i, j, rng);
+    i = j;
+  }
+}
+
 function emptyState(): PersonState {
   return { shiftsPlaced: 0, daysWorked: new Set(), assignedShifts: [] };
 }
@@ -207,14 +245,13 @@ export function runEngine(
   const stateOf = (p: Person): PersonState => states.get(p.name)!;
   const personByName = new Map(people.map((p) => [p.name, p]));
 
-  const placed: PlacedAssignment[] = assignments
-    .map((a) => ({
-      ...a,
-      assignedVolunteer: "",
-      brokenRules: [] as string[],
-      brokenCodes: [] as string[],
-    }))
-    .sort((a, b) => compareSlots(a, b));
+  const placed: PlacedAssignment[] = assignments.map((a) => ({
+    ...a,
+    assignedVolunteer: "",
+    brokenRules: [] as string[],
+    brokenCodes: [] as string[],
+  }));
+  orderSlotsForFill(placed, rng);
 
   // Step 3 — copy staged volunteers into their assignments. Evaluate the
   // full assignment-rule set against the (staged person, slot) pair BEFORE
