@@ -10,25 +10,26 @@ import fs from "node:fs";
 import path from "node:path";
 import {
   mulberry32,
-  parseLegacy,
   runEngine,
+  type Assignment,
   type PlacedAssignment,
+  type Person,
 } from "../src/engine.ts";
 import { targetRules } from "../src/rulesets.ts";
-import type { SchedulerInput } from "../src/types.ts";
+
+type EngineInput = { people: Person[]; assignments: Assignment[] };
 
 const fixturesDir = path.resolve("test/fixtures");
 const expectedDir = path.join(fixturesDir, "expected", "target");
 
 function runFixture(name: string): void {
-  const input: SchedulerInput = JSON.parse(
+  const input: EngineInput = JSON.parse(
     fs.readFileSync(path.join(fixturesDir, `${name}.json`), "utf8")
   );
-  const canonical = parseLegacy(input.assignments, input.people);
   const actual = runEngine(
     targetRules,
-    canonical.assignments,
-    canonical.people,
+    input.assignments,
+    input.people,
     { rng: mulberry32(0) }
   );
   const expected: PlacedAssignment[] = JSON.parse(

@@ -1,65 +1,34 @@
 {
   "people": [
     {
-      "first": "Person",
-      "last": "01",
-      "nickname": "",
-      "volunteerType": "Staff",
-      "specialQualifications": "",
-      "timePreference": "PM, AM",
       "name": "Person 01",
-      "hoursAssigned": 16,
-      "shifts": 2,
-      "specialQualificationsIds": []
+      "timePreference": "EITHER",
+      "qualifications": []
     },
     {
-      "first": "Person",
-      "last": "02",
-      "nickname": "",
-      "volunteerType": "Staff",
-      "specialQualifications": "",
-      "timePreference": "AM, PM",
       "name": "Person 02",
-      "hoursAssigned": 16,
-      "shifts": 2,
-      "timeId": 1,
-      "specialQualificationsIds": []
+      "timePreference": "EITHER",
+      "qualifications": []
     }
   ],
   "assignments": [
     {
-      "stagedVolunteer": "",
-      "assignedVolunteer": "",
-      "jobPriority": 0,
       "jobName": "Carts",
-      "special": false,
+      "jobPriority": 0,
       "day": 1,
-      "dayId": 2,
-      "shiftStart": "1899-12-30T14:00:00.000Z",
-      "shiftStartNum": 6,
-      "hrsShift": 8,
-      "person": 1,
-      "timePriority": 0,
-      "timeCategory": "AM",
-      "sameDayAssigned": false,
-      "nonIdealShiftTaken": false
+      "startHour": 6,
+      "durationHours": 8,
+      "timeWindow": "AM",
+      "stagedVolunteer": ""
     },
     {
-      "stagedVolunteer": "",
-      "assignedVolunteer": "",
-      "jobPriority": 0,
       "jobName": "Carts",
-      "special": false,
+      "jobPriority": 0,
       "day": 2,
-      "dayId": 3,
-      "shiftStart": "1899-12-30T14:00:00.000Z",
-      "shiftStartNum": 6,
-      "hrsShift": 8,
-      "person": 1,
-      "timePriority": 0,
-      "timeCategory": "AM",
-      "sameDayAssigned": false,
-      "nonIdealShiftTaken": false
+      "startHour": 6,
+      "durationHours": 8,
+      "timeWindow": "AM",
+      "stagedVolunteer": ""
     }
   ]
 }

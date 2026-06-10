@@ -3,26 +3,26 @@
 // code paths so a regression fails a named test instead of an opaque
 // whole-output diff.
 //
-// Inputs in test/fixtures/*.json are still in the legacy shape — the
-// engine's parseLegacy bridges them. Once src/sheet.ts is rewritten to
-// emit canonical types directly, the fixtures move to canonical shape
-// too and parseLegacy is deleted.
+// Inputs in test/fixtures/*.json are canonical engine shapes, fed
+// straight to runEngine.
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import fs from "node:fs";
 import path from "node:path";
 import {
-  parseLegacy,
   runEngine,
+  type Assignment,
   type PlacedAssignment,
+  type Person,
 } from "../src/engine.ts";
 import { currentRules } from "../src/rulesets.ts";
-import type { SchedulerInput } from "../src/types.ts";
+
+type EngineInput = { people: Person[]; assignments: Assignment[] };
 
 const fixturesDir = path.resolve("test/fixtures");
 const expectedDir = path.join(fixturesDir, "expected");
 
-function loadInput(name: string): SchedulerInput {
+function loadInput(name: string): EngineInput {
   return JSON.parse(
     fs.readFileSync(path.join(fixturesDir, `${name}.json`), "utf8")
   );
@@ -36,8 +36,7 @@ function loadExpected(name: string): PlacedAssignment[] {
 
 function runFixture(name: string): void {
   const input = loadInput(name);
-  const canonical = parseLegacy(input.assignments, input.people);
-  const actual = runEngine(currentRules, canonical.assignments, canonical.people);
+  const actual = runEngine(currentRules, input.assignments, input.people);
   const expected = loadExpected(name);
   assert.deepEqual(actual, expected);
 }

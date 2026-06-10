@@ -8,9 +8,15 @@
 // and the `target` snapshot (test/fixtures/expected/target/*.json).
 import fs from "node:fs";
 import path from "node:path";
-import { mulberry32, parseLegacy, runEngine } from "../src/engine.ts";
+import {
+  mulberry32,
+  runEngine,
+  type Assignment,
+  type Person,
+} from "../src/engine.ts";
 import { currentRules, targetRules } from "../src/rulesets.ts";
-import type { SchedulerInput } from "../src/types.ts";
+
+type EngineInput = { people: Person[]; assignments: Assignment[] };
 
 const fixturesDir = path.resolve("test/fixtures");
 const expectedDir = path.join(fixturesDir, "expected");
@@ -27,12 +33,11 @@ const inputs = fs
   .sort();
 
 for (const name of inputs) {
-  const data: SchedulerInput = JSON.parse(
+  const data: EngineInput = JSON.parse(
     fs.readFileSync(path.join(fixturesDir, name), "utf8")
   );
-  const canonical = parseLegacy(data.assignments, data.people);
 
-  const current = runEngine(currentRules, canonical.assignments, canonical.people);
+  const current = runEngine(currentRules, data.assignments, data.people);
   fs.writeFileSync(
     path.join(expectedDir, name),
     JSON.stringify(current, null, 2) + "\n"
@@ -40,8 +45,8 @@ for (const name of inputs) {
 
   const target = runEngine(
     targetRules,
-    canonical.assignments,
-    canonical.people,
+    data.assignments,
+    data.people,
     { rng: mulberry32(0) }
   );
   fs.writeFileSync(
