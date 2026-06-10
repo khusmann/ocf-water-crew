@@ -52,15 +52,18 @@ shows green tests; **"Joint"** = needs Kyle's hands on the live sheet.
 - [x] **Commit 4 — docs refresh** *(local).* `README.md` `src/`
   description; META_PLAN / NEW_SYSTEM parser notes flipped to past tense;
   this checklist ticked. *(§7.5)*
-- [ ] **Commit 5 — Job Priority feature (§4.6)** *(joint).* Engine:
-  seed-shuffle equal-priority slot groups in `runEngine`. Sheet: add the
-  Jobs **Priority** column. Add a tie-exercising `target` fixture +
-  snapshot. `current` suite stays green. *(§4.6, §7.6)*
-- [ ] **Commit 6 — two-domain time model (§4.3)** *(joint).* Engine/rules:
-  `ShiftWindow` type + `COMPATIBLE` matrix; rewrite `timePreference` and
-  `preferExactTimeMatch`. Sheet: switch the Shifts time column to
-  Morning/Midday/Evening (hand-entered). Update NEW_SYSTEM §3; re-snapshot
-  `target`. `current` untouched. *(§4.3, §7.7)*
+- [x] **Commit 5 — Job Priority feature (§4.6)** *(joint).* Engine:
+  seed-shuffles equal-priority slot groups in `runEngine`. Sheet: reads an
+  explicit Jobs **Priority** column, seeded RNG (`mulberry32`) for
+  reproducible draws, stable display sort. Added the `priority-tie` fixture.
+  *(§4.6, §7.6)* — `1f2cabc`, `a4f77b8`, `8175790`
+- [x] **Commit 6 — two-domain time model (§4.3)** *(joint).* Engine/rules:
+  `TimePreference` + `ShiftWindow` types, `COMPATIBLE` matrix, rewrote
+  `timePreference` (matrix lookup) and `preferExactTimeMatch` (EITHER last).
+  Sheet: Shifts hold `MORNING`/`MIDDAY`/`EVENING`, Volunteers `EITHER`;
+  fixtures migrated, both suites re-snapshotted. **Note:** the slot-window
+  type is shared, so `current` adopted the matrix too (its legacy-repro
+  role was already retired). *(§4.3, §7.7)* — `ab96f46`
 - [ ] **Optional — column cleanup (META_PLAN step 3):** drop now-unused
   columns from the live sheet. *(§7.8)*
 

@@ -458,6 +458,14 @@ Decide based on what the diff actually shows.
 
 ## 3. Worked rule set: `target`
 
+> **Update (§4.3 shipped):** the time model below is superseded. Person
+> preference (`AM`/`PM`/`EITHER`) and shift window (`MORNING`/`MIDDAY`/
+> `EVENING`) are now two distinct domains joined by a compatibility matrix
+> (see [UNIFY_SHEET.md](UNIFY_SHEET.md) §4.3). `timePreference` is a matrix
+> lookup, and `preferExactTimeMatch` ranks `EITHER` last among the
+> already-compatible survivors (it no longer reads the slot). Both rule
+> sets share these definitions in `src/rules.ts`.
+
 The policy from META_PLAN's "Target rule set" tables, plus the implicit
 `qualification` floor rule (META_PLAN omits it from the table since
 every assignment rule set must carry it, but the engine has no
