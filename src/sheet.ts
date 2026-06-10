@@ -348,25 +348,32 @@ function readAssignmentRows(): SheetRow[] {
   return objArrayFromSheet(getSheet("Assignments"), ASSIGNMENT_SIZE_COL);
 }
 
+// The by-volunteer grid's per-day columns, with compact print labels.
+const SCHEDULE_WINDOWS = ["MORNING", "MIDDAY", "EVENING"];
+const WINDOW_LABEL: Record<string, string> = {
+  MORNING: "Morn",
+  MIDDAY: "Mid",
+  EVENING: "Eve",
+};
+
 function buildVolunteerScheduleHtml(
   volunteers: SheetRow[],
   assignments: SheetRow[]
 ): string {
-  // Index assignments by volunteer name → "day|AM"/"day|PM" → [jobName],
-  // and collect the union of broken-rule codes across their shifts.
+  // Index assignments by volunteer name → "day|WINDOW" → [jobName], and
+  // collect the union of broken-rule codes across their shifts.
   const buckets = new Map<string, Map<string, string[]>>();
   const codesByName = new Map<string, Set<string>>();
   for (const a of assignments) {
     const name = String(a.assignedVolunteer || "").trim();
     if (!name) continue;
-    const slot = amPmBucket(a);
-    if (!slot) continue;
+    if (!SCHEDULE_WINDOWS.includes(a.timeWindow)) continue;
     let cells = buckets.get(name);
     if (!cells) {
       cells = new Map();
       buckets.set(name, cells);
     }
-    const key = `${a.day}|${slot}`;
+    const key = `${a.day}|${a.timeWindow}`;
     let list = cells.get(key);
     if (!list) {
       list = [];
@@ -395,12 +402,6 @@ function buildVolunteerScheduleHtml(
     );
 
   const days = [1, 2, 3, 4];
-  const slots: ("AM" | "PM")[] = ["AM", "PM"];
-
-  const colHeaders = days
-    .flatMap((d) => slots.map((s) => `${dayShort(d)} ${s}`))
-    .map((h) => `<th>${escapeHtml(h)}</th>`)
-    .join("");
 
   const bodyRows = sorted
     .map((v) => {
@@ -409,8 +410,8 @@ function buildVolunteerScheduleHtml(
       let total = 0;
       const slotCells = days
         .flatMap((d) =>
-          slots.map((s) => {
-            const list = cells.get(`${d}|${s}`) ?? [];
+          SCHEDULE_WINDOWS.map((w) => {
+            const list = cells.get(`${d}|${w}`) ?? [];
             total += list.length;
             return `<td>${list.map(escapeHtml).join(", ")}</td>`;
           })
@@ -429,14 +430,25 @@ function buildVolunteerScheduleHtml(
     })
     .join("\n");
 
+  // Two-tier header: a day spans its three window columns.
+  const dayHeader = days
+    .map((d) => `<th colspan="3">${escapeHtml(dayShort(d))}</th>`)
+    .join("");
+  const windowHeader = days
+    .flatMap(() =>
+      SCHEDULE_WINDOWS.map((w) => `<th>${escapeHtml(WINDOW_LABEL[w])}</th>`)
+    )
+    .join("");
+
   const body = `<section class="page wide">
     ${codesLegend()}
     <table class="schedule">
       <thead>
         <tr>
-          <th>First</th><th>Last</th><th>Nickname</th><th>AM/PM Pref</th><th>Shifts</th><th>Codes</th>
-          ${colHeaders}
+          <th rowspan="2">First</th><th rowspan="2">Last</th><th rowspan="2">Nickname</th><th rowspan="2">Pref</th><th rowspan="2">Shifts</th><th rowspan="2">Codes</th>
+          ${dayHeader}
         </tr>
+        <tr>${windowHeader}</tr>
       </thead>
       <tbody>${bodyRows}</tbody>
     </table>
@@ -472,18 +484,6 @@ function shiftCountColor(n: number): string {
   if (n === 2) return "#f6c592";
   if (n === 3) return "#f5e6a3";
   return "#bfe3a6";
-}
-
-function amPmBucket(a: SheetRow): "AM" | "PM" | null {
-  // Each finished assignment occupies a single AM-or-PM column. AM and
-  // PM pass straight through; an EITHER (midday) shift straddles noon, so
-  // resolve it to a single window by start hour (before noon → AM, noon
-  // or later → PM) rather than spanning both.
-  const t = a.timeWindow;
-  if (t === "AM") return "AM";
-  if (t === "PM") return "PM";
-  if (t === "EITHER") return a.startHour < 12 ? "AM" : "PM";
-  return null;
 }
 
 function dayShort(day: number): string {
