@@ -1,12 +1,34 @@
-import { assign } from "./scheduler.js";
-import { orderCodes } from "./engine.ts";
-import type { Person, Assignment } from "./types.ts";
+import {
+  orderCodes,
+  runEngine,
+  type Assignment,
+  type Person,
+} from "./engine.ts";
+import { currentRules } from "./rulesets.ts";
 
 type Sheet = GoogleAppsScript.Spreadsheet.Sheet;
 
 // One row per data record after pulling from a sheet. Keys are the
 // camelCased column headers; values are whatever the cells contained.
 type SheetRow = Record<string, any>;
+
+// Columns the generated Assignments tab carries. The code owns this header
+// row (writeAssignmentsSheet writes it), so the canonical engine shape is
+// the source of truth for the tab's schema — no hand-maintained headers to
+// drift. Each header camelCases to a canonical Assignment / PlacedAssignment
+// key (plus the derived Codes column).
+const ASSIGNMENT_HEADERS = [
+  "Job Name",
+  "Job Priority",
+  "Required Qualification",
+  "Day",
+  "Start Hour",
+  "Duration Hours",
+  "Time Window",
+  "Staged Volunteer",
+  "Assigned Volunteer",
+  "Codes",
+];
 
 function onOpen(): void {
   const ui = SpreadsheetApp.getUi();
@@ -22,10 +44,9 @@ function onOpen(): void {
 
 function runGenerateAssignments(): void {
   const assignmentsSheet = getSheet("Assignments");
-  const assignments = generateAssignments();
-  pushObjArrayToSheet(assignmentsSheet, assignments);
+  writeAssignmentsSheet(assignmentsSheet, generateAssignments());
   debugPrint("people", JSON.stringify(getVolunteers()), 1);
-  debugPrint("assignments", JSON.stringify(getAssignments()), 2);
+  debugPrint("assignments", JSON.stringify(readAssignmentSlots()), 2);
   assignmentsSheet.activate();
 }
 
@@ -48,17 +69,21 @@ function runAssignVolunteers(): void {
   const assignmentsSheet = getSheet("Assignments");
 
   const people = getVolunteers();
-  const assignments = getAssignments().map((i) => ({
-    ...i,
-    sameDayAssigned: false,
-  }));
+  const slots = readAssignmentSlots();
 
   debugPrint("people", JSON.stringify(people), 1);
-  debugPrint("assignments", JSON.stringify(assignments), 2);
+  debugPrint("assignments", JSON.stringify(slots), 2);
 
-  const newAssignments = assign(assignments, people);
+  const placed = runEngine(currentRules, slots, people);
 
-  pushObjArrayToSheet(assignmentsSheet, newAssignments);
+  // Project each placement onto the sheet columns: spread the canonical
+  // fields and add the human-facing Codes string (ordered, deduped).
+  const rows: SheetRow[] = placed.map((p) => ({
+    ...p,
+    codes: orderCodes(new Set(p.brokenCodes)).join(""),
+  }));
+
+  pushObjArrayToSheet(assignmentsSheet, rows);
   assignmentsSheet.activate();
 }
 
@@ -78,45 +103,52 @@ function getOrCreateSheet(sheet_name: string): Sheet {
   return ss.getSheetByName(sheet_name) ?? ss.insertSheet(sheet_name);
 }
 
-function lookupTimeId(t: string): number | undefined {
-  return ({ AM: 0, PM: 2, "AM, PM": 1, "AM,PM": 1 } as Record<string, number>)[
-    t
-  ];
+// Person preference → engine TimeWindow. "AM, PM" / "PM, AM" / "" all fold
+// to EITHER (the flexible reserve). Was the engine's personTimeWindow.
+function personTimeWindow(t: string): Person["timePreference"] {
+  if (t === "AM") return "AM";
+  if (t === "PM") return "PM";
+  return "EITHER";
 }
 
-function lookupDayId(d: number): number | undefined {
-  return ({ 1: 2, 2: 3, 3: 5, 4: 7 } as Record<number, number>)[d];
+// Shift category → engine TimeWindow. Tolerates both "AM, PM" and the
+// no-space "AM,PM" the sheet has historically produced. Was slotTimeWindow.
+function slotTimeWindow(t: string): Assignment["timeWindow"] {
+  if (t === "AM") return "AM";
+  if (t === "PM") return "PM";
+  return "EITHER";
 }
 
+// Expand the Jobs × Shifts layout into one canonical Assignment row per
+// (shift, person-slot, day). `assignedVolunteer` / `Codes` start blank;
+// `stagedVolunteer` is hand-entered after generation. Replaces the legacy
+// shiftsXJobsX… pipeline; the dropped legacy fields (dayId, person, the
+// GS date serial, the numeric timePriority) have no canonical equivalent.
 function generateAssignments(): SheetRow[] {
-  const jobs = getJobs();
+  const jobLookup = Object.fromEntries(getJobs().map((j) => [j.jobName, j]));
 
-  const shifts = getShifts().map((i): SheetRow => ({
-    ...i,
-    timePriority: lookupTimeId(i.timeCategory),
-  }));
-
-  const jobLookup = Object.fromEntries(jobs.map((j) => [j.jobName, j]));
-
-  const shiftsXJobs = shifts.map((s): SheetRow => ({
-    ...s,
-    shiftStartNum: new Date(s.shiftStart).getHours(),
-    ...jobLookup[s.jobName],
-  }));
-
-  const shiftsXJobsXpeople = shiftsXJobs.flatMap((s) =>
-    Array.from({ length: s.peopleShift }, (_, i): SheetRow => ({ ...s, person: i + 1 }))
-  );
-
-  const shiftsXJobsXpeopleXDays = shiftsXJobsXpeople.flatMap((s) =>
-    Array.from({ length: s.days }, (_, i): SheetRow => ({
-      ...s,
-      day: i + 1,
-      dayId: lookupDayId(i + 1),
-    }))
-  );
-
-  return shiftsXJobsXpeopleXDays;
+  const rows: SheetRow[] = [];
+  for (const s of getShifts()) {
+    const job = jobLookup[s.jobName];
+    const base: SheetRow = {
+      jobName: s.jobName,
+      jobPriority: job.jobPriority,
+      // Qualification token is the job's own name (special jobs only).
+      requiredQualification: job.special ? s.jobName : "",
+      startHour: new Date(s.shiftStart).getHours(),
+      durationHours: s.hrsShift,
+      timeWindow: slotTimeWindow(s.timeCategory),
+      stagedVolunteer: "",
+      assignedVolunteer: "",
+      codes: "",
+    };
+    for (let person = 0; person < s.peopleShift; person++) {
+      for (let day = 1; day <= s.days; day++) {
+        rows.push({ ...base, day });
+      }
+    }
+  }
+  return rows;
 }
 
 function getJobs(): SheetRow[] {
@@ -130,27 +162,41 @@ function getShifts(): SheetRow[] {
   return objArrayFromSheet(getSheet("Shifts"));
 }
 
+// Canonical Person rows for the engine. Name is rebuilt from the
+// first/last/nickname columns (matching what the staged/assigned cells
+// contain); qualifications are the job-name tokens in the comma-joined
+// Special Qualifications column.
 function getVolunteers(): Person[] {
-  const jobs = getJobs();
-
-  // Throws via `!` if the qualification name doesn't match any job —
-  // same crash the original JS would produce on `.jobPriority` of
-  // undefined. The sheet is expected to keep these in sync.
-  const lookupPriority = (name: string): number =>
-    jobs.find((i) => i.jobName === name)!.jobPriority;
-
   return objArrayFromSheet(getSheet("Volunteers")).map((i) => ({
-    ...i,
-    timeId: lookupTimeId(i.timePreference),
-    specialQualificationsIds:
+    name: volunteerDisplayName(i),
+    timePreference: personTimeWindow(i.timePreference),
+    qualifications:
       i.specialQualifications === ""
         ? []
-        : i.specialQualifications.split(", ").map(lookupPriority),
-  })) as Person[];
+        : String(i.specialQualifications).split(", "),
+  }));
 }
 
-function getAssignments(): Assignment[] {
-  return objArrayFromSheet(getSheet("Assignments"), 3) as Assignment[];
+// The canonical name used to match staged/assigned cells, rebuilt from the
+// name-part columns. (NEW: §4.1 would switch this to the Name column once
+// it's confirmed to match the staging convention on the live sheet.)
+function volunteerDisplayName(row: SheetRow): string {
+  return `${row.first} ${row.last} ${row.nickname}`.trim();
+}
+
+// Canonical Assignment slots for the engine, read back off the generated
+// tab. A blank Required Qualification means "no requirement" (undefined).
+function readAssignmentSlots(): Assignment[] {
+  return objArrayFromSheet(getSheet("Assignments")).map((r) => ({
+    jobName: r.jobName,
+    jobPriority: r.jobPriority,
+    requiredQualification: r.requiredQualification || undefined,
+    day: r.day,
+    startHour: r.startHour,
+    durationHours: r.durationHours,
+    timeWindow: r.timeWindow,
+    stagedVolunteer: r.stagedVolunteer || "",
+  }));
 }
 
 function objArrayFromSheet(sheet: Sheet, sizeCol: number = 0): SheetRow[] {
@@ -169,6 +215,17 @@ function objArrayFromSheet(sheet: Sheet, sizeCol: number = 0): SheetRow[] {
   return values.slice(1, nJobs).map((row) =>
     Object.fromEntries(row.slice(0, nProps).map((p, idx) => [props[idx], p]))
   );
+}
+
+// Clears the sheet and writes the code-owned header row + canonical rows.
+// Owning the header means the generated tab's schema can't drift out of
+// sync with the engine shape.
+function writeAssignmentsSheet(sheet: Sheet, objArray: SheetRow[]): void {
+  sheet.clearContents();
+  sheet
+    .getRange(1, 1, 1, ASSIGNMENT_HEADERS.length)
+    .setValues([ASSIGNMENT_HEADERS]);
+  pushObjArrayToSheet(sheet, objArray);
 }
 
 function pushObjArrayToSheet(sheet: Sheet, objArray: SheetRow[]): void {
@@ -205,7 +262,7 @@ function sizeIgnoringEmptyEnd(arr: any[]): number {
 }
 
 function runPrintAssignmentsByJob(): void {
-  const html = buildPrintHtml(getAssignments());
+  const html = buildPrintHtml(readAssignmentRows());
   const output = HtmlService.createHtmlOutput(html)
     .setWidth(1000)
     .setHeight(720);
@@ -213,23 +270,33 @@ function runPrintAssignmentsByJob(): void {
 }
 
 function runPrintAssignmentsByVolunteer(): void {
-  const html = buildVolunteerScheduleHtml(getVolunteers(), getAssignments());
+  const html = buildVolunteerScheduleHtml(
+    objArrayFromSheet(getSheet("Volunteers")),
+    readAssignmentRows()
+  );
   const output = HtmlService.createHtmlOutput(html)
     .setWidth(1200)
     .setHeight(800);
   SpreadsheetApp.getUi().showModalDialog(output, "Print assignments by volunteer");
 }
 
+// Raw Assignments rows for the print views — keeps every column (incl.
+// the display-only Codes string) rather than the engine's canonical
+// subset. jobName (column 0) is always populated, so default sizing works.
+function readAssignmentRows(): SheetRow[] {
+  return objArrayFromSheet(getSheet("Assignments"));
+}
+
 function buildVolunteerScheduleHtml(
-  volunteers: Person[],
-  assignments: Assignment[]
+  volunteers: SheetRow[],
+  assignments: SheetRow[]
 ): string {
   // Index assignments by volunteer name → "day|AM"/"day|PM" → [jobName],
   // and collect the union of broken-rule codes across their shifts.
   const buckets = new Map<string, Map<string, string[]>>();
   const codesByName = new Map<string, Set<string>>();
   for (const a of assignments) {
-    const name = (a.assignedVolunteer || "").trim();
+    const name = String(a.assignedVolunteer || "").trim();
     if (!name) continue;
     const slot = amPmBucket(a);
     if (!slot) continue;
@@ -262,8 +329,8 @@ function buildVolunteerScheduleHtml(
     .slice()
     .sort(
       (a, b) =>
-        (a.last || "").localeCompare(b.last || "") ||
-        (a.first || "").localeCompare(b.first || "")
+        String(a.last || "").localeCompare(String(b.last || "")) ||
+        String(a.first || "").localeCompare(String(b.first || ""))
     );
 
   const days = [1, 2, 3, 4];
@@ -276,7 +343,8 @@ function buildVolunteerScheduleHtml(
 
   const bodyRows = sorted
     .map((v) => {
-      const cells = buckets.get(v.name) ?? new Map<string, string[]>();
+      const name = volunteerDisplayName(v);
+      const cells = buckets.get(name) ?? new Map<string, string[]>();
       let total = 0;
       const slotCells = days
         .flatMap((d) =>
@@ -287,7 +355,7 @@ function buildVolunteerScheduleHtml(
           })
         )
         .join("");
-      const codes = orderCodes(codesByName.get(v.name) ?? []).join("");
+      const codes = orderCodes(codesByName.get(name) ?? []).join("");
       return `<tr>
         <td class="id">${escapeHtml(v.first)}</td>
         <td class="id">${escapeHtml(v.last)}</td>
@@ -344,15 +412,15 @@ function shiftCountColor(n: number): string {
   return "#bfe3a6";
 }
 
-function amPmBucket(a: Assignment): "AM" | "PM" | null {
+function amPmBucket(a: SheetRow): "AM" | "PM" | null {
   // Each finished assignment occupies a single AM-or-PM column. AM and
-  // PM pass straight through; a midday "AM, PM" shift is one shift that
-  // straddles noon, so resolve it to a single window by start hour
-  // (before noon → AM, noon or later → PM) rather than spanning both.
-  const t = a.timeCategory;
+  // PM pass straight through; an EITHER (midday) shift straddles noon, so
+  // resolve it to a single window by start hour (before noon → AM, noon
+  // or later → PM) rather than spanning both.
+  const t = a.timeWindow;
   if (t === "AM") return "AM";
   if (t === "PM") return "PM";
-  if (t === "AM,PM" || t === "AM, PM") return a.shiftStartNum < 12 ? "AM" : "PM";
+  if (t === "EITHER") return a.startHour < 12 ? "AM" : "PM";
   return null;
 }
 
@@ -369,8 +437,8 @@ function prefLabel(p: string): string {
   return p ?? "";
 }
 
-function buildPrintHtml(assignments: Assignment[]): string {
-  const byJob = new Map<string, Assignment[]>();
+function buildPrintHtml(assignments: SheetRow[]): string {
+  const byJob = new Map<string, SheetRow[]>();
   for (const a of assignments) {
     let list = byJob.get(a.jobName);
     if (!list) {
@@ -398,23 +466,24 @@ function buildPrintHtml(assignments: Assignment[]): string {
   return wrapPrintDocument(pages.join("\n"));
 }
 
-function renderJobPage(jobName: string, rows: Assignment[]): string {
+function renderJobPage(jobName: string, rows: SheetRow[]): string {
   const days = Array.from(new Set(rows.map((r) => r.day))).sort((a, b) => a - b);
 
-  // Columns: union of (start-of-day minutes, hrsShift) pairs across the job.
-  const shiftCols = new Map<string, { start: any; hrs: number; minutes: number }>();
+  // Columns: union of (startHour, durationHours) pairs across the job.
+  const shiftCols = new Map<string, { startHour: number; hrs: number }>();
   for (const r of rows) {
-    const minutes = timeOfDayMinutes(r.shiftStart);
-    const key = `${minutes}|${r.hrsShift}`;
+    const key = `${r.startHour}|${r.durationHours}`;
     if (!shiftCols.has(key)) {
-      shiftCols.set(key, { start: r.shiftStart, hrs: r.hrsShift, minutes });
+      shiftCols.set(key, { startHour: r.startHour, hrs: r.durationHours });
     }
   }
-  const cols = Array.from(shiftCols.values()).sort((a, b) => a.minutes - b.minutes);
+  const cols = Array.from(shiftCols.values()).sort(
+    (a, b) => a.startHour - b.startHour
+  );
 
-  const cellMap = new Map<string, Assignment[]>();
+  const cellMap = new Map<string, SheetRow[]>();
   for (const r of rows) {
-    const key = `${r.day}|${timeOfDayMinutes(r.shiftStart)}|${r.hrsShift}`;
+    const key = `${r.day}|${r.startHour}|${r.durationHours}`;
     let list = cellMap.get(key);
     if (!list) {
       list = [];
@@ -424,15 +493,13 @@ function renderJobPage(jobName: string, rows: Assignment[]): string {
   }
 
   const headerCells = cols
-    .map((c) => `<th>${escapeHtml(shiftRangeLabel(c.start, c.hrs))}</th>`)
+    .map((c) => `<th>${escapeHtml(shiftRangeLabel(c.startHour, c.hrs))}</th>`)
     .join("");
   const bodyRows = days
     .map((d) => {
       const tds = cols
         .map((c) => {
-          const list = (cellMap.get(`${d}|${c.minutes}|${c.hrs}`) ?? [])
-            .slice()
-            .sort((a, b) => a.person - b.person);
+          const list = cellMap.get(`${d}|${c.startHour}|${c.hrs}`) ?? [];
           const names = list
             .map((a) => escapeHtml(volunteerName(a)))
             .join("<br>");
@@ -452,12 +519,12 @@ function renderJobPage(jobName: string, rows: Assignment[]): string {
   </section>`;
 }
 
-function renderCartsShiftPages(rows: Assignment[]): string[] {
+function renderCartsShiftPages(rows: SheetRow[]): string[] {
   const color = titleColor("Carts");
-  // One page per (day, shiftStart) combination.
-  const shifts = new Map<string, Assignment[]>();
+  // One page per (day, startHour) combination.
+  const shifts = new Map<string, SheetRow[]>();
   for (const a of rows) {
-    const key = `${String(a.day).padStart(2, "0")}|${shiftTimeKey(a.shiftStart)}`;
+    const key = `${String(a.day).padStart(2, "0")}|${String(a.startHour).padStart(2, "0")}`;
     let list = shifts.get(key);
     if (!list) {
       list = [];
@@ -468,7 +535,7 @@ function renderCartsShiftPages(rows: Assignment[]): string[] {
   return Array.from(shifts.keys())
     .sort()
     .map((k) => {
-      const group = shifts.get(k)!.slice().sort((a, b) => a.person - b.person);
+      const group = shifts.get(k)!;
       const head = group[0];
       const half = Math.ceil(group.length / 2);
       const trs: string[] = [];
@@ -480,7 +547,7 @@ function renderCartsShiftPages(rows: Assignment[]): string[] {
         trs.push(`<tr>${lCell}${rCell}</tr>`);
       }
       return `<section class="page">
-      <h1 class="title" style="background:${color}">Carts &mdash; ${escapeHtml(dayLabel(head.day))} ${escapeHtml(shiftRangeLabel(head.shiftStart, head.hrsShift))}</h1>
+      <h1 class="title" style="background:${color}">Carts &mdash; ${escapeHtml(dayLabel(head.day))} ${escapeHtml(shiftRangeLabel(head.startHour, head.durationHours))}</h1>
       <table class="roster"><tbody>${trs.join("\n")}</tbody></table>
     </section>`;
     });
@@ -509,36 +576,23 @@ function dayLabel(day: number): string {
   );
 }
 
-function shiftRangeLabel(start: any, hrs: number): string {
-  if (!start) return "";
-  const d = new Date(start);
-  const end = new Date(d.getTime() + hrs * 60 * 60 * 1000);
-  return `${formatHourCompact(d)} - ${formatHourCompact(end)}`;
+// "6am - 2pm" from an integer start hour + duration. All shift starts in
+// the data are whole hours, so no minutes handling is needed; end wraps
+// past midnight via mod 24 (a 20:00 + 8h shift ends "4am").
+function shiftRangeLabel(startHour: number, hrs: number): string {
+  return `${formatHourCompact(startHour)} - ${formatHourCompact(
+    (startHour + hrs) % 24
+  )}`;
 }
 
-function formatHourCompact(d: Date): string {
-  // "7:00 AM" → "7am", "12:30 PM" → "12:30pm"
-  const raw = Utilities.formatDate(d, Session.getScriptTimeZone(), "h:mm a");
-  const [time, ampm] = raw.split(" ");
-  const [h, m] = time.split(":");
-  const suffix = ampm.toLowerCase();
-  return m === "00" ? `${h}${suffix}` : `${h}:${m}${suffix}`;
+function formatHourCompact(hour: number): string {
+  const suffix = hour < 12 ? "am" : "pm";
+  const h = hour % 12 === 0 ? 12 : hour % 12;
+  return `${h}${suffix}`;
 }
 
-function volunteerName(a: Assignment): string {
+function volunteerName(a: SheetRow): string {
   return a.assignedVolunteer || a.stagedVolunteer || "—";
-}
-
-function timeOfDayMinutes(t: any): number {
-  if (!t) return 0;
-  const d = new Date(t);
-  return d.getHours() * 60 + d.getMinutes();
-}
-
-function shiftTimeKey(t: any): string {
-  if (!t) return "00:00";
-  const d = new Date(t);
-  return `${String(d.getHours()).padStart(2, "0")}:${String(d.getMinutes()).padStart(2, "0")}`;
 }
 
 function escapeHtml(s: string): string {
