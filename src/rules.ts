@@ -54,6 +54,21 @@ export function oneShiftPerDay(priority: number): AssignmentRule {
   };
 }
 
+// No MORNING shift the day after an EVENING shift — too little overnight
+// turnaround, regardless of the clock-hour gap. dev/DESIGN.md §4.
+export function overnightTurnaround(priority: number): AssignmentRule {
+  return {
+    name: "overnight-turnaround",
+    code: "O",
+    priority,
+    test: ({ slot, state }) =>
+      slot.timeWindow !== "MORNING" ||
+      !state.assignedShifts.some(
+        (s) => s.day === slot.day - 1 && s.window === "EVENING"
+      ),
+  };
+}
+
 // Legacy buggy quirk preserved for currentRules: `.some(... > h)` plus
 // the initial [0] sentinel in legacy `assignedHours` means this is
 // "any prior anchor — including the sentinel — is >h from the slot",
@@ -119,6 +134,18 @@ export function fewerShiftsFirst(priority: number): SortingRule {
     priority,
     compare: (a, b, { stateOf }) =>
       stateOf(a).shiftsPlaced - stateOf(b).shiftsPlaced,
+  };
+}
+
+// Total assigned hours so far, ascending — spread the workload by hours
+// (finer than shift count, since shifts vary in length). dev/DESIGN.md §4.
+export function fewerHoursFirst(priority: number): SortingRule {
+  const hours = (s: { assignedShifts: Array<{ durationHours: number }> }) =>
+    s.assignedShifts.reduce((sum, x) => sum + x.durationHours, 0);
+  return {
+    name: "fewer-hours-first",
+    priority,
+    compare: (a, b, { stateOf }) => hours(stateOf(a)) - hours(stateOf(b)),
   };
 }
 

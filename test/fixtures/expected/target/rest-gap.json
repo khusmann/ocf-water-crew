@@ -2,28 +2,24 @@
   {
     "jobName": "Carts",
     "jobPriority": 0,
-    "day": 2,
-    "startHour": 6,
-    "durationHours": 8,
-    "timeWindow": "MORNING",
-    "stagedVolunteer": "",
-    "assignedVolunteer": "Person 01",
-    "brokenRules": [
-      "sequential-rest-8h"
-    ],
-    "brokenCodes": [
-      "H8"
-    ]
-  },
-  {
-    "jobName": "Carts",
-    "jobPriority": 0,
     "day": 1,
     "startHour": 22,
     "durationHours": 4,
     "timeWindow": "EVENING",
     "stagedVolunteer": "Person 01",
     "assignedVolunteer": "Person 01",
+    "brokenRules": [],
+    "brokenCodes": []
+  },
+  {
+    "jobName": "Carts",
+    "jobPriority": 0,
+    "day": 2,
+    "startHour": 6,
+    "durationHours": 8,
+    "timeWindow": "MORNING",
+    "stagedVolunteer": "",
+    "assignedVolunteer": "",
     "brokenRules": [],
     "brokenCodes": []
   }

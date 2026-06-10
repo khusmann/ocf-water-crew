@@ -5,12 +5,13 @@ import { defineRuleSet, type RuleSet } from "./engine.ts";
 import {
   alphabeticalByName,
   everyoneGetsAtLeast,
-  fewerDaysFirst,
+  fewerHoursFirst,
   fewerQualsFirstAmongSpecialists,
   fewerShiftsFirst,
   maxShifts,
   moreSpecializedFirstAmongSpecialists,
   oneShiftPerDay,
+  overnightTurnaround,
   preferExactTimeMatch,
   qualification,
   restGapLegacy,
@@ -38,25 +39,27 @@ export const currentRules: RuleSet = defineRuleSet({
   ],
 });
 
-// The policy production runs. Explicit floor of qualification + ≥1h rest;
-// relaxable layers for one-shift-per-day / ≥8h rest / max-shifts /
-// time-preference; sorting stack that distributes work fairly and
-// saves EITHER candidates for slots an exact-match person can't take.
-// dev/DESIGN.md §4.
+// The policy production runs. Hard floor (priority 0): qualified, one
+// shift per day, overnight turnaround, ≥1h rest. Relaxable layers peel off
+// softest-first: time-preference (3), then max-shifts (2), then the ≥10h
+// rest preference (1) down to the 1h floor. Sorting distributes work
+// fairly (everyone ≥2, then fewest hours/shifts) and saves EITHER
+// candidates for slots an exact-match person can't take. dev/DESIGN.md §4.
 export const targetRules: RuleSet = defineRuleSet({
   name: "target",
   assignmentRules: [
     qualification(0),
+    oneShiftPerDay(0),
+    overnightTurnaround(0),
     sequentialRest(1, 0),
-    oneShiftPerDay(1),
-    sequentialRest(8, 1),
+    sequentialRest(10, 1),
     maxShifts(4, 2),
     timePreference(3),
   ],
   sortingRules: [
     everyoneGetsAtLeast(2, 0),
-    fewerShiftsFirst(1),
-    fewerDaysFirst(2),
+    fewerHoursFirst(1),
+    fewerShiftsFirst(2),
     preferExactTimeMatch(3),
     fewerQualsFirstAmongSpecialists(4),
   ],

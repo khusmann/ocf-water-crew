@@ -451,8 +451,9 @@ function codesLegend(): string {
   const items: [string, string][] = [
     ["H#", "under #h rest between shifts"],
     ["D", "second shift same day"],
+    ["O", "morning after a previous evening"],
     ["S#", "over # shifts (max)"],
-    ["T", "non-preferred AM/PM"],
+    ["T", "non-preferred time window"],
     ["Q", "missing required qualification"],
   ];
   const entries = items

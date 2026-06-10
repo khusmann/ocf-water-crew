@@ -76,9 +76,10 @@ interface PersonState {
 
 1. **Order slots for filling.** Without `rng`: the deterministic canonical
    order `compareSlots` = `[jobPriority, day, startHour, jobName]`. With
-   `rng`: stable by `jobPriority`, then each equal-priority group is
-   **Fisher–Yates shuffled together** (full interleave) so no equal-priority
-   job systematically gets first pick (§4 / Job Priority).
+   `rng`: by `jobPriority`, then by window (`EVENING` → `MORNING` →
+   `MIDDAY`, hardest-to-staff first / MIDDAY conserved), then each
+   remaining `(priority, window)` group is **Fisher–Yates shuffled
+   together** so no equally-ranked job systematically gets first pick (§4).
 2. **Staging pass.** Copy each `stagedVolunteer` into `assignedVolunteer`,
    evaluate the *full* assignment-rule set against the (staged person, slot)
    pair, and record any failures in `brokenRules` — staging is never
@@ -171,17 +172,26 @@ in `rules.ts`.
 | Assignment rule       | Priority |   | Sorting rule                            | Priority |
 |-----------------------|:--------:|---|-----------------------------------------|:--------:|
 | `qualification`       | 0        |   | `everyone-gets-2-shifts`                | 0        |
-| `sequential-rest-1h`  | 0        |   | `fewer-shifts-first`                    | 1        |
-| `one-shift-per-day`   | 1        |   | `fewer-days-first`                      | 2        |
-| `sequential-rest-8h`  | 1        |   | `prefer-exact-time-match`               | 3        |
-| `max-shifts-4`        | 2        |   | `fewer-quals-first-among-specialists`   | 4        |
+| `one-shift-per-day`   | 0        |   | `fewer-hours-first`                     | 1        |
+| `overnight-turnaround`| 0        |   | `fewer-shifts-first`                    | 2        |
+| `sequential-rest-1h`  | 0        |   | `prefer-exact-time-match`               | 3        |
+| `sequential-rest-10h` | 1        |   | `fewer-quals-first-among-specialists`   | 4        |
+| `max-shifts-4`        | 2        |   |                                         |          |
 | `time-preference`     | 3        |   |                                         |          |
 
-The diff between the two is the policy change the cutover to `targetRules`
-shipped: a split rest-gap (≥1h floor / ≥8h relaxable) replacing the buggy
-9h rule, `max-shifts-4` demoted off the floor, a fairness-first sorting
-stack (everyone gets ≥2, then fewest shifts/days), and *fewer*-qualified-
-first (anti-burnout) instead of more-specialized-first.
+The **floor** (priority 0, never relaxes) is: qualified, one shift per day,
+overnight turnaround (no MORNING the day after an EVENING — §2/`rules.ts`),
+and ≥1h rest. Relaxable layers peel off softest-first: `time-preference`
+(3), then `max-shifts-4` (2), then the ≥10h rest preference (1) down to the
+1h floor. A slot that can't meet the floor stays empty. The sorting stack
+distributes work fairly (everyone ≥2 shifts, then fewest hours, then fewest
+shifts), prefers exact time-window matches (saving EITHER folks as the
+flexible reserve), and uses *fewer*-qualified specialists first
+(anti-burnout). Final ties resolve via the seeded RNG.
+
+Slot fill order also prefers the hardest-to-staff window first — `EVENING`,
+then `MORNING`, then `MIDDAY` (everyone is compatible with MIDDAY, so it's
+conserved for last) — within each priority tier, before the shuffle (§2).
 
 > The slot-`timeWindow` type is shared, so both rule sets use the §3.3
 > matrix for `timePreference`. `currentRules` is no longer a byte-faithful
@@ -255,6 +265,7 @@ the `Codes` column and surfaced in the by-volunteer print legend:
 |------|--------------------------------------|
 | `H#` | under #h rest between shifts         |
 | `D`  | second shift same day                |
+| `O`  | morning after a previous evening     |
 | `S#` | over # shifts (the max-shifts cap)   |
 | `T`  | non-preferred window (matrix miss)   |
 | `Q`  | missing required qualification       |

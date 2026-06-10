@@ -20,8 +20,12 @@
     "timeWindow": "MIDDAY",
     "stagedVolunteer": "Person 01",
     "assignedVolunteer": "Person 01",
-    "brokenRules": [],
-    "brokenCodes": []
+    "brokenRules": [
+      "sequential-rest-10h"
+    ],
+    "brokenCodes": [
+      "H10"
+    ]
   },
   {
     "jobName": "Carts",
@@ -33,14 +37,14 @@
     "stagedVolunteer": "Person 01",
     "assignedVolunteer": "Person 01",
     "brokenRules": [
-      "sequential-rest-1h",
       "one-shift-per-day",
-      "sequential-rest-8h"
+      "sequential-rest-1h",
+      "sequential-rest-10h"
     ],
     "brokenCodes": [
-      "H1",
       "D",
-      "H8"
+      "H1",
+      "H10"
     ]
   }
 ]

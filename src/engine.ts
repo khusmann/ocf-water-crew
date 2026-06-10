@@ -49,6 +49,8 @@ export interface PersonState {
   assignedShifts: Array<{
     absoluteStartHour: number;
     durationHours: number;
+    day: number;
+    window: ShiftWindow;
   }>;
 }
 
@@ -124,12 +126,12 @@ export function defineRuleSet(spec: RuleSet): RuleSet {
 // orderCodes — stable display order for broken-rule codes.
 // ---------------------------------------------------------------------------
 
-// Sort by leading letter (rest H, same-day D, max-shifts S, time T,
-// qualification Q; anything else last), then by trailing number so e.g.
-// "H8" precedes "H10". Dedups via the Set the caller passes in.
+// Sort by leading letter (rest H, same-day D, overnight O, max-shifts S,
+// time T, qualification Q; anything else last), then by trailing number so
+// e.g. "H8" precedes "H10". Dedups via the Set the caller passes in.
 export function orderCodes(codes: Iterable<string>): string[] {
   const rank = (code: string): number => {
-    const i = "HDSTQ".indexOf(code[0]);
+    const i = "HDOSTQ".indexOf(code[0]);
     return i === -1 ? Number.MAX_SAFE_INTEGER : i;
   };
   const num = (code: string): number => {
@@ -181,11 +183,17 @@ function shuffleRange<T>(
   }
 }
 
+// Hardest-to-staff window first: EVENING (fewest want it), then MORNING,
+// then MIDDAY (everyone is compatible, so conserve it for last). §4.
+function windowRank(w: ShiftWindow): number {
+  return w === "EVENING" ? 0 : w === "MORNING" ? 1 : 2;
+}
+
 // The order the engine fills slots in. Without rng: the deterministic
-// canonical order (compareSlots). With rng: stable by jobPriority, then
-// each equal-priority group is shuffled together (full interleave) — so
-// among equal-priority slots no job systematically gets first pick of the
-// candidate pool. dev/DESIGN.md §4.
+// canonical order (compareSlots). With rng: by jobPriority, then by shift
+// window (EVENING → MORNING → MIDDAY), then each remaining (priority,
+// window) group is shuffled together so among equally-ranked slots no job
+// systematically gets first pick of the candidate pool. dev/DESIGN.md §4.
 function orderSlotsForFill(
   placed: PlacedAssignment[],
   rng?: () => number
@@ -194,11 +202,19 @@ function orderSlotsForFill(
     placed.sort((a, b) => compareSlots(a, b));
     return;
   }
-  placed.sort((a, b) => a.jobPriority - b.jobPriority); // stable in V8
+  placed.sort(
+    (a, b) =>
+      a.jobPriority - b.jobPriority ||
+      windowRank(a.timeWindow) - windowRank(b.timeWindow)
+  ); // stable in V8
   let i = 0;
   while (i < placed.length) {
     let j = i;
-    while (j < placed.length && placed[j].jobPriority === placed[i].jobPriority) {
+    while (
+      j < placed.length &&
+      placed[j].jobPriority === placed[i].jobPriority &&
+      placed[j].timeWindow === placed[i].timeWindow
+    ) {
       j++;
     }
     shuffleRange(placed, i, j, rng);
@@ -216,6 +232,8 @@ function bumpState(state: PersonState, slot: Assignment): void {
   state.assignedShifts.push({
     absoluteStartHour: 24 * slot.day + slot.startHour,
     durationHours: slot.durationHours,
+    day: slot.day,
+    window: slot.timeWindow,
   });
 }
 

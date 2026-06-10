@@ -44,7 +44,7 @@
     "durationHours": 8,
     "timeWindow": "MIDDAY",
     "stagedVolunteer": "",
-    "assignedVolunteer": "Person 01",
+    "assignedVolunteer": "Person 02",
     "brokenRules": [],
     "brokenCodes": []
   },
@@ -56,7 +56,7 @@
     "durationHours": 8,
     "timeWindow": "MIDDAY",
     "stagedVolunteer": "",
-    "assignedVolunteer": "Person 02",
+    "assignedVolunteer": "Person 03",
     "brokenRules": [],
     "brokenCodes": []
   },
@@ -68,7 +68,7 @@
     "durationHours": 8,
     "timeWindow": "MIDDAY",
     "stagedVolunteer": "",
-    "assignedVolunteer": "Person 02",
+    "assignedVolunteer": "Person 01",
     "brokenRules": [],
     "brokenCodes": []
   },
@@ -80,7 +80,7 @@
     "durationHours": 8,
     "timeWindow": "MIDDAY",
     "stagedVolunteer": "",
-    "assignedVolunteer": "Person 03",
+    "assignedVolunteer": "Person 01",
     "brokenRules": [],
     "brokenCodes": []
   },
@@ -92,7 +92,7 @@
     "durationHours": 8,
     "timeWindow": "MIDDAY",
     "stagedVolunteer": "",
-    "assignedVolunteer": "Person 01",
+    "assignedVolunteer": "Person 03",
     "brokenRules": [],
     "brokenCodes": []
   },
