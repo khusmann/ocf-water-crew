@@ -3,7 +3,7 @@
 // seeded RNG (mulberry32(0)) so the snapshots stay deterministic. The
 // behavioral diff between these snapshots and the `current` ones in
 // test/fixtures/expected/ is exactly the policy change the rewrite
-// ships — see dev/NEW_SYSTEM.md §4 for the row-by-row breakdown.
+// ships — see dev/DESIGN.md §4 for the row-by-row breakdown.
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import fs from "node:fs";

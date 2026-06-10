@@ -55,9 +55,8 @@ That builds and runs `clasp push` against the script ID pinned in
 GAS editor and need to bring those changes back into the repo
 (diff before committing).
 
-## Repository layout
+## Design
 
-See [dev/PLAN.md](dev/PLAN.md) for the migration plan and
-[dev/CURRENT.md](dev/CURRENT.md) for the as-found snapshot of the
-codebase before this work. [dev/UNIFY_SHEET.md](dev/UNIFY_SHEET.md) tracks
-the sheet↔engine unification (the removal of the legacy translation layer).
+See [dev/DESIGN.md](dev/DESIGN.md) for how the scheduler works — the
+canonical data model, the placement engine, the rule sets, the
+time-preference matrix, and the sheet layer.

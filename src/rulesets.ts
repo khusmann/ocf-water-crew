@@ -1,6 +1,6 @@
 // Named rule-set compositions. The diff between currentRules and
 // targetRules is exactly the policy change the rewrite ships —
-// see dev/NEW_SYSTEM.md §4 for the row-by-row breakdown.
+// see dev/DESIGN.md §4 for the row-by-row breakdown.
 import { defineRuleSet, type RuleSet } from "./engine.ts";
 import {
   alphabeticalByName,
@@ -18,9 +18,9 @@ import {
   timePreference,
 } from "./rules.ts";
 
-// Reproduces the legacy four-pass policy in the new DSL. Bug-preserving
-// where the bugs fit cleanly into rule bodies (see NEW_SYSTEM.md §2.4
-// for the divergences that don't).
+// The policy production runs today. Derived from the legacy four-pass
+// algorithm (e.g. restGapLegacy preserves its buggy gap check), though the
+// time-preference rule now uses the shared matrix. See dev/DESIGN.md §4.
 export const currentRules: RuleSet = defineRuleSet({
   name: "current",
   assignmentRules: [
@@ -41,7 +41,7 @@ export const currentRules: RuleSet = defineRuleSet({
 // relaxable layers for one-shift-per-day / ≥8h rest / max-shifts /
 // time-preference; sorting stack that distributes work fairly and
 // saves EITHER candidates for slots an exact-match person can't take.
-// NEW_SYSTEM.md §3.
+// dev/DESIGN.md §4.
 export const targetRules: RuleSet = defineRuleSet({
   name: "target",
   assignmentRules: [

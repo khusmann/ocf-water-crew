@@ -1,7 +1,7 @@
 // Regenerates test/fixtures/expected/*.json by running the rules
 // engine against every input under test/fixtures/. After a deliberate
 // behavior change (e.g. a new rule, or a §2.4 divergence in
-// dev/NEW_SYSTEM.md), the diff between regenerated and prior expected
+// dev/DESIGN.md), the diff between regenerated and prior expected
 // is the proof of what changed.
 //
 // Writes both the `current` snapshot (test/fixtures/expected/*.json)

@@ -8,13 +8,13 @@
 // the import graph linear.
 
 // ---------------------------------------------------------------------------
-// Canonical types — dev/NEW_SYSTEM.md §1.
+// Canonical types — dev/DESIGN.md §1.
 // ---------------------------------------------------------------------------
 
 // A person's availability preference and a shift's time-of-day window are
 // two distinct domains, joined by the compatibility matrix in rules.ts
 // (an AM person can take Morning or Midday; a PM person Midday or Evening;
-// an EITHER person anything). dev/UNIFY_SHEET.md §4.3.
+// an EITHER person anything). dev/DESIGN.md §3.3.
 export type TimePreference = "AM" | "PM" | "EITHER";
 export type ShiftWindow = "MORNING" | "MIDDAY" | "EVENING";
 
@@ -153,7 +153,7 @@ export function mulberry32(seed: number): () => number {
 }
 
 // ---------------------------------------------------------------------------
-// runEngine — META_PLAN target algorithm.
+// runEngine — see dev/DESIGN.md §2.
 // ---------------------------------------------------------------------------
 
 // The canonical order the engine fills slots in. Exported so the sheet can
@@ -185,7 +185,7 @@ function shuffleRange<T>(
 // canonical order (compareSlots). With rng: stable by jobPriority, then
 // each equal-priority group is shuffled together (full interleave) — so
 // among equal-priority slots no job systematically gets first pick of the
-// candidate pool. dev/UNIFY_SHEET.md §4.6.
+// candidate pool. dev/DESIGN.md §4.
 function orderSlotsForFill(
   placed: PlacedAssignment[],
   rng?: () => number

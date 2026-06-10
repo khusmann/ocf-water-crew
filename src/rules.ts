@@ -14,7 +14,7 @@ import type {
 
 // Which shift windows each availability preference can cover. An AM person
 // takes Morning or Midday; a PM person Midday or Evening; EITHER anything.
-// Midday is the only window everyone can take. dev/UNIFY_SHEET.md §4.3.
+// Midday is the only window everyone can take. dev/DESIGN.md §3.3.
 const COMPATIBLE: Record<TimePreference, ShiftWindow[]> = {
   AM: ["MORNING", "MIDDAY"],
   PM: ["MIDDAY", "EVENING"],
@@ -194,7 +194,7 @@ export function everyoneGetsAtLeast(
 // Among the already-compatible survivors (the time-preference assignment
 // rule has gated everyone here), prefer fixed-preference (AM/PM) people;
 // EITHER ranks last so the flexible reserve is saved for windows a
-// fixed-preference person can't fill. dev/UNIFY_SHEET.md §4.3.
+// fixed-preference person can't fill. dev/DESIGN.md §3.3.
 export function preferExactTimeMatch(priority: number): SortingRule {
   return {
     name: "prefer-exact-time-match",

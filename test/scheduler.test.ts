@@ -45,14 +45,13 @@ function runFixture(name: string): void {
 test("tiny: pre-stage copy of all slots", () => runFixture("tiny"));
 
 // Specialist eligible for both their specialty job and any general job —
-// no special bucket-duplication needed (META_PLAN: short-circuit on
-// qualification rule). See dev/NEW_SYSTEM.md §2.4.
+// the qualification rule short-circuits for general jobs, so no special
+// bucket handling is needed.
 test("special-jobs: specialist also fills a general slot", () =>
   runFixture("special-jobs"));
 
 // Pre-stages the same person to two day-1 slots and one day-2 slot.
-// Second day-1 slot picks up "one-shift-per-day" in brokenRules —
-// the new shape of the legacy `sameDayAssigned` flag (§2.4).
+// Second day-1 slot picks up "one-shift-per-day" in brokenRules.
 test("same-day: same-day staging surfaces in brokenRules", () =>
   runFixture("same-day"));
 
@@ -63,22 +62,21 @@ test("same-day: same-day staging surfaces in brokenRules", () =>
 test("rest-gap: legacy-quirk gap rule still admits the placement", () =>
   runFixture("rest-gap"));
 
-// AM-only person, PM slot. Time-preference rule (priority 2) drops on
-// pass 2; placement records "time-preference" in brokenRules.
+// AM-only person on an EVENING slot — incompatible per the time-preference
+// matrix. The rule (priority 2 in currentRules) drops on relaxation;
+// placement records "time-preference" in brokenRules.
 test("relaxation: time-preference relaxation surfaces in brokenRules", () =>
   runFixture("relaxation"));
 
-// Brute-force fixture (legacy). Under the canonical engine, every
-// qualified specialist competes for general slots (META_PLAN
-// qualification decision), so the legacy bucket-duplication blind spot
-// goes away. See dev/NEW_SYSTEM.md §2.4 "Bucket-duplication trick".
-test("brute-force: candidate-pool reshuffle (§2.4)", () =>
+// Every qualified specialist competes for general slots (the qualification
+// rule passes for everyone on general jobs), so there's no bucket blind
+// spot — specialists can land general slots.
+test("brute-force: candidate-pool reshuffle", () =>
   runFixture("brute-force"));
 
-// Person 01 had timePreference "PM, AM" with no legacy `timeId`; the
-// canonical parser folds both "PM, AM" and "AM, PM" into "EITHER",
-// removing the deprioritization. See dev/NEW_SYSTEM.md §2.4 "PM, AM".
-test("time-pref-permutation: PM,AM no longer sorts worst (§2.4)", () =>
+// EITHER-preference people compete on equal footing (no legacy
+// deprioritization of the old "PM, AM" permutation).
+test("time-pref-permutation: EITHER preference sorts normally", () =>
   runFixture("time-pref-permutation"));
 
 // Two jobs sharing a priority. Under currentRules (no rng) the fill order
