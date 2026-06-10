@@ -81,6 +81,13 @@ test("brute-force: candidate-pool reshuffle (§2.4)", () =>
 test("time-pref-permutation: PM,AM no longer sorts worst (§2.4)", () =>
   runFixture("time-pref-permutation"));
 
+// Two jobs sharing a priority. Under currentRules (no rng) the fill order
+// is the deterministic compareSlots order, so this is a stable baseline;
+// the target suite drives the same fixture with rng to exercise the §4.6
+// equal-priority shuffle.
+test("priority-tie: equal-priority jobs fill in deterministic order (no rng)", () =>
+  runFixture("priority-tie"));
+
 // Broad regression catch — same shape as the live data/thejson.json.
 test("realistic: anonymized full-size dataset", () =>
   runFixture("realistic"));

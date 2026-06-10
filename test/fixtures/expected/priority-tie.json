@@ -1,0 +1,50 @@
+[
+  {
+    "jobName": "Alpha",
+    "jobPriority": 5,
+    "day": 1,
+    "startHour": 9,
+    "durationHours": 4,
+    "timeWindow": "EITHER",
+    "stagedVolunteer": "",
+    "assignedVolunteer": "Person A",
+    "brokenRules": [],
+    "brokenCodes": []
+  },
+  {
+    "jobName": "Alpha",
+    "jobPriority": 5,
+    "day": 1,
+    "startHour": 9,
+    "durationHours": 4,
+    "timeWindow": "EITHER",
+    "stagedVolunteer": "",
+    "assignedVolunteer": "Person B",
+    "brokenRules": [],
+    "brokenCodes": []
+  },
+  {
+    "jobName": "Bravo",
+    "jobPriority": 5,
+    "day": 1,
+    "startHour": 14,
+    "durationHours": 4,
+    "timeWindow": "EITHER",
+    "stagedVolunteer": "",
+    "assignedVolunteer": "Person C",
+    "brokenRules": [],
+    "brokenCodes": []
+  },
+  {
+    "jobName": "Bravo",
+    "jobPriority": 5,
+    "day": 1,
+    "startHour": 14,
+    "durationHours": 4,
+    "timeWindow": "EITHER",
+    "stagedVolunteer": "",
+    "assignedVolunteer": "Person D",
+    "brokenRules": [],
+    "brokenCodes": []
+  }
+]

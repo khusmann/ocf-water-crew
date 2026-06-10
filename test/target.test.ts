@@ -45,4 +45,6 @@ test("target/rest-gap", () => runFixture("rest-gap"));
 test("target/relaxation", () => runFixture("relaxation"));
 test("target/brute-force", () => runFixture("brute-force"));
 test("target/time-pref-permutation", () => runFixture("time-pref-permutation"));
+// §4.6: equal-priority slots shuffle together under the seeded rng.
+test("target/priority-tie", () => runFixture("priority-tie"));
 test("target/realistic", () => runFixture("realistic"));
