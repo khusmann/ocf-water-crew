@@ -1,4 +1,5 @@
 import {
+  compareSlots,
   orderCodes,
   runEngine,
   type Assignment,
@@ -17,7 +18,13 @@ type SheetRow = Record<string, any>;
 // the source of truth for the tab's schema — no hand-maintained headers to
 // drift. Each header camelCases to a canonical Assignment / PlacedAssignment
 // key (plus the derived Codes column).
+// Staged / Assigned Volunteer lead so the hand-edited and result columns
+// are first; the rest follow. Job Name (index 2) is always populated, so
+// it's the safe column to size data rows off of (Staged Volunteer is blank
+// for open slots — see ASSIGNMENT_SIZE_COL).
 const ASSIGNMENT_HEADERS = [
+  "Staged Volunteer",
+  "Assigned Volunteer",
   "Job Name",
   "Job Priority",
   "Required Qualification",
@@ -25,10 +32,12 @@ const ASSIGNMENT_HEADERS = [
   "Start Hour",
   "Duration Hours",
   "Time Window",
-  "Staged Volunteer",
-  "Assigned Volunteer",
+  "Seat",
   "Codes",
 ];
+
+// Column index of the always-populated Job Name, used to count data rows.
+const ASSIGNMENT_SIZE_COL = 2;
 
 function onOpen(): void {
   const ui = SpreadsheetApp.getUi();
@@ -119,22 +128,25 @@ function slotTimeWindow(t: string): Assignment["timeWindow"] {
   return "EITHER";
 }
 
-// Expand the Jobs × Shifts layout into one canonical Assignment row per
-// (shift, person-slot, day). `assignedVolunteer` / `Codes` start blank;
+// Expand the Jobs × Shifts layout into one Assignment row per
+// (shift, seat, day). `assignedVolunteer` / `Codes` start blank;
 // `stagedVolunteer` is hand-entered after generation. Replaces the legacy
-// shiftsXJobsX… pipeline; the dropped legacy fields (dayId, person, the
-// GS date serial, the numeric timePriority) have no canonical equivalent.
+// shiftsXJobsX… pipeline; the dropped legacy fields (dayId, the GS date
+// serial, the numeric timePriority) have no canonical equivalent.
 function generateAssignments(): SheetRow[] {
   const jobLookup = Object.fromEntries(getJobs().map((j) => [j.jobName, j]));
 
   const rows: SheetRow[] = [];
-  for (const s of getShifts()) {
-    const job = jobLookup[s.jobName];
+  for (const shift of getShifts()) {
+    // Merge the job's columns onto the shift (job wins on collision), as
+    // the legacy pipeline did via `...jobLookup[jobName]`. peopleShift /
+    // days may live on either tab, so read them off the merged row.
+    const s = { ...shift, ...jobLookup[shift.jobName] };
     const base: SheetRow = {
       jobName: s.jobName,
-      jobPriority: job.jobPriority,
+      jobPriority: s.jobPriority,
       // Qualification token is the job's own name (special jobs only).
-      requiredQualification: job.special ? s.jobName : "",
+      requiredQualification: s.special ? s.jobName : "",
       startHour: new Date(s.shiftStart).getHours(),
       durationHours: s.hrsShift,
       timeWindow: slotTimeWindow(s.timeCategory),
@@ -142,13 +154,34 @@ function generateAssignments(): SheetRow[] {
       assignedVolunteer: "",
       codes: "",
     };
-    for (let person = 0; person < s.peopleShift; person++) {
+    for (let i = 0; i < s.peopleShift; i++) {
       for (let day = 1; day <= s.days; day++) {
         rows.push({ ...base, day });
       }
     }
   }
-  return rows;
+  // Emit in the same order the engine fills slots in, with seat as the
+  // final tiebreak, so running "Assign" doesn't reshuffle the tab.
+  return numberSeats(rows).sort(
+    (a, b) =>
+      compareSlots(a as Assignment, b as Assignment) || a.seat - b.seat
+  );
+}
+
+// Stamps each row with a within-shift seat number (1..N) so the N
+// otherwise-identical slots of one (job, day, start, duration) are
+// distinguishable on the sheet and orderable in the print views. Stamped
+// once here at generation; the assign pass reads it back and carries it
+// through the engine untouched (passenger data — drives no placement
+// decision, hence off the canonical Assignment type).
+function numberSeats(rows: SheetRow[]): SheetRow[] {
+  const counts = new Map<string, number>();
+  return rows.map((r) => {
+    const key = `${r.jobName}|${r.day}|${r.startHour}|${r.durationHours}`;
+    const seat = (counts.get(key) ?? 0) + 1;
+    counts.set(key, seat);
+    return { ...r, seat };
+  });
 }
 
 function getJobs(): SheetRow[] {
@@ -184,10 +217,16 @@ function volunteerDisplayName(row: SheetRow): string {
   return `${row.first} ${row.last} ${row.nickname}`.trim();
 }
 
+// An engine slot plus the sheet-only `seat` passenger field (preserved
+// across the run, not used by any rule — see numberSeats).
+type EngineSlot = Assignment & { seat: number };
+
 // Canonical Assignment slots for the engine, read back off the generated
 // tab. A blank Required Qualification means "no requirement" (undefined).
-function readAssignmentSlots(): Assignment[] {
-  return objArrayFromSheet(getSheet("Assignments")).map((r) => ({
+// `seat` is carried through so the write-back keeps the seat numbering
+// stamped at generation.
+function readAssignmentSlots(): EngineSlot[] {
+  return objArrayFromSheet(getSheet("Assignments"), ASSIGNMENT_SIZE_COL).map((r) => ({
     jobName: r.jobName,
     jobPriority: r.jobPriority,
     requiredQualification: r.requiredQualification || undefined,
@@ -196,6 +235,7 @@ function readAssignmentSlots(): Assignment[] {
     durationHours: r.durationHours,
     timeWindow: r.timeWindow,
     stagedVolunteer: r.stagedVolunteer || "",
+    seat: r.seat,
   }));
 }
 
@@ -281,10 +321,9 @@ function runPrintAssignmentsByVolunteer(): void {
 }
 
 // Raw Assignments rows for the print views — keeps every column (incl.
-// the display-only Codes string) rather than the engine's canonical
-// subset. jobName (column 0) is always populated, so default sizing works.
+// the display-only Codes string) rather than the engine's canonical subset.
 function readAssignmentRows(): SheetRow[] {
-  return objArrayFromSheet(getSheet("Assignments"));
+  return objArrayFromSheet(getSheet("Assignments"), ASSIGNMENT_SIZE_COL);
 }
 
 function buildVolunteerScheduleHtml(
@@ -499,7 +538,9 @@ function renderJobPage(jobName: string, rows: SheetRow[]): string {
     .map((d) => {
       const tds = cols
         .map((c) => {
-          const list = cellMap.get(`${d}|${c.startHour}|${c.hrs}`) ?? [];
+          const list = (cellMap.get(`${d}|${c.startHour}|${c.hrs}`) ?? [])
+            .slice()
+            .sort((a, b) => a.seat - b.seat);
           const names = list
             .map((a) => escapeHtml(volunteerName(a)))
             .join("<br>");
@@ -535,7 +576,7 @@ function renderCartsShiftPages(rows: SheetRow[]): string[] {
   return Array.from(shifts.keys())
     .sort()
     .map((k) => {
-      const group = shifts.get(k)!;
+      const group = shifts.get(k)!.slice().sort((a, b) => a.seat - b.seat);
       const head = group[0];
       const half = Math.ceil(group.length / 2);
       const trs: string[] = [];

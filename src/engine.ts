@@ -159,7 +159,11 @@ export function mulberry32(seed: number): () => number {
 // runEngine — META_PLAN target algorithm.
 // ---------------------------------------------------------------------------
 
-function compareSlots(a: Assignment, b: Assignment): number {
+// The canonical order the engine fills slots in. Exported so the sheet can
+// emit generated rows in the same order, keeping the Assignments tab from
+// reshuffling on the first assign run (ties beyond these keys preserve
+// input order via stable sort).
+export function compareSlots(a: Assignment, b: Assignment): number {
   if (a.jobPriority !== b.jobPriority) return a.jobPriority - b.jobPriority;
   if (a.day !== b.day) return a.day - b.day;
   if (a.startHour !== b.startHour) return a.startHour - b.startHour;
