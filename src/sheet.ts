@@ -1,5 +1,6 @@
 import {
   compareSlots,
+  mulberry32,
   orderCodes,
   runEngine,
   type Assignment,
@@ -38,6 +39,11 @@ const ASSIGNMENT_HEADERS = [
 
 // Column index of the always-populated Job Name, used to count data rows.
 const ASSIGNMENT_SIZE_COL = 2;
+
+// Seed for the assignment RNG. A fixed seed makes runs reproducible (same
+// inputs → same schedule) while still breaking ties without alphabetical
+// bias. Change it to draw a different (still-reproducible) schedule.
+const ASSIGNMENT_SEED = 1;
 
 function onOpen(): void {
   const ui = SpreadsheetApp.getUi();
@@ -83,14 +89,26 @@ function runAssignVolunteers(): void {
   debugPrint("people", JSON.stringify(people), 1);
   debugPrint("assignments", JSON.stringify(slots), 2);
 
-  const placed = runEngine(currentRules, slots, people);
+  // A seeded RNG drives the engine's tiebreaks: equal-priority slots fill in
+  // a (reproducible) shuffled order (§4.6) and any people ties resolve the
+  // same way. Output is re-sorted below for a stable sheet, so the shuffle
+  // affects who gets each slot, not the row order.
+  const placed = runEngine(currentRules, slots, people, {
+    rng: mulberry32(ASSIGNMENT_SEED),
+  });
 
   // Project each placement onto the sheet columns: spread the canonical
-  // fields and add the human-facing Codes string (ordered, deduped).
-  const rows: SheetRow[] = placed.map((p) => ({
-    ...p,
-    codes: orderCodes(new Set(p.brokenCodes)).join(""),
-  }));
+  // fields, add the human-facing Codes string (ordered, deduped), and sort
+  // into the stable display order (same key generateAssignments uses) so the
+  // tab doesn't reshuffle between generate and assign.
+  const rows: SheetRow[] = placed
+    .map((p): SheetRow => ({
+      ...p,
+      codes: orderCodes(new Set(p.brokenCodes)).join(""),
+    }))
+    .sort(
+      (a, b) => compareSlots(a as Assignment, b as Assignment) || a.seat - b.seat
+    );
 
   pushObjArrayToSheet(assignmentsSheet, rows);
   assignmentsSheet.activate();
@@ -185,9 +203,12 @@ function numberSeats(rows: SheetRow[]): SheetRow[] {
 }
 
 function getJobs(): SheetRow[] {
-  return objArrayFromSheet(getSheet("Jobs")).map((i, idx) => ({
+  // jobPriority comes from the explicit Jobs "Priority" column. Non-unique
+  // is allowed: equal-priority jobs' slots fill in randomized order so none
+  // systematically gets first pick of volunteers (§4.6).
+  return objArrayFromSheet(getSheet("Jobs")).map((i) => ({
     ...i,
-    jobPriority: idx,
+    jobPriority: i.priority,
   }));
 }
 
