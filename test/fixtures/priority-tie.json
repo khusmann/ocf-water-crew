@@ -1,14 +1,62 @@
 {
   "people": [
-    { "name": "Person A", "timePreference": "EITHER", "qualifications": [] },
-    { "name": "Person B", "timePreference": "EITHER", "qualifications": [] },
-    { "name": "Person C", "timePreference": "EITHER", "qualifications": [] },
-    { "name": "Person D", "timePreference": "EITHER", "qualifications": [] }
+    {
+      "name": "Person A",
+      "timePreference": "EITHER",
+      "qualifications": []
+    },
+    {
+      "name": "Person B",
+      "timePreference": "EITHER",
+      "qualifications": []
+    },
+    {
+      "name": "Person C",
+      "timePreference": "EITHER",
+      "qualifications": []
+    },
+    {
+      "name": "Person D",
+      "timePreference": "EITHER",
+      "qualifications": []
+    }
   ],
   "assignments": [
-    { "jobName": "Alpha", "jobPriority": 5, "day": 1, "startHour": 9, "durationHours": 4, "timeWindow": "EITHER", "stagedVolunteer": "" },
-    { "jobName": "Alpha", "jobPriority": 5, "day": 1, "startHour": 9, "durationHours": 4, "timeWindow": "EITHER", "stagedVolunteer": "" },
-    { "jobName": "Bravo", "jobPriority": 5, "day": 1, "startHour": 14, "durationHours": 4, "timeWindow": "EITHER", "stagedVolunteer": "" },
-    { "jobName": "Bravo", "jobPriority": 5, "day": 1, "startHour": 14, "durationHours": 4, "timeWindow": "EITHER", "stagedVolunteer": "" }
+    {
+      "jobName": "Alpha",
+      "jobPriority": 5,
+      "day": 1,
+      "startHour": 9,
+      "durationHours": 4,
+      "timeWindow": "MIDDAY",
+      "stagedVolunteer": ""
+    },
+    {
+      "jobName": "Alpha",
+      "jobPriority": 5,
+      "day": 1,
+      "startHour": 9,
+      "durationHours": 4,
+      "timeWindow": "MIDDAY",
+      "stagedVolunteer": ""
+    },
+    {
+      "jobName": "Bravo",
+      "jobPriority": 5,
+      "day": 1,
+      "startHour": 14,
+      "durationHours": 4,
+      "timeWindow": "MIDDAY",
+      "stagedVolunteer": ""
+    },
+    {
+      "jobName": "Bravo",
+      "jobPriority": 5,
+      "day": 1,
+      "startHour": 14,
+      "durationHours": 4,
+      "timeWindow": "MIDDAY",
+      "stagedVolunteer": ""
+    }
   ]
 }

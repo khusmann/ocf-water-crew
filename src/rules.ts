@@ -5,7 +5,21 @@
 // Names embed parameter values where useful (e.g. `max-shifts-4`,
 // `sequential-rest-8h`) so the strings that land in brokenRules stay
 // self-describing without separate "name" arguments.
-import type { AssignmentRule, SortingRule, TimeWindow } from "./engine.ts";
+import type {
+  AssignmentRule,
+  ShiftWindow,
+  SortingRule,
+  TimePreference,
+} from "./engine.ts";
+
+// Which shift windows each availability preference can cover. An AM person
+// takes Morning or Midday; a PM person Midday or Evening; EITHER anything.
+// Midday is the only window everyone can take. dev/UNIFY_SHEET.md §4.3.
+const COMPATIBLE: Record<TimePreference, ShiftWindow[]> = {
+  AM: ["MORNING", "MIDDAY"],
+  PM: ["MIDDAY", "EVENING"],
+  EITHER: ["MORNING", "MIDDAY", "EVENING"],
+};
 
 // ---------------------------------------------------------------------------
 // Assignment rules
@@ -91,9 +105,7 @@ export function timePreference(priority: number): AssignmentRule {
     code: "T",
     priority,
     test: ({ slot, person }) =>
-      slot.timeWindow === person.timePreference ||
-      person.timePreference === "EITHER" ||
-      slot.timeWindow === "EITHER",
+      COMPATIBLE[person.timePreference].includes(slot.timeWindow),
   };
 }
 
@@ -179,16 +191,16 @@ export function everyoneGetsAtLeast(
   };
 }
 
-// Exact slot match wins, then EITHER, then opposite-window people last
-// (they only land here once `time-preference` has already relaxed).
-// Saves EITHER candidates for slots an exact-match person can't take.
+// Among the already-compatible survivors (the time-preference assignment
+// rule has gated everyone here), prefer fixed-preference (AM/PM) people;
+// EITHER ranks last so the flexible reserve is saved for windows a
+// fixed-preference person can't fill. dev/UNIFY_SHEET.md §4.3.
 export function preferExactTimeMatch(priority: number): SortingRule {
   return {
     name: "prefer-exact-time-match",
     priority,
-    compare: (a, b, { slot }) => {
-      const rank = (pref: TimeWindow) =>
-        pref === slot.timeWindow ? 0 : pref === "EITHER" ? 1 : 2;
+    compare: (a, b) => {
+      const rank = (pref: TimePreference) => (pref === "EITHER" ? 1 : 0);
       return rank(a.timePreference) - rank(b.timePreference);
     },
   };

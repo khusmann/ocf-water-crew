@@ -28,7 +28,7 @@
       "day": 1,
       "startHour": 6,
       "durationHours": 8,
-      "timeWindow": "EITHER",
+      "timeWindow": "MIDDAY",
       "stagedVolunteer": ""
     },
     {
@@ -37,7 +37,7 @@
       "day": 1,
       "startHour": 6,
       "durationHours": 8,
-      "timeWindow": "EITHER",
+      "timeWindow": "MIDDAY",
       "stagedVolunteer": ""
     },
     {
@@ -46,7 +46,7 @@
       "day": 1,
       "startHour": 14,
       "durationHours": 8,
-      "timeWindow": "EITHER",
+      "timeWindow": "MIDDAY",
       "stagedVolunteer": ""
     },
     {
@@ -55,7 +55,7 @@
       "day": 2,
       "startHour": 6,
       "durationHours": 8,
-      "timeWindow": "EITHER",
+      "timeWindow": "MIDDAY",
       "stagedVolunteer": ""
     },
     {
@@ -64,7 +64,7 @@
       "day": 2,
       "startHour": 14,
       "durationHours": 8,
-      "timeWindow": "EITHER",
+      "timeWindow": "MIDDAY",
       "stagedVolunteer": ""
     },
     {
@@ -73,7 +73,7 @@
       "day": 3,
       "startHour": 6,
       "durationHours": 8,
-      "timeWindow": "EITHER",
+      "timeWindow": "MIDDAY",
       "stagedVolunteer": ""
     },
     {
@@ -82,7 +82,7 @@
       "day": 3,
       "startHour": 14,
       "durationHours": 8,
-      "timeWindow": "EITHER",
+      "timeWindow": "MIDDAY",
       "stagedVolunteer": ""
     },
     {
@@ -91,7 +91,7 @@
       "day": 4,
       "startHour": 6,
       "durationHours": 8,
-      "timeWindow": "EITHER",
+      "timeWindow": "MIDDAY",
       "stagedVolunteer": ""
     },
     {
@@ -100,7 +100,7 @@
       "day": 4,
       "startHour": 14,
       "durationHours": 8,
-      "timeWindow": "EITHER",
+      "timeWindow": "MIDDAY",
       "stagedVolunteer": ""
     }
   ]

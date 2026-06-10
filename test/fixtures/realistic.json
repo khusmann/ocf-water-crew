@@ -865,7 +865,7 @@
       "day": 1,
       "startHour": 6,
       "durationHours": 8,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": "Person 098"
     },
     {
@@ -875,7 +875,7 @@
       "day": 2,
       "startHour": 6,
       "durationHours": 8,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": "Person 098"
     },
     {
@@ -885,7 +885,7 @@
       "day": 3,
       "startHour": 6,
       "durationHours": 8,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": "Person 080"
     },
     {
@@ -895,7 +895,7 @@
       "day": 4,
       "startHour": 6,
       "durationHours": 8,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": "Person 098"
     },
     {
@@ -905,7 +905,7 @@
       "day": 1,
       "startHour": 10,
       "durationHours": 8,
-      "timeWindow": "EITHER",
+      "timeWindow": "MIDDAY",
       "stagedVolunteer": "Person 080"
     },
     {
@@ -915,7 +915,7 @@
       "day": 2,
       "startHour": 10,
       "durationHours": 8,
-      "timeWindow": "EITHER",
+      "timeWindow": "MIDDAY",
       "stagedVolunteer": "Person 080"
     },
     {
@@ -925,7 +925,7 @@
       "day": 3,
       "startHour": 10,
       "durationHours": 8,
-      "timeWindow": "EITHER",
+      "timeWindow": "MIDDAY",
       "stagedVolunteer": "Person 098"
     },
     {
@@ -935,7 +935,7 @@
       "day": 4,
       "startHour": 10,
       "durationHours": 8,
-      "timeWindow": "EITHER",
+      "timeWindow": "MIDDAY",
       "stagedVolunteer": "Person 080"
     },
     {
@@ -945,7 +945,7 @@
       "day": 1,
       "startHour": 14,
       "durationHours": 8,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": "Person 003"
     },
     {
@@ -955,7 +955,7 @@
       "day": 1,
       "startHour": 20,
       "durationHours": 8,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": "Person 085"
     },
     {
@@ -965,7 +965,7 @@
       "day": 2,
       "startHour": 14,
       "durationHours": 8,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": "Person 003"
     },
     {
@@ -975,7 +975,7 @@
       "day": 2,
       "startHour": 20,
       "durationHours": 8,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": "Person 085"
     },
     {
@@ -985,7 +985,7 @@
       "day": 3,
       "startHour": 14,
       "durationHours": 8,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": "Person 003"
     },
     {
@@ -995,7 +995,7 @@
       "day": 3,
       "startHour": 20,
       "durationHours": 8,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": "Person 085"
     },
     {
@@ -1005,7 +1005,7 @@
       "day": 4,
       "startHour": 14,
       "durationHours": 8,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": "Person 003"
     },
     {
@@ -1015,7 +1015,7 @@
       "day": 4,
       "startHour": 20,
       "durationHours": 8,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": "Person 085"
     },
     {
@@ -1025,7 +1025,7 @@
       "day": 1,
       "startHour": 5,
       "durationHours": 5,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": "Person 099"
     },
     {
@@ -1035,7 +1035,7 @@
       "day": 2,
       "startHour": 5,
       "durationHours": 5,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": "Person 099"
     },
     {
@@ -1045,7 +1045,7 @@
       "day": 3,
       "startHour": 5,
       "durationHours": 5,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": "Person 099"
     },
     {
@@ -1055,7 +1055,7 @@
       "day": 4,
       "startHour": 5,
       "durationHours": 5,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": ""
     },
     {
@@ -1065,7 +1065,7 @@
       "day": 1,
       "startHour": 10,
       "durationHours": 5,
-      "timeWindow": "EITHER",
+      "timeWindow": "MIDDAY",
       "stagedVolunteer": ""
     },
     {
@@ -1075,7 +1075,7 @@
       "day": 2,
       "startHour": 10,
       "durationHours": 5,
-      "timeWindow": "EITHER",
+      "timeWindow": "MIDDAY",
       "stagedVolunteer": ""
     },
     {
@@ -1085,7 +1085,7 @@
       "day": 3,
       "startHour": 10,
       "durationHours": 5,
-      "timeWindow": "EITHER",
+      "timeWindow": "MIDDAY",
       "stagedVolunteer": ""
     },
     {
@@ -1095,7 +1095,7 @@
       "day": 4,
       "startHour": 10,
       "durationHours": 5,
-      "timeWindow": "EITHER",
+      "timeWindow": "MIDDAY",
       "stagedVolunteer": "Person 099"
     },
     {
@@ -1105,7 +1105,7 @@
       "day": 1,
       "startHour": 15,
       "durationHours": 5,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": ""
     },
     {
@@ -1115,7 +1115,7 @@
       "day": 1,
       "startHour": 20,
       "durationHours": 5,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": "Person 028"
     },
     {
@@ -1125,7 +1125,7 @@
       "day": 2,
       "startHour": 15,
       "durationHours": 5,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": "Person 115"
     },
     {
@@ -1135,7 +1135,7 @@
       "day": 2,
       "startHour": 20,
       "durationHours": 5,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": "Person 030"
     },
     {
@@ -1145,7 +1145,7 @@
       "day": 3,
       "startHour": 15,
       "durationHours": 5,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": ""
     },
     {
@@ -1155,7 +1155,7 @@
       "day": 3,
       "startHour": 20,
       "durationHours": 5,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": ""
     },
     {
@@ -1165,7 +1165,7 @@
       "day": 4,
       "startHour": 15,
       "durationHours": 5,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": "Person 073"
     },
     {
@@ -1175,7 +1175,7 @@
       "day": 4,
       "startHour": 20,
       "durationHours": 5,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": ""
     },
     {
@@ -1185,7 +1185,7 @@
       "day": 1,
       "startHour": 8,
       "durationHours": 4,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": "Person 061"
     },
     {
@@ -1195,7 +1195,7 @@
       "day": 2,
       "startHour": 8,
       "durationHours": 4,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": "Person 053"
     },
     {
@@ -1205,7 +1205,7 @@
       "day": 3,
       "startHour": 8,
       "durationHours": 4,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": "Person 053"
     },
     {
@@ -1215,7 +1215,7 @@
       "day": 4,
       "startHour": 8,
       "durationHours": 4,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": "Person 053"
     },
     {
@@ -1225,7 +1225,7 @@
       "day": 1,
       "startHour": 12,
       "durationHours": 4,
-      "timeWindow": "EITHER",
+      "timeWindow": "MIDDAY",
       "stagedVolunteer": "Person 077"
     },
     {
@@ -1235,7 +1235,7 @@
       "day": 2,
       "startHour": 12,
       "durationHours": 4,
-      "timeWindow": "EITHER",
+      "timeWindow": "MIDDAY",
       "stagedVolunteer": "Person 061"
     },
     {
@@ -1245,7 +1245,7 @@
       "day": 3,
       "startHour": 12,
       "durationHours": 4,
-      "timeWindow": "EITHER",
+      "timeWindow": "MIDDAY",
       "stagedVolunteer": "Person 061"
     },
     {
@@ -1255,7 +1255,7 @@
       "day": 4,
       "startHour": 12,
       "durationHours": 4,
-      "timeWindow": "EITHER",
+      "timeWindow": "MIDDAY",
       "stagedVolunteer": "Person 061"
     },
     {
@@ -1265,7 +1265,7 @@
       "day": 1,
       "startHour": 16,
       "durationHours": 4,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": "Person 100"
     },
     {
@@ -1275,7 +1275,7 @@
       "day": 2,
       "startHour": 16,
       "durationHours": 4,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": "Person 100"
     },
     {
@@ -1285,7 +1285,7 @@
       "day": 3,
       "startHour": 16,
       "durationHours": 4,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": "Person 100"
     },
     {
@@ -1295,7 +1295,7 @@
       "day": 4,
       "startHour": 16,
       "durationHours": 4,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": "Person 100"
     },
     {
@@ -1305,7 +1305,7 @@
       "day": 1,
       "startHour": 8,
       "durationHours": 4,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": ""
     },
     {
@@ -1315,7 +1315,7 @@
       "day": 2,
       "startHour": 8,
       "durationHours": 4,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": "Person 048"
     },
     {
@@ -1325,7 +1325,7 @@
       "day": 3,
       "startHour": 8,
       "durationHours": 4,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": "Person 048"
     },
     {
@@ -1335,7 +1335,7 @@
       "day": 4,
       "startHour": 8,
       "durationHours": 4,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": "Person 048"
     },
     {
@@ -1345,7 +1345,7 @@
       "day": 1,
       "startHour": 12,
       "durationHours": 4,
-      "timeWindow": "EITHER",
+      "timeWindow": "MIDDAY",
       "stagedVolunteer": "Person 021"
     },
     {
@@ -1355,7 +1355,7 @@
       "day": 2,
       "startHour": 12,
       "durationHours": 4,
-      "timeWindow": "EITHER",
+      "timeWindow": "MIDDAY",
       "stagedVolunteer": ""
     },
     {
@@ -1365,7 +1365,7 @@
       "day": 3,
       "startHour": 12,
       "durationHours": 4,
-      "timeWindow": "EITHER",
+      "timeWindow": "MIDDAY",
       "stagedVolunteer": ""
     },
     {
@@ -1375,7 +1375,7 @@
       "day": 4,
       "startHour": 12,
       "durationHours": 4,
-      "timeWindow": "EITHER",
+      "timeWindow": "MIDDAY",
       "stagedVolunteer": ""
     },
     {
@@ -1385,7 +1385,7 @@
       "day": 1,
       "startHour": 16,
       "durationHours": 4,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": ""
     },
     {
@@ -1395,7 +1395,7 @@
       "day": 2,
       "startHour": 16,
       "durationHours": 4,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": ""
     },
     {
@@ -1405,7 +1405,7 @@
       "day": 3,
       "startHour": 16,
       "durationHours": 4,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": ""
     },
     {
@@ -1415,7 +1415,7 @@
       "day": 4,
       "startHour": 16,
       "durationHours": 4,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": ""
     },
     {
@@ -1425,7 +1425,7 @@
       "day": 1,
       "startHour": 5,
       "durationHours": 5,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": "Person 069"
     },
     {
@@ -1435,7 +1435,7 @@
       "day": 1,
       "startHour": 5,
       "durationHours": 5,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": "Person 045"
     },
     {
@@ -1445,7 +1445,7 @@
       "day": 2,
       "startHour": 5,
       "durationHours": 5,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": "Person 069"
     },
     {
@@ -1455,7 +1455,7 @@
       "day": 2,
       "startHour": 5,
       "durationHours": 5,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": "Person 046"
     },
     {
@@ -1465,7 +1465,7 @@
       "day": 3,
       "startHour": 5,
       "durationHours": 5,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": "Person 069"
     },
     {
@@ -1475,7 +1475,7 @@
       "day": 3,
       "startHour": 5,
       "durationHours": 5,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": "Person 047"
     },
     {
@@ -1485,7 +1485,7 @@
       "day": 4,
       "startHour": 5,
       "durationHours": 5,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": "Person 069"
     },
     {
@@ -1495,7 +1495,7 @@
       "day": 4,
       "startHour": 5,
       "durationHours": 5,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": "Person 108"
     },
     {
@@ -1505,7 +1505,7 @@
       "day": 1,
       "startHour": 10,
       "durationHours": 5,
-      "timeWindow": "EITHER",
+      "timeWindow": "MIDDAY",
       "stagedVolunteer": "Person 107"
     },
     {
@@ -1515,7 +1515,7 @@
       "day": 1,
       "startHour": 10,
       "durationHours": 5,
-      "timeWindow": "EITHER",
+      "timeWindow": "MIDDAY",
       "stagedVolunteer": "Person 014"
     },
     {
@@ -1525,7 +1525,7 @@
       "day": 2,
       "startHour": 10,
       "durationHours": 5,
-      "timeWindow": "EITHER",
+      "timeWindow": "MIDDAY",
       "stagedVolunteer": "Person 071"
     },
     {
@@ -1535,7 +1535,7 @@
       "day": 2,
       "startHour": 10,
       "durationHours": 5,
-      "timeWindow": "EITHER",
+      "timeWindow": "MIDDAY",
       "stagedVolunteer": "Person 107"
     },
     {
@@ -1545,7 +1545,7 @@
       "day": 3,
       "startHour": 10,
       "durationHours": 5,
-      "timeWindow": "EITHER",
+      "timeWindow": "MIDDAY",
       "stagedVolunteer": "Person 107"
     },
     {
@@ -1555,7 +1555,7 @@
       "day": 3,
       "startHour": 10,
       "durationHours": 5,
-      "timeWindow": "EITHER",
+      "timeWindow": "MIDDAY",
       "stagedVolunteer": "Person 108"
     },
     {
@@ -1565,7 +1565,7 @@
       "day": 4,
       "startHour": 10,
       "durationHours": 5,
-      "timeWindow": "EITHER",
+      "timeWindow": "MIDDAY",
       "stagedVolunteer": "Person 071"
     },
     {
@@ -1575,7 +1575,7 @@
       "day": 4,
       "startHour": 10,
       "durationHours": 5,
-      "timeWindow": "EITHER",
+      "timeWindow": "MIDDAY",
       "stagedVolunteer": "Person 075"
     },
     {
@@ -1585,7 +1585,7 @@
       "day": 1,
       "startHour": 15,
       "durationHours": 5,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": "Person 054"
     },
     {
@@ -1595,7 +1595,7 @@
       "day": 1,
       "startHour": 20,
       "durationHours": 5,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": "Person 040"
     },
     {
@@ -1605,7 +1605,7 @@
       "day": 1,
       "startHour": 15,
       "durationHours": 5,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": "Person 044"
     },
     {
@@ -1615,7 +1615,7 @@
       "day": 1,
       "startHour": 20,
       "durationHours": 5,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": "Person 038"
     },
     {
@@ -1625,7 +1625,7 @@
       "day": 2,
       "startHour": 15,
       "durationHours": 5,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": "Person 075"
     },
     {
@@ -1635,7 +1635,7 @@
       "day": 2,
       "startHour": 20,
       "durationHours": 5,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": "Person 054"
     },
     {
@@ -1645,7 +1645,7 @@
       "day": 2,
       "startHour": 15,
       "durationHours": 5,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": "Person 040"
     },
     {
@@ -1655,7 +1655,7 @@
       "day": 2,
       "startHour": 20,
       "durationHours": 5,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": "Person 117"
     },
     {
@@ -1665,7 +1665,7 @@
       "day": 3,
       "startHour": 15,
       "durationHours": 5,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": "Person 066"
     },
     {
@@ -1675,7 +1675,7 @@
       "day": 3,
       "startHour": 20,
       "durationHours": 5,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": "Person 125"
     },
     {
@@ -1685,7 +1685,7 @@
       "day": 3,
       "startHour": 15,
       "durationHours": 5,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": "Person 054"
     },
     {
@@ -1695,7 +1695,7 @@
       "day": 3,
       "startHour": 20,
       "durationHours": 5,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": "Person 038"
     },
     {
@@ -1705,7 +1705,7 @@
       "day": 4,
       "startHour": 15,
       "durationHours": 5,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": "Person 040"
     },
     {
@@ -1715,7 +1715,7 @@
       "day": 4,
       "startHour": 20,
       "durationHours": 5,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": "Person 125"
     },
     {
@@ -1725,7 +1725,7 @@
       "day": 4,
       "startHour": 15,
       "durationHours": 5,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": "Person 066"
     },
     {
@@ -1735,7 +1735,7 @@
       "day": 4,
       "startHour": 20,
       "durationHours": 5,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": "Person 054"
     },
     {
@@ -1745,7 +1745,7 @@
       "day": 1,
       "startHour": 1,
       "durationHours": 4,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": "Person 125"
     },
     {
@@ -1755,7 +1755,7 @@
       "day": 2,
       "startHour": 1,
       "durationHours": 4,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": "Person 038"
     },
     {
@@ -1765,7 +1765,7 @@
       "day": 3,
       "startHour": 1,
       "durationHours": 4,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": "Person 117"
     },
     {
@@ -1775,7 +1775,7 @@
       "day": 4,
       "startHour": 1,
       "durationHours": 4,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": "Person 123"
     },
     {
@@ -1785,7 +1785,7 @@
       "day": 1,
       "startHour": 5,
       "durationHours": 5,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": "Person 059"
     },
     {
@@ -1795,7 +1795,7 @@
       "day": 2,
       "startHour": 5,
       "durationHours": 5,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": "Person 009"
     },
     {
@@ -1805,7 +1805,7 @@
       "day": 3,
       "startHour": 5,
       "durationHours": 5,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": "Person 118"
     },
     {
@@ -1815,7 +1815,7 @@
       "day": 4,
       "startHour": 5,
       "durationHours": 5,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": "Person 059"
     },
     {
@@ -1825,7 +1825,7 @@
       "day": 1,
       "startHour": 10,
       "durationHours": 5,
-      "timeWindow": "EITHER",
+      "timeWindow": "MIDDAY",
       "stagedVolunteer": "Person 123"
     },
     {
@@ -1835,7 +1835,7 @@
       "day": 2,
       "startHour": 10,
       "durationHours": 5,
-      "timeWindow": "EITHER",
+      "timeWindow": "MIDDAY",
       "stagedVolunteer": "Person 063"
     },
     {
@@ -1845,7 +1845,7 @@
       "day": 3,
       "startHour": 10,
       "durationHours": 5,
-      "timeWindow": "EITHER",
+      "timeWindow": "MIDDAY",
       "stagedVolunteer": "Person 009"
     },
     {
@@ -1855,7 +1855,7 @@
       "day": 4,
       "startHour": 10,
       "durationHours": 5,
-      "timeWindow": "EITHER",
+      "timeWindow": "MIDDAY",
       "stagedVolunteer": "Person 009"
     },
     {
@@ -1865,7 +1865,7 @@
       "day": 1,
       "startHour": 15,
       "durationHours": 5,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": "Person 063"
     },
     {
@@ -1875,7 +1875,7 @@
       "day": 1,
       "startHour": 20,
       "durationHours": 5,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": "Person 118"
     },
     {
@@ -1885,7 +1885,7 @@
       "day": 2,
       "startHour": 15,
       "durationHours": 5,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": "Person 024"
     },
     {
@@ -1895,7 +1895,7 @@
       "day": 2,
       "startHour": 20,
       "durationHours": 5,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": "Person 076"
     },
     {
@@ -1905,7 +1905,7 @@
       "day": 3,
       "startHour": 15,
       "durationHours": 5,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": "Person 076"
     },
     {
@@ -1915,7 +1915,7 @@
       "day": 3,
       "startHour": 20,
       "durationHours": 5,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": "Person 063"
     },
     {
@@ -1925,7 +1925,7 @@
       "day": 4,
       "startHour": 15,
       "durationHours": 5,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": "Person 118"
     },
     {
@@ -1935,7 +1935,7 @@
       "day": 4,
       "startHour": 20,
       "durationHours": 5,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": "Person 076"
     },
     {
@@ -1945,7 +1945,7 @@
       "day": 1,
       "startHour": 7,
       "durationHours": 8,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": "Person 089"
     },
     {
@@ -1955,7 +1955,7 @@
       "day": 2,
       "startHour": 7,
       "durationHours": 8,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": "Person 021"
     },
     {
@@ -1965,7 +1965,7 @@
       "day": 3,
       "startHour": 7,
       "durationHours": 8,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": "Person 089"
     },
     {
@@ -1975,7 +1975,7 @@
       "day": 4,
       "startHour": 7,
       "durationHours": 8,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": "Person 058"
     },
     {
@@ -1985,7 +1985,7 @@
       "day": 1,
       "startHour": 15,
       "durationHours": 8,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": "Person 111"
     },
     {
@@ -1995,7 +1995,7 @@
       "day": 2,
       "startHour": 15,
       "durationHours": 8,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": "Person 089"
     },
     {
@@ -2005,7 +2005,7 @@
       "day": 3,
       "startHour": 15,
       "durationHours": 8,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": "Person 111"
     },
     {
@@ -2015,7 +2015,7 @@
       "day": 4,
       "startHour": 15,
       "durationHours": 8,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": "Person 111"
     },
     {
@@ -2025,7 +2025,7 @@
       "day": 1,
       "startHour": 7,
       "durationHours": 5,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": "Person 078"
     },
     {
@@ -2035,7 +2035,7 @@
       "day": 1,
       "startHour": 7,
       "durationHours": 5,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": "Person 004"
     },
     {
@@ -2045,7 +2045,7 @@
       "day": 2,
       "startHour": 7,
       "durationHours": 5,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": "Person 087"
     },
     {
@@ -2055,7 +2055,7 @@
       "day": 2,
       "startHour": 7,
       "durationHours": 5,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": "Person 058"
     },
     {
@@ -2065,7 +2065,7 @@
       "day": 3,
       "startHour": 7,
       "durationHours": 5,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": "Person 087"
     },
     {
@@ -2075,7 +2075,7 @@
       "day": 3,
       "startHour": 7,
       "durationHours": 5,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": "Person 058"
     },
     {
@@ -2085,7 +2085,7 @@
       "day": 4,
       "startHour": 7,
       "durationHours": 5,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": "Person 004"
     },
     {
@@ -2095,7 +2095,7 @@
       "day": 4,
       "startHour": 7,
       "durationHours": 5,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": "Person 023"
     },
     {
@@ -2105,7 +2105,7 @@
       "day": 1,
       "startHour": 12,
       "durationHours": 5,
-      "timeWindow": "EITHER",
+      "timeWindow": "MIDDAY",
       "stagedVolunteer": "Person 112"
     },
     {
@@ -2115,7 +2115,7 @@
       "day": 1,
       "startHour": 12,
       "durationHours": 5,
-      "timeWindow": "EITHER",
+      "timeWindow": "MIDDAY",
       "stagedVolunteer": "Person 087"
     },
     {
@@ -2125,7 +2125,7 @@
       "day": 2,
       "startHour": 12,
       "durationHours": 5,
-      "timeWindow": "EITHER",
+      "timeWindow": "MIDDAY",
       "stagedVolunteer": "Person 078"
     },
     {
@@ -2135,7 +2135,7 @@
       "day": 2,
       "startHour": 12,
       "durationHours": 5,
-      "timeWindow": "EITHER",
+      "timeWindow": "MIDDAY",
       "stagedVolunteer": "Person 023"
     },
     {
@@ -2145,7 +2145,7 @@
       "day": 3,
       "startHour": 12,
       "durationHours": 5,
-      "timeWindow": "EITHER",
+      "timeWindow": "MIDDAY",
       "stagedVolunteer": "Person 112"
     },
     {
@@ -2155,7 +2155,7 @@
       "day": 3,
       "startHour": 12,
       "durationHours": 5,
-      "timeWindow": "EITHER",
+      "timeWindow": "MIDDAY",
       "stagedVolunteer": "Person 023"
     },
     {
@@ -2165,7 +2165,7 @@
       "day": 4,
       "startHour": 12,
       "durationHours": 5,
-      "timeWindow": "EITHER",
+      "timeWindow": "MIDDAY",
       "stagedVolunteer": "Person 087"
     },
     {
@@ -2175,7 +2175,7 @@
       "day": 4,
       "startHour": 12,
       "durationHours": 5,
-      "timeWindow": "EITHER",
+      "timeWindow": "MIDDAY",
       "stagedVolunteer": "Person 078"
     },
     {
@@ -2185,7 +2185,7 @@
       "day": 1,
       "startHour": 17,
       "durationHours": 5,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": "Person 023"
     },
     {
@@ -2195,7 +2195,7 @@
       "day": 1,
       "startHour": 17,
       "durationHours": 5,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": "Person 036"
     },
     {
@@ -2205,7 +2205,7 @@
       "day": 2,
       "startHour": 17,
       "durationHours": 5,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": "Person 111"
     },
     {
@@ -2215,7 +2215,7 @@
       "day": 2,
       "startHour": 17,
       "durationHours": 5,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": "Person 112"
     },
     {
@@ -2225,7 +2225,7 @@
       "day": 3,
       "startHour": 17,
       "durationHours": 5,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": "Person 078"
     },
     {
@@ -2235,7 +2235,7 @@
       "day": 3,
       "startHour": 17,
       "durationHours": 5,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": "Person 036"
     },
     {
@@ -2245,7 +2245,7 @@
       "day": 4,
       "startHour": 17,
       "durationHours": 5,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": "Person 112"
     },
     {
@@ -2255,7 +2255,7 @@
       "day": 4,
       "startHour": 17,
       "durationHours": 5,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": "Person 124"
     },
     {
@@ -2265,7 +2265,7 @@
       "day": 1,
       "startHour": 7,
       "durationHours": 4,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": ""
     },
     {
@@ -2275,7 +2275,7 @@
       "day": 1,
       "startHour": 7,
       "durationHours": 4,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": ""
     },
     {
@@ -2285,7 +2285,7 @@
       "day": 1,
       "startHour": 7,
       "durationHours": 4,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": ""
     },
     {
@@ -2295,7 +2295,7 @@
       "day": 1,
       "startHour": 7,
       "durationHours": 4,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": ""
     },
     {
@@ -2305,7 +2305,7 @@
       "day": 1,
       "startHour": 7,
       "durationHours": 4,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": ""
     },
     {
@@ -2315,7 +2315,7 @@
       "day": 2,
       "startHour": 7,
       "durationHours": 4,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": ""
     },
     {
@@ -2325,7 +2325,7 @@
       "day": 2,
       "startHour": 7,
       "durationHours": 4,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": ""
     },
     {
@@ -2335,7 +2335,7 @@
       "day": 2,
       "startHour": 7,
       "durationHours": 4,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": ""
     },
     {
@@ -2345,7 +2345,7 @@
       "day": 2,
       "startHour": 7,
       "durationHours": 4,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": ""
     },
     {
@@ -2355,7 +2355,7 @@
       "day": 2,
       "startHour": 7,
       "durationHours": 4,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": ""
     },
     {
@@ -2365,7 +2365,7 @@
       "day": 3,
       "startHour": 7,
       "durationHours": 4,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": ""
     },
     {
@@ -2375,7 +2375,7 @@
       "day": 3,
       "startHour": 7,
       "durationHours": 4,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": ""
     },
     {
@@ -2385,7 +2385,7 @@
       "day": 3,
       "startHour": 7,
       "durationHours": 4,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": ""
     },
     {
@@ -2395,7 +2395,7 @@
       "day": 3,
       "startHour": 7,
       "durationHours": 4,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": ""
     },
     {
@@ -2405,7 +2405,7 @@
       "day": 3,
       "startHour": 7,
       "durationHours": 4,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": ""
     },
     {
@@ -2415,7 +2415,7 @@
       "day": 4,
       "startHour": 7,
       "durationHours": 4,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": ""
     },
     {
@@ -2425,7 +2425,7 @@
       "day": 4,
       "startHour": 7,
       "durationHours": 4,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": ""
     },
     {
@@ -2435,7 +2435,7 @@
       "day": 4,
       "startHour": 7,
       "durationHours": 4,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": ""
     },
     {
@@ -2445,7 +2445,7 @@
       "day": 4,
       "startHour": 7,
       "durationHours": 4,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": ""
     },
     {
@@ -2455,7 +2455,7 @@
       "day": 4,
       "startHour": 7,
       "durationHours": 4,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": ""
     },
     {
@@ -2465,7 +2465,7 @@
       "day": 1,
       "startHour": 19,
       "durationHours": 4,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": ""
     },
     {
@@ -2475,7 +2475,7 @@
       "day": 1,
       "startHour": 19,
       "durationHours": 4,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": ""
     },
     {
@@ -2485,7 +2485,7 @@
       "day": 1,
       "startHour": 19,
       "durationHours": 4,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": ""
     },
     {
@@ -2495,7 +2495,7 @@
       "day": 1,
       "startHour": 19,
       "durationHours": 4,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": ""
     },
     {
@@ -2505,7 +2505,7 @@
       "day": 1,
       "startHour": 19,
       "durationHours": 4,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": ""
     },
     {
@@ -2515,7 +2515,7 @@
       "day": 2,
       "startHour": 19,
       "durationHours": 4,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": ""
     },
     {
@@ -2525,7 +2525,7 @@
       "day": 2,
       "startHour": 19,
       "durationHours": 4,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": ""
     },
     {
@@ -2535,7 +2535,7 @@
       "day": 2,
       "startHour": 19,
       "durationHours": 4,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": ""
     },
     {
@@ -2545,7 +2545,7 @@
       "day": 2,
       "startHour": 19,
       "durationHours": 4,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": ""
     },
     {
@@ -2555,7 +2555,7 @@
       "day": 2,
       "startHour": 19,
       "durationHours": 4,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": ""
     },
     {
@@ -2565,7 +2565,7 @@
       "day": 3,
       "startHour": 19,
       "durationHours": 4,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": ""
     },
     {
@@ -2575,7 +2575,7 @@
       "day": 3,
       "startHour": 19,
       "durationHours": 4,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": ""
     },
     {
@@ -2585,7 +2585,7 @@
       "day": 3,
       "startHour": 19,
       "durationHours": 4,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": ""
     },
     {
@@ -2595,7 +2595,7 @@
       "day": 3,
       "startHour": 19,
       "durationHours": 4,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": ""
     },
     {
@@ -2605,7 +2605,7 @@
       "day": 3,
       "startHour": 19,
       "durationHours": 4,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": ""
     },
     {
@@ -2615,7 +2615,7 @@
       "day": 4,
       "startHour": 19,
       "durationHours": 4,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": ""
     },
     {
@@ -2625,7 +2625,7 @@
       "day": 4,
       "startHour": 19,
       "durationHours": 4,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": ""
     },
     {
@@ -2635,7 +2635,7 @@
       "day": 4,
       "startHour": 19,
       "durationHours": 4,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": ""
     },
     {
@@ -2645,7 +2645,7 @@
       "day": 4,
       "startHour": 19,
       "durationHours": 4,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": ""
     },
     {
@@ -2655,7 +2655,7 @@
       "day": 4,
       "startHour": 19,
       "durationHours": 4,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": ""
     },
     {
@@ -2665,7 +2665,7 @@
       "day": 1,
       "startHour": 6,
       "durationHours": 5,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": "Person 012"
     },
     {
@@ -2675,7 +2675,7 @@
       "day": 1,
       "startHour": 10,
       "durationHours": 5,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": "Person 026"
     },
     {
@@ -2685,7 +2685,7 @@
       "day": 2,
       "startHour": 6,
       "durationHours": 5,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": "Person 090"
     },
     {
@@ -2695,7 +2695,7 @@
       "day": 2,
       "startHour": 10,
       "durationHours": 5,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": "Person 026"
     },
     {
@@ -2705,7 +2705,7 @@
       "day": 3,
       "startHour": 6,
       "durationHours": 5,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": "Person 090"
     },
     {
@@ -2715,7 +2715,7 @@
       "day": 3,
       "startHour": 10,
       "durationHours": 5,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": "Person 012"
     },
     {
@@ -2725,7 +2725,7 @@
       "day": 4,
       "startHour": 6,
       "durationHours": 5,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": "Person 026"
     },
     {
@@ -2735,7 +2735,7 @@
       "day": 4,
       "startHour": 10,
       "durationHours": 5,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": "Person 012"
     },
     {
@@ -2745,7 +2745,7 @@
       "day": 1,
       "startHour": 15,
       "durationHours": 5,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": "Person 088"
     },
     {
@@ -2755,7 +2755,7 @@
       "day": 1,
       "startHour": 20,
       "durationHours": 5,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": "Person 018"
     },
     {
@@ -2765,7 +2765,7 @@
       "day": 2,
       "startHour": 15,
       "durationHours": 5,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": "Person 088"
     },
     {
@@ -2775,7 +2775,7 @@
       "day": 2,
       "startHour": 20,
       "durationHours": 5,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": "Person 018"
     },
     {
@@ -2785,7 +2785,7 @@
       "day": 3,
       "startHour": 15,
       "durationHours": 5,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": "Person 017"
     },
     {
@@ -2795,7 +2795,7 @@
       "day": 3,
       "startHour": 20,
       "durationHours": 5,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": "Person 088"
     },
     {
@@ -2805,7 +2805,7 @@
       "day": 4,
       "startHour": 15,
       "durationHours": 5,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": "Person 018"
     },
     {
@@ -2815,7 +2815,7 @@
       "day": 4,
       "startHour": 20,
       "durationHours": 5,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": "Person 088"
     },
     {
@@ -2824,7 +2824,7 @@
       "day": 1,
       "startHour": 8,
       "durationHours": 4,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": ""
     },
     {
@@ -2833,7 +2833,7 @@
       "day": 1,
       "startHour": 8,
       "durationHours": 4,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": ""
     },
     {
@@ -2842,7 +2842,7 @@
       "day": 2,
       "startHour": 8,
       "durationHours": 4,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": ""
     },
     {
@@ -2851,7 +2851,7 @@
       "day": 2,
       "startHour": 8,
       "durationHours": 4,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": ""
     },
     {
@@ -2860,7 +2860,7 @@
       "day": 3,
       "startHour": 8,
       "durationHours": 4,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": ""
     },
     {
@@ -2869,7 +2869,7 @@
       "day": 3,
       "startHour": 8,
       "durationHours": 4,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": ""
     },
     {
@@ -2878,7 +2878,7 @@
       "day": 4,
       "startHour": 8,
       "durationHours": 4,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": ""
     },
     {
@@ -2887,7 +2887,7 @@
       "day": 4,
       "startHour": 8,
       "durationHours": 4,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": ""
     },
     {
@@ -2896,7 +2896,7 @@
       "day": 1,
       "startHour": 12,
       "durationHours": 4,
-      "timeWindow": "EITHER",
+      "timeWindow": "MIDDAY",
       "stagedVolunteer": ""
     },
     {
@@ -2905,7 +2905,7 @@
       "day": 1,
       "startHour": 12,
       "durationHours": 4,
-      "timeWindow": "EITHER",
+      "timeWindow": "MIDDAY",
       "stagedVolunteer": ""
     },
     {
@@ -2914,7 +2914,7 @@
       "day": 2,
       "startHour": 12,
       "durationHours": 4,
-      "timeWindow": "EITHER",
+      "timeWindow": "MIDDAY",
       "stagedVolunteer": ""
     },
     {
@@ -2923,7 +2923,7 @@
       "day": 2,
       "startHour": 12,
       "durationHours": 4,
-      "timeWindow": "EITHER",
+      "timeWindow": "MIDDAY",
       "stagedVolunteer": ""
     },
     {
@@ -2932,7 +2932,7 @@
       "day": 3,
       "startHour": 12,
       "durationHours": 4,
-      "timeWindow": "EITHER",
+      "timeWindow": "MIDDAY",
       "stagedVolunteer": ""
     },
     {
@@ -2941,7 +2941,7 @@
       "day": 3,
       "startHour": 12,
       "durationHours": 4,
-      "timeWindow": "EITHER",
+      "timeWindow": "MIDDAY",
       "stagedVolunteer": ""
     },
     {
@@ -2950,7 +2950,7 @@
       "day": 4,
       "startHour": 12,
       "durationHours": 4,
-      "timeWindow": "EITHER",
+      "timeWindow": "MIDDAY",
       "stagedVolunteer": ""
     },
     {
@@ -2959,16 +2959,7 @@
       "day": 4,
       "startHour": 12,
       "durationHours": 4,
-      "timeWindow": "EITHER",
-      "stagedVolunteer": ""
-    },
-    {
-      "jobName": "Fountain Sanitizer",
-      "jobPriority": 11,
-      "day": 1,
-      "startHour": 16,
-      "durationHours": 4,
-      "timeWindow": "PM",
+      "timeWindow": "MIDDAY",
       "stagedVolunteer": ""
     },
     {
@@ -2977,7 +2968,16 @@
       "day": 1,
       "startHour": 16,
       "durationHours": 4,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
+      "stagedVolunteer": ""
+    },
+    {
+      "jobName": "Fountain Sanitizer",
+      "jobPriority": 11,
+      "day": 1,
+      "startHour": 16,
+      "durationHours": 4,
+      "timeWindow": "EVENING",
       "stagedVolunteer": ""
     },
     {
@@ -2986,7 +2986,7 @@
       "day": 2,
       "startHour": 16,
       "durationHours": 4,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": ""
     },
     {
@@ -2995,7 +2995,7 @@
       "day": 2,
       "startHour": 16,
       "durationHours": 4,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": ""
     },
     {
@@ -3004,7 +3004,7 @@
       "day": 3,
       "startHour": 16,
       "durationHours": 4,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": ""
     },
     {
@@ -3013,7 +3013,7 @@
       "day": 3,
       "startHour": 16,
       "durationHours": 4,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": ""
     },
     {
@@ -3022,7 +3022,7 @@
       "day": 4,
       "startHour": 16,
       "durationHours": 4,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": ""
     },
     {
@@ -3031,7 +3031,7 @@
       "day": 4,
       "startHour": 16,
       "durationHours": 4,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": ""
     },
     {
@@ -3040,7 +3040,7 @@
       "day": 1,
       "startHour": 12,
       "durationHours": 4,
-      "timeWindow": "EITHER",
+      "timeWindow": "MIDDAY",
       "stagedVolunteer": ""
     },
     {
@@ -3049,7 +3049,7 @@
       "day": 1,
       "startHour": 12,
       "durationHours": 4,
-      "timeWindow": "EITHER",
+      "timeWindow": "MIDDAY",
       "stagedVolunteer": ""
     },
     {
@@ -3058,7 +3058,7 @@
       "day": 1,
       "startHour": 12,
       "durationHours": 4,
-      "timeWindow": "EITHER",
+      "timeWindow": "MIDDAY",
       "stagedVolunteer": ""
     },
     {
@@ -3067,7 +3067,7 @@
       "day": 1,
       "startHour": 12,
       "durationHours": 4,
-      "timeWindow": "EITHER",
+      "timeWindow": "MIDDAY",
       "stagedVolunteer": ""
     },
     {
@@ -3076,7 +3076,7 @@
       "day": 1,
       "startHour": 12,
       "durationHours": 4,
-      "timeWindow": "EITHER",
+      "timeWindow": "MIDDAY",
       "stagedVolunteer": ""
     },
     {
@@ -3085,7 +3085,7 @@
       "day": 1,
       "startHour": 12,
       "durationHours": 4,
-      "timeWindow": "EITHER",
+      "timeWindow": "MIDDAY",
       "stagedVolunteer": ""
     },
     {
@@ -3094,7 +3094,7 @@
       "day": 2,
       "startHour": 12,
       "durationHours": 4,
-      "timeWindow": "EITHER",
+      "timeWindow": "MIDDAY",
       "stagedVolunteer": ""
     },
     {
@@ -3103,7 +3103,7 @@
       "day": 2,
       "startHour": 12,
       "durationHours": 4,
-      "timeWindow": "EITHER",
+      "timeWindow": "MIDDAY",
       "stagedVolunteer": ""
     },
     {
@@ -3112,7 +3112,7 @@
       "day": 2,
       "startHour": 12,
       "durationHours": 4,
-      "timeWindow": "EITHER",
+      "timeWindow": "MIDDAY",
       "stagedVolunteer": ""
     },
     {
@@ -3121,7 +3121,7 @@
       "day": 2,
       "startHour": 12,
       "durationHours": 4,
-      "timeWindow": "EITHER",
+      "timeWindow": "MIDDAY",
       "stagedVolunteer": ""
     },
     {
@@ -3130,7 +3130,7 @@
       "day": 2,
       "startHour": 12,
       "durationHours": 4,
-      "timeWindow": "EITHER",
+      "timeWindow": "MIDDAY",
       "stagedVolunteer": ""
     },
     {
@@ -3139,7 +3139,7 @@
       "day": 2,
       "startHour": 12,
       "durationHours": 4,
-      "timeWindow": "EITHER",
+      "timeWindow": "MIDDAY",
       "stagedVolunteer": ""
     },
     {
@@ -3148,7 +3148,7 @@
       "day": 3,
       "startHour": 12,
       "durationHours": 4,
-      "timeWindow": "EITHER",
+      "timeWindow": "MIDDAY",
       "stagedVolunteer": ""
     },
     {
@@ -3157,7 +3157,7 @@
       "day": 3,
       "startHour": 12,
       "durationHours": 4,
-      "timeWindow": "EITHER",
+      "timeWindow": "MIDDAY",
       "stagedVolunteer": ""
     },
     {
@@ -3166,7 +3166,7 @@
       "day": 3,
       "startHour": 12,
       "durationHours": 4,
-      "timeWindow": "EITHER",
+      "timeWindow": "MIDDAY",
       "stagedVolunteer": ""
     },
     {
@@ -3175,7 +3175,7 @@
       "day": 3,
       "startHour": 12,
       "durationHours": 4,
-      "timeWindow": "EITHER",
+      "timeWindow": "MIDDAY",
       "stagedVolunteer": ""
     },
     {
@@ -3184,7 +3184,7 @@
       "day": 3,
       "startHour": 12,
       "durationHours": 4,
-      "timeWindow": "EITHER",
+      "timeWindow": "MIDDAY",
       "stagedVolunteer": ""
     },
     {
@@ -3193,7 +3193,7 @@
       "day": 3,
       "startHour": 12,
       "durationHours": 4,
-      "timeWindow": "EITHER",
+      "timeWindow": "MIDDAY",
       "stagedVolunteer": ""
     },
     {
@@ -3202,7 +3202,7 @@
       "day": 4,
       "startHour": 12,
       "durationHours": 4,
-      "timeWindow": "EITHER",
+      "timeWindow": "MIDDAY",
       "stagedVolunteer": ""
     },
     {
@@ -3211,7 +3211,7 @@
       "day": 4,
       "startHour": 12,
       "durationHours": 4,
-      "timeWindow": "EITHER",
+      "timeWindow": "MIDDAY",
       "stagedVolunteer": ""
     },
     {
@@ -3220,7 +3220,7 @@
       "day": 4,
       "startHour": 12,
       "durationHours": 4,
-      "timeWindow": "EITHER",
+      "timeWindow": "MIDDAY",
       "stagedVolunteer": ""
     },
     {
@@ -3229,7 +3229,7 @@
       "day": 4,
       "startHour": 12,
       "durationHours": 4,
-      "timeWindow": "EITHER",
+      "timeWindow": "MIDDAY",
       "stagedVolunteer": ""
     },
     {
@@ -3238,7 +3238,7 @@
       "day": 4,
       "startHour": 12,
       "durationHours": 4,
-      "timeWindow": "EITHER",
+      "timeWindow": "MIDDAY",
       "stagedVolunteer": ""
     },
     {
@@ -3247,7 +3247,7 @@
       "day": 4,
       "startHour": 12,
       "durationHours": 4,
-      "timeWindow": "EITHER",
+      "timeWindow": "MIDDAY",
       "stagedVolunteer": ""
     },
     {
@@ -3256,7 +3256,7 @@
       "day": 1,
       "startHour": 7,
       "durationHours": 4,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": ""
     },
     {
@@ -3265,7 +3265,7 @@
       "day": 1,
       "startHour": 7,
       "durationHours": 4,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": ""
     },
     {
@@ -3274,7 +3274,7 @@
       "day": 1,
       "startHour": 7,
       "durationHours": 4,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": ""
     },
     {
@@ -3283,7 +3283,7 @@
       "day": 2,
       "startHour": 7,
       "durationHours": 4,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": ""
     },
     {
@@ -3292,7 +3292,7 @@
       "day": 2,
       "startHour": 7,
       "durationHours": 4,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": ""
     },
     {
@@ -3301,7 +3301,7 @@
       "day": 2,
       "startHour": 7,
       "durationHours": 4,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": ""
     },
     {
@@ -3310,7 +3310,7 @@
       "day": 3,
       "startHour": 7,
       "durationHours": 4,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": ""
     },
     {
@@ -3319,7 +3319,7 @@
       "day": 3,
       "startHour": 7,
       "durationHours": 4,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": ""
     },
     {
@@ -3328,7 +3328,7 @@
       "day": 3,
       "startHour": 7,
       "durationHours": 4,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": ""
     },
     {
@@ -3337,7 +3337,7 @@
       "day": 4,
       "startHour": 7,
       "durationHours": 4,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": ""
     },
     {
@@ -3346,7 +3346,7 @@
       "day": 4,
       "startHour": 7,
       "durationHours": 4,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": ""
     },
     {
@@ -3355,7 +3355,7 @@
       "day": 4,
       "startHour": 7,
       "durationHours": 4,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": ""
     },
     {
@@ -3364,7 +3364,7 @@
       "day": 1,
       "startHour": 7,
       "durationHours": 4,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": ""
     },
     {
@@ -3373,7 +3373,7 @@
       "day": 1,
       "startHour": 7,
       "durationHours": 4,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": ""
     },
     {
@@ -3382,7 +3382,7 @@
       "day": 1,
       "startHour": 7,
       "durationHours": 4,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": ""
     },
     {
@@ -3391,7 +3391,7 @@
       "day": 1,
       "startHour": 7,
       "durationHours": 4,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": ""
     },
     {
@@ -3400,7 +3400,7 @@
       "day": 1,
       "startHour": 7,
       "durationHours": 4,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": ""
     },
     {
@@ -3409,7 +3409,7 @@
       "day": 1,
       "startHour": 7,
       "durationHours": 4,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": ""
     },
     {
@@ -3418,7 +3418,7 @@
       "day": 1,
       "startHour": 7,
       "durationHours": 4,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": ""
     },
     {
@@ -3427,7 +3427,7 @@
       "day": 1,
       "startHour": 7,
       "durationHours": 4,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": ""
     },
     {
@@ -3436,7 +3436,7 @@
       "day": 1,
       "startHour": 7,
       "durationHours": 4,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": ""
     },
     {
@@ -3445,7 +3445,7 @@
       "day": 1,
       "startHour": 7,
       "durationHours": 4,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": ""
     },
     {
@@ -3454,7 +3454,7 @@
       "day": 1,
       "startHour": 7,
       "durationHours": 4,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": ""
     },
     {
@@ -3463,7 +3463,7 @@
       "day": 1,
       "startHour": 7,
       "durationHours": 4,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": ""
     },
     {
@@ -3472,7 +3472,7 @@
       "day": 1,
       "startHour": 7,
       "durationHours": 4,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": ""
     },
     {
@@ -3481,7 +3481,7 @@
       "day": 1,
       "startHour": 7,
       "durationHours": 4,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": ""
     },
     {
@@ -3490,7 +3490,7 @@
       "day": 1,
       "startHour": 7,
       "durationHours": 4,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": ""
     },
     {
@@ -3499,7 +3499,7 @@
       "day": 1,
       "startHour": 7,
       "durationHours": 4,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": ""
     },
     {
@@ -3508,7 +3508,7 @@
       "day": 1,
       "startHour": 7,
       "durationHours": 4,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": ""
     },
     {
@@ -3517,7 +3517,7 @@
       "day": 1,
       "startHour": 7,
       "durationHours": 4,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": ""
     },
     {
@@ -3526,7 +3526,7 @@
       "day": 1,
       "startHour": 7,
       "durationHours": 4,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": ""
     },
     {
@@ -3535,7 +3535,7 @@
       "day": 1,
       "startHour": 7,
       "durationHours": 4,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": ""
     },
     {
@@ -3544,7 +3544,7 @@
       "day": 2,
       "startHour": 7,
       "durationHours": 4,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": ""
     },
     {
@@ -3553,7 +3553,7 @@
       "day": 2,
       "startHour": 7,
       "durationHours": 4,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": ""
     },
     {
@@ -3562,7 +3562,7 @@
       "day": 2,
       "startHour": 7,
       "durationHours": 4,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": ""
     },
     {
@@ -3571,7 +3571,7 @@
       "day": 2,
       "startHour": 7,
       "durationHours": 4,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": ""
     },
     {
@@ -3580,7 +3580,7 @@
       "day": 2,
       "startHour": 7,
       "durationHours": 4,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": ""
     },
     {
@@ -3589,7 +3589,7 @@
       "day": 2,
       "startHour": 7,
       "durationHours": 4,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": ""
     },
     {
@@ -3598,7 +3598,7 @@
       "day": 2,
       "startHour": 7,
       "durationHours": 4,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": ""
     },
     {
@@ -3607,7 +3607,7 @@
       "day": 2,
       "startHour": 7,
       "durationHours": 4,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": ""
     },
     {
@@ -3616,7 +3616,7 @@
       "day": 2,
       "startHour": 7,
       "durationHours": 4,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": ""
     },
     {
@@ -3625,7 +3625,7 @@
       "day": 2,
       "startHour": 7,
       "durationHours": 4,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": ""
     },
     {
@@ -3634,7 +3634,7 @@
       "day": 2,
       "startHour": 7,
       "durationHours": 4,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": ""
     },
     {
@@ -3643,7 +3643,7 @@
       "day": 2,
       "startHour": 7,
       "durationHours": 4,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": ""
     },
     {
@@ -3652,7 +3652,7 @@
       "day": 2,
       "startHour": 7,
       "durationHours": 4,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": ""
     },
     {
@@ -3661,7 +3661,7 @@
       "day": 2,
       "startHour": 7,
       "durationHours": 4,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": ""
     },
     {
@@ -3670,7 +3670,7 @@
       "day": 2,
       "startHour": 7,
       "durationHours": 4,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": ""
     },
     {
@@ -3679,7 +3679,7 @@
       "day": 2,
       "startHour": 7,
       "durationHours": 4,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": ""
     },
     {
@@ -3688,7 +3688,7 @@
       "day": 2,
       "startHour": 7,
       "durationHours": 4,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": ""
     },
     {
@@ -3697,7 +3697,7 @@
       "day": 2,
       "startHour": 7,
       "durationHours": 4,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": ""
     },
     {
@@ -3706,7 +3706,7 @@
       "day": 2,
       "startHour": 7,
       "durationHours": 4,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": ""
     },
     {
@@ -3715,7 +3715,7 @@
       "day": 2,
       "startHour": 7,
       "durationHours": 4,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": ""
     },
     {
@@ -3724,7 +3724,7 @@
       "day": 3,
       "startHour": 7,
       "durationHours": 4,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": ""
     },
     {
@@ -3733,7 +3733,7 @@
       "day": 3,
       "startHour": 7,
       "durationHours": 4,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": ""
     },
     {
@@ -3742,7 +3742,7 @@
       "day": 3,
       "startHour": 7,
       "durationHours": 4,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": ""
     },
     {
@@ -3751,7 +3751,7 @@
       "day": 3,
       "startHour": 7,
       "durationHours": 4,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": ""
     },
     {
@@ -3760,7 +3760,7 @@
       "day": 3,
       "startHour": 7,
       "durationHours": 4,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": ""
     },
     {
@@ -3769,7 +3769,7 @@
       "day": 3,
       "startHour": 7,
       "durationHours": 4,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": ""
     },
     {
@@ -3778,7 +3778,7 @@
       "day": 3,
       "startHour": 7,
       "durationHours": 4,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": ""
     },
     {
@@ -3787,7 +3787,7 @@
       "day": 3,
       "startHour": 7,
       "durationHours": 4,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": ""
     },
     {
@@ -3796,7 +3796,7 @@
       "day": 3,
       "startHour": 7,
       "durationHours": 4,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": ""
     },
     {
@@ -3805,7 +3805,7 @@
       "day": 3,
       "startHour": 7,
       "durationHours": 4,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": ""
     },
     {
@@ -3814,7 +3814,7 @@
       "day": 3,
       "startHour": 7,
       "durationHours": 4,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": ""
     },
     {
@@ -3823,7 +3823,7 @@
       "day": 3,
       "startHour": 7,
       "durationHours": 4,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": ""
     },
     {
@@ -3832,7 +3832,7 @@
       "day": 3,
       "startHour": 7,
       "durationHours": 4,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": ""
     },
     {
@@ -3841,7 +3841,7 @@
       "day": 3,
       "startHour": 7,
       "durationHours": 4,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": ""
     },
     {
@@ -3850,7 +3850,7 @@
       "day": 3,
       "startHour": 7,
       "durationHours": 4,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": ""
     },
     {
@@ -3859,7 +3859,7 @@
       "day": 3,
       "startHour": 7,
       "durationHours": 4,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": ""
     },
     {
@@ -3868,7 +3868,7 @@
       "day": 3,
       "startHour": 7,
       "durationHours": 4,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": ""
     },
     {
@@ -3877,7 +3877,7 @@
       "day": 3,
       "startHour": 7,
       "durationHours": 4,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": ""
     },
     {
@@ -3886,7 +3886,7 @@
       "day": 3,
       "startHour": 7,
       "durationHours": 4,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": ""
     },
     {
@@ -3895,7 +3895,7 @@
       "day": 3,
       "startHour": 7,
       "durationHours": 4,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": ""
     },
     {
@@ -3904,7 +3904,7 @@
       "day": 4,
       "startHour": 7,
       "durationHours": 4,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": ""
     },
     {
@@ -3913,7 +3913,7 @@
       "day": 4,
       "startHour": 7,
       "durationHours": 4,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": ""
     },
     {
@@ -3922,7 +3922,7 @@
       "day": 4,
       "startHour": 7,
       "durationHours": 4,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": ""
     },
     {
@@ -3931,7 +3931,7 @@
       "day": 4,
       "startHour": 7,
       "durationHours": 4,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": ""
     },
     {
@@ -3940,7 +3940,7 @@
       "day": 4,
       "startHour": 7,
       "durationHours": 4,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": ""
     },
     {
@@ -3949,7 +3949,7 @@
       "day": 4,
       "startHour": 7,
       "durationHours": 4,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": ""
     },
     {
@@ -3958,7 +3958,7 @@
       "day": 4,
       "startHour": 7,
       "durationHours": 4,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": ""
     },
     {
@@ -3967,7 +3967,7 @@
       "day": 4,
       "startHour": 7,
       "durationHours": 4,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": ""
     },
     {
@@ -3976,7 +3976,7 @@
       "day": 4,
       "startHour": 7,
       "durationHours": 4,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": ""
     },
     {
@@ -3985,7 +3985,7 @@
       "day": 4,
       "startHour": 7,
       "durationHours": 4,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": ""
     },
     {
@@ -3994,7 +3994,7 @@
       "day": 4,
       "startHour": 7,
       "durationHours": 4,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": ""
     },
     {
@@ -4003,7 +4003,7 @@
       "day": 4,
       "startHour": 7,
       "durationHours": 4,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": ""
     },
     {
@@ -4012,7 +4012,7 @@
       "day": 4,
       "startHour": 7,
       "durationHours": 4,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": ""
     },
     {
@@ -4021,7 +4021,7 @@
       "day": 4,
       "startHour": 7,
       "durationHours": 4,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": ""
     },
     {
@@ -4030,7 +4030,7 @@
       "day": 4,
       "startHour": 7,
       "durationHours": 4,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": ""
     },
     {
@@ -4039,7 +4039,7 @@
       "day": 4,
       "startHour": 7,
       "durationHours": 4,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": ""
     },
     {
@@ -4048,7 +4048,7 @@
       "day": 4,
       "startHour": 7,
       "durationHours": 4,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": ""
     },
     {
@@ -4057,7 +4057,7 @@
       "day": 4,
       "startHour": 7,
       "durationHours": 4,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": ""
     },
     {
@@ -4066,7 +4066,7 @@
       "day": 4,
       "startHour": 7,
       "durationHours": 4,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": ""
     },
     {
@@ -4075,7 +4075,7 @@
       "day": 4,
       "startHour": 7,
       "durationHours": 4,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": ""
     },
     {
@@ -4084,7 +4084,7 @@
       "day": 1,
       "startHour": 19,
       "durationHours": 4,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": ""
     },
     {
@@ -4093,7 +4093,7 @@
       "day": 1,
       "startHour": 19,
       "durationHours": 4,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": ""
     },
     {
@@ -4102,7 +4102,7 @@
       "day": 1,
       "startHour": 19,
       "durationHours": 4,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": ""
     },
     {
@@ -4111,7 +4111,7 @@
       "day": 1,
       "startHour": 19,
       "durationHours": 4,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": ""
     },
     {
@@ -4120,7 +4120,7 @@
       "day": 1,
       "startHour": 19,
       "durationHours": 4,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": ""
     },
     {
@@ -4129,7 +4129,7 @@
       "day": 1,
       "startHour": 19,
       "durationHours": 4,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": ""
     },
     {
@@ -4138,7 +4138,7 @@
       "day": 1,
       "startHour": 19,
       "durationHours": 4,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": ""
     },
     {
@@ -4147,7 +4147,7 @@
       "day": 1,
       "startHour": 19,
       "durationHours": 4,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": ""
     },
     {
@@ -4156,7 +4156,7 @@
       "day": 1,
       "startHour": 19,
       "durationHours": 4,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": ""
     },
     {
@@ -4165,7 +4165,7 @@
       "day": 1,
       "startHour": 19,
       "durationHours": 4,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": ""
     },
     {
@@ -4174,7 +4174,7 @@
       "day": 1,
       "startHour": 19,
       "durationHours": 4,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": ""
     },
     {
@@ -4183,7 +4183,7 @@
       "day": 1,
       "startHour": 19,
       "durationHours": 4,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": ""
     },
     {
@@ -4192,7 +4192,7 @@
       "day": 1,
       "startHour": 19,
       "durationHours": 4,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": ""
     },
     {
@@ -4201,7 +4201,7 @@
       "day": 1,
       "startHour": 19,
       "durationHours": 4,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": ""
     },
     {
@@ -4210,7 +4210,7 @@
       "day": 1,
       "startHour": 19,
       "durationHours": 4,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": ""
     },
     {
@@ -4219,7 +4219,7 @@
       "day": 1,
       "startHour": 19,
       "durationHours": 4,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": ""
     },
     {
@@ -4228,7 +4228,7 @@
       "day": 1,
       "startHour": 19,
       "durationHours": 4,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": ""
     },
     {
@@ -4237,7 +4237,7 @@
       "day": 1,
       "startHour": 19,
       "durationHours": 4,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": ""
     },
     {
@@ -4246,7 +4246,7 @@
       "day": 1,
       "startHour": 19,
       "durationHours": 4,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": ""
     },
     {
@@ -4255,7 +4255,7 @@
       "day": 1,
       "startHour": 19,
       "durationHours": 4,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": ""
     },
     {
@@ -4264,7 +4264,7 @@
       "day": 2,
       "startHour": 19,
       "durationHours": 4,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": ""
     },
     {
@@ -4273,7 +4273,7 @@
       "day": 2,
       "startHour": 19,
       "durationHours": 4,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": ""
     },
     {
@@ -4282,7 +4282,7 @@
       "day": 2,
       "startHour": 19,
       "durationHours": 4,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": ""
     },
     {
@@ -4291,7 +4291,7 @@
       "day": 2,
       "startHour": 19,
       "durationHours": 4,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": ""
     },
     {
@@ -4300,7 +4300,7 @@
       "day": 2,
       "startHour": 19,
       "durationHours": 4,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": ""
     },
     {
@@ -4309,7 +4309,7 @@
       "day": 2,
       "startHour": 19,
       "durationHours": 4,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": ""
     },
     {
@@ -4318,7 +4318,7 @@
       "day": 2,
       "startHour": 19,
       "durationHours": 4,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": ""
     },
     {
@@ -4327,7 +4327,7 @@
       "day": 2,
       "startHour": 19,
       "durationHours": 4,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": ""
     },
     {
@@ -4336,7 +4336,7 @@
       "day": 2,
       "startHour": 19,
       "durationHours": 4,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": ""
     },
     {
@@ -4345,7 +4345,7 @@
       "day": 2,
       "startHour": 19,
       "durationHours": 4,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": ""
     },
     {
@@ -4354,7 +4354,7 @@
       "day": 2,
       "startHour": 19,
       "durationHours": 4,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": ""
     },
     {
@@ -4363,7 +4363,7 @@
       "day": 2,
       "startHour": 19,
       "durationHours": 4,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": ""
     },
     {
@@ -4372,7 +4372,7 @@
       "day": 2,
       "startHour": 19,
       "durationHours": 4,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": ""
     },
     {
@@ -4381,7 +4381,7 @@
       "day": 2,
       "startHour": 19,
       "durationHours": 4,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": ""
     },
     {
@@ -4390,7 +4390,7 @@
       "day": 2,
       "startHour": 19,
       "durationHours": 4,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": ""
     },
     {
@@ -4399,7 +4399,7 @@
       "day": 2,
       "startHour": 19,
       "durationHours": 4,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": ""
     },
     {
@@ -4408,7 +4408,7 @@
       "day": 2,
       "startHour": 19,
       "durationHours": 4,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": ""
     },
     {
@@ -4417,7 +4417,7 @@
       "day": 2,
       "startHour": 19,
       "durationHours": 4,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": ""
     },
     {
@@ -4426,7 +4426,7 @@
       "day": 2,
       "startHour": 19,
       "durationHours": 4,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": ""
     },
     {
@@ -4435,7 +4435,7 @@
       "day": 2,
       "startHour": 19,
       "durationHours": 4,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": ""
     },
     {
@@ -4444,7 +4444,7 @@
       "day": 3,
       "startHour": 19,
       "durationHours": 4,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": ""
     },
     {
@@ -4453,7 +4453,7 @@
       "day": 3,
       "startHour": 19,
       "durationHours": 4,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": ""
     },
     {
@@ -4462,7 +4462,7 @@
       "day": 3,
       "startHour": 19,
       "durationHours": 4,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": ""
     },
     {
@@ -4471,7 +4471,7 @@
       "day": 3,
       "startHour": 19,
       "durationHours": 4,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": ""
     },
     {
@@ -4480,7 +4480,7 @@
       "day": 3,
       "startHour": 19,
       "durationHours": 4,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": ""
     },
     {
@@ -4489,7 +4489,7 @@
       "day": 3,
       "startHour": 19,
       "durationHours": 4,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": ""
     },
     {
@@ -4498,7 +4498,7 @@
       "day": 3,
       "startHour": 19,
       "durationHours": 4,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": ""
     },
     {
@@ -4507,7 +4507,7 @@
       "day": 3,
       "startHour": 19,
       "durationHours": 4,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": ""
     },
     {
@@ -4516,7 +4516,7 @@
       "day": 3,
       "startHour": 19,
       "durationHours": 4,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": ""
     },
     {
@@ -4525,7 +4525,7 @@
       "day": 3,
       "startHour": 19,
       "durationHours": 4,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": ""
     },
     {
@@ -4534,7 +4534,7 @@
       "day": 3,
       "startHour": 19,
       "durationHours": 4,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": ""
     },
     {
@@ -4543,7 +4543,7 @@
       "day": 3,
       "startHour": 19,
       "durationHours": 4,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": ""
     },
     {
@@ -4552,7 +4552,7 @@
       "day": 3,
       "startHour": 19,
       "durationHours": 4,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": ""
     },
     {
@@ -4561,7 +4561,7 @@
       "day": 3,
       "startHour": 19,
       "durationHours": 4,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": ""
     },
     {
@@ -4570,7 +4570,7 @@
       "day": 3,
       "startHour": 19,
       "durationHours": 4,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": ""
     },
     {
@@ -4579,7 +4579,7 @@
       "day": 3,
       "startHour": 19,
       "durationHours": 4,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": ""
     },
     {
@@ -4588,7 +4588,7 @@
       "day": 3,
       "startHour": 19,
       "durationHours": 4,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": ""
     },
     {
@@ -4597,7 +4597,7 @@
       "day": 3,
       "startHour": 19,
       "durationHours": 4,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": ""
     },
     {
@@ -4606,7 +4606,7 @@
       "day": 3,
       "startHour": 19,
       "durationHours": 4,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": ""
     },
     {
@@ -4615,7 +4615,7 @@
       "day": 3,
       "startHour": 19,
       "durationHours": 4,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": ""
     },
     {
@@ -4624,7 +4624,7 @@
       "day": 4,
       "startHour": 19,
       "durationHours": 4,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": ""
     },
     {
@@ -4633,7 +4633,7 @@
       "day": 4,
       "startHour": 19,
       "durationHours": 4,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": ""
     },
     {
@@ -4642,7 +4642,7 @@
       "day": 4,
       "startHour": 19,
       "durationHours": 4,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": ""
     },
     {
@@ -4651,7 +4651,7 @@
       "day": 4,
       "startHour": 19,
       "durationHours": 4,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": ""
     },
     {
@@ -4660,7 +4660,7 @@
       "day": 4,
       "startHour": 19,
       "durationHours": 4,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": ""
     },
     {
@@ -4669,7 +4669,7 @@
       "day": 4,
       "startHour": 19,
       "durationHours": 4,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": ""
     },
     {
@@ -4678,7 +4678,7 @@
       "day": 4,
       "startHour": 19,
       "durationHours": 4,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": ""
     },
     {
@@ -4687,7 +4687,7 @@
       "day": 4,
       "startHour": 19,
       "durationHours": 4,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": ""
     },
     {
@@ -4696,7 +4696,7 @@
       "day": 4,
       "startHour": 19,
       "durationHours": 4,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": ""
     },
     {
@@ -4705,7 +4705,7 @@
       "day": 4,
       "startHour": 19,
       "durationHours": 4,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": ""
     },
     {
@@ -4714,7 +4714,7 @@
       "day": 4,
       "startHour": 19,
       "durationHours": 4,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": ""
     },
     {
@@ -4723,7 +4723,7 @@
       "day": 4,
       "startHour": 19,
       "durationHours": 4,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": ""
     },
     {
@@ -4732,7 +4732,7 @@
       "day": 4,
       "startHour": 19,
       "durationHours": 4,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": ""
     },
     {
@@ -4741,7 +4741,7 @@
       "day": 4,
       "startHour": 19,
       "durationHours": 4,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": ""
     },
     {
@@ -4750,7 +4750,7 @@
       "day": 4,
       "startHour": 19,
       "durationHours": 4,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": ""
     },
     {
@@ -4759,7 +4759,7 @@
       "day": 4,
       "startHour": 19,
       "durationHours": 4,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": ""
     },
     {
@@ -4768,7 +4768,7 @@
       "day": 4,
       "startHour": 19,
       "durationHours": 4,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": ""
     },
     {
@@ -4777,7 +4777,7 @@
       "day": 4,
       "startHour": 19,
       "durationHours": 4,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": ""
     },
     {
@@ -4786,7 +4786,7 @@
       "day": 4,
       "startHour": 19,
       "durationHours": 4,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": ""
     },
     {
@@ -4795,7 +4795,7 @@
       "day": 4,
       "startHour": 19,
       "durationHours": 4,
-      "timeWindow": "PM",
+      "timeWindow": "EVENING",
       "stagedVolunteer": ""
     }
   ]

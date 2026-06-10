@@ -39,7 +39,7 @@ function slot(overrides: Partial<Assignment> = {}): Assignment {
     day: 1,
     startHour: 6,
     durationHours: 8,
-    timeWindow: "AM",
+    timeWindow: "MORNING",
     stagedVolunteer: "",
     ...overrides,
   };

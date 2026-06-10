@@ -11,13 +11,18 @@
 // Canonical types — dev/NEW_SYSTEM.md §1.
 // ---------------------------------------------------------------------------
 
-export type TimeWindow = "AM" | "PM" | "EITHER";
+// A person's availability preference and a shift's time-of-day window are
+// two distinct domains, joined by the compatibility matrix in rules.ts
+// (an AM person can take Morning or Midday; a PM person Midday or Evening;
+// an EITHER person anything). dev/UNIFY_SHEET.md §4.3.
+export type TimePreference = "AM" | "PM" | "EITHER";
+export type ShiftWindow = "MORNING" | "MIDDAY" | "EVENING";
 
 export type QualificationId = string;
 
 export interface Person {
   name: string;
-  timePreference: TimeWindow;
+  timePreference: TimePreference;
   qualifications: QualificationId[];
 }
 
@@ -28,7 +33,7 @@ export interface Assignment {
   day: number;
   startHour: number;
   durationHours: number;
-  timeWindow: TimeWindow;
+  timeWindow: ShiftWindow;
   stagedVolunteer: string;
 }
 

@@ -21,7 +21,7 @@
       "day": 1,
       "startHour": 6,
       "durationHours": 8,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": ""
     },
     {
@@ -30,7 +30,7 @@
       "day": 2,
       "startHour": 6,
       "durationHours": 8,
-      "timeWindow": "AM",
+      "timeWindow": "MORNING",
       "stagedVolunteer": ""
     }
   ]

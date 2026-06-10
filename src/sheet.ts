@@ -130,20 +130,21 @@ function getOrCreateSheet(sheet_name: string): Sheet {
   return ss.getSheetByName(sheet_name) ?? ss.insertSheet(sheet_name);
 }
 
-// Person preference → engine TimeWindow. "AM, PM" / "PM, AM" / "" all fold
-// to EITHER (the flexible reserve). Was the engine's personTimeWindow.
-function personTimeWindow(t: string): Person["timePreference"] {
+// Volunteer Time Preference → engine TimePreference. "AM, PM" / "PM, AM" /
+// "" all fold to EITHER (the flexible reserve).
+function personTimePreference(t: string): Person["timePreference"] {
   if (t === "AM") return "AM";
   if (t === "PM") return "PM";
   return "EITHER";
 }
 
-// Shift category → engine TimeWindow. Tolerates both "AM, PM" and the
-// no-space "AM,PM" the sheet has historically produced. Was slotTimeWindow.
-function slotTimeWindow(t: string): Assignment["timeWindow"] {
-  if (t === "AM") return "AM";
-  if (t === "PM") return "PM";
-  return "EITHER";
+// Shift time-of-day category → engine ShiftWindow. The Shifts tab now holds
+// MORNING / MIDDAY / EVENING directly; anything unrecognized (incl. blank)
+// falls back to MIDDAY, the window every preference can cover. §4.3.
+function shiftWindow(t: string): Assignment["timeWindow"] {
+  if (t === "MORNING") return "MORNING";
+  if (t === "EVENING") return "EVENING";
+  return "MIDDAY";
 }
 
 // Expand the Jobs × Shifts layout into one Assignment row per
@@ -167,7 +168,7 @@ function generateAssignments(): SheetRow[] {
       requiredQualification: s.special ? s.jobName : "",
       startHour: new Date(s.shiftStart).getHours(),
       durationHours: s.hrsShift,
-      timeWindow: slotTimeWindow(s.timeCategory),
+      timeWindow: shiftWindow(s.timeCategory),
       stagedVolunteer: "",
       assignedVolunteer: "",
       codes: "",
@@ -223,7 +224,7 @@ function getShifts(): SheetRow[] {
 function getVolunteers(): Person[] {
   return objArrayFromSheet(getSheet("Volunteers")).map((i) => ({
     name: volunteerDisplayName(i),
-    timePreference: personTimeWindow(i.timePreference),
+    timePreference: personTimePreference(i.timePreference),
     qualifications:
       i.specialQualifications === ""
         ? []
@@ -493,8 +494,10 @@ function dayShort(day: number): string {
 }
 
 function prefLabel(p: string): string {
-  if (p === "AM, PM" || p === "PM, AM" || p === "AM,PM") return "AM/PM";
-  return p ?? "";
+  // Mirror personTimePreference: only strict "AM"/"PM" are fixed; every
+  // other value ("EITHER", "AM, PM", "PM, AM", blank) is the flexible case.
+  if (p === "AM" || p === "PM") return p;
+  return "Either";
 }
 
 function buildPrintHtml(assignments: SheetRow[]): string {
