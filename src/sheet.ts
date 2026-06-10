@@ -6,7 +6,7 @@ import {
   type Assignment,
   type Person,
 } from "./engine.ts";
-import { currentRules } from "./rulesets.ts";
+import { targetRules } from "./rulesets.ts";
 
 type Sheet = GoogleAppsScript.Spreadsheet.Sheet;
 
@@ -93,7 +93,7 @@ function runAssignVolunteers(): void {
   // a (reproducible) shuffled order (§4.6) and any people ties resolve the
   // same way. Output is re-sorted below for a stable sheet, so the shuffle
   // affects who gets each slot, not the row order.
-  const placed = runEngine(currentRules, slots, people, {
+  const placed = runEngine(targetRules, slots, people, {
     rng: mulberry32(ASSIGNMENT_SEED),
   });
 

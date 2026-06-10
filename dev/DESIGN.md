@@ -149,8 +149,10 @@ fill.
 ## 4. The two rule sets
 
 Both are composed in `src/rulesets.ts` from the same combinators.
+**Production runs `targetRules`** (`sheet.ts`); `currentRules` is kept for
+reference and its snapshot suite.
 
-**`currentRules`** — the policy production runs today.
+**`currentRules`** — derived from the legacy algorithm.
 
 | Assignment rule        | Priority |   | Sorting rule                              | Priority |
 |------------------------|:--------:|---|-------------------------------------------|:--------:|
@@ -164,8 +166,7 @@ Both are composed in `src/rulesets.ts` from the same combinators.
 sentinel comparison that under-rejects); see the comment on `restGapLegacy`
 in `rules.ts`.
 
-**`targetRules`** — the fuller intended policy (snapshot-pinned, not yet
-wired into production).
+**`targetRules`** — the production policy.
 
 | Assignment rule       | Priority |   | Sorting rule                            | Priority |
 |-----------------------|:--------:|---|-----------------------------------------|:--------:|
@@ -176,11 +177,11 @@ wired into production).
 | `max-shifts-4`        | 2        |   | `fewer-quals-first-among-specialists`   | 4        |
 | `time-preference`     | 3        |   |                                         |          |
 
-The diff between the two is the policy change a production cutover would
-ship: a split rest-gap (≥1h floor / ≥8h relaxable) replacing the buggy 9h
-rule, `max-shifts-4` demoted off the floor, a fairness-first sorting stack
-(everyone gets ≥2, then fewest shifts/days), and *fewer*-qualified-first
-(anti-burnout) instead of more-specialized-first.
+The diff between the two is the policy change the cutover to `targetRules`
+shipped: a split rest-gap (≥1h floor / ≥8h relaxable) replacing the buggy
+9h rule, `max-shifts-4` demoted off the floor, a fairness-first sorting
+stack (everyone gets ≥2, then fewest shifts/days), and *fewer*-qualified-
+first (anti-burnout) instead of more-specialized-first.
 
 > The slot-`timeWindow` type is shared, so both rule sets use the §3.3
 > matrix for `timePreference`. `currentRules` is no longer a byte-faithful
@@ -233,7 +234,7 @@ Menu actions:
 - **Clear / Re-generate assignments** — expands Jobs × Shifts into slot
   rows (in `compareSlots`+seat order) and writes the tab.
 - **Assign volunteers** — reads slots + volunteers, runs
-  `runEngine(currentRules, …, { rng: mulberry32(ASSIGNMENT_SEED) })`, then
+  `runEngine(targetRules, …, { rng: mulberry32(ASSIGNMENT_SEED) })`, then
   writes results back **re-sorted by `[compareSlots, seat]`** so the tab
   stays in a stable order even though fill order is randomized.
 - **Print by job / by volunteer** — HTML print views built from the raw

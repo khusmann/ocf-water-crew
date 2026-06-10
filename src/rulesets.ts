@@ -18,9 +18,10 @@ import {
   timePreference,
 } from "./rules.ts";
 
-// The policy production runs today. Derived from the legacy four-pass
-// algorithm (e.g. restGapLegacy preserves its buggy gap check), though the
-// time-preference rule now uses the shared matrix. See dev/DESIGN.md §4.
+// Derived from the legacy four-pass algorithm (e.g. restGapLegacy preserves
+// its buggy gap check), though the time-preference rule now uses the shared
+// matrix. Kept for reference/snapshots; production runs targetRules. See
+// dev/DESIGN.md §4.
 export const currentRules: RuleSet = defineRuleSet({
   name: "current",
   assignmentRules: [
@@ -37,7 +38,7 @@ export const currentRules: RuleSet = defineRuleSet({
   ],
 });
 
-// The new policy: explicit floor of qualification + ≥1h rest;
+// The policy production runs. Explicit floor of qualification + ≥1h rest;
 // relaxable layers for one-shift-per-day / ≥8h rest / max-shifts /
 // time-preference; sorting stack that distributes work fairly and
 // saves EITHER candidates for slots an exact-match person can't take.
