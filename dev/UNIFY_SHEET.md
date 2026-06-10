@@ -28,28 +28,30 @@ The commit-by-commit order we're working through. Each ends green
 for each lives in the section linked. **"Local"** = Claude does it solo and
 shows green tests; **"Joint"** = needs Kyle's hands on the live sheet.
 
-- [ ] **Commit 1 — fixtures + tests** *(local).* Convert
+- [x] **Commit 1 — fixtures + tests** *(local).* Convert
   `test/fixtures/*.json` inputs legacy→canonical, drop `parseLegacy` from
   `scheduler.test.ts` / `target.test.ts` / `regen-fixtures.ts`, delete
-  `sheetAdapter.test.ts`. The `expected/` snapshots must stay byte-for-byte
-  identical — that's the proof the reshape changes no behavior, and the
-  safety net for everything after. No sheet involvement. *(§6, §7.1)*
-- [ ] **Commit 2 — rewrite `sheet.ts`** *(joint).* Read canonical → run
-  `runEngine(currentRules, …)` directly → write back; rewrite the print
-  helpers; let `runGenerateAssignments` own the Assignments header row.
-  Delete `scheduler.ts` + `src/types.ts`; fix `build-gas.ts` / `run-local.ts`.
-  - *Claude:* write the code, `npm run typecheck` + `npm run build`.
-  - *Kyle:* on a **copy** of the live sheet, re-key the input-tab headers
-    per the mapping Claude derives from `npm run pull` (Jobs `special`→
-    "Requires Qualification"; Volunteers drop `timeId`; Shifts keep AM/PM
-    for now); `clasp push`; run "Assign volunteers" + both print views.
-  - *Prereqs (§8):* confirm the live header set, and that the `Name`
-    column is populated and matches the staging strings. *(§3, §4, §5, §7.2–7.3)*
-- [ ] **Commit 3 — delete `parseLegacy`** from `engine.ts` *(local).*
-  Type-check + `npm test` green proves nothing else referenced it. *(§7.4)*
-- [ ] **Commit 4 — docs refresh** *(local).* `README.md` `src/`
-  description; flip META_PLAN / NEW_SYSTEM "parser deleted in step 2" notes
-  to past tense. *(§7.5)*
+  `sheetAdapter.test.ts`. The `expected/` snapshots stayed byte-for-byte
+  identical — proof the reshape changed no behavior. No sheet involvement.
+  *(§6, §7.1)* — `d1231ae`
+- [x] **Commit 2 — rewrite `sheet.ts`** *(joint).* Read canonical → run
+  `runEngine(currentRules, …)` directly → write back; rewrote the print
+  helpers; `runGenerateAssignments` owns the Assignments header row.
+  **Realization:** the input tabs (Jobs/Shifts/Volunteers) did *not* need
+  renaming — `sheet.ts` maps their existing columns, so only the generated
+  Assignments tab changed (code-owned). Kyle's part was just `npm run push`
+  + Danger/Clear-Regenerate + Assign + print — no header re-keying.
+  Follow-up fixups: merge job cols into shifts, Staged/Assigned columns
+  first, the **Seat** column, and generate-in-engine-order so the tab
+  doesn't reshuffle on assign. *(§3, §4, §5, §7.2)* — `f0a93e1`, `5fb0461`
+- [x] **Commit 3 — remove the legacy type layer** *(local).* Deleting
+  `src/types.ts` forced deleting `parseLegacy` (its only remaining
+  consumer), so this merged with the `scheduler.ts`/`types.ts` deletion +
+  `build-gas.ts` order + porting `run-local.ts`/`anonymize.ts` to canonical.
+  *(§7.3–7.4)* — `2cd722a`
+- [x] **Commit 4 — docs refresh** *(local).* `README.md` `src/`
+  description; META_PLAN / NEW_SYSTEM parser notes flipped to past tense;
+  this checklist ticked. *(§7.5)*
 - [ ] **Commit 5 — Job Priority feature (§4.6)** *(joint).* Engine:
   seed-shuffle equal-priority slot groups in `runEngine`. Sheet: add the
   Jobs **Priority** column. Add a tie-exercising `target` fixture +

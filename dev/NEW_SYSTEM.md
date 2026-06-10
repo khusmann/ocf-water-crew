@@ -14,8 +14,14 @@ The behavioral change the rewrite ships is exactly the diff between
 
 ### 1.1 Canonical input types
 
+> **Update (done):** the legacy shapes and the boundary parser
+> (`parseLegacy`) have since been removed — `src/sheet.ts` reads the sheet
+> straight into the canonical types and `src/types.ts` is deleted. See
+> [UNIFY_SHEET.md](UNIFY_SHEET.md). The description below is the original
+> design; "the parser" no longer exists.
+
 The engine sees a normalized form of the input — not the legacy
-[src/types.ts](../src/types.ts) `Person` / `Assignment` shapes. A small
+`Person` / `Assignment` shapes. A small
 parser at the engine entry converts the legacy shape (as produced by
 [src/sheet.ts](../src/sheet.ts)) into the canonical one; the parser
 gets deleted once `sheet.ts` is rewritten to emit canonical types
