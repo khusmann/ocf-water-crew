@@ -1,19 +1,11 @@
-// Rules engine: canonical types, RuleSet validator, scheduling loop,
-// seeded RNG, and the boundary parser that bridges the legacy
-// src/types.ts shapes (as produced by src/sheet.ts) to the canonical
-// types the engine consumes.
+// Rules engine: canonical types, RuleSet validator, scheduling loop, and
+// seeded RNG. src/sheet.ts reads the sheet straight into these canonical
+// types and runs the engine directly — there is no legacy shape and no
+// boundary parser anymore.
 //
-// One-file layout deliberate: every layer above (rules.ts, rulesets.ts,
-// scheduler.ts) imports from this module; consolidation keeps the dist
-// bundle small and the import graph linear. parseLegacy lives here
-// because it shares the canonical types — it'll be deleted once
-// src/sheet.ts is rewritten to emit canonical shapes directly
-// (META_PLAN migration step 2).
-
-import type {
-  Person as LegacyPerson,
-  Assignment as LegacyAssignment,
-} from "./types.ts";
+// One-file layout deliberate: every layer above (rules.ts, rulesets.ts)
+// imports from this module; consolidation keeps the dist bundle small and
+// the import graph linear.
 
 // ---------------------------------------------------------------------------
 // Canonical types — dev/NEW_SYSTEM.md §1.
@@ -299,70 +291,4 @@ export function runEngine(
   }
 
   return placed;
-}
-
-// ---------------------------------------------------------------------------
-// parseLegacy — legacy → canonical boundary. dev/NEW_SYSTEM.md §1.1.
-// ---------------------------------------------------------------------------
-
-function personTimeWindow(p: LegacyPerson): TimeWindow {
-  switch (p.timePreference) {
-    case "AM":
-      return "AM";
-    case "PM":
-      return "PM";
-    case "AM, PM":
-    case "PM, AM":
-      return "EITHER";
-    case "":
-      return "EITHER";
-  }
-}
-
-function slotTimeWindow(a: LegacyAssignment): TimeWindow {
-  switch (a.timePriority) {
-    case 0:
-      return "AM";
-    case 2:
-      return "PM";
-    case 1:
-      return "EITHER";
-    default:
-      return "EITHER";
-  }
-}
-
-function canonicalName(p: LegacyPerson): string {
-  return `${p.first} ${p.last} ${p.nickname}`.trim();
-}
-
-export function parseLegacyPerson(p: LegacyPerson): Person {
-  return {
-    name: canonicalName(p),
-    timePreference: personTimeWindow(p),
-    qualifications: p.specialQualificationsIds.map((id) => String(id)),
-  };
-}
-
-export function parseLegacyAssignment(a: LegacyAssignment): Assignment {
-  return {
-    jobName: a.jobName,
-    jobPriority: a.jobPriority,
-    ...(a.special ? { requiredQualification: String(a.jobPriority) } : {}),
-    day: a.day,
-    startHour: a.shiftStartNum,
-    durationHours: a.hrsShift,
-    timeWindow: slotTimeWindow(a),
-    stagedVolunteer: a.stagedVolunteer ?? "",
-  };
-}
-
-export function parseLegacy(
-  assignments: LegacyAssignment[],
-  people: LegacyPerson[]
-): { assignments: Assignment[]; people: Person[] } {
-  return {
-    assignments: assignments.map(parseLegacyAssignment),
-    people: people.map(parseLegacyPerson),
-  };
 }

@@ -19,7 +19,6 @@ const order = [
   "engine.js",
   "rules.js",
   "rulesets.js",
-  "scheduler.js",
   "sheet.js",
 ];
 
