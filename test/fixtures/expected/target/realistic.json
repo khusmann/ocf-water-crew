@@ -584,13 +584,9 @@
     "durationHours": 4,
     "timeWindow": "EVENING",
     "stagedVolunteer": "",
-    "assignedVolunteer": "Person 077",
-    "brokenRules": [
-      "time-preference"
-    ],
-    "brokenCodes": [
-      "T"
-    ]
+    "assignedVolunteer": "Person 019",
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Phil-up Swampers",
@@ -2125,15 +2121,9 @@
     "durationHours": 4,
     "timeWindow": "EVENING",
     "stagedVolunteer": "",
-    "assignedVolunteer": "Person 059",
-    "brokenRules": [
-      "sequential-rest-10h",
-      "time-preference"
-    ],
-    "brokenCodes": [
-      "H10",
-      "T"
-    ]
+    "assignedVolunteer": "",
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Cart Leads",
@@ -2144,15 +2134,9 @@
     "durationHours": 4,
     "timeWindow": "EVENING",
     "stagedVolunteer": "",
-    "assignedVolunteer": "Person 102",
-    "brokenRules": [
-      "sequential-rest-10h",
-      "time-preference"
-    ],
-    "brokenCodes": [
-      "H10",
-      "T"
-    ]
+    "assignedVolunteer": "",
+    "brokenRules": [],
+    "brokenCodes": []
   },
   {
     "jobName": "Cart Leads",

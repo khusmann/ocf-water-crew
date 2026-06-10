@@ -55,17 +55,28 @@ export function oneShiftPerDay(priority: number): AssignmentRule {
 }
 
 // No MORNING shift the day after an EVENING shift — too little overnight
-// turnaround, regardless of the clock-hour gap. dev/DESIGN.md §4.
+// turnaround, regardless of the clock-hour gap. Checked from BOTH sides so
+// it holds no matter which of the two shifts is placed first: a MORNING
+// slot is blocked by a prior-day EVENING already assigned, and an EVENING
+// slot is blocked by a next-day MORNING already assigned. dev/DESIGN.md §4.
 export function overnightTurnaround(priority: number): AssignmentRule {
   return {
     name: "overnight-turnaround",
     code: "O",
     priority,
-    test: ({ slot, state }) =>
-      slot.timeWindow !== "MORNING" ||
-      !state.assignedShifts.some(
-        (s) => s.day === slot.day - 1 && s.window === "EVENING"
-      ),
+    test: ({ slot, state }) => {
+      if (slot.timeWindow === "MORNING") {
+        return !state.assignedShifts.some(
+          (s) => s.day === slot.day - 1 && s.window === "EVENING"
+        );
+      }
+      if (slot.timeWindow === "EVENING") {
+        return !state.assignedShifts.some(
+          (s) => s.day === slot.day + 1 && s.window === "MORNING"
+        );
+      }
+      return true;
+    },
   };
 }
 
