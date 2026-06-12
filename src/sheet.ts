@@ -444,9 +444,19 @@ function buildVolunteerScheduleHtml(
     )
     .join("");
 
+  // Fixed-layout column widths: narrow meta columns, the rest split evenly
+  // across the 12 day/window slots so the table never overflows the page.
+  const slotCols = days
+    .flatMap(() => SCHEDULE_WINDOWS.map(() => `<col class="slot">`))
+    .join("");
+
   const body = `<section class="page wide">
     ${codesLegend()}
     <table class="schedule">
+      <colgroup>
+        <col class="c-first"><col class="c-last"><col class="c-nick"><col class="c-pref"><col class="c-shifts"><col class="c-codes">
+        ${slotCols}
+      </colgroup>
       <thead>
         <tr>
           <th rowspan="2">First</th><th rowspan="2">Last</th><th rowspan="2">Nickname</th><th rowspan="2">Pref</th><th rowspan="2">Shifts</th><th rowspan="2">Codes</th>
@@ -702,14 +712,18 @@ function wrapPrintDocument(
   table.grid td { min-height: 70px; height: 70px; }
   table.roster { width: 100%; border-collapse: collapse; border: 1px solid #888; border-top: none; table-layout: fixed; }
   table.roster td { padding: 14px 16px; border: 1px solid #888; font-size: 16px; width: 50%; }
-  table.schedule { width: 100%; border-collapse: collapse; font-size: 11px; }
+  table.schedule { width: 100%; border-collapse: collapse; font-size: 11px; table-layout: fixed; }
   table.schedule tr { page-break-inside: avoid; break-inside: avoid; }
-  table.schedule th, table.schedule td { border: 1px solid #888; padding: 4px 6px; vertical-align: middle; }
+  table.schedule th, table.schedule td { border: 1px solid #888; padding: 4px 6px; vertical-align: middle; overflow-wrap: anywhere; }
   table.schedule thead th { background: #d6e4f7; font-weight: bold; text-align: center; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-  table.schedule td.id { font-weight: 500; white-space: nowrap; }
+  table.schedule td.id { font-weight: 500; }
   table.schedule td.center { text-align: center; }
   table.schedule td.swatch { font-weight: bold; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
   table.schedule th.day-sep, table.schedule td.day-sep { border-left: 2px solid #333; }
+  table.schedule col.c-first, table.schedule col.c-last { width: 7%; }
+  table.schedule col.c-nick { width: 7%; }
+  table.schedule col.c-pref, table.schedule col.c-shifts, table.schedule col.c-codes { width: 3.5%; }
+  table.schedule col.slot { width: 5.25%; }
   .legend { font-size: 11px; margin: 0 0 8px; line-height: 1.6; }
   .legend-title { font-weight: bold; }
   .legend-item { margin-right: 14px; white-space: nowrap; }
