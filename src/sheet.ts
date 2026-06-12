@@ -410,10 +410,11 @@ function buildVolunteerScheduleHtml(
       let total = 0;
       const slotCells = days
         .flatMap((d) =>
-          SCHEDULE_WINDOWS.map((w) => {
+          SCHEDULE_WINDOWS.map((w, i) => {
             const list = cells.get(`${d}|${w}`) ?? [];
             total += list.length;
-            return `<td>${list.map(escapeHtml).join(", ")}</td>`;
+            const sep = i === 0 ? ' class="day-sep"' : "";
+            return `<td${sep}>${list.map(escapeHtml).join(", ")}</td>`;
           })
         )
         .join("");
@@ -432,11 +433,14 @@ function buildVolunteerScheduleHtml(
 
   // Two-tier header: a day spans its three window columns.
   const dayHeader = days
-    .map((d) => `<th colspan="3">${escapeHtml(dayShort(d))}</th>`)
+    .map((d) => `<th colspan="3" class="day-sep">${escapeHtml(dayShort(d))}</th>`)
     .join("");
   const windowHeader = days
     .flatMap(() =>
-      SCHEDULE_WINDOWS.map((w) => `<th>${escapeHtml(WINDOW_LABEL[w])}</th>`)
+      SCHEDULE_WINDOWS.map(
+        (w, i) =>
+          `<th${i === 0 ? ' class="day-sep"' : ""}>${escapeHtml(WINDOW_LABEL[w])}</th>`
+      )
     )
     .join("");
 
@@ -705,6 +709,7 @@ function wrapPrintDocument(
   table.schedule td.id { font-weight: 500; white-space: nowrap; }
   table.schedule td.center { text-align: center; }
   table.schedule td.swatch { font-weight: bold; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  table.schedule th.day-sep, table.schedule td.day-sep { border-left: 2px solid #333; }
   .legend { font-size: 11px; margin: 0 0 8px; line-height: 1.6; }
   .legend-title { font-weight: bold; }
   .legend-item { margin-right: 14px; white-space: nowrap; }
